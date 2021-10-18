@@ -63,7 +63,7 @@
                                 <i class="far fa-times-circle text-danger font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">136</h5>
+                    <h5 class="font-size-22">10</h5>
 
                 </div>
             </div>
@@ -189,7 +189,7 @@
 
 
 
-                <h4 class="header-title mb-4 float-sm-start">Pelanggan terbaik</h4>
+                <h4 class="header-title mb-4 float-sm-start mb-4">Pelanggan terbaik</h4>
 
                 <div class="float-sm-end">
 
