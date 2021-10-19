@@ -22,3 +22,6 @@ Route::get('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.user');
 });
+Route::get('/servis', function () {
+    return view('content.servis');
+});

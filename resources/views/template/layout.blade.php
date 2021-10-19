@@ -3,7 +3,7 @@
 
 
     <meta charset="utf-8">
-    <title>Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesdesign" name="author">
@@ -26,6 +26,8 @@
 
             <!-- Responsive datatable examples -->
             <link href="{{asset('tmp/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+            <!-- Responsive datatable examples -->
+            <link href="{{asset('tmp/assets/libs/chart.js/Chart.min.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -84,6 +86,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
                         </div>
+
                     </div>
 
                 </div>
@@ -125,15 +128,15 @@
                     <ul class="metismenu list-unstyled mm-show" id="side-menu">
                         <li class="menu-title">Menu</li>
 
-                        <li class="mm-active">
-                            <a href="index.html" class="waves-effect active">
+                        <li class="">
+                            <a href="/dashboard" class="waves-effect">
                                 <i class="dripicons-home"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="/servis" class=" waves-effect">
                                 <i class="fas fa-hammer"></i>
                                 <span>Servis</span>
                             </a>
@@ -196,10 +199,10 @@
                      <div class="row align-items-center">
                          <div class="col-sm-6">
                              <div class="page-title">
-                                 <h4>Dashboard</h4>
+                                 <h4>@yield('title')</h4>
                                      <ol class="breadcrumb m-0">
-                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                         <li class="breadcrumb-item active">Dashboard</li>
+                                         <li class="breadcrumb-item"><a href="javascript: void(0);">@yield('title')</a></li>
+                                         <li class="breadcrumb-item active">@yield('title')</li>
                                      </ol>
                              </div>
                          </div>
@@ -256,35 +259,6 @@
             <hr class="mt-0">
             <h6 class="text-center mb-0">Choose Layouts</h6>
 
-            <div class="p-4">
-                <div class="mb-2">
-                    <img src="{{asset('tmp/assets/images/layouts/layout-1.jpg')}}" class="img-fluid img-thumbnail" alt="layout-1">
-                </div>
-
-                <div class="form-check form-switch mb-3">
-                    <input class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked="">
-                    <label class="form-check-label" for="light-mode-switch">Light Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{asset('tmp/assets/images/layouts/layout-2.jpg')}}" class="img-fluid img-thumbnail" alt="layout-2">
-                </div>
-                <div class="form-check form-switch mb-3">
-                    <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" data-bsstyle="{{asset('tmp/assets/css/bootstrap-dark.min.css')}}" data-appstyle="assets/css/app-dark.min.css">
-                    <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{asset('tmp/assets/images/layouts/layout-3.jpg')}}" class="img-fluid img-thumbnail" alt="layout-3">
-                </div>
-                <div class="form-check form-switch mb-5">
-                    <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch" data-appstyle="{{asset('tmp/assets/css/app-rtl.min.css')}}">
-                    <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
-                </div>
-
-
-            </div>
-
         </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 850px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 395px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end slimscroll-menu-->
     </div>
     <!-- /Right-bar -->
@@ -301,13 +275,6 @@
 
     <script src="{{asset('tmp/assets/js/pages/dashboard.init.js')}}"></script>
 
-    <!-- apexcharts -->
-    {{-- <script src="{{asset('tmp/assets/libs/apexcharts/apexcharts.min.js')}}"></script> --}} --}}
-
-    <!-- Plugins js-->
-    <script src="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-    <script src="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
-
     {{-- datatables --}}
     <script src="{{asset('tmp/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('tmp/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -315,10 +282,13 @@
     <script src="{{asset('tmp/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
     <script src="{{asset('tmp/dataTables/dashboard_admin.js')}}"></script>
 
+    <script src="{{asset('tmp/assets/libs/chart.js/Chart.min.js')}}"></script>
+
+    <script src="{{asset('tmp/chart/dashboard_admin.js')}}"></script>
 
 
 
-    {{-- <script src="{{asset('tmp/assets/js/app.js')}}"></script> --}}
+    <script src="{{asset('tmp/assets/js/app.js')}}"></script>
 
 
 

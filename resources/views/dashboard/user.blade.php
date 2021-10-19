@@ -1,4 +1,5 @@
 @extends('template.layout')
+@section('title', 'Dashboard')
 @section('content')
 
 <div class="row">
@@ -76,17 +77,20 @@
 <div class="row">
     <div class="col-xl-7">
         <div class="card">
-            <div class="card-body">
-
-
-
+            <div class="card-header bg-white">
                 <h4 class="header-title mb-4 float-sm-start">Grafik Barang terlaris</h4>
 
                 <div class="float-sm-end">
 
                 </div>
+            </div>
+            <div class="card-body">
 
-                <div class="clearfix"></div>
+                <div class="clearfix" style="width: 500px;">
+                    <div class="table-responsive mb-0 fixed-solution">
+                        <canvas id="G_barang_laris"></canvas>
+                    </div>
+                </div>
 
 
             </div>
@@ -134,19 +138,15 @@
 <div class="row">
     <div class="col-xl-7">
         <div class="card">
+            <div class="card-header bg-white">
+                                <h4 class="header-title mb-4 float-sm-start mb-4">Barang stock limit</h4>
+            </div>
             <div class="card-body">
 
 
-
-                <h4 class="header-title mb-4 float-sm-start mb-4">Barang stock limit</h4>
-
-                <div class="float-sm-end">
-
-                </div>
-
                 <div class="clearfix">
-                    <div class="table">
-                        <table class="table table-striped" >
+                    <div class="table-responsive mb-0 fixed-solution">
+                        <table class="table table-striped" id='stoklimit' widht='60%'>
                             <thead>
                                 <tr>
                                     <th>Kode Barang</th>
@@ -158,19 +158,19 @@
                             <tbody>
                                 <tr>
                                     <td>0001</td>
-                                    <td>Minyak goreng</td>
+                                    <td>Battery Smartphone</td>
                                     <td><button class="btn btn-sm btn-danger">4</button></td>
                                     <td><button class="btn btn-sm btn-danger">4</button></td>
                                 </tr>
                                 <tr>
                                     <td>0002</td>
-                                    <td>Royko</td>
+                                    <td>Charger</td>
                                     <td><button class="btn btn-sm btn-danger">5</button></td>
                                     <td><button class="btn btn-sm btn-danger">5</button></td>
                                 </tr>
                                 <tr>
                                     <td>0003</td>
-                                    <td>Teh Pucuk</td>
+                                    <td>Headset</td>
                                     <td><button class="btn btn-sm btn-danger">2</button></td>
                                     <td><button class="btn btn-sm btn-danger">2</button></td>
                                 </tr>
@@ -196,7 +196,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <div class="table">
+                    <div class="">
                         <table class="table table-striped" id="pelangganterbaik">
                             <thead>
                                 <tr>
