@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'penjualan')
+@section('title', 'Pembelian')
 @section('content')
     <div class="card">
         <div class="card-header bg-white">
@@ -10,30 +10,29 @@
                 <table class="table table-striped" widht="80%" id="stoklimit" style="font-size: 13px;">
                     <thead>
                         <tr>
-                            <th>Invoice</th>
-                            <th>Kasir</th>
-                            <th>Customer</th>
-                            <th>Diskon</th>
-                            <th>Total</th>
-                            <th>Payment</th>
+                            <th>Kode</th>
+                            <th>No Faktur</th>
+                            <th>Tgl Faktur</th>
+                            <th>Supplaier</th>
+                            <th>diskon</th>
                             <th>Qty</th>
-                            <th>Waktu</th>
+                            <th>total</th>
+                            <th>payment</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>POS78998787667</td>
-                            <td>Administrator</td>
-                            <td>Umum</td>
+                            <td>PMB7878767</td>
+                            <td>782349867</td>
+                            <td>2020-09-21</td>
+                            <td>CV.Amanah</td>
                             <td>0</td>
+                            <td>1</td>
                             <td>40000</td>
                             <td>cash</td>
-                            <td>3</td>
-                            <td>2020-09-10 20:45:34</td>
                             <td>
                                 <a href="" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
-                                <a href="" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
                             </td>
                         </tr>
                     </tbody>

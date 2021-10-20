@@ -80,8 +80,8 @@
                                 <td>4</td>
                                 <td>20000</td>
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm mt-2"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="" class="btn btn-danger btn-sm mt-2"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="" class="btn btn-primary btn-sm mb-2"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="" class="btn btn-danger btn-sm mb-2"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -91,8 +91,8 @@
                                 <td>4</td>
                                 <td>20000</td>
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="" class="btn btn-primary btn-sm mb-2"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="" class="btn btn-danger btn-sm mb-2"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -102,8 +102,8 @@
                                 <td>4</td>
                                 <td>20000</td>
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="" class="btn btn-primary btn-sm mb-2"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="" class="btn btn-danger btn-sm mb-2"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         </tbody>

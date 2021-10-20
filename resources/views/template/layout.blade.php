@@ -150,8 +150,8 @@
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 <li><a href="/entry_penjualan">Enty Penjualan</a></li>
                                 <li><a href="/daftar_penjualan">Daftar Penjualan</a></li>
-                                <li><a href="#">Entry Pembelian</a></li>
-                                <li><a href="#">Daftar Pembelian</a></li>
+                                <li><a href="/entry_pembelian">Entry Pembelian</a></li>
+                                <li><a href="/daftar_pembelian">Daftar Pembelian</a></li>
                                 <li><a href="#">Hutang</a></li>
                                 <li><a href="#">Piutang</a></li>
                             </ul>

@@ -31,3 +31,9 @@ Route::get('/entry_penjualan', function () {
 Route::get('/daftar_penjualan', function () {
     return view('transaksi.data_penjualan');
 });
+Route::get('/entry_pembelian', function () {
+    return view('transaksi.entry_pembelian');
+});
+Route::get('/daftar_pembelian', function () {
+    return view('transaksi.data_pembelian');
+});
