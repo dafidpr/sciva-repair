@@ -143,10 +143,18 @@
                         </li>
 
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-cart"></i>
                                 <span>Transaksi</span>
                             </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="/entry_penjualan">Enty Penjualan</a></li>
+                                <li><a href="/daftar_penjualan">Daftar Penjualan</a></li>
+                                <li><a href="#">Entry Pembelian</a></li>
+                                <li><a href="#">Daftar Pembelian</a></li>
+                                <li><a href="#">Hutang</a></li>
+                                <li><a href="#">Piutang</a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -155,9 +163,9 @@
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="ui-alerts.html">Data Barang</a></li>
-                                <li><a href="ui-buttons.html">Data Pelanggan</a></li>
-                                <li><a href="ui-cards.html">Data karyawan</a></li>\
+                                <li><a href="#">Data Barang</a></li>
+                                <li><a href="#">Data Pelanggan</a></li>
+                                <li><a href="#">Data karyawan</a></li>
                             </ul>
                         </li>
 

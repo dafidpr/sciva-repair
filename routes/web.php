@@ -25,3 +25,9 @@ Route::get('/dashboard', function () {
 Route::get('/servis', function () {
     return view('content.servis');
 });
+Route::get('/entry_penjualan', function () {
+    return view('transaksi.entry_penjualan');
+});
+Route::get('/daftar_penjualan', function () {
+    return view('transaksi.data_penjualan');
+});

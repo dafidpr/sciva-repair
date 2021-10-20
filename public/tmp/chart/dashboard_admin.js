@@ -6,7 +6,7 @@ var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
      //membuat label chart
-        labels: ['Samsung', 'Xiaomi', 'Charger', 'USB', 'Kaca Touchscreen', 'Asus', 'Vivo', 'Oppo', 'Battery', 'Casing'],
+        labels: ['Samsung', 'Xiaomi', 'Charger', 'USB', 'Screen Touchscreen', 'Asus', 'Vivo', 'Oppo', 'Battery', 'Casing'],
         datasets: [{
             label: '# of Votes',
             //isi chart
