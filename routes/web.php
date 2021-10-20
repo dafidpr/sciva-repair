@@ -37,3 +37,21 @@ Route::get('/entry_pembelian', function () {
 Route::get('/daftar_pembelian', function () {
     return view('transaksi.data_pembelian');
 });
+Route::get('/piutang', function () {
+    return view('transaksi.piutang');
+});
+Route::get('/hutang', function () {
+    return view('transaksi.hutang');
+});
+Route::get('/barang', function () {
+    return view('masterdata.barang');
+});
+Route::get('/jasa', function () {
+    return view('masterdata.data_jasa');
+});
+Route::get('/pelanggan', function () {
+    return view('masterdata.pelanggan');
+});
+Route::get('/karyawan', function () {
+    return view('masterdata.karyawan');
+});

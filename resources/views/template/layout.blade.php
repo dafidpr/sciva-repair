@@ -152,8 +152,8 @@
                                 <li><a href="/daftar_penjualan">Daftar Penjualan</a></li>
                                 <li><a href="/entry_pembelian">Entry Pembelian</a></li>
                                 <li><a href="/daftar_pembelian">Daftar Pembelian</a></li>
-                                <li><a href="#">Hutang</a></li>
-                                <li><a href="#">Piutang</a></li>
+                                <li><a href="/hutang">Hutang</a></li>
+                                <li><a href="/piutang">Piutang</a></li>
                             </ul>
                         </li>
 
@@ -163,9 +163,10 @@
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="#">Data Barang</a></li>
-                                <li><a href="#">Data Pelanggan</a></li>
-                                <li><a href="#">Data karyawan</a></li>
+                                <li><a href="/barang">Data Barang</a></li>
+                                <li><a href="/jasa">Data Jasa</a></li>
+                                <li><a href="/pelanggan">Data Pelanggan</a></li>
+                                <li><a href="/karyawan">Data karyawan</a></li>
                             </ul>
                         </li>
 
