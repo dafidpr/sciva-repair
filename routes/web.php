@@ -58,3 +58,18 @@ Route::get('/karyawan', function () {
 Route::get('/grafik', function () {
     return view('content.grafik');
 });
+Route::get('/lap_labarugi', function () {
+    return view('laporan.labarugi');
+});
+Route::get('/lap_jurnalharian', function () {
+    return view('laporan.jurnalharian');
+});
+Route::get('/lap_penjualan', function () {
+    return view('laporan.penjualan');
+});
+Route::get('/lap_pembelian', function () {
+    return view('laporan.pembelian');
+});
+Route::get('/lap_hutangpiutang', function () {
+    return view('laporan.hutangpiutang');
+});

@@ -176,8 +176,11 @@
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="ui-alerts.html">Jurnal harian</a></li>
-                                <li><a href="ui-buttons.html">Laba rugi</a></li>
+                                <li><a href="/lap_jurnalharian">Jurnal harian</a></li>
+                                <li><a href="/lap_penjualan">Penjualan</a></li>
+                                <li><a href="/lap_pembelian">Pembelian</a></li>
+                                <li><a href="/lap_hutangpiutang">Hutang Piutang</a></li>
+                                <li><a href="/lap_labarugi">Laba rugi</a></li>
                             </ul>
                         </li>
 

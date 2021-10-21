@@ -27,18 +27,6 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
-        <div class="card">
-            <div class="card-header bg-white">
-                <h6>Grafik Pengeluaran</h6>
-            </div>
-            <div class="card-body">
-                <div>
-                    <canvas id="pengeluaran_grafik"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 @endsection
