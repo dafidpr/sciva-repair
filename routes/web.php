@@ -55,3 +55,6 @@ Route::get('/pelanggan', function () {
 Route::get('/karyawan', function () {
     return view('masterdata.karyawan');
 });
+Route::get('/grafik', function () {
+    return view('content.grafik');
+});

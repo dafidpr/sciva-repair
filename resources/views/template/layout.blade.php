@@ -176,15 +176,33 @@
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="ui-alerts.html">Laporan jurnal harian</a></li>
-                                <li><a href="ui-buttons.html">Laporan laba rugi</a></li>
+                                <li><a href="ui-alerts.html">Jurnal harian</a></li>
+                                <li><a href="ui-buttons.html">Laba rugi</a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="/grafik" class=" waves-effect">
                                 <i class="far fa-chart-bar"></i>
                                 <span>Grafik</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="calendar.html" class=" waves-effect">
+                                <i class="fas fa-tools"></i>
+                                <span>Tools</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="calendar.html" class=" waves-effect">
+                                <i class="dripicons-flag"></i>
+                                <span>Index Prestasi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="calendar.html" class=" waves-effect">
+                                <i class="dripicons-toggles"></i>
+                                <span>Setting</span>
                             </a>
                         </li>
 
