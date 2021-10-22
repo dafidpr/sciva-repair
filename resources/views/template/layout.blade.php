@@ -196,9 +196,9 @@
                                 <span>Tools</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="#">Backup Data</a></li>
-                                <li><a href="#">Hapus servis</a></li>
-                                <li><a href="#">Hapus Transaksi</a></li>
+                                <li><a href="/backupdata">Backup Data</a></li>
+                                <li><a href="/del_dataservis">Hapus servis</a></li>
+                                <li><a href="/del_transaksi">Hapus Transaksi</a></li>
                             </ul>
                         </li>
                         <li>

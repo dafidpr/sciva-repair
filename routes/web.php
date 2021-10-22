@@ -73,3 +73,12 @@ Route::get('/lap_pembelian', function () {
 Route::get('/lap_hutangpiutang', function () {
     return view('laporan.hutangpiutang');
 });
+Route::get('/backupdata', function () {
+    return view('tools.backupdata');
+});
+Route::get('/del_dataservis', function () {
+    return view('tools.del_dataservis');
+});
+Route::get('/del_transaksi', function () {
+    return view('tools.del_transaksi');
+});
