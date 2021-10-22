@@ -191,15 +191,20 @@
                             </a>
                         </li>
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-tools"></i>
                                 <span>Tools</span>
                             </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="#">Backup Data</a></li>
+                                <li><a href="#">Hapus servis</a></li>
+                                <li><a href="#">Hapus Transaksi</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="calendar.html" class=" waves-effect">
                                 <i class="dripicons-flag"></i>
-                                <span>Index Prestasi</span>
+                                <span>Komisi Karyawan</span>
                             </a>
                         </li>
                         <li>
