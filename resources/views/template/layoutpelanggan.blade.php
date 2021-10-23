@@ -127,115 +127,10 @@
                         <li class="menu-title">Menu</li>
 
                         <li class="">
-                            <a href="/dashboard" class="waves-effect">
+                            <a href="#" class="waves-effect">
                                 <i class="dripicons-home"></i>
                                 <span>Dashboard</span>
                             </a>
-                        </li>
-
-                        <li>
-                            <a href="/servis" class=" waves-effect">
-                                <i class="fas fa-hammer"></i>
-                                <span>Servis</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-cart"></i>
-                                <span>Transaksi</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/entry_penjualan">Enty Penjualan</a></li>
-                                <li><a href="/daftar_penjualan">Daftar Penjualan</a></li>
-                                <li><a href="/entry_pembelian">Entry Pembelian</a></li>
-                                <li><a href="/daftar_pembelian">Daftar Pembelian</a></li>
-                                <li><a href="/hutang">Hutang</a></li>
-                                <li><a href="/piutang">Piutang</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fas fa-desktop"></i>
-                                <span>Data Master</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/barang">Data Barang</a></li>
-                                <li><a href="/jasa">Data Jasa</a></li>
-                                <li><a href="/supplier">Data Supplier</a></li>
-                                <li><a href="/pelanggan">Data Pelanggan</a></li>
-                                <li><a href="/karyawan">Data karyawan</a></li>
-                                <li><a href="/stokopname">Stok Opname</a></li>
-                                <li><a href="/stok_in_out">Stok In/Out</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fas fa-money-bill-alt"></i>
-                                <span>Keuangan</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/kas">Kas</a></li>
-                                <li><a href="/ppn">PPN</a></li>
-                                <li><a href="/bank">Bank</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fas fa-file-alt"></i>
-                                <span>Laporan</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/lap_jurnalharian">Jurnal harian</a></li>
-                                <li><a href="/lap_penjualan">Penjualan</a></li>
-                                <li><a href="/lap_pembelian">Pembelian</a></li>
-                                <li><a href="/lap_stokopname">stok opname</a></li>
-                                <li><a href="/lap_stok_in_out">stok In/Out</a></li>
-                                <li><a href="/lap_kas">Kas</a></li>
-                                <li><a href="/lap_kasbank">Kas Bank</a></li>
-                                <li><a href="/lap_hutangpiutang">Hutang Piutang</a></li>
-                                <li><a href="/lap_labarugi">Laba rugi</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="/grafik" class=" waves-effect">
-                                <i class="far fa-chart-bar"></i>
-                                <span>Grafik</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="fas fa-tools"></i>
-                                <span>Tools</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/generatebarcode">Generate Barcode</a></li>
-                                <li><a href="/backupdata">Backup Data</a></li>
-                                <li><a href="/del_dataservis">Hapus servis</a></li>
-                                <li><a href="/del_transaksi">Hapus Transaksi</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/komisi" class=" waves-effect">
-                                <i class="dripicons-flag"></i>
-                                <span>Komisi Karyawan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-toggles"></i>
-                                <span>Setting</span>
-                            </a>
-                            <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/footer_nota">Footer Nota</a></li>
-                                <li><a href="/format_sms">Format sms</a></li>
-                                <li><a href="/format_WA">Format WA</a></li>
-                                <li><a href="/bataspengambilan">Batas Ambil Servis</a></li>
-                                <li><a href="/profil">Profil Toko</a></li>
-                            </ul>
                         </li>
 
                     </ul>
@@ -344,6 +239,19 @@
     <script src="{{asset('tmp/assets/libs/chart.js/Chart.min.js')}}"></script>
 
     <script src="{{asset('tmp/chart/dashboard_admin.js')}}"></script>
+
+
+            <!-- plugin js -->
+            <script src="{{asset('tmp/assets/libs/moment/min/moment.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/jquery-ui-dist/jquery-ui.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/@fullcalendar/core/main.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/@fullcalendar/bootstrap/main.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/@fullcalendar/daygrid/main.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/@fullcalendar/timegrid/main.min.js')}}"></script>
+            <script src="{{asset('tmp/assets/libs/@fullcalendar/interaction/main.min.js')}}"></script>
+
+            <!-- Calendar init -->
+            <script src="{{asset('tmp/assets/js/pages/calendar.init.js')}}"></script>
 
 
     <script src="{{asset('tmp/assets/js/app.js')}}"></script>

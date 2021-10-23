@@ -95,48 +95,7 @@
 
             </div>
         </div>
-    </div>
-    <div class="col-xl-5">
-        <div class="card">
-            <div class="card-body">
 
-                <h4 class="header-title mb-4 float-sm-start">Piutang Pelanggan</h4>
-
-                <div class="float-sm-end">
-
-                </div>
-
-                <div class="clearfix">
-                    <div class="table">
-                        <table class="table table-striped" style="font-size: 14px;">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Hutang</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Siti</td>
-                                    <td>Rp.10000</td>
-                                    <td><a href="" class="btn btn-sm btn-success"><i class="fas fa-hand-holding-usd"></i> Payment</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xl-7">
         <div class="card">
             <div class="card-header bg-white">
                 <h4 class="header-title mb-4 float-sm-start mb-4">Barang stock limit</h4>
@@ -185,19 +144,58 @@
     </div>
     <div class="col-xl-5">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header bg-white">
 
-
-
-                <h4 class="header-title mb-4 float-sm-start mb-4">Pelanggan terbaik</h4>
+                <h4 class="header-title mb-4 float-sm-start">Piutang Pelanggan</h4>
 
                 <div class="float-sm-end">
 
                 </div>
+            </div>
+            <div class="card-body">
+
 
                 <div class="clearfix">
-                    <div class="">
-                        <table class="table table-striped" id="pelangganterbaik" style="font-size: 14px;">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="piutang" style="font-size: 14px;">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Hutang</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Siti</td>
+                                    <td>Rp.10000</td>
+                                    <td><a href="" class="btn btn-sm btn-success"><i class="fas fa-hand-holding-usd"></i> Payment</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card">
+
+                <div class="card-header bg-white">
+
+                    <h4 class="header-title mb-4 float-sm-start mb-4">Pelanggan terbaik</h4>
+
+                    <div class="float-sm-end">
+
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="bestpelanggan" style="font-size: 14px;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -217,9 +215,11 @@
                 </div>
 
 
-            </div>
         </div>
     </div>
+</div>
+
+<div class="row">
 
     <div class="col-xl-9">
         <div class="card">

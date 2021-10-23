@@ -22,6 +22,9 @@ Route::get('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.user');
 });
+Route::get('/dashboardpelanggan', function () {
+    return view('dashboard.pelanggan');
+});
 Route::get('/servis', function () {
     return view('content.servis');
 });
@@ -120,4 +123,16 @@ Route::get('/komisi', function () {
 });
 Route::get('/profil', function () {
     return view('setting.profil_toko');
+});
+Route::get('/footer_nota', function () {
+    return view('setting.footerNota');
+});
+Route::get('/format_WA', function () {
+    return view('setting.formatWA');
+});
+Route::get('/format_sms', function () {
+    return view('setting.formatsms');
+});
+Route::get('/bataspengambilan', function () {
+    return view('setting.bataspengambilan');
 });
