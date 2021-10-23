@@ -221,16 +221,23 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="/komisi" class=" waves-effect">
                                 <i class="dripicons-flag"></i>
                                 <span>Komisi Karyawan</span>
                             </a>
                         </li>
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-toggles"></i>
                                 <span>Setting</span>
                             </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="#">Footer Nota</a></li>
+                                <li><a href="#">Format sms</a></li>
+                                <li><a href="#">Format WA</a></li>
+                                <li><a href="#">Batas Pengambilan</a></li>
+                                <li><a href="/profil">Profil Toko</a></li>
+                            </ul>
                         </li>
 
                     </ul>

@@ -115,3 +115,9 @@ Route::get('/ppn', function () {
 Route::get('/bank', function () {
     return view('keuangan.bank');
 });
+Route::get('/komisi', function () {
+    return view('content.komisikaryawan');
+});
+Route::get('/profil', function () {
+    return view('setting.profil_toko');
+});
