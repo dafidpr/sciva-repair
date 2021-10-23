@@ -136,3 +136,6 @@ Route::get('/format_sms', function () {
 Route::get('/bataspengambilan', function () {
     return view('setting.bataspengambilan');
 });
+Route::get('/ubahpassword', function () {
+    return view('content.ubahpassword');
+});

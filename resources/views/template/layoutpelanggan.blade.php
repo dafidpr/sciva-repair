@@ -241,18 +241,6 @@
     <script src="{{asset('tmp/chart/dashboard_admin.js')}}"></script>
 
 
-            <!-- plugin js -->
-            <script src="{{asset('tmp/assets/libs/moment/min/moment.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/jquery-ui-dist/jquery-ui.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/@fullcalendar/core/main.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/@fullcalendar/bootstrap/main.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/@fullcalendar/daygrid/main.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/@fullcalendar/timegrid/main.min.js')}}"></script>
-            <script src="{{asset('tmp/assets/libs/@fullcalendar/interaction/main.min.js')}}"></script>
-
-            <!-- Calendar init -->
-            <script src="{{asset('tmp/assets/js/pages/calendar.init.js')}}"></script>
-
 
     <script src="{{asset('tmp/assets/js/app.js')}}"></script>
 
