@@ -1,12 +1,10 @@
 @extends('template.layout')
-@section('title', 'Pelanggan')
+@section('title', 'Supplier')
 @section('content')
 
 <div class="card">
     <div class="card-header bg-white">
-        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Pelanggan</a>
-        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a>
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a>
+        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -16,9 +14,12 @@
                         <th>Aksi</th>
                         <th>Kode</th>
                         <th>Nama</th>
-                        <th>No HP</th>
-                        <th>Alamat</th>
-                        <th>Jenis</th>
+                        <th>stok gudang</th>
+                        <th>stok nyata</th>
+                        <th>selisih</th>
+                        <th>nilai</th>
+                        <th>keterangan</th>
+                        <th>tanggal</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,11 +28,14 @@
                             <a href="" class="text-primary"><i class="fas fa-edit"></i></a>
                             <a href="" class="text-primary"><i class="fas fa-trash"></i></a>
                         </td>
-                        <td>PLG-0001</td>
-                        <td>Nur Khalisa</td>
-                        <td>0843245678</td>
-                        <td>Rogojampi</td>
-                        <td>Member</td>
+                        <td>BR-0001</td>
+                        <td>Battery>
+                        <td>100</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>000</td>
+                        <td>Nice</td>
+                        <td>2020-09-10</td>
                     </tr>
                 </tbody>
             </table>

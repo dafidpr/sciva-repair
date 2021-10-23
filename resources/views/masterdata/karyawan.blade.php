@@ -4,7 +4,9 @@
 
 <div class="card">
     <div class="card-header bg-white">
-        <a href="" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Karyawan</a>
+        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Karyawan</a>
+        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Karyawan</a>
+        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Karyawan</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -42,7 +44,7 @@
         <h6>Level Karyawan</h6>
     </div>
     <div class="card-body">
-        <a href="" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Level</a>
+        <a href="" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus"></i> Tambah Level</a>
         <div class="table-responsive">
             <table class="table table-striped" style="font-size: 13px;">
                 <thead>

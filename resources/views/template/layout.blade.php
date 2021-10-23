@@ -165,11 +165,25 @@
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 <li><a href="/barang">Data Barang</a></li>
                                 <li><a href="/jasa">Data Jasa</a></li>
+                                <li><a href="/supplier">Data Supplier</a></li>
                                 <li><a href="/pelanggan">Data Pelanggan</a></li>
                                 <li><a href="/karyawan">Data karyawan</a></li>
+                                <li><a href="/stokopname">Stok Opname</a></li>
+                                <li><a href="/stok_in_out">Stok In/Out</a></li>
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="fas fa-money-bill-alt"></i>
+                                <span>Keuangan</span>
+                            </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="/kas">Kas</a></li>
+                                <li><a href="/ppn">PPN</a></li>
+                                <li><a href="/bank">Bank</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-file-alt"></i>
@@ -179,6 +193,10 @@
                                 <li><a href="/lap_jurnalharian">Jurnal harian</a></li>
                                 <li><a href="/lap_penjualan">Penjualan</a></li>
                                 <li><a href="/lap_pembelian">Pembelian</a></li>
+                                <li><a href="/lap_stokopname">stok opname</a></li>
+                                <li><a href="/lap_stok_in_out">stok In/Out</a></li>
+                                <li><a href="/lap_kas">Kas</a></li>
+                                <li><a href="/lap_kasbank">Kas Bank</a></li>
                                 <li><a href="/lap_hutangpiutang">Hutang Piutang</a></li>
                                 <li><a href="/lap_labarugi">Laba rugi</a></li>
                             </ul>
@@ -196,6 +214,7 @@
                                 <span>Tools</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="/generatebarcode">Generate Barcode</a></li>
                                 <li><a href="/backupdata">Backup Data</a></li>
                                 <li><a href="/del_dataservis">Hapus servis</a></li>
                                 <li><a href="/del_transaksi">Hapus Transaksi</a></li>

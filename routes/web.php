@@ -49,6 +49,15 @@ Route::get('/barang', function () {
 Route::get('/jasa', function () {
     return view('masterdata.data_jasa');
 });
+Route::get('/supplier', function () {
+    return view('masterdata.supplier');
+});
+Route::get('/stokopname', function () {
+    return view('masterdata.stokopname');
+});
+Route::get('/stok_in_out', function () {
+    return view('masterdata.stok_in_out');
+});
 Route::get('/pelanggan', function () {
     return view('masterdata.pelanggan');
 });
@@ -67,6 +76,18 @@ Route::get('/lap_jurnalharian', function () {
 Route::get('/lap_penjualan', function () {
     return view('laporan.penjualan');
 });
+Route::get('/lap_stokopname', function () {
+    return view('laporan.stokopname');
+});
+Route::get('/lap_stok_in_out', function () {
+    return view('laporan.stok_in_out');
+});
+Route::get('/lap_kas', function () {
+    return view('laporan.kas');
+});
+Route::get('/lap_kasbank', function () {
+    return view('laporan.kasbank');
+});
 Route::get('/lap_pembelian', function () {
     return view('laporan.pembelian');
 });
@@ -76,9 +97,21 @@ Route::get('/lap_hutangpiutang', function () {
 Route::get('/backupdata', function () {
     return view('tools.backupdata');
 });
+Route::get('/generatebarcode', function () {
+    return view('tools.generatebarcode');
+});
 Route::get('/del_dataservis', function () {
     return view('tools.del_dataservis');
 });
 Route::get('/del_transaksi', function () {
     return view('tools.del_transaksi');
+});
+Route::get('/kas', function () {
+    return view('keuangan.kas');
+});
+Route::get('/ppn', function () {
+    return view('keuangan.ppn');
+});
+Route::get('/bank', function () {
+    return view('keuangan.bank');
 });
