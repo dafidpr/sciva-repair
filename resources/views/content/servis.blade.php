@@ -182,7 +182,7 @@
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
-                        Menunggu sparepat
+                        Menunggu Sparepat
                     </label>
                 </div>
                 <div class="form-check mb-3">
@@ -194,7 +194,13 @@
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
-                        Di batalkan
+                        Dibatalkan
+                    </label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <label class="form-check-label" for="formRadios">
+                        Sudah Diambil
                     </label>
                 </div>
                 <div class="form-check mb-3">

@@ -23,7 +23,7 @@
             <div class="card-body">
                 <form action="">
                     <div>
-                        <label for="">customer</label>
+                        <label for="">Customer</label>
                         <div class="input-group mb-3">
                             <button class="btn btn-primary" type="button" id="button-addon1"><i class="fas fa-search"></i></button>
                             <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">

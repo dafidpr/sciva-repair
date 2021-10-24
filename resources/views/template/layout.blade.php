@@ -165,7 +165,7 @@
                                 <li><a href="/jasa">Data Jasa</a></li>
                                 <li><a href="/supplier">Data Supplier</a></li>
                                 <li><a href="/pelanggan">Data Pelanggan</a></li>
-                                <li><a href="/karyawan">Data karyawan</a></li>
+                                <li><a href="/karyawan">Data Karyawan</a></li>
                                 <li><a href="/stokopname">Stok Opname</a></li>
                                 <li><a href="/stok_in_out">Stok In/Out</a></li>
                             </ul>
@@ -191,12 +191,12 @@
                                 <li><a href="/lap_jurnalharian">Jurnal harian</a></li>
                                 <li><a href="/lap_penjualan">Penjualan</a></li>
                                 <li><a href="/lap_pembelian">Pembelian</a></li>
-                                <li><a href="/lap_stokopname">stok opname</a></li>
-                                <li><a href="/lap_stok_in_out">stok In/Out</a></li>
+                                <li><a href="/lap_stokopname">Stok Opname</a></li>
+                                <li><a href="/lap_stok_in_out">Stok In/Out</a></li>
                                 <li><a href="/lap_kas">Kas</a></li>
                                 <li><a href="/lap_kasbank">Kas Bank</a></li>
                                 <li><a href="/lap_hutangpiutang">Hutang Piutang</a></li>
-                                <li><a href="/lap_labarugi">Laba rugi</a></li>
+                                <li><a href="/lap_labarugi">Laba Rugi</a></li>
                             </ul>
                         </li>
 
@@ -214,7 +214,7 @@
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 <li><a href="/generatebarcode">Generate Barcode</a></li>
                                 <li><a href="/backupdata">Backup Data</a></li>
-                                <li><a href="/del_dataservis">Hapus servis</a></li>
+                                <li><a href="/del_dataservis">Hapus Servis</a></li>
                                 <li><a href="/del_transaksi">Hapus Transaksi</a></li>
                             </ul>
                         </li>
@@ -231,7 +231,7 @@
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 <li><a href="/footer_nota">Footer Nota</a></li>
-                                <li><a href="/format_sms">Format sms</a></li>
+                                <li><a href="/format_sms">Format SMS</a></li>
                                 <li><a href="/format_WA">Format WA</a></li>
                                 <li><a href="/bataspengambilan">Batas Ambil Servis</a></li>
                                 <li><a href="/profil">Profil Toko</a></li>

@@ -86,7 +86,7 @@
             </div>
             <div class="card-body">
 
-                <div class="clearfix" style="width: 500px;">
+                <div class="clearfix" style="width: 100%;">
                     <div class="table-responsive mb-0 fixed-solution">
                         <canvas id="G_barang_laris"></canvas>
                     </div>
