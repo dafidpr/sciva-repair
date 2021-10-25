@@ -7,14 +7,19 @@
         <h3 class=" mb-4 float-sm-start">Servis</h3>
 
         <div class="float-sm-end">
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Data</a>
             {{-- modal --}}
-                <!-- Small modal -->
-                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
+
+
+
+            <td>
+                {{-- <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" >Modal demo</button> --}}
+                <!-- sample modal content -->
+                <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Scrollable Modal</h5>
+                                <h5 class="modal-title mt-0" id="myModalLabel">Tambah Data</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                                 </button>
@@ -29,7 +34,7 @@
                                     <div>
                                         <label for="">Pelanggan</label>
                                         <div class="input-group mb-3">
-                                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"><i class="fas fa-search"></i></button>
+                                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"><i class="fas fa-search"></i></button>
                                             <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                                         </div>
                                     </div>
@@ -102,44 +107,78 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
+                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                            </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+            </td>
 
-                <td>
-                    <!-- Small modal -->
+
+                    <!-- Large modal -->
                     {{-- <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" >Modal demo</button> --}}
 
-                    <div class="modal fade bs-example-modal-center" tabindex="-1" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
+                    <!--  Modal content for the above example -->
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title mt-0">Center modal</h5>
+                                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Data Pelanggan</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Cras mattis consectetur purus sit amet fermentum.
-                                        Cras justo odio, dapibus ac facilisis in,
-                                        egestas eget quam. Morbi leo risus, porta ac
-                                        consectetur ac, vestibulum at eros.</p>
-                                    <p>Praesent commodo cursus magna, vel scelerisque
-                                        nisl consectetur et. Vivamus sagittis lacus vel
-                                        augue laoreet rutrum faucibus dolor auctor.</p>
-                                    <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur.
-                                        Praesent commodo cursus magna, vel scelerisque
-                                        nisl consectetur et. Donec sed odio dui. Donec
-                                        ullamcorper nulla non metus auctor
-                                        fringilla.</p>
+                                    <div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-1">
+                                                <label>Tambah Data</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="No Telephone">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Nama">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Alamat">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</button>
+                                            </div>
+                                        </div>
+                                    </div><hr>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" width="100%" style="font-size: 13px;" id="piutang">
+                                            <thead>
+                                                <tr>
+                                                    <th>No Tlp</th>
+                                                    <th>Nama</th>
+                                                    <th>Alamat</th>
+                                                    <th>Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>0883743849</td>
+                                                    <td>Fitriyansyah</td>
+                                                    <td>Banyuwangi</td>
+                                                    <td>
+                                                        <a href="" class="btn btn-sm btn-warning">Pilih</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                </td>
+
+
 
 
             {{-- end-modal --}}
@@ -149,7 +188,7 @@
         <h6>Menampilkan data servis berdasarkan :</h6>
         <div class="row">
             {{-- waktu --}}
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <h6>Waktu :</h6>
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" checked="">
@@ -171,44 +210,51 @@
                 </div>
             </div>
             {{-- status --}}
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <h6>Status :</h6>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                    <label class="form-check-label" for="formRadios">
-                        Dalam Proses
-                    </label>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
+                            <label class="form-check-label" for="formRadios">
+                                Dalam Proses
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
+                            <label class="form-check-label" for="formRadios">
+                                Menunggu Sparepat
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
+                            <label class="form-check-label" for="formRadios">
+                                Selesai
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
+                            <label class="form-check-label" for="formRadios">
+                                Dibatalkan
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
+                            <label class="form-check-label" for="formRadios">
+                                Sudah Diambil
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" checked="">
+                            <label class="form-check-label" for="formRadios">
+                                Semua
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                    <label class="form-check-label" for="formRadios">
-                        Menunggu Sparepat
-                    </label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                    <label class="form-check-label" for="formRadios">
-                        Selesai
-                    </label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                    <label class="form-check-label" for="formRadios">
-                        Dibatalkan
-                    </label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                    <label class="form-check-label" for="formRadios">
-                        Sudah Diambil
-                    </label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" checked="">
-                    <label class="form-check-label" for="formRadios">
-                        Semua
-                    </label>
-                </div>
+
             </div>
         </div>
         <hr>
