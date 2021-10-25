@@ -46,7 +46,7 @@
                                     </div>
 
 
-                                    <form class="form-horizontal mt-4 pt-2" action="/dashboard">
+                                    <form class="form-horizontal mt-4 pt-2" action="/admin/dashboard">
 
                                         <div class="mb-3">
                                             <label for="username">Username</label>

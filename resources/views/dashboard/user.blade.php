@@ -219,42 +219,70 @@
     </div>
 </div>
 
-<div class="row">
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title mb-4 mb-4">History</h4>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Penjualan</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Service</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Login</button>
+                </li>
+              </ul>
 
-    <div class="col-xl-9">
-        <div class="card">
-            <div class="card-body">
 
-
-
-                <h4 class="header-title mb-4 float-sm-start">History</h4>
-
-                <div class="float-sm-end">
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Penjualan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Service</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
-                        </li>
-                    </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table table-bordered" style="font-size: 13px;">
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                    </table>
                 </div>
-
-                <div class="clearfix">
-                    <div>
-                        <table class="table">
-                            <tr>
-                                <td>00001 Telah Login Hari ini</td>
-                            </tr>
-                        </table>
-                    </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <table class="table table-bordered" style="font-size: 13px;">
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                        </tr>
+                    </table>
                 </div>
-
-
-            </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <table class="table table-bordered" style="font-size: 13px;">
+                        <tr>
+                            <td>
+                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
         </div>
     </div>
 </div>

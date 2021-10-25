@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <label for="">Qty</label>
-                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" value="">
+                            <input type="number" class="form-control" placeholder="" aria-label="Example text with button addon" value="">
                     </div>
                     <button class="btn btn-success mt-3"><i class="dripicons-cart"></i> Tambah</button>
                 </form>
