@@ -13,129 +13,139 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//HomePage
 Route::get('/', function () {
     return view('homepage');
 });
+
+//User Admin
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/dashboard', function () {
+Route::get('/admin/dashboard', function () {
     return view('dashboard.user');
 });
-Route::get('/dashboardpelanggan', function () {
-    return view('dashboard.pelanggan');
-});
-Route::get('/servis', function () {
+Route::get('/admin/servis', function () {
     return view('content.servis');
 });
-Route::get('/entry_penjualan', function () {
+Route::get('/admin/entry_penjualan', function () {
     return view('transaksi.entry_penjualan');
 });
-Route::get('/daftar_penjualan', function () {
+Route::get('/admin/daftar_penjualan', function () {
     return view('transaksi.data_penjualan');
 });
-Route::get('/entry_pembelian', function () {
+Route::get('/admin/entry_pembelian', function () {
     return view('transaksi.entry_pembelian');
 });
-Route::get('/daftar_pembelian', function () {
+Route::get('/admin/daftar_pembelian', function () {
     return view('transaksi.data_pembelian');
 });
-Route::get('/piutang', function () {
+Route::get('/admin/piutang', function () {
     return view('transaksi.piutang');
 });
-Route::get('/hutang', function () {
+Route::get('/admin/hutang', function () {
     return view('transaksi.hutang');
 });
-Route::get('/barang', function () {
+Route::get('/admin/barang', function () {
     return view('masterdata.barang');
 });
-Route::get('/jasa', function () {
+Route::get('/admin/jasa', function () {
     return view('masterdata.data_jasa');
 });
-Route::get('/supplier', function () {
+Route::get('/admin/supplier', function () {
     return view('masterdata.supplier');
 });
-Route::get('/stokopname', function () {
+Route::get('/admin/stokopname', function () {
     return view('masterdata.stokopname');
 });
-Route::get('/stok_in_out', function () {
+Route::get('/admin/stok_in_out', function () {
     return view('masterdata.stok_in_out');
 });
-Route::get('/pelanggan', function () {
+Route::get('/admin/pelanggan', function () {
     return view('masterdata.pelanggan');
 });
-Route::get('/karyawan', function () {
+Route::get('/admin/karyawan', function () {
     return view('masterdata.karyawan');
 });
-Route::get('/grafik', function () {
+Route::get('/admin/grafik', function () {
     return view('content.grafik');
 });
-Route::get('/lap_labarugi', function () {
+Route::get('/admin/lap_labarugi', function () {
     return view('laporan.labarugi');
 });
-Route::get('/lap_jurnalharian', function () {
+Route::get('/admin/lap_jurnalharian', function () {
     return view('laporan.jurnalharian');
 });
-Route::get('/lap_penjualan', function () {
+Route::get('/admin/lap_penjualan', function () {
     return view('laporan.penjualan');
 });
-Route::get('/lap_stokopname', function () {
+Route::get('/admin/lap_stokopname', function () {
     return view('laporan.stokopname');
 });
-Route::get('/lap_stok_in_out', function () {
+Route::get('/admin/lap_stok_in_out', function () {
     return view('laporan.stok_in_out');
 });
-Route::get('/lap_kas', function () {
+Route::get('/admin/lap_kas', function () {
     return view('laporan.kas');
 });
-Route::get('/lap_kasbank', function () {
+Route::get('/admin/lap_kasbank', function () {
     return view('laporan.kasbank');
 });
-Route::get('/lap_pembelian', function () {
+Route::get('/admin/lap_pembelian', function () {
     return view('laporan.pembelian');
 });
-Route::get('/lap_hutangpiutang', function () {
+Route::get('/admin/lap_hutangpiutang', function () {
     return view('laporan.hutangpiutang');
 });
-Route::get('/backupdata', function () {
+Route::get('/admin/backupdata', function () {
     return view('tools.backupdata');
 });
-Route::get('/generatebarcode', function () {
+Route::get('/admin/generatebarcode', function () {
     return view('tools.generatebarcode');
 });
-Route::get('/del_dataservis', function () {
+Route::get('/admin/del_dataservis', function () {
     return view('tools.del_dataservis');
 });
-Route::get('/del_transaksi', function () {
+Route::get('/admin/del_transaksi', function () {
     return view('tools.del_transaksi');
 });
-Route::get('/kas', function () {
+Route::get('/admin/kas', function () {
     return view('keuangan.kas');
 });
-Route::get('/ppn', function () {
+Route::get('/admin/ppn', function () {
     return view('keuangan.ppn');
 });
-Route::get('/bank', function () {
+Route::get('/admin/bank', function () {
     return view('keuangan.bank');
 });
-Route::get('/komisi', function () {
+Route::get('/admin/komisi', function () {
     return view('content.komisikaryawan');
 });
-Route::get('/profil', function () {
+Route::get('/admin/profil', function () {
     return view('setting.profil_toko');
 });
-Route::get('/footer_nota', function () {
+Route::get('/admin/footer_nota', function () {
     return view('setting.footerNota');
 });
-Route::get('/format_WA', function () {
+Route::get('/admin/format_WA', function () {
     return view('setting.formatWA');
 });
-Route::get('/format_sms', function () {
+Route::get('/admin/format_sms', function () {
     return view('setting.formatsms');
 });
-Route::get('/bataspengambilan', function () {
+Route::get('/admin/bataspengambilan', function () {
     return view('setting.bataspengambilan');
 });
-Route::get('/ubahpassword', function () {
+Route::get('/admin/ubahpassword', function () {
     return view('content.ubahpassword');
+});
+
+
+
+//Pelanggan
+Route::get('/pelanggan/dashboardpelanggan', function () {
+    return view('dashboard.pelanggan');
+});
+Route::get('/pelanggan/ubahpassword', function () {
+    return view('content.ubahpasswordpelanggan');
 });

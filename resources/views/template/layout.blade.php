@@ -80,7 +80,7 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             {{-- <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a> --}}
-                            <a class="dropdown-item d-block" href="/ubahpassword"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Ubah Password</a>
+                            <a class="dropdown-item d-block" href="/admin/admin/ubahpassword"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Ubah Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
                         </div>
@@ -127,14 +127,14 @@
                         <li class="menu-title">Menu</li>
 
                         <li class="">
-                            <a href="/dashboard" class="waves-effect">
+                            <a href="/admin/dashboard" class="waves-effect">
                                 <i class="dripicons-home"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/servis" class=" waves-effect">
+                            <a href="/admin/servis" class=" waves-effect">
                                 <i class="fas fa-hammer"></i>
                                 <span>Servis</span>
                             </a>
@@ -146,12 +146,12 @@
                                 <span>Transaksi</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/entry_penjualan">Enty Penjualan</a></li>
-                                <li><a href="/daftar_penjualan">Daftar Penjualan</a></li>
-                                <li><a href="/entry_pembelian">Entry Pembelian</a></li>
-                                <li><a href="/daftar_pembelian">Daftar Pembelian</a></li>
-                                <li><a href="/hutang">Hutang</a></li>
-                                <li><a href="/piutang">Piutang</a></li>
+                                <li><a href="/admin/entry_penjualan">Enty Penjualan</a></li>
+                                <li><a href="/admin/daftar_penjualan">Daftar Penjualan</a></li>
+                                <li><a href="/admin/entry_pembelian">Entry Pembelian</a></li>
+                                <li><a href="/admin/daftar_pembelian">Daftar Pembelian</a></li>
+                                <li><a href="/admin/hutang">Hutang</a></li>
+                                <li><a href="/admin/piutang">Piutang</a></li>
                             </ul>
                         </li>
 
@@ -161,13 +161,13 @@
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/barang">Data Barang</a></li>
-                                <li><a href="/jasa">Data Jasa</a></li>
-                                <li><a href="/supplier">Data Supplier</a></li>
-                                <li><a href="/pelanggan">Data Pelanggan</a></li>
-                                <li><a href="/karyawan">Data Karyawan</a></li>
-                                <li><a href="/stokopname">Stok Opname</a></li>
-                                <li><a href="/stok_in_out">Stok In/Out</a></li>
+                                <li><a href="/admin/barang">Data Barang</a></li>
+                                <li><a href="/admin/jasa">Data Jasa</a></li>
+                                <li><a href="/admin/supplier">Data Supplier</a></li>
+                                <li><a href="/admin/pelanggan">Data Pelanggan</a></li>
+                                <li><a href="/admin/karyawan">Data Karyawan</a></li>
+                                <li><a href="/admin/stokopname">Stok Opname</a></li>
+                                <li><a href="/admin/stok_in_out">Stok In/Out</a></li>
                             </ul>
                         </li>
 
@@ -177,9 +177,9 @@
                                 <span>Keuangan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/kas">Kas</a></li>
-                                <li><a href="/ppn">PPN</a></li>
-                                <li><a href="/bank">Bank</a></li>
+                                <li><a href="/admin/kas">Kas</a></li>
+                                <li><a href="/admin/ppn">PPN</a></li>
+                                <li><a href="/admin/bank">Bank</a></li>
                             </ul>
                         </li>
                         <li>
@@ -188,20 +188,20 @@
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/lap_jurnalharian">Jurnal harian</a></li>
-                                <li><a href="/lap_penjualan">Penjualan</a></li>
-                                <li><a href="/lap_pembelian">Pembelian</a></li>
-                                <li><a href="/lap_stokopname">Stok Opname</a></li>
-                                <li><a href="/lap_stok_in_out">Stok In/Out</a></li>
-                                <li><a href="/lap_kas">Kas</a></li>
-                                <li><a href="/lap_kasbank">Kas Bank</a></li>
-                                <li><a href="/lap_hutangpiutang">Hutang Piutang</a></li>
-                                <li><a href="/lap_labarugi">Laba Rugi</a></li>
+                                <li><a href="/admin/lap_jurnalharian">Jurnal harian</a></li>
+                                <li><a href="/admin/lap_penjualan">Penjualan</a></li>
+                                <li><a href="/admin/lap_pembelian">Pembelian</a></li>
+                                <li><a href="/admin/lap_stokopname">Stok Opname</a></li>
+                                <li><a href="/admin/lap_stok_in_out">Stok In/Out</a></li>
+                                <li><a href="/admin/lap_kas">Kas</a></li>
+                                <li><a href="/admin/lap_kasbank">Kas Bank</a></li>
+                                <li><a href="/admin/lap_hutangpiutang">Hutang Piutang</a></li>
+                                <li><a href="/admin/lap_labarugi">Laba Rugi</a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="/grafik" class=" waves-effect">
+                            <a href="/admin/grafik" class=" waves-effect">
                                 <i class="far fa-chart-bar"></i>
                                 <span>Grafik</span>
                             </a>
@@ -212,14 +212,14 @@
                                 <span>Tools</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/generatebarcode">Generate Barcode</a></li>
-                                <li><a href="/backupdata">Backup Data</a></li>
-                                <li><a href="/del_dataservis">Hapus Servis</a></li>
-                                <li><a href="/del_transaksi">Hapus Transaksi</a></li>
+                                <li><a href="/admin/generatebarcode">Generate Barcode</a></li>
+                                <li><a href="/admin/backupdata">Backup Data</a></li>
+                                <li><a href="/admin/del_dataservis">Hapus Servis</a></li>
+                                <li><a href="/admin/del_transaksi">Hapus Transaksi</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/komisi" class=" waves-effect">
+                            <a href="/admin/komisi" class=" waves-effect">
                                 <i class="dripicons-flag"></i>
                                 <span>Komisi Karyawan</span>
                             </a>
@@ -230,11 +230,11 @@
                                 <span>Setting</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                <li><a href="/footer_nota">Footer Nota</a></li>
-                                <li><a href="/format_sms">Format SMS</a></li>
-                                <li><a href="/format_WA">Format WA</a></li>
-                                <li><a href="/bataspengambilan">Batas Ambil Servis</a></li>
-                                <li><a href="/profil">Profil Toko</a></li>
+                                <li><a href="/admin/footer_nota">Footer Nota</a></li>
+                                <li><a href="/admin/format_sms">Format SMS</a></li>
+                                <li><a href="/admin/format_WA">Format WA</a></li>
+                                <li><a href="/admin/bataspengambilan">Batas Ambil Servis</a></li>
+                                <li><a href="/admin/profil">Profil Toko</a></li>
                             </ul>
                         </li>
 
