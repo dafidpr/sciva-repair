@@ -5,8 +5,8 @@
 <div class="card">
     <div class="card-header bg-white">
         <a href="" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Jasa</a>
-        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Jasa</a>
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Jasa</a>
+        {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Jasa</a>
+        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Jasa</a> --}}
     </div>
     <div class="card-body">
         <div class="table-responsive">

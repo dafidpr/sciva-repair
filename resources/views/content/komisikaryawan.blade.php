@@ -18,7 +18,12 @@
                 </div>
                 <div>
                     <label for="">Nama Karyawan</label>
-                    <input type="text" class="form-control">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="" selected="">Pilih...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                 </div>
                 <div style="font-size: 12px;">
                     <span class="text-danger">Perhatian : Fitur ini berfungsi untuk mengetahui prestasi karyawan dan perolehan komisi karyawan per periode tanggal yang anda tentukan.</span>

@@ -5,8 +5,8 @@
 <div class="card">
     <div class="card-header bg-white">
         <a href="" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Supplier</a>
-        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a>
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a>
+        {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a>
+        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a> --}}
     </div>
     <div class="card-body">
         <div class="table-responsive">

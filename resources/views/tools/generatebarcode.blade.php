@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="stoklimit">
+                    <table class="table table-bordered" id="stoklimit" style="font-size:13px;">
                         <thead>
                             <tr>
                                 <th>Kode Barang</th>

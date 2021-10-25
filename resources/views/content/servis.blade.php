@@ -174,37 +174,37 @@
             <div class="col-sm-6">
                 <h6>Status :</h6>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
                         Dalam Proses
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
                         Menunggu Sparepat
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
                         Selesai
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
                         Dibatalkan
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" >
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
                     <label class="form-check-label" for="formRadios">
                         Sudah Diambil
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2" checked="">
+                    <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" checked="">
                     <label class="form-check-label" for="formRadios">
                         Semua
                     </label>
