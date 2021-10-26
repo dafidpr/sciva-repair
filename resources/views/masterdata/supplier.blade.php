@@ -21,7 +21,6 @@
                         <th>Bank</th>
                         <th>Rekening</th>
                         <th>Alamat</th>
-                        <th>Jenis</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +36,6 @@
                         <td>BRI</td>
                         <td>98787898999</td>
                         <td>Rogojampi</td>
-                        <td>Member</td>
                     </tr>
                 </tbody>
             </table>

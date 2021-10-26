@@ -14,11 +14,11 @@
                 <thead>
                     <tr>
                         <th>Aksi</th>
-                        <th>Kode</th>
                         <th>Nama</th>
                         <th>No HP</th>
                         <th>Alamat</th>
                         <th>Jenis</th>
+                        <th>Piutang</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,11 +27,11 @@
                             <a href="" class="text-primary"><i class="fas fa-edit"></i></a>
                             <a href="" class="text-primary"><i class="fas fa-trash"></i></a>
                         </td>
-                        <td>PLG-0001</td>
                         <td>Nur Khalisa</td>
                         <td>0843245678</td>
                         <td>Rogojampi</td>
                         <td>Member</td>
+                        <td>100000</td>
                     </tr>
                 </tbody>
             </table>
