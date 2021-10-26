@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'Supplier')
+@section('title', 'Stok Opname')
 @section('content')
 
 <div class="card">
@@ -29,7 +29,7 @@
                             <a href="" class="text-primary"><i class="fas fa-trash"></i></a>
                         </td>
                         <td>BR-0001</td>
-                        <td>Battery>
+                        <td>Battery</td>
                         <td>100</td>
                         <td>50</td>
                         <td>50</td>
