@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Supplier extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'barcode', 'name', 'selling_price', 'purchase_price', 'member_price', 'stock', 'limit', 'supplier_id'
+        'supplier_code', 'name', 'telephone', 'bank', 'account_number', 'bank_account_name', 'address'
     ];
 }

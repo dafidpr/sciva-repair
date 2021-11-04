@@ -50,6 +50,7 @@ Route::get('/admin/hutang', function () {
 
 //master data barang
 Route::get('/admin/barang', [ProductController::class, 'index']);
+Route::post('/admin/barang/tambahbarang', [ProductController::class, 'create']);
 
 
 
