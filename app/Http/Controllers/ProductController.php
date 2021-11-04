@@ -38,7 +38,6 @@ class ProductController extends Controller
             'selling_price' => 'required',
             'purchase_price' => 'required',
             'member_price' => 'required',
-            'stock' => 'required',
             'limit' => 'required',
             'supplier_id' => 'required'
         ];
@@ -49,7 +48,6 @@ class ProductController extends Controller
             'selling_price.required' => 'Harga jual tidak boleh kosong!!',
             'purchase_price.required' => 'Harga beli tidak boleh kosong!!',
             'member_price.required' => 'Harga member tidak boleh kosong!!',
-            'stock.required' => 'Stok tidak boleh kosong!!',
             'limit.required' => 'Limit tidak boleh kosong!!',
             'supplier_id.required' => 'Supplier tidak boleh kosong!!',
         ];
@@ -64,7 +62,7 @@ class ProductController extends Controller
             'selling_price' => $request->selling_price,
             'purchase_price' => $request->purchase_price,
             'member_price' => $request->member_price,
-            'stock' => $request->stock,
+            'stock' => 0,
             'limit' => $request->limit,
             'supplier_id' => $request->supplier_id
         ]);
@@ -92,6 +90,9 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $data = Product::find($id);
+
+        return json_encode($data);
     }
 
     /**
@@ -112,9 +113,43 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $rules = [
+            'barcode' => 'required',
+            'name' => 'required',
+            'selling_price' => 'required',
+            'purchase_price' => 'required',
+            'member_price' => 'required',
+            'limit' => 'required',
+            'supplier_id' => 'required'
+        ];
+        $messages = [
+            'barcode.required' => 'Barcode tidak boleh kosong!!',
+            'name.required' => 'Barcode tidak boleh kosong!!',
+            'selling_price.required' => 'Harga jual tidak boleh kosong!!',
+            'purchase_price.required' => 'Harga beli tidak boleh kosong!!',
+            'member_price.required' => 'Harga member tidak boleh kosong!!',
+            'limit.required' => 'Limit tidak boleh kosong!!',
+            'supplier_id.required' => 'Supplier tidak boleh kosong!!',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        Product::where('id', $request->id)->update([
+            'barcode' => $request->barcode,
+            'name' => $request->name,
+            'selling_price' => $request->selling_price,
+            'purchase_price' => $request->purchase_price,
+            'member_price' => $request->member_price,
+            'limit' => $request->limit,
+            'supplier_id' => $request->supplier_id,
+        ]);
+
+        return redirect('/admin/barang')->with('berhasil', 'Anda berhasil merubah data!!');
     }
 
     /**
@@ -126,5 +161,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        Product::where('id', $id)->delete();
+        return redirect('/admin/barang')->with('berhasil', 'Anda telah menghapus data!!');
     }
 }

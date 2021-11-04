@@ -51,10 +51,9 @@ Route::get('/admin/hutang', function () {
 //master data barang
 Route::get('/admin/barang', [ProductController::class, 'index']);
 Route::post('/admin/barang/tambahbarang', [ProductController::class, 'create']);
-
-
-
-
+Route::get('/admin/barang/hapusdata/{id}', [ProductController::class, 'destroy']);
+Route::get('/admin/barang/detail/{id}', [ProductController::class, 'show']);
+Route::post('/admin/barang/editdata', [ProductController::class, 'update']);
 
 
 Route::get('/admin/jasa', function () {
