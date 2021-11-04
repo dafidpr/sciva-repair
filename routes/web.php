@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,9 +47,15 @@ Route::get('/admin/piutang', function () {
 Route::get('/admin/hutang', function () {
     return view('transaksi.hutang');
 });
-Route::get('/admin/barang', function () {
-    return view('masterdata.barang');
-});
+
+//master data barang
+Route::get('/admin/barang', [ProductController::class, 'index']);
+
+
+
+
+
+
 Route::get('/admin/jasa', function () {
     return view('masterdata.data_jasa');
 });
