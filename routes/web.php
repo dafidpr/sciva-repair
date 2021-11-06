@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,9 +80,16 @@ Route::middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/admin/pelanggan', function () {
         return view('masterdata.pelanggan');
     });
-    Route::get('/admin/karyawan', function () {
-        return view('masterdata.karyawan');
-    });
+
+    //master karyawan/user
+    Route::get('/admin/karyawan', [UserController::class, 'index']);
+    Route::post('/admin/karyawan/tambah', [UserController::class, 'store']);
+    Route::get('/admin/karyawan/hapusdata/{id}', [UserController::class, 'destroy']);
+    Route::get('/admin/karyawan/detail/{id}', [UserController::class, 'show']);
+    Route::post('/admin/karyawan/update', [UserController::class, 'update']);
+
+
+
     Route::get('/admin/grafik', function () {
         return view('content.grafik');
     });
