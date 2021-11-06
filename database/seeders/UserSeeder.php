@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $user->telephone = "081234123123";
         $user->address = "Banyuwangi";
         $user->username = 'admin';
-        $user->password = bcrypt("admin");
+        $user->password = password_hash('admin', PASSWORD_DEFAULT);
         $user->login_at = null;
         $user->logout_at = null;
         $user->save();

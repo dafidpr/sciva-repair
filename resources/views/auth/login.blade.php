@@ -42,20 +42,38 @@
                                         </a>
 
                                         <h5 class="text-primary mb-2 mt-4">SCIVA REPAIR CENTER</h5>
+
+                                        @if (session('berhasil'))
+                                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                                            </button>
+                                            <strong>Selamat</strong> {{session('berhasil')}}.
+                                        </div>
+                                        @endif
+                                        @if (session('gagal'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                                            </button>
+                                            <strong>Maaf</strong> {{session('gagal')}}.
+                                        </div>
+                                        @endif
+
                                         <p class="text-muted">Silahkan anda login.</p>
                                     </div>
 
 
-                                    <form class="form-horizontal mt-4 pt-2" action="/admin/dashboard">
-
+                                    <form class="form-horizontal mt-4 pt-2" action="/login/input" method="post">
+                                        @csrf
                                         <div class="mb-3">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                            <label for="username">Username/Telephone</label>
+                                            <input type="text" value="{{old('username')}}" class="form-control" name="username" placeholder="Enter username/Telephone">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="userpassword">Password</label>
-                                            <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                                            <input type="password" class="form-control" name="password" placeholder="Enter password">
                                         </div>
 
                                         <div>
