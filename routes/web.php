@@ -30,146 +30,150 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 
 
-Route::middleware(['authmiddle', 'user'])->group(function () {
+Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     //User Admin
-    Route::get('/admin/dashboard', function () {
+    Route::get('/dashboard', function () {
         return view('dashboard.user');
     });
-    Route::get('/admin/servis', function () {
+    Route::get('/servis', function () {
         return view('content.servis');
     });
-    Route::get('/admin/entry_penjualan', function () {
+    Route::get('/entry_penjualan', function () {
         return view('transaksi.entry_penjualan');
     });
-    Route::get('/admin/daftar_penjualan', function () {
+    Route::get('/daftar_penjualan', function () {
         return view('transaksi.data_penjualan');
     });
-    Route::get('/admin/entry_pembelian', function () {
+    Route::get('/entry_pembelian', function () {
         return view('transaksi.entry_pembelian');
     });
-    Route::get('/admin/daftar_pembelian', function () {
+    Route::get('/daftar_pembelian', function () {
         return view('transaksi.data_pembelian');
     });
-    Route::get('/admin/piutang', function () {
+    Route::get('/piutang', function () {
         return view('transaksi.piutang');
     });
-    Route::get('/admin/hutang', function () {
+    Route::get('/hutang', function () {
         return view('transaksi.hutang');
     });
 
     //master data barang
-    Route::get('/admin/barang', [ProductController::class, 'index']);
-    Route::post('/admin/barang/tambahbarang', [ProductController::class, 'create']);
-    Route::get('/admin/barang/hapusdata/{id}', [ProductController::class, 'destroy']);
-    Route::get('/admin/barang/detail/{id}', [ProductController::class, 'show']);
-    Route::post('/admin/barang/editdata', [ProductController::class, 'update']);
+    Route::prefix('barang')->group(function () {
+        Route::get('', [ProductController::class, 'index'])->middleware('can:read-products');
+        Route::post('/tambahbarang', [ProductController::class, 'create'])->middleware('can:create-products');
+        Route::get('/hapusdata/{id}', [ProductController::class, 'destroy'])->middleware('can:delete-products');
+        Route::get('/detail/{id}', [ProductController::class, 'show']);
+        Route::post('/editdata', [ProductController::class, 'update'])->middleware('can:update-products');
+    });
 
 
-    Route::get('/admin/jasa', function () {
+    Route::get('/jasa', function () {
         return view('masterdata.data_jasa');
     });
-    Route::get('/admin/supplier', function () {
+    Route::get('/supplier', function () {
         return view('masterdata.supplier');
     });
-    Route::get('/admin/stokopname', function () {
+    Route::get('/stokopname', function () {
         return view('masterdata.stokopname');
     });
-    Route::get('/admin/stok_in_out', function () {
+    Route::get('/stok_in_out', function () {
         return view('masterdata.stok_in_out');
     });
-    Route::get('/admin/pelanggan', function () {
+    Route::get('/pelanggan', function () {
         return view('masterdata.pelanggan');
     });
 
     //master karyawan/user
-    Route::get('/admin/karyawan', [UserController::class, 'index']);
-    Route::post('/admin/karyawan/tambah', [UserController::class, 'store']);
-    Route::get('/admin/karyawan/hapusdata/{id}', [UserController::class, 'destroy']);
-    Route::get('/admin/karyawan/detail/{id}', [UserController::class, 'show']);
-    Route::post('/admin/karyawan/update', [UserController::class, 'update']);
+    Route::prefix('karyawan')->group(function () {
+        Route::get('', [UserController::class, 'index']);
+        Route::post('/tambah', [UserController::class, 'store']);
+        Route::get('/hapusdata/{id}', [UserController::class, 'destroy']);
+        Route::get('/detail/{id}', [UserController::class, 'show']);
+        Route::post('/update', [UserController::class, 'update']);
+    });
 
 
 
-    Route::get('/admin/grafik', function () {
+    Route::get('/grafik', function () {
         return view('content.grafik');
     });
-    Route::get('/admin/lap_labarugi', function () {
+    Route::get('/lap_labarugi', function () {
         return view('laporan.labarugi');
     });
-    Route::get('/admin/lap_jurnalharian', function () {
+    Route::get('/lap_jurnalharian', function () {
         return view('laporan.jurnalharian');
     });
-    Route::get('/admin/lap_penjualan', function () {
+    Route::get('/lap_penjualan', function () {
         return view('laporan.penjualan');
     });
-    Route::get('/admin/lap_stokopname', function () {
+    Route::get('/lap_stokopname', function () {
         return view('laporan.stokopname');
     });
-    Route::get('/admin/lap_stok_in_out', function () {
+    Route::get('/lap_stok_in_out', function () {
         return view('laporan.stok_in_out');
     });
-    Route::get('/admin/lap_kas', function () {
+    Route::get('/lap_kas', function () {
         return view('laporan.kas');
     });
-    Route::get('/admin/lap_kasbank', function () {
+    Route::get('/lap_kasbank', function () {
         return view('laporan.kasbank');
     });
-    Route::get('/admin/lap_pembelian', function () {
+    Route::get('/lap_pembelian', function () {
         return view('laporan.pembelian');
     });
-    Route::get('/admin/lap_hutangpiutang', function () {
+    Route::get('/lap_hutangpiutang', function () {
         return view('laporan.hutangpiutang');
     });
-    Route::get('/admin/backupdata', function () {
+    Route::get('/backupdata', function () {
         return view('tools.backupdata');
     });
-    Route::get('/admin/generatebarcode', function () {
+    Route::get('/generatebarcode', function () {
         return view('tools.generatebarcode');
     });
-    Route::get('/admin/del_dataservis', function () {
+    Route::get('/del_dataservis', function () {
         return view('tools.del_dataservis');
     });
-    Route::get('/admin/del_transaksi', function () {
+    Route::get('/del_transaksi', function () {
         return view('tools.del_transaksi');
     });
-    Route::get('/admin/kas', function () {
+    Route::get('/kas', function () {
         return view('keuangan.kas');
     });
-    Route::get('/admin/ppn', function () {
+    Route::get('/ppn', function () {
         return view('keuangan.ppn');
     });
-    Route::get('/admin/bank', function () {
+    Route::get('/bank', function () {
         return view('keuangan.bank');
     });
-    Route::get('/admin/komisi', function () {
+    Route::get('/komisi', function () {
         return view('content.komisikaryawan');
     });
-    Route::get('/admin/profil', function () {
+    Route::get('/profil', function () {
         return view('setting.profil_toko');
     });
-    Route::get('/admin/footer_nota', function () {
+    Route::get('/footer_nota', function () {
         return view('setting.footerNota');
     });
-    Route::get('/admin/format_WA', function () {
+    Route::get('/format_WA', function () {
         return view('setting.formatWA');
     });
-    Route::get('/admin/format_sms', function () {
+    Route::get('/format_sms', function () {
         return view('setting.formatsms');
     });
-    Route::get('/admin/bataspengambilan', function () {
+    Route::get('/bataspengambilan', function () {
         return view('setting.bataspengambilan');
     });
-    Route::get('/admin/ubahpassword', function () {
+    Route::get('/ubahpassword', function () {
         return view('content.ubahpassword');
     });
 });
 
-Route::middleware(['authmiddle', 'customer'])->group(function () {
+Route::prefix('pelanggan')->middleware(['authmiddle', 'customer'])->group(function () {
     //Pelanggan
-    Route::get('/pelanggan/dashboardpelanggan', function () {
+    Route::get('/dashboardpelanggan', function () {
         return view('dashboard.pelanggan');
     });
-    Route::get('/pelanggan/ubahpassword', function () {
+    Route::get('/ubahpassword', function () {
         return view('content.ubahpasswordpelanggan');
     });
 });

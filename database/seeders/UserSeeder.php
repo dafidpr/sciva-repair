@@ -15,14 +15,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        $user = new User();
-        $user->name = "admin";
-        $user->telephone = "081234123123";
-        $user->address = "Banyuwangi";
-        $user->username = 'admin';
-        $user->password = password_hash('admin', PASSWORD_DEFAULT);
-        $user->login_at = null;
-        $user->logout_at = null;
-        $user->save();
+        $user = User::create([
+            'name' => 'admin',
+            'telephone' => '081234123123',
+            'address' => 'Banyuwangi',
+            'username' => 'admin',
+            'password' => password_hash('admin', PASSWORD_DEFAULT),
+            'login_at' => null,
+            'logout_at' => null
+        ]);
+
+        $user->assignRole('admin');
     }
 }
