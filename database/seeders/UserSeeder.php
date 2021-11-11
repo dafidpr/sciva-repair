@@ -26,5 +26,15 @@ class UserSeeder extends Seeder
         ]);
 
         $user->assignRole('admin');
+        $user = User::create([
+            'name' => 'kasir',
+            'telephone' => '081111111111',
+            'address' => 'Banyuwangi',
+            'username' => 'kasir',
+            'password' => password_hash('kasir', PASSWORD_DEFAULT),
+            'login_at' => null,
+            'logout_at' => null
+        ]);
+        $user->assignRole('kasir');
     }
 }

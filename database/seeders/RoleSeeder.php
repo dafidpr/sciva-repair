@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -21,6 +22,12 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
-        $admin->givePermissionTo(['read-products', 'update-products', 'create-products', 'delete-products']);
+        $kasir = Role::create([
+            'name' => 'kasir',
+            'guard_name' => 'web'
+        ]);
+
+        $admin->givePermissionTo(['read-products', 'create-products', 'update-products', 'delete-products']);
+        $kasir->givePermissionTo('read-products');
     }
 }

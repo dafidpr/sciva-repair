@@ -165,9 +165,9 @@
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                @can('read-products')
+                                {{-- @can('read-products') --}}
                                 <li><a href="/admin/barang">Data Barang</a></li>
-                                @endcan
+                                {{-- @endcan --}}
                                 <li><a href="/admin/jasa">Data Jasa</a></li>
                                 <li><a href="/admin/supplier">Data Supplier</a></li>
                                 <li><a href="/admin/pelanggan">Data Pelanggan</a></li>

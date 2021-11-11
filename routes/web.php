@@ -59,7 +59,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
 
     //master data barang
     Route::prefix('barang')->group(function () {
-        Route::get('', [ProductController::class, 'index'])->middleware('can:read-products');
+        Route::get('', [ProductController::class, 'index'])->middleware("can:read-products");
         Route::post('/tambahbarang', [ProductController::class, 'create'])->middleware('can:create-products');
         Route::get('/hapusdata/{id}', [ProductController::class, 'destroy'])->middleware('can:delete-products');
         Route::get('/detail/{id}', [ProductController::class, 'show']);
