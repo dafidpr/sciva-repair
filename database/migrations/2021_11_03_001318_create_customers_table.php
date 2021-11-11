@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200);
-            $table->decimal('telephone')->unique();
+            $table->string('telephone', 15)->unique();
             $table->text('address');
             $table->string('password', 255);
             $table->enum('type', ['umum', 'member']);

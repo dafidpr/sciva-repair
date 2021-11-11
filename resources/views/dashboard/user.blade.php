@@ -2,6 +2,24 @@
 @section('title', 'Dashboard')
 @section('content')
 
+@if (session('berhasil'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+            </button>
+            <strong>Selamat</strong> {{session('berhasil')}}.
+        </div>
+        @endif
+        @if (session('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+            </button>
+            <strong>Maaf</strong> {{session('gagal')}}.
+        </div>
+@endif
+
+
 <div class="row">
     <div class="col-xl-3 col-md-3">
         <div class="card">

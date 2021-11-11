@@ -17,9 +17,9 @@ class CreateSuppliersTable extends Migration
             $table->id();
             $table->string('supplier_code', 100);
             $table->string('name', 100);
-            $table->decimal('telephone');
+            $table->string('telephone', 15);
             $table->string('bank', 100);
-            $table->decimal('account_number');
+            $table->string('account_number', 30);
             $table->string('bank_account_name', 100);
             $table->text('address');
             $table->timestamps();
