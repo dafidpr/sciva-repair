@@ -25,6 +25,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-users', 'guard_name' => 'web'],
             ['name' => 'update-users', 'guard_name' => 'web'],
             ['name' => 'delete-users', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-roles', 'guard_name' => 'web'],
+            ['name' => 'create-roles', 'guard_name' => 'web'],
+            ['name' => 'update-roles', 'guard_name' => 'web'],
+            ['name' => 'delete-roles', 'guard_name' => 'web'],
+            ['name' => 'change-permissions', 'guard_name' => 'web'],
         ]);
     }
 }

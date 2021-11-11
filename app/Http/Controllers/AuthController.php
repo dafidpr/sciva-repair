@@ -20,7 +20,7 @@ class AuthController extends Controller
         if (Auth::guard('customer')->attempt(['telephone' => $request->username, 'password' => $request->password])) {
 
             return redirect('/pelanggan/dashboardpelanggan')->with('berhasil', 'Anda telah berhasil Login!!');
-        } elseif (Auth::guard('user')->attempt(['username' => $request->username, 'password' => $request->password])) {
+        } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
 
             return redirect('/admin/dashboard')->with('berhasil', 'Anda telah berhasil Login!!');
         } else {
@@ -37,9 +37,9 @@ class AuthController extends Controller
     public function logout()
     {
         //
-        if (Auth::guard('user')->check()) {
+        if (Auth::guard('web')->check()) {
 
-            Auth::guard('user')->logout();
+            Auth::guard('web')->logout();
 
             return redirect('/login')->with('berhasil', 'Anda telah Logout!!');
         } elseif (Auth::guard('customer')->check()) {

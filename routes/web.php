@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +91,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/hapusdata/{id}', [UserController::class, 'destroy']);
         Route::get('/detail/{id}', [UserController::class, 'show']);
         Route::post('/update', [UserController::class, 'update']);
+        //roles
+        Route::post('/createRole', [RoleController::class, 'store'])->middleware('can:create-roles');
+        Route::get('/deleteRole/{id}', [RoleController::class, 'destroy'])->middleware('can:delete-roles');
+        Route::post('/updateRole', [RoleController::class, 'update'])->middleware('can:update-roles');
+        Route::get('/detailRole/{id}', [RoleController::class, 'show']);
+        Route::get('/changepermission/{id}', [RoleController::class, 'changePermission']);
+        Route::post('/{id}/input-change-permissions', [RoleController::class, 'inputPermission']);
     });
 
 
