@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -68,9 +69,15 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     });
 
 
-    Route::get('/jasa', function () {
-        return view('masterdata.data_jasa');
+    Route::prefix('jasa')->group(function () {
+        Route::get('', [RepaireController::class, 'index'])->middleware('can:read-repaire');
+        Route::get('/{id}/delete', [RepaireController::class, 'destroy'])->middleware('can:delete-repaire');
+        Route::get('/detail/{id}', [RepaireController::class, 'show']);
+        Route::post('/create', [RepaireController::class, 'store'])->middleware('can:create-repaire');
+        Route::post('/update', [RepaireController::class, 'update'])->middleware('can:update-repaire');
     });
+
+
     Route::get('/supplier', function () {
         return view('masterdata.supplier');
     });
