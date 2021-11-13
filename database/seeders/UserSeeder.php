@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        $user = User::create([
+        $admin = User::create([
             'name' => 'admin',
             'telephone' => '081234123123',
             'address' => 'Banyuwangi',
@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
             'logout_at' => null
         ]);
 
-        $user->assignRole('admin');
-        $user = User::create([
+        $admin->assignRole('admin');
+        $kasir = User::create([
             'name' => 'kasir',
             'telephone' => '081111111111',
             'address' => 'Banyuwangi',
@@ -35,6 +35,6 @@ class UserSeeder extends Seeder
             'login_at' => null,
             'logout_at' => null
         ]);
-        $user->assignRole('kasir');
+        $kasir->assignRole('kasir');
     }
 }
