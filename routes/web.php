@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
@@ -87,8 +88,11 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/stok_in_out', function () {
         return view('masterdata.stok_in_out');
     });
-    Route::get('/pelanggan', function () {
-        return view('masterdata.pelanggan');
+    Route::prefix('pelanggan')->group(function () {
+        Route::get('', [CustomerController::class, 'index']);
+        Route::post('/create', [CustomerController::class, 'store']);
+        Route::get('/{id}/delete', [CustomerController::class, 'destroy']);
+        Route::get('/detail/{id}', [CustomerController::class, 'show']);
     });
 
     //master karyawan/user

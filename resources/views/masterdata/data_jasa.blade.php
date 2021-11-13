@@ -116,7 +116,7 @@
                         <div class="mb-3">
                             <label for="">Kode</label>
                             <input type="hidden" name="id" id="id" class="form-control">
-                            <input type="text" name="repaire_code" id="repaire_code" class="form-control">
+                            <input type="text" name="repaire_code" id="repaire_code" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="">Name</label>
