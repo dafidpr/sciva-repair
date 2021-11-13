@@ -17,7 +17,7 @@ class NotAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('user')->check()) {
+        if (Auth::guard('web')->check()) {
             return redirect('/admin/dashboard');
         } elseif (Auth::guard('customer')->check()) {
             return redirect('/pelanggan/dashboardpelanggan');

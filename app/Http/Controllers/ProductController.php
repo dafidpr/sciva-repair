@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -21,6 +22,7 @@ class ProductController extends Controller
             'barang' => Product::all(),
             'supplier' => Supplier::all()
         ];
+        // dd(Auth::guard('web')->user()->name);
         return view('masterdata.barang', $data);
     }
 

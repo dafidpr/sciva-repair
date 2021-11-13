@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RepaireController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,9 +70,15 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     });
 
 
-    Route::get('/jasa', function () {
-        return view('masterdata.data_jasa');
+    Route::prefix('jasa')->group(function () {
+        Route::get('', [RepaireController::class, 'index'])->middleware('can:read-repaire');
+        Route::get('/{id}/delete', [RepaireController::class, 'destroy'])->middleware('can:delete-repaire');
+        Route::get('/detail/{id}', [RepaireController::class, 'show']);
+        Route::post('/create', [RepaireController::class, 'store'])->middleware('can:create-repaire');
+        Route::post('/update', [RepaireController::class, 'update'])->middleware('can:update-repaire');
     });
+
+
     Route::get('/supplier', function () {
         return view('masterdata.supplier');
     });
@@ -79,8 +88,11 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/stok_in_out', function () {
         return view('masterdata.stok_in_out');
     });
-    Route::get('/pelanggan', function () {
-        return view('masterdata.pelanggan');
+    Route::prefix('pelanggan')->group(function () {
+        Route::get('', [CustomerController::class, 'index']);
+        Route::post('/create', [CustomerController::class, 'store']);
+        Route::get('/{id}/delete', [CustomerController::class, 'destroy']);
+        Route::get('/detail/{id}', [CustomerController::class, 'show']);
     });
 
     //master karyawan/user
@@ -90,6 +102,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/hapusdata/{id}', [UserController::class, 'destroy']);
         Route::get('/detail/{id}', [UserController::class, 'show']);
         Route::post('/update', [UserController::class, 'update']);
+        //roles
+        Route::post('/createRole', [RoleController::class, 'store'])->middleware('can:create-roles');
+        Route::get('/deleteRole/{id}', [RoleController::class, 'destroy'])->middleware('can:delete-roles');
+        Route::post('/updateRole', [RoleController::class, 'update'])->middleware('can:update-roles');
+        Route::get('/detailRole/{id}', [RoleController::class, 'show']);
+        Route::get('/changepermission/{id}', [RoleController::class, 'changePermission']);
+        Route::post('/{id}/input-change-permissions', [RoleController::class, 'inputPermission']);
     });
 
 

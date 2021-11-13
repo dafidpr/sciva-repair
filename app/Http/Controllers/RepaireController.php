@@ -2,31 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Repaire_service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class RepaireController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
+        $data = [
+            'repaire' => Repaire_service::all()
+        ];
 
-        if (Auth::guard('customer')->attempt(['telephone' => $request->username, 'password' => $request->password])) {
-
-            return redirect('/pelanggan/dashboardpelanggan')->with('berhasil', 'Anda telah berhasil Login!!');
-        } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
-
-            return redirect('/admin/dashboard')->with('berhasil', 'Anda telah berhasil Login!!');
-        } else {
-
-            return redirect('login')->with('gagal', 'Username/Telephone atau password yang anda masukan salah!!')->withInput($request->all());
-        }
+        return view('masterdata.data_jasa', $data);
     }
 
     /**
@@ -34,20 +27,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function create()
     {
         //
-        if (Auth::guard('web')->check()) {
-
-            Auth::guard('web')->logout();
-
-            return redirect('/login')->with('berhasil', 'Anda telah Logout!!');
-        } elseif (Auth::guard('customer')->check()) {
-
-            Auth::guard('customer')->logout();
-
-            return redirect('/login')->with('berhasil', 'Anda telah Logout!!');
-        }
     }
 
     /**
@@ -59,6 +41,13 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         //
+        Repaire_service::create([
+            'repaire_code' => $request->repaire_code,
+            'name' => $request->name,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Anda telah menambah data!!');
     }
 
     /**
@@ -70,6 +59,9 @@ class AuthController extends Controller
     public function show($id)
     {
         //
+        $data = Repaire_service::find($id);
+
+        return json_encode($data);
     }
 
     /**
@@ -90,9 +82,16 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        Repaire_service::where('id', $request->id)->update([
+            'repaire_code' => $request->repaire_code,
+            'name' => $request->name,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Anda telah mengubah data!!');
     }
 
     /**
@@ -104,5 +103,8 @@ class AuthController extends Controller
     public function destroy($id)
     {
         //
+        Repaire_service::where('id', $id)->delete();
+
+        return redirect()->back()->with('berhasil', 'Data telah anda hapus!!');
     }
 }

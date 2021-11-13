@@ -78,7 +78,7 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">{{Auth::guard('user')->user()->name}}</span>
+                            <span class="d-none d-xl-inline-block ms-1">{{Auth::guard('web')->user()->name}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -165,13 +165,17 @@
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                {{-- @can('read-products') --}}
+                                @can('read-products')
                                 <li><a href="/admin/barang">Data Barang</a></li>
-                                {{-- @endcan --}}
+                                @endcan
+                                @can('read-repaire')
                                 <li><a href="/admin/jasa">Data Jasa</a></li>
+                                @endcan
                                 <li><a href="/admin/supplier">Data Supplier</a></li>
                                 <li><a href="/admin/pelanggan">Data Pelanggan</a></li>
+                                @can('read-users')
                                 <li><a href="/admin/karyawan">Data Karyawan</a></li>
+                                @endcan
                                 <li><a href="/admin/stokopname">Stok Opname</a></li>
                                 <li><a href="/admin/stok_in_out">Stok In/Out</a></li>
                             </ul>

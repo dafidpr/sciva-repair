@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
     {
         //
         $data = [
-            'user' => User::all()
+            'user' => User::where('username', '!=', 'root')->get(),
+            'roles' => Role::where('name', '!=', 'developer')->get()
         ];
         return view('masterdata.karyawan', $data);
     }
@@ -62,13 +64,14 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all())->with('gagal', 'Anda gagal menambahkan data!!');
         }
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'telephone' => $request->telephone,
             'address' => $request->address,
             'username' => $request->username,
             'password' => bcrypt($request->name),
         ]);
+        $user->assignRole($request->role);
 
         return redirect('/admin/karyawan')->with('berhasil', 'Data berhasil ditambahkan!!');
     }
@@ -83,8 +86,14 @@ class UserController extends Controller
     {
         //
         $data = User::find($id);
+        $role = $data->getRoleNames();
+        // dd($role);
+        $user = [
+            'data' => $data,
+            'role' => $role
+        ];
 
-        return json_encode($data);
+        return json_encode($user);
     }
 
     /**
@@ -120,12 +129,17 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all())->with('gagal', 'Anda gagal menambahkan data!!');
         }
 
+        $user = User::find($request->id);
+
+        $user->syncRoles($request->role);
+
         User::where('id', $request->id)->update([
             'name' => $request->name,
             'telephone' => $request->telephone,
             'address' => $request->address,
-            'username' => $request->username,
+            'username' => $request->password,
         ]);
+        // dd($request->role);
 
         return redirect('/admin/karyawan')->with('berhasil', 'Data berhasil diupdate!!');
     }
