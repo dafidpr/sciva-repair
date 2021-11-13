@@ -89,19 +89,20 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         return view('masterdata.stok_in_out');
     });
     Route::prefix('pelanggan')->group(function () {
-        Route::get('', [CustomerController::class, 'index']);
-        Route::post('/create', [CustomerController::class, 'store']);
-        Route::get('/{id}/delete', [CustomerController::class, 'destroy']);
+        Route::get('', [CustomerController::class, 'index'])->middleware('can:read-customers');
+        Route::post('/create', [CustomerController::class, 'store'])->middleware('can:create-customers');
+        Route::post('/update', [CustomerController::class, 'update'])->middleware('can:update-customers');
+        Route::get('/{id}/delete', [CustomerController::class, 'destroy'])->middleware('can:delete-customers');
         Route::get('/detail/{id}', [CustomerController::class, 'show']);
     });
 
     //master karyawan/user
     Route::prefix('karyawan')->group(function () {
-        Route::get('', [UserController::class, 'index']);
-        Route::post('/tambah', [UserController::class, 'store']);
-        Route::get('/hapusdata/{id}', [UserController::class, 'destroy']);
+        Route::get('', [UserController::class, 'index'])->middleware('can:read-users');
+        Route::post('/tambah', [UserController::class, 'store'])->middleware('can:create-users');
+        Route::get('/hapusdata/{id}', [UserController::class, 'destroy'])->middleware('can:delete-users');
         Route::get('/detail/{id}', [UserController::class, 'show']);
-        Route::post('/update', [UserController::class, 'update']);
+        Route::post('/update', [UserController::class, 'update'])->middleware('can:update-users');
         //roles
         Route::post('/createRole', [RoleController::class, 'store'])->middleware('can:create-roles');
         Route::get('/deleteRole/{id}', [RoleController::class, 'destroy'])->middleware('can:delete-roles');

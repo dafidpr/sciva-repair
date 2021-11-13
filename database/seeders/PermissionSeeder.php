@@ -36,6 +36,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-repaire', 'guard_name' => 'web'],
             ['name' => 'update-repaire', 'guard_name' => 'web'],
             ['name' => 'delete-repaire', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-customers', 'guard_name' => 'web'],
+            ['name' => 'create-customers', 'guard_name' => 'web'],
+            ['name' => 'update-customers', 'guard_name' => 'web'],
+            ['name' => 'delete-customers', 'guard_name' => 'web'],
+            //
         ]);
     }
 }

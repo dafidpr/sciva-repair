@@ -172,7 +172,9 @@
                                 <li><a href="/admin/jasa">Data Jasa</a></li>
                                 @endcan
                                 <li><a href="/admin/supplier">Data Supplier</a></li>
+                                @can('read-customers')
                                 <li><a href="/admin/pelanggan">Data Pelanggan</a></li>
+                                @endcan
                                 @can('read-users')
                                 <li><a href="/admin/karyawan">Data Karyawan</a></li>
                                 @endcan

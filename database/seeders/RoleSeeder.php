@@ -37,8 +37,9 @@ class RoleSeeder extends Seeder
         //admin
         $admin->givePermissionTo(['read-products', 'create-products', 'update-products', 'delete-products']);
         $admin->givePermissionTo(['read-users', 'create-users', 'update-users', 'delete-users']);
-        $admin->givePermissionTo(['create-roles', 'update-roles', 'delete-roles', 'change-permissions']);
-        $admin->givePermissionTo(['create-repaire', 'update-repaire', 'delete-repaire']);
+        $admin->givePermissionTo(['read-roles', 'create-roles', 'update-roles', 'delete-roles', 'change-permissions']);
+        $admin->givePermissionTo(['read-repaire', 'create-repaire', 'update-repaire', 'delete-repaire']);
+        $admin->givePermissionTo(['read-customers', 'create-customers', 'update-customers', 'delete-customers']);
 
         //kasir
         $kasir->givePermissionTo('read-products');

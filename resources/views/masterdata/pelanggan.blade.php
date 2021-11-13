@@ -4,7 +4,9 @@
 
 <div class="card">
     <div class="card-header bg-white">
+        @can('create-customers')
         <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Pelanggan</a>
+        @endcan
         {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a>
         <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a> --}}
     </div>
@@ -43,8 +45,12 @@
                     @foreach ($pelanggan as $item)
                     <tr>
                         <td>
+                            @can('update-customers')
                             <a href="#" class="text-primary" onclick="editData({{$item->id}})"><i class="fas fa-edit"></i></a>
+                            @endcan
+                            @can('delete-customers')
                             <a href="#" class="text-primary" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            @endcan
                         </td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->telephone}}</td>
@@ -121,7 +127,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Tambah Pelanggan</h5>
+                    <h5 class="modal-title mt-0" id="myModalLabel">Edit Pelanggan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                     </button>
@@ -131,7 +137,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="">Name</label>
-                            <input type="hidden" class="form-control" name="id" value="{{old('id')}}" placeholder="id" required>
+                            <input type="hidden" class="form-control" name="id" id="id" value="{{old('id')}}" placeholder="id" required>
                             <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" placeholder="Nama" required>
                             @if ($errors->has('name'))
                             <span class="text-danger">{{ $errors->first('name') }}</span>

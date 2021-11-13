@@ -98,9 +98,17 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        // dd($request->all());
+        Customer::where('id', $request->id)->update([
+            'name' => $request->name,
+            'telephone' => $request->telephone,
+            'address' => $request->address,
+            'type' => $request->type
+        ]);
+        return redirect()->back()->with('berhasil', 'Anda berhasil mengubah data!!!');
     }
 
     /**
