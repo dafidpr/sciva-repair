@@ -130,15 +130,16 @@ class UserController extends Controller
         }
 
         $user = User::find($request->id);
+        // dd($request->id);
 
-        $user->syncRoles($request->role);
 
         User::where('id', $request->id)->update([
             'name' => $request->name,
             'telephone' => $request->telephone,
             'address' => $request->address,
-            'username' => $request->password,
+            'username' => $request->username,
         ]);
+        $user->syncRoles($request->role);
         // dd($request->role);
 
         return redirect('/admin/karyawan')->with('berhasil', 'Data berhasil diupdate!!');

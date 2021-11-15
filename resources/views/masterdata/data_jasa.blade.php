@@ -79,10 +79,10 @@
                 <div class="modal-body">
                     <form action="/admin/jasa/create" method="post">
                         @csrf
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="">Kode</label>
-                            <input type="text" name="repaire_code" class="form-control">
-                        </div>
+                            <input type="text" name="repaire_code" value="" class="form-control" readonly>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="">Name</label>
                             <input type="text" name="name" class="form-control" required>

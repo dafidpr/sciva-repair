@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,10 +79,14 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/update', [RepaireController::class, 'update'])->middleware('can:update-repaire');
     });
 
-
-    Route::get('/supplier', function () {
-        return view('masterdata.supplier');
+    Route::prefix('supplier')->group(function () {
+        Route::get('', [SupplierController::class, 'index']);
+        Route::get('/{id}/delete', [SupplierController::class, 'destroy']);
+        Route::get('/detail/{id}', [SupplierController::class, 'show']);
+        Route::post('/create', [SupplierController::class, 'store']);
+        Route::post('/update', [SupplierController::class, 'update']);
     });
+
     Route::get('/stokopname', function () {
         return view('masterdata.stokopname');
     });

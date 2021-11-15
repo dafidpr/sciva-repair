@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Repaire_service;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
-class RepaireController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,11 @@ class RepaireController extends Controller
     {
         //
         $data = [
-            'repaire' => Repaire_service::all()
+            'suppliers' => Supplier::all(),
+            'sup_code' => IdGenerator::generate(['table' => 'suppliers', 'field' => 'supplier_code', 'length' => 8, 'prefix' => 'SPL'])
+            //output: P00001
         ];
-
-        return view('masterdata.data_jasa', $data);
+        return view('masterdata.supplier', $data);
     }
 
     /**
@@ -42,14 +43,14 @@ class RepaireController extends Controller
     public function store(Request $request)
     {
         //
-        $idgenerate = IdGenerator::generate(['table' => 'repaire_services', 'field' => 'repaire_code', 'length' => 7, 'prefix' => 'JS']);
-
-        // dd($idgenerate);
-
-        Repaire_service::create([
-            'repaire_code' => $idgenerate,
+        Supplier::create([
+            'supplier_code' => $request->supplier_code,
             'name' => $request->name,
-            'price' => $request->price,
+            'telephone' => $request->telephone,
+            'bank' => $request->bank,
+            'account_number' => $request->account_number,
+            'bank_account_name' => $request->bank_account_name,
+            'address' => $request->address
         ]);
 
         return redirect()->back()->with('berhasil', 'Anda telah menambah data!!');
@@ -64,7 +65,7 @@ class RepaireController extends Controller
     public function show($id)
     {
         //
-        $data = Repaire_service::find($id);
+        $data = Supplier::find($id);
 
         return json_encode($data);
     }
@@ -90,13 +91,16 @@ class RepaireController extends Controller
     public function update(Request $request)
     {
         //
-        Repaire_service::where('id', $request->id)->update([
-            'repaire_code' => $request->repaire_code,
+        Supplier::where('id', $request->id)->update([
             'name' => $request->name,
-            'price' => $request->price,
+            'telephone' => $request->telephone,
+            'bank' => $request->bank,
+            'account_number' => $request->account_number,
+            'bank_account_name' => $request->bank_account_name,
+            'address' => $request->address,
         ]);
 
-        return redirect()->back()->with('berhasil', 'Anda telah mengubah data!!');
+        return redirect()->back()->with('berhasil', 'Anda telah berhasil merubah Data!!');
     }
 
     /**
@@ -108,8 +112,8 @@ class RepaireController extends Controller
     public function destroy($id)
     {
         //
-        Repaire_service::where('id', $id)->delete();
+        Supplier::where('id', $id)->delete();
 
-        return redirect()->back()->with('berhasil', 'Data telah anda hapus!!');
+        return redirect()->back()->with('berhasil', 'Anda telah berhasil menghapus data!!');
     }
 }

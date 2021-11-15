@@ -171,7 +171,9 @@
                                 @can('read-repaire')
                                 <li><a href="/admin/jasa">Data Jasa</a></li>
                                 @endcan
+                                @can('read-suppliers')
                                 <li><a href="/admin/supplier">Data Supplier</a></li>
+                                @endcan
                                 @can('read-customers')
                                 <li><a href="/admin/pelanggan">Data Pelanggan</a></li>
                                 @endcan

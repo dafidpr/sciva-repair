@@ -61,7 +61,7 @@ function editKaryawan(e) {
         type: "get",
         success: function(data) {
             var obj = JSON.parse(data);
-            $('#e_id').val(obj.data.id);
+            $('#id').val(obj.data.id);
             $('#e_name').val(obj.data.name);
             $('#e_telephone').val(obj.data.telephone);
             $('.e_address').val(obj.data.address);

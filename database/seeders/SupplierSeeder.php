@@ -16,7 +16,7 @@ class SupplierSeeder extends Seeder
     {
         //
         $supplier = new Supplier();
-        $supplier->supplier_code = "SPL00003";
+        $supplier->supplier_code = "SPL00001";
         $supplier->name = "CV Putra Mas";
         $supplier->telephone = "0851234567892";
         $supplier->bank = 'bni';
@@ -26,7 +26,7 @@ class SupplierSeeder extends Seeder
         $supplier->save();
 
         $supplier = new Supplier();
-        $supplier->supplier_code = "SPL00004";
+        $supplier->supplier_code = "SPL00002";
         $supplier->name = "CV Angkasa Mas";
         $supplier->telephone = "0851234567891";
         $supplier->bank = 'bni';
@@ -36,7 +36,7 @@ class SupplierSeeder extends Seeder
         $supplier->save();
 
         $supplier = new Supplier();
-        $supplier->supplier_code = "SPL00005";
+        $supplier->supplier_code = "SPL00003";
         $supplier->name = "CV Merpati";
         $supplier->telephone = "0851234567890";
         $supplier->bank = 'bni';
