@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
@@ -87,9 +88,15 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/update', [SupplierController::class, 'update']);
     });
 
-    Route::get('/stokopname', function () {
-        return view('masterdata.stokopname');
+    Route::prefix('stockopname')->group(function () {
+        Route::get('', [OpnameController::class, 'index'])->middleware('can:read-opnames');
+        Route::post('/create', [OpnameController::class, 'store'])->middleware('can:create-opnames');
+        Route::post('/update/{id}', [OpnameController::class, 'update']);
+        Route::get('/{id}/select_product', [OpnameController::class, 'selectProduct']);
+        Route::get('/{id}/delete', [OpnameController::class, 'destroy'])->middleware('can:delete-opnames');
+        Route::get('/{id}/detail', [OpnameController::class, 'show'])->middleware('can:update-opnames');
     });
+
     Route::get('/stok_in_out', function () {
         return view('masterdata.stok_in_out');
     });

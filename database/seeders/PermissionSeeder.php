@@ -46,6 +46,11 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-suppliers', 'guard_name' => 'web'],
             ['name' => 'update-suppliers', 'guard_name' => 'web'],
             ['name' => 'delete-suppliers', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-opnames', 'guard_name' => 'web'],
+            ['name' => 'create-opnames', 'guard_name' => 'web'],
+            ['name' => 'update-opnames', 'guard_name' => 'web'],
+            ['name' => 'delete-opnames', 'guard_name' => 'web'],
         ]);
     }
 }
