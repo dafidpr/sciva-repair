@@ -87,7 +87,7 @@
                     <form action="/admin/stockopname/create" method="post">
                         @csrf
                         <div>
-                            <label for="">Barcode</label>
+                            <label for="">Pilih Barang</label>
                             <div class="input-group mb-3">
                                 <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"><i class="fas fa-search"></i></button>
                                 <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">

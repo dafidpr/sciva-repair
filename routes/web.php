@@ -6,6 +6,7 @@ use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -97,8 +98,10 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/{id}/detail', [OpnameController::class, 'show'])->middleware('can:update-opnames');
     });
 
-    Route::get('/stok_in_out', function () {
-        return view('masterdata.stok_in_out');
+    Route::prefix('stock_in_out')->group(function () {
+        Route::get('', [StockController::class, 'index'])->middleware('can:read-stocks');
+        Route::get('/{id}/delete', [StockController::class, 'destroy'])->middleware('can:delete-stocks');
+        Route::post('/create', [StockController::class, 'store'])->middleware('can:create-stocks');
     });
     Route::prefix('pelanggan')->group(function () {
         Route::get('', [CustomerController::class, 'index'])->middleware('can:read-customers');

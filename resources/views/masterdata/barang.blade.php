@@ -51,7 +51,13 @@
                         <td>{{$item->selling_price}}</td>
                         <td>{{$item->purchase_price}}</td>
                         <td>{{$item->member_price}}</td>
-                        <td><span class="btn btn-sm btn-success">{{$item->stock}}</span></td>
+                        <td>
+                            @if ($item->stock == $item->limit || $item->stock < $item->limit)
+                            <span class="btn btn-sm btn-danger">{{$item->stock}}</span>
+                            @else
+                            <span class="btn btn-sm btn-success">{{$item->stock}}</span>
+                            @endif
+                        </td>
                         <td><span class="btn btn-sm btn-danger">{{$item->limit}}</span></td>
                     </tr>
                     @endforeach

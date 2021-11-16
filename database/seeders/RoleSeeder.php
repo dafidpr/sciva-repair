@@ -42,6 +42,7 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['read-customers', 'create-customers', 'update-customers', 'delete-customers']);
         $admin->givePermissionTo(['read-suppliers', 'create-suppliers', 'update-suppliers', 'delete-suppliers']);
         $admin->givePermissionTo(['read-opnames', 'create-opnames', 'update-opnames', 'delete-opnames']);
+        $admin->givePermissionTo(['read-stocks', 'create-stocks', 'delete-stocks']);
 
         //kasir
         $kasir->givePermissionTo('read-products');

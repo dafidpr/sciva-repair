@@ -183,7 +183,9 @@
                                 @can('read-opnames')
                                 <li><a href="/admin/stockopname">Stok Opname</a></li>
                                 @endcan
-                                <li><a href="/admin/stok_in_out">Stok In/Out</a></li>
+                                @can('read-stocks')
+                                <li><a href="/admin/stock_in_out">Stok In/Out</a></li>
+                                @endcan
                             </ul>
                         </li>
 
