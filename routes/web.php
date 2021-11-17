@@ -8,6 +8,7 @@ use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionServiceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,9 +42,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.user');
     });
-    Route::get('/servis', function () {
-        return view('content.servis');
+
+    Route::prefix('servis')->group(function () {
+        Route::get('', [TransactionServiceController::class, 'index']);
+        Route::get('/{id}/select_customer', [TransactionServiceController::class, 'select_customer']);
+        Route::post('/create', [TransactionServiceController::class, 'store']);
     });
+
     Route::get('/entry_penjualan', function () {
         return view('transaksi.entry_penjualan');
     });

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             StockOpnameSeeder::class,
             StockSeeder::class,
             CustomerSeeder::class,
+            ServiceSeeder::class,
         ]);
     }
 }

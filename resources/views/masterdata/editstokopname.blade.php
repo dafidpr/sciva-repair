@@ -83,13 +83,13 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Detail Product</h5>
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Data Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4 class="text-center">Pilih Product</h4>
+                    <h4 class="text-center">Pilih Barang</h4>
                     <div class="table-responsive">
                         <table class="table table-striped" style="width: 100%" id="piutang">
                             <thead>
