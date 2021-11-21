@@ -17,6 +17,7 @@ class ServiceSeeder extends Seeder
         //
         Transaction_service::create([
             'customer_id' => 1,
+            'user_id' => null,
             "transaction_code" => 'SRV202109100001',
             'unit' => 'samsung A1',
             'serial_number' => 0000001,
@@ -35,6 +36,7 @@ class ServiceSeeder extends Seeder
 
         Transaction_service::create([
             'customer_id' => 1,
+            'user_id' => null,
             "transaction_code" => 'SRV202109100002',
             'unit' => 'samsung C1',
             'serial_number' => 0000002,

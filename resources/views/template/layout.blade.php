@@ -10,6 +10,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('tmp/assets/images/favicon.ico')}}">
 
+    <link href="{{asset('tmp/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
     <!-- plugin css -->
     <link href="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
 
@@ -32,6 +33,7 @@
             <link href="{{asset('tmp/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
             <!-- Responsive datatable examples -->
             <link href="{{asset('tmp/assets/libs/chart.js/Chart.min.css')}}" rel="stylesheet" type="text/css">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -362,6 +364,14 @@
     <script src="{{asset('tmp/assets/libs/chart.js/Chart.min.js')}}"></script>
 
     <script src="{{asset('tmp/chart/dashboard_admin.js')}}"></script>
+
+    <script src="{{asset('tmp/assets/libs/select2/js/select2.min.js')}}"></script>
+
+
+    <script src="{{asset('tmp/javascript/service.js')}}"></script>
+        <!-- init js -->
+        {{-- <script src="{{asset('tmp/assets/js/pages/ecommerce-add-product.init.js')}}"></script> --}}
+    {{-- //service --}}
 
 
     <script src="{{asset('tmp/assets/js/app.js')}}"></script>

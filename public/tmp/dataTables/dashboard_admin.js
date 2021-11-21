@@ -14,3 +14,13 @@ $(document).ready(function(){
         responsive: true
     } );
 })
+$(document).ready(function(){
+    $('#pilihProduct').DataTable( {
+        responsive: true
+    } );
+})
+$(document).ready(function(){
+    $('#pilihjasa').DataTable( {
+        responsive: true
+    } );
+})

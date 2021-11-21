@@ -45,8 +45,18 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
 
     Route::prefix('servis')->group(function () {
         Route::get('', [TransactionServiceController::class, 'index']);
+        Route::get('/restore', [TransactionServiceController::class, 'restore']);
         Route::get('/{id}/select_customer', [TransactionServiceController::class, 'select_customer']);
+        Route::get('/{id}/select_repaire', [TransactionServiceController::class, 'select_repaire']);
+        Route::get('/{id}/detail_service', [TransactionServiceController::class, 'detail_service']);
+        Route::get('/{id}/edit', [TransactionServiceController::class, 'edit']);
+        Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
+        Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
+        Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
+        Route::get('/{id}/forcedelete', [TransactionServiceController::class, 'destroy2']);
         Route::post('/create', [TransactionServiceController::class, 'store']);
+        Route::post('/create_customer', [TransactionServiceController::class, 'create_customer']);
+        Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
     });
 
     Route::get('/entry_penjualan', function () {
