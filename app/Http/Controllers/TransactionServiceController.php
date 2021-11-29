@@ -97,7 +97,7 @@ class TransactionServiceController extends Controller
             'status' => $request->status
         ]);
 
-        return redirect()->back()->with('berhasil', 'Anda telah berhasil menambah data service!!');
+        return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
     }
 
     public function create_customer(Request $request)
@@ -110,7 +110,7 @@ class TransactionServiceController extends Controller
             'type' => 'umum',
         ]);
 
-        return redirect()->back()->with('berhasil', 'Anda berhasil menambah Data Pelanggan!!');
+        return redirect('/admin/servis')->with('berhasil', 'Anda berhasil menambah Data Pelanggan!!');
     }
 
     public function serviceSelesai(request $request)
@@ -145,7 +145,7 @@ class TransactionServiceController extends Controller
             'status' => 'finished'
         ]);
 
-        return redirect()->back()->with('berhasil', 'Transaksi Telah selesai');
+        return redirect('/admin/servis')->with('berhasil', 'Transaksi Telah selesai');
     }
 
     /**
@@ -177,6 +177,18 @@ class TransactionServiceController extends Controller
         ];
 
         return view('content.editservis', $data);
+    }
+
+    public function takeUnit(Request $request)
+    {
+        Transaction_service::where('transaction_code', $request->transaction_code)->update([
+            'pickup_date' => date('Y-m-d'),
+            'payment' => $request->payment,
+            'cashback' => $request->cashback,
+            'status' => 'take'
+        ]);
+
+        return redirect('/admin/servis')->with('berhasil', 'Unit Telah berhasil diambil!!');
     }
 
     /**
@@ -215,11 +227,81 @@ class TransactionServiceController extends Controller
 
         return redirect('/admin/servis')->with('berhasil', 'Anda berhasil menghapus data!!');
     }
-    public function destroy2($id)
+    public function deletePermanent($id = null)
     {
         //
-        Transaction_service::where('id', $id)->forceDelete();
+        if ($id !== null) {
+            Transaction_service::onlyTrashed()->where('id', $id)->forceDelete();
+        } else {
+            Transaction_service::onlyTrashed()->forceDelete();
+        }
 
-        return redirect('/admin/servis')->with('berhasil', 'Anda berhasil menghapus data!!');
+        return redirect('/admin/servis/restore')->with('berhasil', 'Anda berhasil menghapus data!!');
+    }
+    public function restoreall($id = null)
+    {
+        //
+        if ($id !== null) {
+            Transaction_service::onlyTrashed()->where('id', $id)->restore();
+        } else {
+            Transaction_service::onlyTrashed()->restore();
+        }
+
+        return redirect('/admin/servis/restore');
+    }
+
+    public function batalServis($id)
+    {
+        Transaction_service::where('id', $id)->update([
+            'status' => 'cancelled'
+        ]);
+
+        return redirect('/admin/servis')->with('error', 'Anda telah membatalkan Service!!');
+    }
+
+    public function filter(Request $request)
+    {
+        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 15, 'prefix' => 'SRV' . date('dmY'), 'reset_on_prefix_change' => true]);
+        //output: INV-000001
+        // dd($request->all());
+        if ($request->time == 'all') {
+            if ($request->all_status !== null) {
+
+                return redirect('/admin/servis');
+            } else {
+
+                $data = [
+                    'service' => Transaction_service::where('status', $request->proses)->orWhere('status', $request->waiting_sparepart)->orWhere('status', $request->finished)->orWhere('status', $request->cancelled)->orWhere('status', $request->take)->get(),
+                    "customer" => Customer::all(),
+                    'nota' => $no_nota,
+                    'product' => Product::all(),
+                    'repaire' => Repaire_service::all()
+                ];
+                return view('content.servis', $data);
+            }
+        } elseif ($request->time == 'now') {
+            if ($request->all_status !== null) {
+
+                $data = [
+                    'service' => Transaction_service::where('service_date', date('Y-m-d'))->get(),
+                    "customer" => Customer::all(),
+                    'nota' => $no_nota,
+                    'product' => Product::all(),
+                    'repaire' => Repaire_service::all()
+                ];
+                return view('content.servis', $data);
+            } else {
+
+                $data = [
+                    'service' => Transaction_service::where('status', $request->proses)->orWhere('status', $request->waiting_sparepart)->orWhere('status', $request->finished)->orWhere('status', $request->cancelled)->orWhere('status', $request->take)->get(),
+                    "customer" => Customer::all(),
+                    'nota' => $no_nota,
+                    'product' => Product::all(),
+                    'repaire' => Repaire_service::all()
+                ];
+                return view('content.servis', $data);
+            }
+        } elseif ($request->time == 'range') {
+        }
     }
 }

@@ -12,30 +12,30 @@
                         <tr>
                             <th>Invoice</th>
                             <th>Kasir</th>
-                            <th>Customer</th>
-                            <th>Diskon</th>
+                            <th>Pelanggan</th>
                             <th>Total</th>
-                            <th>Payment</th>
-                            <th>Qty</th>
+                            <th>Type</th>
+                            <th>Bayar</th>
                             <th>Waktu</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($sale as $item)
                         <tr>
-                            <td>POS78998787667</td>
-                            <td>Administrator</td>
-                            <td>Umum</td>
-                            <td>0</td>
-                            <td>40000</td>
-                            <td>cash</td>
-                            <td>3</td>
-                            <td>2020-09-10 20:45:34</td>
+                            <td>{{$item->invoice}}</td>
+                            <td>{{$item->_user->name}}</td>
+                            <td>{{$item->_customer->name}}</td>
+                            <td>{{$item->total}}</td>
+                            <td>{{$item->method}}</td>
+                            <td>{{$item->payment}}</td>
+                            <td>{{$item->created_at}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
+                                <a href="/admin/daftar_penjualan/show/{{$item->id}}" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
                                 <a href="" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

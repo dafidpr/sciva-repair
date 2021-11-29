@@ -17,6 +17,7 @@ class CreateVatTaxesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tax_code', 255);
+            $table->decimal('nominal', 10, 2)->nullable();
             $table->enum('type', ['deposit', 'out', 'income']);
             $table->date('date')->nullable();
             $table->text('description');

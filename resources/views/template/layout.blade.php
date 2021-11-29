@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="{{asset('tmp/assets/images/favicon.ico')}}">
 
     <link href="{{asset('tmp/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('tmp/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet">
     <!-- plugin css -->
     <link href="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
 
@@ -367,8 +368,10 @@
 
     <script src="{{asset('tmp/assets/libs/select2/js/select2.min.js')}}"></script>
 
+    <script src="{{asset('tmp/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
 
     <script src="{{asset('tmp/javascript/service.js')}}"></script>
+    <script src="{{asset('tmp/javascript/entryPenjualan.js')}}"></script>
         <!-- init js -->
         {{-- <script src="{{asset('tmp/assets/js/pages/ecommerce-add-product.init.js')}}"></script> --}}
     {{-- //service --}}

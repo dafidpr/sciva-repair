@@ -17,10 +17,10 @@ class CreateSaleDetailsTable extends Migration
             $table->id();
             $table->foreignId('sale_id')->constrained('sales')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->decimal('discount');
-            $table->decimal('total');
+            $table->decimal('discount', 10, 2);
+            $table->decimal('total', 10, 2);
             $table->integer('quantity');
-            $table->decimal('sub_total');
+            $table->decimal('sub_total', 10, 2);
             $table->timestamps();
         });
     }

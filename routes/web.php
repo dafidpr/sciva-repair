@@ -6,10 +6,12 @@ use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionServiceController;
 use App\Http\Controllers\UserController;
+use App\Models\Sale;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,18 +55,25 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
         Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
         Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
-        Route::get('/{id}/forcedelete', [TransactionServiceController::class, 'destroy2']);
+        Route::get('/deletepermanent/{id?}', [TransactionServiceController::class, 'deletePermanent']);
+        Route::get('/restoreall/{id?}', [TransactionServiceController::class, 'restoreall']);
+        Route::get('/batalServis/{id}', [TransactionServiceController::class, 'batalServis']);
         Route::post('/create', [TransactionServiceController::class, 'store']);
+        Route::post('/takeUnit', [TransactionServiceController::class, 'takeUnit']);
         Route::post('/create_customer', [TransactionServiceController::class, 'create_customer']);
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
+        Route::post('/filter', [TransactionServiceController::class, 'filter']);
     });
 
-    Route::get('/entry_penjualan', function () {
-        return view('transaksi.entry_penjualan');
+    Route::prefix('entry_penjualan')->group(function () {
+        Route::get('', [SaleController::class, 'Entry']);
+        Route::post('/inputSale', [SaleController::class, 'store']);
     });
-    Route::get('/daftar_penjualan', function () {
-        return view('transaksi.data_penjualan');
+    Route::prefix('daftar_penjualan')->group(function () {
+        Route::get('', [SaleController::class, 'index']);
+        Route::get('/show/{id}', [SaleController::class, 'show']);
     });
+
     Route::get('/entry_pembelian', function () {
         return view('transaksi.entry_pembelian');
     });

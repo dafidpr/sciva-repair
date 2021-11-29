@@ -215,26 +215,28 @@
 
 
         <h6>Menampilkan data servis berdasarkan :</h6>
+        <form action="/admin/servis/filter" method="post">
+            @csrf
         <div class="row">
             {{-- waktu --}}
             <div class="col-md-5">
                 <h6>Waktu :</h6>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" checked="">
-                    <label class="form-check-label" for="formRadios1">
+                    <input class="form-check-input" type="radio" name="time" value="all" checked="">
+                    <label class="form-check-label">
                         Semua
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" >
-                    <label class="form-check-label" for="formRadios1">
+                    <input class="form-check-input" type="radio" name="time" value="now">
+                    <label class="form-check-label">
                         Hari ini
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" >
-                    <label class="form-check-label" for="formRadios1">
-                        <input type="date"> s/d <input type="date">
+                    <input class="form-check-input" type="radio" name="time" value="range">
+                    <label class="form-check-label">
+                        <input type="date" name="from"> s/d <input type="date" name="to">
                     </label>
                 </div>
             </div>
@@ -244,40 +246,40 @@
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="proses" value="proses">
+                            <label class="form-check-label">
                                 Dalam Proses
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="waiting_sparepart" value="waiting_sparepart">
+                            <label class="form-check-label">
                                 Menunggu Sparepat
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="finished" value="finished">
+                            <label class="form-check-label">
                                 Selesai
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-5">
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="cancelled" value="cancelled">
+                            <label class="form-check-label">
                                 Dibatalkan
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" >
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="take" value="take">
+                            <label class="form-check-label">
                                 Sudah Diambil
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="formRadios2" id="formRadios2" checked="">
-                            <label class="form-check-label" for="formRadios">
+                            <input class="form-check-input" type="checkbox" name="all_status" value="all_status" checked="">
+                            <label class="form-check-label">
                                 Semua
                             </label>
                         </div>
@@ -288,6 +290,7 @@
                 </div>
             </div>
         </div>
+    </form>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
@@ -309,15 +312,13 @@
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
                             <a href="/admin/servis/{{$item->id}}/edit"><i class="fas fa-edit"></i></a>
                             <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-money-bill"></i></a>
-                            <a href="#" onclick="forceDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
-                            <a href="#"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                            <a href="#" onclick="forceDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#" onclick="modCall()"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" onclick="takeUnit(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-shopping-cart"></i></a>
                             @elseif ($item->status == 'take')
                             <i class="fas fa-print"></i>
-                            <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
                             @endif
+                            <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
                             <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}">
                                 <i class="fas fa-search"></i>
                             </a>
@@ -440,7 +441,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" onmousemove="sum()" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                    <a href="" type="button" onmousemove="sum()" class="btn btn-danger" data-bs-dismiss="modal">Batalkan</a>
+                    <a href="#" onclick="batalData()" class="btn btn-danger" data-bs-dismiss="modal">Batalkan</a>
                     <button type="submit" onmousemove="sum()" class="btn btn-primary">Selesai</button>
                 </div>
             </form>
@@ -522,6 +523,86 @@
     </div><!-- /.modal-dialog -->
 </div>
 {{-- End Detail Modal --}}
+{{-- Payment Servis --}}
+<div class="modal fade" id="takeUnit" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="takeUnit">Pengambilan Unit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/servis/takeUnit" method="post">
+                    @csrf
+                    <div>
+                        <label for="">No Nota</label>
+                        <input type="text" class="form-control" name="transaction_code" id="t_transaction_code" readonly>
+                    </div>
+                    <div>
+                        <label for="">Pelanggan</label>
+                        <input type="text" class="form-control" name="customer" id="t_customer" readonly>
+                    </div>
+                    <div>
+                        <label for="">Unit</label>
+                        <input type="text" class="form-control" name="unit" id="t_unit" readonly>
+                    </div>
+                    <div>
+                        <label for="">No Seri</label>
+                        <input type="text" class="form-control" name="serial_number" id="t_serial_number" readonly>
+                    </div>
+                    <div>
+                        <label for="">Total Biaya</label>
+                        <input type="number" class="form-control" name="total" id="t_total" readonly>
+                    </div>
+                    <div>
+                        <label for="">Bayar</label>
+                        <input type="number" onkeyup="es_cashback()" class="form-control" name="payment" id="t_payment">
+                    </div>
+                    <div>
+                        <label for="">Kembalian</label>
+                        <input type="number" class="form-control" name="cashback" id="t_cashback" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Payment Servis --}}
+{{-- Modal Call Customer --}}
+<div class="modal fade" id="callcustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Hubungi Pelanggan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="#"><i class="fab fa-whatsapp-square fa-10x"></i></a>
+                </div>
+                <div class="col-sm-4">
+                    <a href="#"><i class="fas fa-envelope-square fa-10x"></i></a>
+                </div>
+                <div class="col-sm-4">
+                    <a href="#"><i class="fas fa-phone-square-alt fa-10x"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{-- End Modal Call Customer --}}
 
 
 <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>

@@ -16,11 +16,18 @@ class CustomerSeeder extends Seeder
     {
         //
         $cs = new Customer();
+        $cs->name = "umum";
+        $cs->telephone = "00";
+        $cs->address = "umum";
+        $cs->password = bcrypt('umum');
+        $cs->type = "umum";
+        $cs->save();
+        $cs = new Customer();
         $cs->name = "pelanggan";
-        $cs->telephone = "081123456789";
+        $cs->telephone = "080123456789";
         $cs->address = "Jawa Timur";
         $cs->password = bcrypt('pelanggan');
-        $cs->type = "umum";
+        $cs->type = "member";
         $cs->save();
         $cs = new Customer();
         $cs->name = "pelanggan2";

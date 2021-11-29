@@ -8,8 +8,9 @@
     </div>
     <div class="card-body">
         <div>
-            <a href="" class="btn btn-sm btn-primary"><i class="fas fa-undo-alt"></i> Restore all</a>
-            <a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete permanent all</a>
+            <a href="#" onclick="restoreall()" class="btn btn-sm btn-primary"><i class="fas fa-undo-alt"></i> Restore all</a>
+            <a href="#" onclick="deletepermanent()" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete permanent all</a>
+            <a href="/admin/servis" class="btn btn-sm btn-secondary"><i class="fas fa-undo-alt"></i> Back</a>
         </div><br>
         <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
             <thead>
@@ -28,7 +29,7 @@
                 <tr class="">
                     <td class="text-primary">
                         <a href="#" onclick="forceDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
-                        <a href="#"><i class="fas fa-undo-alt"></i></a>
+                        <a href="#" onclick="restoreallid({{$item->id}})"><i class="fas fa-undo-alt"></i></a>
                     </td>
                     <td>{{$item->service_date}}</td>
                     <td>{{$item->transaction_code}}</td>

@@ -17,10 +17,10 @@ class CreatePurchaseDetailsTable extends Migration
             $table->id();
             $table->foreignId('purchase_id')->constrained('purchases')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->decimal('selling_price');
-            $table->decimal('purchase_price');
+            $table->decimal('selling_price', 10, 2);
+            $table->decimal('purchase_price', 10, 2);
             $table->integer('quantity');
-            $table->decimal('sub_total');
+            $table->decimal('sub_total', 10, 2);
             $table->timestamps();
         });
     }
