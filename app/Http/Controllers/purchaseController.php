@@ -102,6 +102,25 @@ class purchaseController extends Controller
                     // dd($value);
                 }
             }
+
+            if (count($data['i_quantity']) > 0) {
+                foreach ($data['i_quantity'] as $item => $v) {
+                    $p = Product::where('id', $data['i_id_product'][$item])->get();
+                    foreach ($p as $key) {
+                        # code...
+                        $updateqtyproduct = $key->stock + $data['i_quantity'][$item];
+                    }
+                    $q = [
+                        'selling_price' => $request->i_sale_price[$item],
+                        'purchase_price' => $request->i_purchase_price[$item],
+                        'stock' => $updateqtyproduct
+                    ];
+
+                    Product::where('id', $data['i_id_product'][$item])->update($q);
+                    // dd($value);
+                }
+            }
+
             Cash::create([
                 'user_id' => Auth::guard('web')->user()->id,
                 'cash_code' => $cash_id,
@@ -138,6 +157,26 @@ class purchaseController extends Controller
                     // dd($value);
                 }
             }
+
+
+            if (count($data['i_quantity']) > 0) {
+                foreach ($data['i_quantity'] as $item => $v) {
+                    $p = Product::where('id', $data['i_id_product'][$item])->get();
+                    foreach ($p as $key) {
+                        # code...
+                        $updateqtyproduct = $key->stock + $data['i_quantity'][$item];
+                    }
+                    $q = [
+                        'selling_price' => $request->i_sale_price[$item],
+                        'purchase_price' => $request->i_purchase_price[$item],
+                        'stock' => $updateqtyproduct
+                    ];
+
+                    Product::where('id', $data['i_id_product'][$item])->update($q);
+                    // dd($value);
+                }
+            }
+
 
             Cash::create([
                 'user_id' => Auth::guard('web')->user()->id,

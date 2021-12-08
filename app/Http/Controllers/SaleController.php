@@ -108,6 +108,22 @@ class SaleController extends Controller
                 }
             }
 
+            if (count($data['quantity']) > 0) {
+                foreach ($data['quantity'] as $item => $v) {
+                    $p = Product::where('id', $data['id_product'][$item])->get();
+                    foreach ($p as $key) {
+                        # code...
+                        $updateqtyproduct = $key->stock - $data['quantity'][$item];
+                    }
+                    $q = [
+                        'stock' => $updateqtyproduct
+                    ];
+
+                    Product::where('id', $data['id_product'][$item])->update($q);
+                    // dd($value);
+                }
+            }
+
             Cash::create([
                 'user_id' => Auth::guard('web')->user()->id,
                 'cash_code' => $cash_id,
@@ -154,6 +170,21 @@ class SaleController extends Controller
                         'sub_total' => $data['total'][$item]
                     ];
                     Sale_detail::create($detail);
+                    // dd($value);
+                }
+            }
+            if (count($data['quantity']) > 0) {
+                foreach ($data['quantity'] as $item => $v) {
+                    $p = Product::where('id', $data['id_product'][$item])->get();
+                    foreach ($p as $key) {
+                        # code...
+                        $updateqtyproduct = $key->stock - $data['quantity'][$item];
+                    }
+                    $q = [
+                        'stock' => $updateqtyproduct
+                    ];
+
+                    Product::where('id', $data['id_product'][$item])->update($q);
                     // dd($value);
                 }
             }
