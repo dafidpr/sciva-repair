@@ -18,9 +18,9 @@ class CreateCashesTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('cash_code', 200);
             $table->date('date')->nullable();
-            $table->decimal('nominal');
+            $table->decimal('nominal', 10, 2);
             $table->text('description');
-            $table->enum('source', ['input', 'sale', 'purchase']);
+            $table->enum('source', ['income', 'expenditure']);
             $table->timestamps();
         });
     }

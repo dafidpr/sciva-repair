@@ -17,4 +17,12 @@ class Transaction_service_detail extends Model
     {
         return $this->belongsTo(Transaction_service::class);
     }
+    public function _product()
+    {
+        return $this->belongsTo(Product::class, 'sparepart_id');
+    }
+    public function _repaire()
+    {
+        return $this->belongsTo(Repaire_service::class, 'repaire_id');
+    }
 }

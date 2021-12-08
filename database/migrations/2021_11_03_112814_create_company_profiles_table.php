@@ -17,11 +17,11 @@ class CreateCompanyProfilesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('address');
-            $table->decimal('telephone');
+            $table->string('telephone');
             $table->string('fax', 100);
             $table->string('email', 100);
             $table->string('instagram', 100);
-            $table->string('logo', 255);
+            $table->string('logo', 255)->nullable();
             $table->timestamps();
         });
     }

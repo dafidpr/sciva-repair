@@ -20,19 +20,35 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($debt as $item)
                     <tr>
-                        <td>PB000001</td>
-                        <td>Celuller Cinta</td>
-                        <td>2020-09-10</td>
-                        <td>2020-09-20</td>
-                        <td>300000</td>
-                        <td>300000</td>
-                        <td>0</td>
-                        <td><span class="badge bg-success">Lunas</span></td>
+                        <td>{{$item->_purchase->invoice}}</td>
+                        <td>{{$item->_purchase->_supplier->name}}</td>
+                        <td>{{$item->debt_date}}</td>
+                        <td>{{$item->due_date}}</td>
+                        <td>{{$item->total}}</td>
+                        <td>{{$item->payment}}</td>
+                        <td>{{$item->remainder}}</td>
                         <td>
-                            <a href="" class="btn btn-sm btn-primary"><i class="dripicons-preview"></i></a>
+                            @if ($item->status == 'paid_off')
+                            <span class="badge bg-success">Lunas</span>
+                            @elseif ($item->status == 'not yet paid')
+                            <span class="badge bg-danger">Belum Lunas</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->status == 'paid_off')
+                            @can('detail-debt')
+                            <a href="/admin/hutang/{{$item->id}}/detail_debt" class="btn btn-sm btn-primary"><i class="dripicons-preview"></i></a>
+                            @endcan
+                            @elseif ($item->status == 'not yet paid')
+                            @can('payment-debt')
+                            <a href="/admin/hutang/{{$item->id}}/view_payment_debt" class="btn btn-sm btn-success"><i class="fas fa-money-bill-wave"></i></a>
+                            @endcan
+                            @endif
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

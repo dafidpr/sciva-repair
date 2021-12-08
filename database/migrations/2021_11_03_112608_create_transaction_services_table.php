@@ -32,6 +32,7 @@ class CreateTransactionServicesTable extends Migration
             $table->decimal('cashback')->nullable();
             $table->decimal('total')->nullable();
             $table->enum('status', ['proses', 'waiting sparepart', 'finished', 'cancelled', 'take']);
+            $table->foreignId('technician')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

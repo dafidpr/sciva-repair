@@ -246,3 +246,9 @@ $(document).ready(function () {
     });
 
 });
+$(document).ready(function () {
+    $('#technician').select2({
+        maximumSelectionLength: 4
+    });
+
+});

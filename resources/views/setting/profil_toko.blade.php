@@ -5,13 +5,14 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="text-center">SCIVA CENTER REPAIR</h5>
+                    <img width="200px" src="{{asset('tmp/asset/images'). '/'. $company->logo}}" alt="">
+                    <h5 class="text-center">{{$company->name}}</h5>
                     <div class="text-right">
-                        <p><i class="fas fa-map-marker-alt"></i> Jl.Raja Wali Jakarta</p>
-                        <p><i class="fas fa-phone-alt"></i> Telp. 0883402480</p>
-                        <p><i class="fas fa-tty"></i> Fax: (003) 067645</p>
-                        <p><i class="fas fa-envelope-square"></i> Emailtoko@gmail.com</p>
-                        <p><i class="fas fa-external-link-alt"></i> www.toktoko.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> {{$company->address}}</p>
+                        <p><i class="fas fa-phone-alt"></i> Telp. {{$company->telephone}}</p>
+                        <p><i class="fas fa-tty"></i> Fax: {{$company->fax}}</p>
+                        <p><i class="fas fa-envelope-square"></i> Email: {{$company->email}}</p>
+                        <p><i class="fas fa-external-link-alt"></i> Ig: {{$company->instagram}}</p>
                     </div>
                 </div>
             </div>
@@ -19,42 +20,43 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <form action="">
+                    <form action="/admin/profil/changeProfil" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
-                                <input type="text" class="form-control" placeholder="Nama Toko" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="name" placeholder="Nama Toko" aria-label="Username" aria-describedby="basic-addon1" value="{{$company->name}}" required>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Alamat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="Alamat" name="address" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{$company->address}}" required>
                                 <span class="input-group-text" id="basic-addon2"><i class="fas fa-map-marker-alt"></i></span>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone-alt"></i></span>
-                                <input type="text" class="form-control" placeholder="No Telephone" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="telephone" placeholder="No Telephone" aria-label="Username" aria-describedby="basic-addon1" value="{{$company->telephone}}" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Fax:" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" name="fax" placeholder="Fax:" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{$company->fax}}" required>
                                 <span class="input-group-text" id="basic-addon2"><i class="fas fa-tty"></i></span>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-envelope-square"></i></span>
-                                <input type="text" class="form-control" placeholder="email" id="basic-url" aria-describedby="basic-addon3">
+                                <input type="text" class="form-control" name="email" placeholder="email" id="basic-url" aria-describedby="basic-addon3" value="{{$company->email}}" required>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Situs.." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" name="instagram" placeholder="Instagram.." aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{$company->instagram}}" required>
                                 <span class="input-group-text" id="basic-addon2"><i class="fas fa-external-link-alt"></i></span>
                             </div>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon3"><i class="fas fa-images"></i></span>
-                            <input type="file" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            <input type="file" name="logo" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                         </div>
                         <div>
-                            <button class="btn btn-sm btn-success"><i class="far fa-edit"></i> Edit Profile</button>
+                            <button type="submit" class="btn btn-sm btn-success"><i class="far fa-edit"></i> Edit Profile</button>
                         </div>
                     </div>
                     </form>

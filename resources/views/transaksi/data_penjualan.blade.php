@@ -26,13 +26,17 @@
                             <td>{{$item->invoice}}</td>
                             <td>{{$item->_user->name}}</td>
                             <td>{{$item->_customer->name}}</td>
-                            <td>{{$item->total}}</td>
+                            <td>{{number_format($item->total)}}</td>
                             <td>{{$item->method}}</td>
-                            <td>{{$item->payment}}</td>
+                            <td>{{number_format($item->payment)}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>
+                                @can('detail-sales')
                                 <a href="/admin/daftar_penjualan/show/{{$item->id}}" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
-                                <a href="" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
+                                @endcan
+                                @can('print-sales')
+                                <a href="/admin/daftar_penjualan/cetak/{{$item->id}}" target="_blank" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

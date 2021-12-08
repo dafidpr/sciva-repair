@@ -11,30 +11,28 @@
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th>No Faktur</th>
-                            <th>Tgl Faktur</th>
                             <th>Supplaier</th>
                             <th>diskon</th>
-                            <th>Qty</th>
                             <th>total</th>
                             <th>payment</th>
+                            <th>method</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($purchase as $item)
                         <tr>
-                            <td>PMB7878767</td>
-                            <td>782349867</td>
-                            <td>2020-09-21</td>
-                            <td>CV.Amanah</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>40000</td>
-                            <td>cash</td>
+                            <td>{{$item->invoice}}</td>
+                            <td>{{$item->_supplier->name}}</td>
+                            <td>{{number_format($item->discount)}}</td>
+                            <td>{{number_format($item->total)}}</td>
+                            <td>{{number_format($item->payment)}}</td>
+                            <td>{{$item->method}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
+                                <a href="/admin/daftar_pembelian/{{$item->id}}/detail_pembelian" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

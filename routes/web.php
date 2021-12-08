@@ -1,9 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CashController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\purchaseController;
+use App\Http\Controllers\ReceivableController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
@@ -11,6 +16,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionServiceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VatController;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Route;
 
@@ -63,28 +69,42 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/create_customer', [TransactionServiceController::class, 'create_customer']);
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
+
+        Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take']);
     });
 
     Route::prefix('entry_penjualan')->group(function () {
-        Route::get('', [SaleController::class, 'Entry']);
+        Route::get('', [SaleController::class, 'Entry'])->middleware('can:create-sales');
         Route::post('/inputSale', [SaleController::class, 'store']);
     });
     Route::prefix('daftar_penjualan')->group(function () {
-        Route::get('', [SaleController::class, 'index']);
-        Route::get('/show/{id}', [SaleController::class, 'show']);
+        Route::get('', [SaleController::class, 'index'])->middleware('can:read-sales');
+        Route::get('/show/{id}', [SaleController::class, 'show'])->middleware('can:detail-sales');
+        Route::get('/cetak/{id}', [SaleController::class, 'cetak'])->middleware('can:print-sales');
     });
 
-    Route::get('/entry_pembelian', function () {
-        return view('transaksi.entry_pembelian');
+    Route::get('/entry_pembelian', [purchaseController::class, 'entry'])->middleware('can:create-purchases');
+    Route::prefix('daftar_pembelian')->group(function () {
+        Route::get('', [purchaseController::class, 'index'])->middleware('can:read-purchases');
+        Route::get('/{id}/select_supplier', [purchaseController::class, 'select_supplier']);
+        Route::post('/inputPurchase', [purchaseController::class, 'store']);
+        Route::get('/{id}/detail_pembelian', [purchaseController::class, 'show'])->middleware('can:detail-purchases');
     });
-    Route::get('/daftar_pembelian', function () {
-        return view('transaksi.data_pembelian');
+
+    Route::prefix('piutang')->group(function () {
+        Route::get('', [ReceivableController::class, 'index'])->middleware('can:read-receivable');
+        Route::get('/{id}/pay_receivable', [ReceivableController::class, 'pay_receivable'])->middleware('can:payment-receivable');
+        Route::get('/{id}/delete_receivable', [ReceivableController::class, 'delete_receivable']);
+        Route::get('/{id}/detail_receivable', [ReceivableController::class, 'detail_receivable'])->middleware('can:detail-receivable');
+        Route::post('/pembayaran_piutang', [ReceivableController::class, 'store']);
     });
-    Route::get('/piutang', function () {
-        return view('transaksi.piutang');
-    });
-    Route::get('/hutang', function () {
-        return view('transaksi.hutang');
+
+    Route::prefix('hutang')->group(function () {
+        Route::get('', [DebtController::class, 'index'])->middleware('can:read-debt');
+        Route::get('/{id}/view_payment_debt', [DebtController::class, 'show'])->middleware('can:payment-debt');
+        Route::get('/{id}/delete_detail', [DebtController::class, 'delete_detail']);
+        Route::post('/payment_debt', [DebtController::class, 'payment_debt']);
+        Route::get('/{id}/detail_debt', [DebtController::class, 'detail_debt'])->middleware('can:detail-debt');
     });
 
     //master data barang
@@ -195,11 +215,17 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/del_transaksi', function () {
         return view('tools.del_transaksi');
     });
-    Route::get('/kas', function () {
-        return view('keuangan.kas');
+
+    Route::prefix('kas')->group(function () {
+        Route::get('', [CashController::class, 'index'])->middleware('can:read-cash');
+        Route::get('/{id}/delete_cash', [CashController::class, 'destroy'])->middleware('can:delete-cash');
+        Route::post('/create_cash', [CashController::class, 'store'])->middleware('can:create-cash');
     });
-    Route::get('/ppn', function () {
-        return view('keuangan.ppn');
+
+    Route::prefix('ppn')->group(function () {
+        Route::get('', [VatController::class, 'index'])->middleware('can:read-ppn');
+        Route::get('/{id}/delete_vat', [VatController::class, 'destroy'])->middleware('can:delete-ppn');
+        Route::post('/create_vat_tax', [VatController::class, 'store'])->middleware('can:create-ppn');
     });
     Route::get('/bank', function () {
         return view('keuangan.bank');
@@ -207,9 +233,9 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/komisi', function () {
         return view('content.komisikaryawan');
     });
-    Route::get('/profil', function () {
-        return view('setting.profil_toko');
-    });
+    Route::get('/profil', [CompanyController::class, 'index']);
+    Route::post('/profil/changeProfil', [CompanyController::class, 'store']);
+
     Route::get('/footer_nota', function () {
         return view('setting.footerNota');
     });

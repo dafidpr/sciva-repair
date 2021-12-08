@@ -56,6 +56,34 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-stocks', 'guard_name' => 'web'],
             ['name' => 'delete-stocks', 'guard_name' => 'web'],
             //
+            ['name' => 'read-sales', 'guard_name' => 'web'],
+            ['name' => 'create-sales', 'guard_name' => 'web'],
+            ['name' => 'detail-sales', 'guard_name' => 'web'],
+            ['name' => 'print-sales', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-purchases', 'guard_name' => 'web'],
+            ['name' => 'create-purchases', 'guard_name' => 'web'],
+            ['name' => 'detail-purchases', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-debt', 'guard_name' => 'web'],
+            ['name' => 'payment-debt', 'guard_name' => 'web'],
+            ['name' => 'detail-debt', 'guard_name' => 'web'],
+            ['name' => 'delete-debt', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-receivable', 'guard_name' => 'web'],
+            ['name' => 'payment-receivable', 'guard_name' => 'web'],
+            ['name' => 'detail-receivable', 'guard_name' => 'web'],
+            ['name' => 'delete-receivable', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-cash', 'guard_name' => 'web'],
+            ['name' => 'create-cash', 'guard_name' => 'web'],
+            // ['name' => 'detail-cash', 'guard_name' => 'web'],
+            ['name' => 'delete-cash', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-ppn', 'guard_name' => 'web'],
+            ['name' => 'create-ppn', 'guard_name' => 'web'],
+            // ['name' => 'detail-ppn', 'guard_name' => 'web'],
+            ['name' => 'delete-ppn', 'guard_name' => 'web'],
         ]);
     }
 }

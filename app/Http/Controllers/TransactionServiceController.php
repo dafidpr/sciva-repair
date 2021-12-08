@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Repaire_service;
 use App\Models\Transaction_service;
 use App\Models\Transaction_service_detail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TransactionServiceController extends Controller
 {
@@ -28,6 +31,7 @@ class TransactionServiceController extends Controller
         $data = [
             'service' => Transaction_service::all(),
             "customer" => Customer::all(),
+            "user" => User::where('username', '!=', 'root')->get(),
             'nota' => $no_nota,
             'product' => Product::all(),
             'repaire' => Repaire_service::all()
@@ -94,7 +98,8 @@ class TransactionServiceController extends Controller
             'payment_method' => null,
             'payment' => null,
             'cashback' => null,
-            'status' => $request->status
+            'status' => $request->status,
+            'technician' => null
         ]);
 
         return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
@@ -142,7 +147,8 @@ class TransactionServiceController extends Controller
         Transaction_service::where('id', $request->transaction_id)->update([
             'user_id' => Auth::guard('web')->user()->id,
             'total' => $request->total,
-            'status' => 'finished'
+            'status' => 'finished',
+            'technician' => $request->technician
         ]);
 
         return redirect('/admin/servis')->with('berhasil', 'Transaksi Telah selesai');
@@ -253,6 +259,7 @@ class TransactionServiceController extends Controller
     public function batalServis($id)
     {
         Transaction_service::where('id', $id)->update([
+            'user_id' => Auth::guard('web')->user()->id,
             'status' => 'cancelled'
         ]);
 
@@ -303,5 +310,18 @@ class TransactionServiceController extends Controller
             }
         } elseif ($request->time == 'range') {
         }
+    }
+
+    public function print_take($id)
+    {
+        $data = [
+            'company' => Company_profile::find(1),
+            'service' => Transaction_service::find($id),
+            'service_detail' => Transaction_service_detail::where('transaction_id', $id)->get(),
+        ];
+
+        // return view('cetak.servis_take', $data);
+        $pdf = PDF::loadView('cetak.servis_take', $data);
+        return $pdf->stream('Struk_service');
     }
 }

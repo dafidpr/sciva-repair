@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cash;
+use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Receivable;
 use App\Models\Sale;
 use App\Models\Sale_detail;
 use App\Models\Vat_tax;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -105,18 +107,6 @@ class SaleController extends Controller
                     // dd($value);
                 }
             }
-            if (count($data['quantity']) > 0) {
-                foreach ($data['quantity'] as $item => $v) {
-                    $p = Product::where('id', $data['id_product'][$item])->get();
-                    $updateqtyproduct = $p[$item]->stock - $data['quantity'][$item];
-                    $q = [
-                        'stock' => $updateqtyproduct
-                    ];
-
-                    Product::where('id', $data['id_product'])->update($q);
-                    // dd($value);
-                }
-            }
 
             Cash::create([
                 'user_id' => Auth::guard('web')->user()->id,
@@ -124,7 +114,7 @@ class SaleController extends Controller
                 'date' => date('Y-m-d'),
                 'nominal' => $request->b_payment,
                 'description' => 'Penjualan',
-                'source' => 'sale'
+                'source' => 'income'
             ]);
 
             if ($request->b_vat_tax != 0) {
@@ -138,7 +128,7 @@ class SaleController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('berhasil', 'Transaksi penjualan berhasil');
+            return redirect('/admin/daftar_penjualan/cetak/' . $sale->id);
         } elseif ($request->method == 'credit') {
             $data = [
                 'user_id' => Auth::guard('web')->user()->id,
@@ -167,18 +157,6 @@ class SaleController extends Controller
                     // dd($value);
                 }
             }
-            if (count($data['quantity']) > 0) {
-                foreach ($data['quantity'] as $item => $v) {
-                    $p = Product::where('id', $data['id_product'][$item])->get();
-                    $updateqtyproduct = $p[$item]->stock - $data['quantity'][$item];
-                    $q = [
-                        'stock' => $updateqtyproduct
-                    ];
-
-                    Product::where('id', $data['id_product'])->update($q);
-                    // dd($value);
-                }
-            }
 
             $piutang = [
                 'sale_id' => $sale->id,
@@ -197,7 +175,7 @@ class SaleController extends Controller
                 'date' => date('Y-m-d'),
                 'nominal' => $request->b_payment,
                 'description' => 'Penjualan',
-                'source' => 'sale'
+                'source' => 'income'
             ]);
 
             if ($request->b_vat_tax != 0) {
@@ -211,7 +189,7 @@ class SaleController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('berhasil', 'Transaksi penjualan berhasil');
+            return redirect('/admin/daftar_penjualan/cetak/' . $sale->id);
         }
     }
 
@@ -238,9 +216,20 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function cetak($id)
     {
         //
+        $sale = Sale::find($id);
+        $data = [
+            'company' => Company_profile::find(1),
+            'sale' => $sale,
+            'sale_detail' => Sale_detail::where('sale_id', $sale->id)->get(),
+        ];
+
+        // return view('cetak.struk_penjualan', $data);
+
+        $pdf = PDF::loadView('cetak.struk_penjualan', $data);
+        return $pdf->stream('Struk_sale');
     }
 
     /**

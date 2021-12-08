@@ -43,18 +43,7 @@ function select_entry_product(e){
 }
 
 
-function changetsubtotal(){
-    var table = document.getElementById("stocklimit"), sumHsl = 0;
-		for(var t = 1; t < table.rows.length; t++)
-		{
-			sumHsl = sumHsl + parseInt(table.rows[t].cells[4].innerHTML);
-		}
-        // console.log(sumHsl);
-            document.getElementById("subtot").innerText = sumHsl;
-            document.getElementById("b_subtotal").value = sumHsl;
-            document.getElementById("b_grandtotal").value = sumHsl;
-            document.getElementById('b_cashback').value = sumHsl;
-}
+
 
 var dtable = document.getElementById('stocklimit'),rIndex;
 

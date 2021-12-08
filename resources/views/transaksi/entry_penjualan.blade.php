@@ -20,7 +20,7 @@
 <div class="row" >
     <div class="col-md-4">
         <div class="card">
-            <div class="card-body" onmousemove="changetsubtotal()">
+            <div class="card-body">
 
                     <div>
                         <label for="">Customer</label>
@@ -61,7 +61,7 @@
                         <label for="">Qty</label>
                         <input type="number" class="form-control" name="quantity" id="quantity" placeholder="" required value="">
                     </div>
-                    <button class="btn btn-success mt-3" onclick="inputStorage()" onmousemove="changetsubtotal()" type="button"><i class="dripicons-cart"></i> Tambah</button>
+                    <button class="btn btn-success mt-3" onclick="inputStorage()"  type="button"><i class="dripicons-cart"></i> Tambah</button>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                 <form action="/admin/entry_penjualan/inputSale" method="post">
                     @csrf
                     <input type="hidden" class="form-control" name="id_customer" id="id_customer" placeholder="" value="" readonly>
-                <div class="table-responsive" onmousemove="changetsubtotal()">
+                <div class="table-responsive">
                     <table class="table table-striped" name="sale_add_item" id="stocklimit" style="font-size: 13px;">
                         <thead>
                             <tr>
@@ -192,14 +192,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Customer</h5>
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Barang</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="bestpelanggan" style="width: 100%;">
+                    <table class="table table-striped" id="piutang" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Barcode</th>
@@ -295,7 +295,7 @@ if (localStorage.saleData && localStorage.idData) {
             </tr>`
 
     }
-
+    changetsubtotal()
 
 } else {
     console.log('Data Kosong/Errors')
@@ -341,6 +341,19 @@ if (localStorage.saleData && localStorage.idData) {
 
         }
 
+    }
+
+    function changetsubtotal(){
+    var table = document.getElementById("stocklimit"), sumHsl = 0;
+		for(var t = 1; t < table.rows.length; t++)
+		{
+			sumHsl = sumHsl + parseInt(table.rows[t].cells[4].innerHTML);
+		}
+        // console.log(sumHsl);
+            document.getElementById("subtot").innerText = sumHsl;
+            document.getElementById("b_subtotal").value = sumHsl;
+            document.getElementById("b_grandtotal").value = sumHsl;
+            document.getElementById('b_cashback').value = sumHsl;
     }
 
     function removeSale(a){

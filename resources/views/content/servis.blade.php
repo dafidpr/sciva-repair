@@ -316,7 +316,7 @@
                             <a href="#" onclick="modCall()"><i class="fab fa-whatsapp"></i></a>
                             <a href="#" onclick="takeUnit(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-shopping-cart"></i></a>
                             @elseif ($item->status == 'take')
-                            <i class="fas fa-print"></i>
+                            <a href="/admin/servis/print_take/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
                             @endif
                             <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
                             <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}">
@@ -403,6 +403,19 @@
                         </div>
                     </div>
 
+                    <div class="">
+                        <div class="mb-3">
+                            <label class="control-label">Teknisi</label>
+
+                            <select class="select2 form-control select2-multiple" name="technician"  id="technician" style="width: 100%;"
+                              data-placeholder="Pilih Teknisi">
+                              <option value=""  data-price="0">-pilih-</option>
+                                @foreach ($user as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="">
                         <div class="mb-3">
                             <label class="control-label">Jasa</label>

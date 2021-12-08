@@ -9,7 +9,7 @@ class Receivable_detail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'receivable_id', 'payment_date', 'nominal', 'user_id', ''
+        'receivable_id', 'payment_date', 'nominal', 'user_id'
     ];
 
     public function _user()

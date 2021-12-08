@@ -153,12 +153,24 @@
                                 <span>Transaksi</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                @can('create-sales')
                                 <li><a href="/admin/entry_penjualan">Enty Penjualan</a></li>
+                                @endcan
+                                @can('read-sales')
                                 <li><a href="/admin/daftar_penjualan">Daftar Penjualan</a></li>
+                                @endcan
+                                @can('create-purchases')
                                 <li><a href="/admin/entry_pembelian">Entry Pembelian</a></li>
+                                @endcan
+                                @can('read-purchases')
                                 <li><a href="/admin/daftar_pembelian">Daftar Pembelian</a></li>
+                                @endcan
+                                @can('read-debt')
                                 <li><a href="/admin/hutang">Hutang</a></li>
+                                @endcan
+                                @can('read-receivable')
                                 <li><a href="/admin/piutang">Piutang</a></li>
+                                @endcan
                             </ul>
                         </li>
 
@@ -198,9 +210,12 @@
                                 <span>Keuangan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                @can('read-cash', Model::class)
                                 <li><a href="/admin/kas">Kas</a></li>
+                                @endcan
+                                @can('read-ppn')
                                 <li><a href="/admin/ppn">PPN</a></li>
-                                <li><a href="/admin/bank">Bank</a></li>
+                                @endcan
                             </ul>
                         </li>
                         <li>
@@ -215,7 +230,6 @@
                                 <li><a href="/admin/lap_stokopname">Stok Opname</a></li>
                                 <li><a href="/admin/lap_stok_in_out">Stok In/Out</a></li>
                                 <li><a href="/admin/lap_kas">Kas</a></li>
-                                <li><a href="/admin/lap_kasbank">Kas Bank</a></li>
                                 <li><a href="/admin/lap_hutangpiutang">Hutang Piutang</a></li>
                                 <li><a href="/admin/lap_labarugi">Laba Rugi</a></li>
                             </ul>

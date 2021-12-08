@@ -20,19 +20,37 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($receivable as $item)
                     <tr>
-                        <td>PB000001</td>
-                        <td>Fikri Hasan</td>
-                        <td>2020-09-10</td>
-                        <td>2020-09-20</td>
-                        <td>300000</td>
-                        <td>300000</td>
-                        <td>0</td>
-                        <td><span class="badge bg-success">Lunas</span></td>
+                        <td>{{$item->_sale->invoice}}</td>
+                        <td>{{$item->_sale->_customer->name}}</td>
+                        <td>{{$item->receivable_date}}</td>
+                        <td>{{$item->due_date}}</td>
+                        <td>{{$item->total}}</td>
+                        <td>{{$item->payment}}</td>
+                        <td>{{$item->remainder}}</td>
                         <td>
-                            <a href="" class="btn btn-sm btn-primary"><i class="dripicons-preview"></i></a>
+                            @if ($item->status == 'paid off')
+
+                            <span class="badge bg-success">Lunas</span>
+                            @else
+                            <span class="badge bg-danger">Belum Lunas</span>
+
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->status == 'paid off')
+                            @can('payment-receivable')
+                            <a href="/admin/piutang/{{$item->id}}/detail_receivable" class="btn btn-sm btn-primary"><i class="dripicons-preview"></i></a>
+                            @endcan
+                            @else
+                            @can('detail-receivable')
+                            <a href="/admin/piutang/{{$item->id}}/pay_receivable" class="btn btn-sm btn-success"><i class="fas fa-money-bill-wave"></i></a>
+                            @endcan
+                            @endif
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
