@@ -44,7 +44,7 @@
                     <div>
                         <label for="">Barcode</label>
                         <div class="input-group mb-3">
-                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-example-product"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-primary" type="button" id="button-addon1" onclick="addProduct()"><i class="fas fa-search"></i></button>
                             <input type="text" class="form-control" placeholder="" name="barcode" id="barcode" aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                     </div>
@@ -52,6 +52,7 @@
                         <label for="">Barang</label>
                         <input type="text" class="form-control" name="name_product" id="name_product" placeholder="" value="" readonly>
                         <input type="hidden" class="form-control" name="id_product" id="id_product" placeholder="" value="" readonly>
+                        <input type="hidden" class="form-control" name="discount" id="discount" placeholder="" value="0" readonly>
                     </div>
                     <div>
                         <label for="">Harga</label>
@@ -81,6 +82,7 @@
                                 <th>Barcode</th>
                                 <th>Nama</th>
                                 <th>Harga</th>
+                                <th>Diskon</th>
                                 <th>Qty</th>
                                 <th>total</th>
                                 <th>Opsi</th>
@@ -251,7 +253,11 @@
                             <label for="">Harga</label>
                             <input type="text" id="a_price" class="form-control" readonly>
                         </div>
-                        <div>
+                        <div class="col-md-6">
+                            <label for="">Diskon</label>
+                            <input type="text" id="a_discount" onkeyup="editDscBarang()" class="form-control">
+                        </div>
+                        <div class="col-md-6">
                             <label for="">Qty</label>
                             <input type="number" id="a_qty" onkeyup="editQtyBarang()" class="form-control">
                         </div>
@@ -289,9 +295,10 @@ if (localStorage.saleData && localStorage.idData) {
                 <td>${saleData[index].barcode}<input type="hidden" name="id_product[]" value="${saleData[index].id_product}" id="id_product"></td>
                 <td>${saleData[index].name_product}</td>
                 <td>${saleData[index].price}<input type="hidden" name="price[]" value="${saleData[index].price}" id="price"></td>
+                <td>${saleData[index].discount}<input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
                 <td>${saleData[index].quantity} <input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
                 <td>${saleData[index].total}<input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
-                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <a href="#" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt"></i></button></td>
             </tr>`
 
     }
@@ -307,6 +314,7 @@ if (localStorage.saleData && localStorage.idData) {
         var name_product = document.getElementById('name_product').value
         var id_product = document.getElementById('id_product').value
         var price = document.getElementById('price').value
+        var discount = document.getElementById('discount').value
         var quantity = document.getElementById('quantity').value
         var total = price * quantity;
 
@@ -329,6 +337,7 @@ if (localStorage.saleData && localStorage.idData) {
             barcode: barcode,
             name_product: name_product,
             price: price,
+            discount: discount,
             quantity: quantity,
             total: total
         })
@@ -336,27 +345,38 @@ if (localStorage.saleData && localStorage.idData) {
         localStorage.setItem('saleData', JSON.stringify(saleData))
         localStorage.setItem('idData', idData)
 
-        location.reload()
-
+        tbody.innerHTML += `<tr>
+            <td>${barcode}<input type="hidden" name="id_product[]" value="${id_product}" id="id_product"></td>
+            <td>${name_product}</td>
+            <td>${price}<input type="hidden" name="price[]" value="${price}" id="price"></td>
+            <td>${discount}<input type="hidden" name="discount[]" value="${discount}" id="discount"></td>
+            <td>${quantity} <input type="hidden" name="quantity[]" value="${quantity}" id="quantity"></td>
+            <td>${total}<input type="hidden" name="total[]" value="${total}" id="total"></td>
+            <td><a href="#" onclick="editSale(${idData})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${idData})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>`
 
         }
+
+        changetsubtotal()
 
     }
 
     function changetsubtotal(){
-    var table = document.getElementById("stocklimit"), sumHsl = 0;
+    var table = document.getElementById("stocklimit"), sumHsl = 0, sumHs2 = 0;
 		for(var t = 1; t < table.rows.length; t++)
 		{
-			sumHsl = sumHsl + parseInt(table.rows[t].cells[4].innerHTML);
+			sumHsl = sumHsl + parseInt(table.rows[t].cells[5].innerHTML);
+			sumHs2 = sumHs2 + parseInt(table.rows[t].cells[3].innerHTML);
 		}
         // console.log(sumHsl);
             document.getElementById("subtot").innerText = sumHsl;
             document.getElementById("b_subtotal").value = sumHsl;
             document.getElementById("b_grandtotal").value = sumHsl;
             document.getElementById('b_cashback').value = sumHsl;
+            document.getElementById('b_discount').value = sumHs2;
     }
 
-    function removeSale(a){
+    function removeSale(a, e){
         if(localStorage.saleData && localStorage.idData){
             saleData = JSON.parse(localStorage.getItem('saleData'))
 
@@ -369,10 +389,25 @@ if (localStorage.saleData && localStorage.idData) {
             }
 
             localStorage.setItem('saleData', JSON.stringify(saleData))
-            location.reload()
+            // location.reload()
+
 
         }
     }
+
+    var tb = document.getElementById('stocklimit'), rindex;
+    tb.addEventListener('click', onDelete);
+    function onDelete(e){
+        if(!e.target.classList.contains('del_sale_y')){
+            return;
+        }
+        // alert('click the button');
+        const btn = e.target;
+        btn.closest('tr').remove();
+        changetsubtotal()
+
+    }
+
 
     function editSale(a){
         if (localStorage.saleData && localStorage.idData) {
@@ -388,6 +423,7 @@ if (localStorage.saleData && localStorage.idData) {
                 document.getElementById('a_name').value = saleData[i].name_product
                 document.getElementById('a_barcode').value = saleData[i].barcode
                 document.getElementById('a_price').value = saleData[i].price
+                document.getElementById('a_discount').value = saleData[i].discount
                 document.getElementById('a_qty').value = saleData[i].quantity
                 document.getElementById('a_total').value = saleData[i].total
                 saleData.splice(idx_data, 1)
@@ -395,33 +431,45 @@ if (localStorage.saleData && localStorage.idData) {
             idx_data++
         }
         editBarang()
+
+            for (let index = 1; index < tb.rows.length; index++) {
+            tb.rows[index].onclick = function (){
+                rIndex = this.rowIndex;
+                console.log(rIndex);
+
+            }
+
+        }
+
         return
 
         }
     }
 
     function updateData(){
-    idData = document.getElementById('a_id').value
-    id_product = document.getElementById('a_idProduct').value
-    barcode = document.getElementById('a_barcode').value
-    name_product = document.getElementById('a_name').value
-    price = document.getElementById('a_price').value
-    quantity = document.getElementById('a_qty').value
-    total = document.getElementById('a_total').value
+        idData = document.getElementById('a_id').value
+        id_product = document.getElementById('a_idProduct').value
+        barcode = document.getElementById('a_barcode').value
+        name_product = document.getElementById('a_name').value
+        price = document.getElementById('a_price').value
+        discount = document.getElementById('a_discount').value
+        quantity = document.getElementById('a_qty').value
+        total = document.getElementById('a_total').value
 
-    saleData.push({
-            id: idData,
-            id_product: id_product,
-            barcode: barcode,
-            name_product: name_product,
-            price: price,
-            quantity: quantity,
-            total: total
-        })
-    localStorage.setItem('saleData', JSON.stringify(saleData))
+        saleData.push({
+                id: idData,
+                id_product: id_product,
+                barcode: barcode,
+                name_product: name_product,
+                price: price,
+                discount: discount,
+                quantity: quantity,
+                total: total
+            })
+        localStorage.setItem('saleData', JSON.stringify(saleData))
 
-    location.reload()
-}
+        location.reload()
+    }
 
 
     function editQtyBarang(){
@@ -432,10 +480,45 @@ if (localStorage.saleData && localStorage.idData) {
 
         document.getElementById('a_total').value = d;
     }
+    function editDscBarang(){
+        var a = document.getElementById('a_price').value;
+        var b = document.getElementById('a_discount').value;
+        var g = document.getElementById('a_qty').value;
+
+        var d = parseInt(a) * parseInt(g) - parseInt(b);
+
+        document.getElementById('a_total').value = d;
+    }
 
     function cancelledSale(){
         localStorage.clear()
         location.reload()
+    }
+
+    function re_load(){
+        if (localStorage.saleData && localStorage.idData) {
+    saleData = JSON.parse(localStorage.getItem('saleData'))
+
+
+    for (let index = 0; index < saleData.length; index++) {
+        // const element = array[index];
+
+        tbody.innerHTML += `<tr>
+                <td>${saleData[index].barcode}<input type="hidden" name="id_product[]" value="${saleData[index].id_product}" id="id_product"></td>
+                <td>${saleData[index].name_product}</td>
+                <td>${saleData[index].price}<input type="hidden" name="price[]" value="${saleData[index].price}" id="price"></td>
+                <td>${saleData[index].discount}<input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
+                <td>${saleData[index].quantity} <input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
+                <td>${saleData[index].total}<input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
+                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>`
+
+    }
+    changetsubtotal()
+
+} else {
+    console.log('Data Kosong/Errors')
+}
     }
 </script>
 @endsection

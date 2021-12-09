@@ -16,7 +16,7 @@ if (localStorage.data_purchase && localStorage.id_data) {
                 <td>${data_purchase[index].total}
                 <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
                 </td>
-                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt"></i></button></td>
             </tr>`
 
     }
@@ -98,7 +98,20 @@ function inputPurchase(){
 
     localStorage.setItem('data_purchase', JSON.stringify(data_purchase))
     localStorage.setItem('id_data', id_data)
-    location.reload()
+
+    tbody.innerHTML += `<tr>
+                <td>${barcode.value} <input type="hidden" name="i_id_product[]" value="${id_product.value}" class="form-control"></td>
+                <td>${name_product.value} </td>
+                <td>${purchase_price.value} <input type="hidden" name="i_purchase_price[]" value="${purchase_price.value}" class="form-control"></td>
+                <td>${sale_price.value} <input type="hidden" name="i_sale_price[]" value="${sale_price.value}" class="form-control"></td>
+                <td>${quantity_product.value} <input type="hidden" name="i_quantity[]" value="${quantity_product.value}" class="form-control"></td>
+                <td>${total}
+                <input type="hidden" name="i_total[]" id="i_total" value="${total}" class="form-control">
+                </td>
+                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${id_data})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${id_data})"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>`
+    // location.reload()
+    changeTotal()
 
 
     }
@@ -117,8 +130,20 @@ function removePurchase(a){
         }
 
         localStorage.setItem('data_purchase', JSON.stringify(data_purchase))
-        location.reload()
+        // location.reload()
     }
+}
+var table = document.getElementById('stocklimit')
+table.addEventListener('click', onDelete);
+function onDelete(e){
+    if(!e.target.classList.contains('del_pur_y')){
+        return;
+    }
+    // alert('click the button');
+    const btn = e.target;
+    btn.closest('tr').remove();
+    changeTotal()
+
 }
 
 function editPurchase(a){

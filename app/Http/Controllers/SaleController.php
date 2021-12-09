@@ -98,7 +98,7 @@ class SaleController extends Controller
                     $detail = [
                         'sale_id' => $sale->id,
                         'product_id' => $data['id_product'][$item],
-                        'discount' => 0,
+                        'discount' => $data['discount'][$item],
                         'total' => $data['price'][$item],
                         'quantity' => $data['quantity'][$item],
                         'sub_total' => $data['total'][$item]
@@ -164,7 +164,7 @@ class SaleController extends Controller
                     $detail = [
                         'sale_id' => $sale->id,
                         'product_id' => $data['id_product'][$item],
-                        'discount' => 0,
+                        'discount' => $data['discount'][$item],
                         'total' => $data['price'][$item],
                         'quantity' => $data['quantity'][$item],
                         'sub_total' => $data['total'][$item]

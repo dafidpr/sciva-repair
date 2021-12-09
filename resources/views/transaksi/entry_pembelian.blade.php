@@ -74,7 +74,7 @@
                 @csrf
                 <input type="hidden" name="id_supplier" id="id_supplier">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="stoklimit" width="100%" style="font-size: 12px;">
+                    <table class="table table-striped" id="stocklimit" width="100%" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th>Barcode</th>

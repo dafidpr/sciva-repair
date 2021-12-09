@@ -50,6 +50,15 @@ var dtable = document.getElementById('stocklimit'),rIndex;
 function editBarang(){
     $('.editBarang').modal('show');
 }
+function addProduct(){
+    var cs = document.getElementById('name_customer').value
+    if(cs == ''){
+        alert('Data Customer harus diisi!!')
+    }else{
+
+        $('.bs-example-product').modal('show');
+    }
+}
 function closeModEdit(){
 
     $('.editBarang').modal('hide');
@@ -76,6 +85,7 @@ function ppn(){
     }
 
 }
+
 
 $(document).ready(function(){
     $("#form_duedate").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
