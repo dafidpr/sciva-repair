@@ -46,7 +46,7 @@ class OpnameController extends Controller
     {
         //
         // dd($request->all());
-        $difference = $request->stock - $request->real_stock;
+        $difference = $request->real_stock - $request->stock;
         $value = $difference * $request->purchase_price;
 
         Stock_opname::create(

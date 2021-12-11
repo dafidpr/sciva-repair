@@ -70,6 +70,7 @@ class UserController extends Controller
             'address' => $request->address,
             'username' => $request->username,
             'password' => bcrypt($request->name),
+            'commission' => $request->commission
         ]);
         $user->assignRole($request->role);
 
@@ -138,6 +139,7 @@ class UserController extends Controller
             'telephone' => $request->telephone,
             'address' => $request->address,
             'username' => $request->username,
+            'commission' => $request->commission
         ]);
         $user->syncRoles($request->role);
         // dd($request->role);

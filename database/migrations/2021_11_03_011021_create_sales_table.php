@@ -23,6 +23,8 @@ class CreateSalesTable extends Migration
             $table->decimal('payment', 10, 2)->nullable();
             $table->decimal('cashback', 10, 2)->nullable();
             $table->decimal('vat_tax', 10, 2)->nullable();
+            $table->decimal('discount', 10, 2)->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'address',
         'username',
         'password',
+        'commission',
         'login_at',
         'logout_at'
     ];

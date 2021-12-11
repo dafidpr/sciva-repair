@@ -20,7 +20,8 @@ function hapusdatabarang(e) {
 
 }
 
-function editBarang(e) {
+function editProductA(e) {
+    console.log(e)
         $.ajax({
             url: "/admin/barang/detail/" + e,
             type: "get",

@@ -9,7 +9,7 @@ class Sale extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'customer_id', 'invoice', 'method', 'total', 'payment', 'cashback', 'vat_tax'
+        'user_id', 'customer_id', 'invoice', 'method', 'total', 'payment', 'cashback', 'vat_tax', 'discount', 'date'
     ];
 
 

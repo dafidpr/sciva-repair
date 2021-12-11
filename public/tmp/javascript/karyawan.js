@@ -67,6 +67,7 @@ function editKaryawan(e) {
             $('.e_address').val(obj.data.address);
             $('.e_role').val(obj.role);
             $('#e_username').val(obj.data.username);
+            $('#e_commission').val(obj.data.commission);
             $('#myEditModal').modal('show');
         }
     })

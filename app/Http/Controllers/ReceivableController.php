@@ -77,7 +77,7 @@ class ReceivableController extends Controller
             'date' => date('Y-m-d'),
             'nominal' => $payment,
             'description' => 'Pembayaran Hutang',
-            'source' => 'input'
+            'source' => 'income'
         ]);
         return redirect()->back()->with('berhasil', 'pembayaran piutang berhasil!!');
     }
@@ -140,7 +140,7 @@ class ReceivableController extends Controller
             'date' => date('Y-m-d'),
             'nominal' => $a->nominal,
             'description' => 'Pembayaran Hutang di Hapus',
-            'source' => 'input'
+            'source' => 'expenditure'
         ]);
 
         return redirect()->back()->with('berhasil', 'Data telah di Hapus!!');

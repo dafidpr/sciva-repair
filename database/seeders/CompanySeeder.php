@@ -22,7 +22,7 @@ class CompanySeeder extends Seeder
             'fax' => '(0333) 000',
             'email' => "SCIVA@GMAIL.COM",
             'instagram' => '@SCIVA',
-            'logo' => NULL
+            'logo' => '84140967-simple-repair-service-logo-like-clock-vector-illustration-.jpg-1638213108.jpg'
         ]);
     }
 }

@@ -103,7 +103,7 @@ class DebtController extends Controller
             'date' => date('Y-m-d'),
             'nominal' => $request->payment,
             'description' => 'Pembayaran Hutang',
-            'source' => 'input'
+            'source' => 'expenditure'
         ]);
 
         return redirect()->back()->with('berhasil', 'Pembayaran telah berhasil!!');
@@ -175,7 +175,7 @@ class DebtController extends Controller
             'date' => date('Y-m-d'),
             'nominal' => $a->nominal,
             'description' => 'Pembayaran Hutang di Hapus',
-            'source' => 'input'
+            'source' => 'income'
         ]);
 
 

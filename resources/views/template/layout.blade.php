@@ -34,7 +34,7 @@
             <link href="{{asset('tmp/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
             <!-- Responsive datatable examples -->
             <link href="{{asset('tmp/assets/libs/chart.js/Chart.min.css')}}" rel="stylesheet" type="text/css">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+            {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> --}}
 
 </head>
 

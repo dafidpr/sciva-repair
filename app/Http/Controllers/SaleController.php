@@ -88,7 +88,9 @@ class SaleController extends Controller
                 'total' => $request->b_grandtotal,
                 'payment' => $request->b_payment,
                 'cashback' => $request->b_cashback,
-                'vat_tax' => $request->b_vat_tax
+                'vat_tax' => $request->b_vat_tax,
+                'discount' => $request->b_discount,
+                'date' => date('Y-m-d')
             ];
             $sale = Sale::create($data);
             $data = $request->all();
@@ -154,7 +156,9 @@ class SaleController extends Controller
                 'total' => $request->b_grandtotal,
                 'payment' => $request->b_payment,
                 'cashback' => $request->b_cashback,
-                'vat_tax' => $request->b_vat_tax
+                'vat_tax' => $request->b_vat_tax,
+                'discount' => $request->b_discount,
+                'date' => date('Y-m-d')
             ];
             $sale = Sale::create($data);
             $data = $request->all();
@@ -259,7 +263,7 @@ class SaleController extends Controller
 
         // return view('cetak.struk_penjualan', $data);
 
-        $pdf = PDF::loadView('cetak.struk_penjualan', $data);
+        $pdf = PDF::loadView('cetak.struk_penjualan', $data)->setPaper('a4', 'potrait');
         return $pdf->stream('Struk_sale');
     }
 

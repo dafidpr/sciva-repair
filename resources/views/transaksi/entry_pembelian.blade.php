@@ -70,6 +70,22 @@
                         <h5>Data Barang</h5>
                     </div>
                     <div class="card-body">
+                        @if (session('berhasil'))
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                            </button>
+                            <strong>Selamat</strong> {{session('berhasil')}}.
+                        </div>
+                        @endif
+                        @if (session('gagal'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                            </button>
+                            <strong>Maaf</strong> {{session('gagal')}}.
+                        </div>
+                        @endif
                 <form action="/admin/daftar_pembelian/inputPurchase" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id_supplier" id="id_supplier">

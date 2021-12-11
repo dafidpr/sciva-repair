@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\purchaseController;
 use App\Http\Controllers\ReceivableController;
 use App\Http\Controllers\RepaireController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockController;
@@ -170,39 +171,59 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/changepermission/{id}', [RoleController::class, 'changePermission']);
         Route::post('/{id}/input-change-permissions', [RoleController::class, 'inputPermission']);
     });
-
-
-
     Route::get('/grafik', function () {
         return view('content.grafik');
     });
-    Route::get('/lap_labarugi', function () {
-        return view('laporan.labarugi');
+
+
+    Route::prefix('lap_labarugi')->group(function () {
+        Route::post('/cetak_labakotor', [ReportController::class, 'laba_rugi']);
+        Route::get('', function () {
+            return view('laporan.labarugi');
+        });
     });
     Route::get('/lap_jurnalharian', function () {
         return view('laporan.jurnalharian');
     });
-    Route::get('/lap_penjualan', function () {
-        return view('laporan.penjualan');
+    Route::prefix('lap_penjualan')->group(function () {
+        Route::get('', function () {
+            return view('laporan.penjualan');
+        });
+        Route::post('cetak_sale', [ReportController::class, 'sale']);
     });
-    Route::get('/lap_stokopname', function () {
-        return view('laporan.stokopname');
+    Route::prefix('lap_stokopname')->group(function () {
+        Route::post('/print_opname', [ReportController::class, 'opname']);
+        Route::get('', function () {
+            return view('laporan.stokopname');
+        });
     });
-    Route::get('/lap_stok_in_out', function () {
-        return view('laporan.stok_in_out');
+    Route::prefix('lap_stok_in_out')->group(function () {
+        Route::post('/print_report', [ReportController::class, 'in_out']);
+        Route::get('', function () {
+            return view('laporan.stok_in_out');
+        });
     });
-    Route::get('/lap_kas', function () {
-        return view('laporan.kas');
+    Route::prefix('lap_kas')->group(function () {
+        Route::post('/print_cash', [ReportController::class, 'cash']);
+        Route::get('', function () {
+            return view('laporan.kas');
+        });
     });
     Route::get('/lap_kasbank', function () {
         return view('laporan.kasbank');
     });
-    Route::get('/lap_pembelian', function () {
-        return view('laporan.pembelian');
+    Route::prefix('lap_pembelian')->group(function () {
+        Route::get('', function () {
+            return view('laporan.pembelian');
+        });
+        Route::post('/cetak_purchase', [ReportController::class, 'purchase']);
     });
-    Route::get('/lap_hutangpiutang', function () {
-        return view('laporan.hutangpiutang');
+    Route::prefix('lap_hutangpiutang')->group(function () {
+        Route::post('/print_debt', [ReportController::class, 'debt']);
+        Route::post('/print_receivable', [ReportController::class, 'receivable']);
+        Route::get('', [ReportController::class, 'hutang_piutang']);
     });
+
     Route::get('/backupdata', function () {
         return view('tools.backupdata');
     });

@@ -23,7 +23,9 @@ class SaleSeeder extends Seeder
             'total' => 10000,
             'payment' => 10000,
             'cashback' => 0,
-            'vat_tax' => 0
+            'vat_tax' => 0,
+            'discount' => 0,
+            'date' => date('Y-m-d')
         ]);
         Sale::create([
             'user_id' => 2,
@@ -33,7 +35,9 @@ class SaleSeeder extends Seeder
             'total' => 10000,
             'payment' => 10000,
             'cashback' => 0,
-            'vat_tax' => 0
+            'vat_tax' => 0,
+            'discount' => 0,
+            'date' => date('Y-m-d')
         ]);
         Sale::create([
             'user_id' => 3,
@@ -43,7 +47,9 @@ class SaleSeeder extends Seeder
             'total' => 10000,
             'payment' => 10000,
             'cashback' => 0,
-            'vat_tax' => 0
+            'vat_tax' => 0,
+            'discount' => 0,
+            'date' => date('Y-m-d'),
         ]);
     }
 }

@@ -43,13 +43,13 @@
                     @foreach ($barang as $item)
                     <tr>
                         <td>
-                            <a href="#" class="text-primary" onclick="editBarang('{{$item->id}}')"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="text-primary" onclick="editProductA({{$item->id}})"><i class="fas fa-edit"></i></a>
                             <a href="#" class="text-primary" onclick="hapusdatabarang('{{$item->id}}')"><i class="fas fa-trash"></i></a>
                         </td>
                         <td>{{$item->barcode}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->selling_price}}</td>
                         <td>{{$item->purchase_price}}</td>
+                        <td>{{$item->selling_price}}</td>
                         <td>{{$item->member_price}}</td>
                         <td>
                             @if ($item->stock == $item->limit || $item->stock < $item->limit)

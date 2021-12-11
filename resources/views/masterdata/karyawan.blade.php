@@ -54,7 +54,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->username}}</td>
                         <td>{{$item->address}}</td>
-                        <td>00</td>
+                        <td>{{$item->commission}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -150,6 +150,13 @@
                         @endif
                     </div>
                     <div class="mb-3">
+                        <label for="">Komisi</label>
+                        <input type="text" class="form-control" name="commission" value="{{old('commission')}}" placeholder="Komisi.." required>
+                        @if ($errors->has('commission'))
+                        <span class="text-danger">{{ $errors->first('commission') }}</span>
+                        @endif
+                    </div>
+                    <div class="mb-3">
                         <label for="">Level</label>
                         <select class="form-select" name="role" aria-label="Default select example" required>
                             <option selected="">--Pilih--</option>
@@ -208,6 +215,13 @@
                         <input type="text" class="form-control" name="username" id="e_username" placeholder="Username.." required>
                         @if ($errors->has('username'))
                         <span class="text-danger">{{ $errors->first('username') }}</span>
+                        @endif
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Komisi</label>
+                        <input type="text" class="form-control" name="commission" id="e_commission" placeholder="Komisi" required>
+                        @if ($errors->has('commission'))
+                        <span class="text-danger">{{ $errors->first('commission') }}</span>
                         @endif
                     </div>
                     <div class="mb-3">

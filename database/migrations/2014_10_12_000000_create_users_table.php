@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->text('address');
             $table->string('username', 100)->unique();
             $table->string('password', 255);
+            $table->string('commission', 255)->nullable();
             $table->timestamp('login_at')->nullable();
             $table->timestamp('logout_at')->nullable();
             $table->timestamps();
