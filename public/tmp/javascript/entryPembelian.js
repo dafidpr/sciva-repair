@@ -16,7 +16,7 @@ if (localStorage.data_purchase && localStorage.id_data) {
                 <td>${data_purchase[index].total}
                 <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
                 </td>
-                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt del_pur_y"></i></button></td>
             </tr>`
 
     }
@@ -108,7 +108,7 @@ function inputPurchase(){
                 <td>${total}
                 <input type="hidden" name="i_total[]" id="i_total" value="${total}" class="form-control">
                 </td>
-                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${id_data})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${id_data})"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${id_data})"><i class="fas fa-pencil-alt"></i> </button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${id_data})"><i class="fas fa-trash-alt del_pur_y"></i> </button></td>
             </tr>`
     // location.reload()
     changeTotal()
@@ -133,8 +133,8 @@ function removePurchase(a){
         // location.reload()
     }
 }
-var table = document.getElementById('stocklimit')
-table.addEventListener('click', onDelete);
+// var table = document.getElementById('stocklimit')
+const table = document.querySelector('table')
 function onDelete(e){
     if(!e.target.classList.contains('del_pur_y')){
         return;
@@ -145,6 +145,7 @@ function onDelete(e){
     changeTotal()
 
 }
+table.addEventListener('click', onDelete);
 
 function editPurchase(a){
     if (localStorage.data_purchase && localStorage.id_data) {

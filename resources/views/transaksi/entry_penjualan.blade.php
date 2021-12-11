@@ -280,7 +280,7 @@
 
 <script>
 
-var table = document.querySelector('table')
+const table = document.querySelector('table')
 var tbody = document.querySelector('tbody')
 
 
@@ -298,7 +298,7 @@ if (localStorage.saleData && localStorage.idData) {
                 <td>${saleData[index].discount}<input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
                 <td>${saleData[index].quantity} <input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
                 <td>${saleData[index].total}<input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
-                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt"></i></button></td>
+                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i> </a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt del_sale_y"></i></button></td>
             </tr>`
 
     }
@@ -352,7 +352,7 @@ if (localStorage.saleData && localStorage.idData) {
             <td>${discount}<input type="hidden" name="discount[]" value="${discount}" id="discount"></td>
             <td>${quantity} <input type="hidden" name="quantity[]" value="${quantity}" id="quantity"></td>
             <td>${total}<input type="hidden" name="total[]" value="${total}" id="total"></td>
-            <td><a href="#" onclick="editSale(${idData})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${idData})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt"></i></button></td>
+            <td><a href="#" onclick="editSale(${idData})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${idData})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt del_sale_y"></i></button></td>
             </tr>`
 
         }
@@ -395,19 +395,19 @@ if (localStorage.saleData && localStorage.idData) {
         }
     }
 
-    var tb = document.getElementById('stocklimit'), rindex;
-    tb.addEventListener('click', onDelete);
-    function onDelete(e){
-        if(!e.target.classList.contains('del_sale_y')){
-            return;
-        }
-        // alert('click the button');
-        const btn = e.target;
-        btn.closest('tr').remove();
-        changetsubtotal()
-
+    table.addEventListener('click', onDelete);
+function onDelete(e){
+    if(!e.target.classList.contains('del_sale_y')){
+        return;
     }
+    // alert('click the button');
+    const btn = e.target;
+    btn.closest('tr').remove();
+    changetsubtotal()
 
+}
+
+    var tb = document.getElementById('stocklimit'), rindex;
 
     function editSale(a){
         if (localStorage.saleData && localStorage.idData) {
