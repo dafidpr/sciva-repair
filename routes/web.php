@@ -178,36 +178,40 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
 
     Route::prefix('lap_labarugi')->group(function () {
         Route::post('/cetak_labakotor', [ReportController::class, 'laba_rugi']);
+        Route::post('/cetak_lababersih', [ReportController::class, 'laba_bersih']);
         Route::get('', function () {
             return view('laporan.labarugi');
-        });
+        })->middleware('can:report-profit');
     });
-    Route::get('/lap_jurnalharian', function () {
-        return view('laporan.jurnalharian');
+    Route::prefix('lap_jurnalharian')->group(function () {
+        Route::post('print', [ReportController::class, 'jurnal_harian']);
+        Route::get('', function () {
+            return view('laporan.jurnalharian');
+        })->middleware('can:report-daily-journal');
     });
     Route::prefix('lap_penjualan')->group(function () {
         Route::get('', function () {
             return view('laporan.penjualan');
-        });
+        })->middleware('can:report-sales');
         Route::post('cetak_sale', [ReportController::class, 'sale']);
     });
     Route::prefix('lap_stokopname')->group(function () {
         Route::post('/print_opname', [ReportController::class, 'opname']);
         Route::get('', function () {
             return view('laporan.stokopname');
-        });
+        })->middleware('can:report-opnames');
     });
     Route::prefix('lap_stok_in_out')->group(function () {
         Route::post('/print_report', [ReportController::class, 'in_out']);
         Route::get('', function () {
             return view('laporan.stok_in_out');
-        });
+        })->middleware('can:report-stock-in-out');
     });
     Route::prefix('lap_kas')->group(function () {
         Route::post('/print_cash', [ReportController::class, 'cash']);
         Route::get('', function () {
             return view('laporan.kas');
-        });
+        })->middleware('can:report-chases');
     });
     Route::get('/lap_kasbank', function () {
         return view('laporan.kasbank');
@@ -215,13 +219,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::prefix('lap_pembelian')->group(function () {
         Route::get('', function () {
             return view('laporan.pembelian');
-        });
+        })->middleware('can:report-purchases');
         Route::post('/cetak_purchase', [ReportController::class, 'purchase']);
     });
     Route::prefix('lap_hutangpiutang')->group(function () {
         Route::post('/print_debt', [ReportController::class, 'debt']);
         Route::post('/print_receivable', [ReportController::class, 'receivable']);
-        Route::get('', [ReportController::class, 'hutang_piutang']);
+        Route::get('', [ReportController::class, 'hutang_piutang'])->middleware('can:report-debts-receivables');
     });
 
     Route::get('/backupdata', function () {

@@ -49,6 +49,7 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['read-receivable', 'payment-receivable', 'detail-receivable', 'delete-receivable']);
         $admin->givePermissionTo(['read-cash', 'create-cash', 'delete-cash']);
         $admin->givePermissionTo(['read-ppn', 'create-ppn', 'delete-ppn']);
+        $admin->givePermissionTo(['report-daily-journal', 'report-sales', 'report-purchases', 'report-opnames', 'report-stock-in-out', 'report-chases', 'report-debts-receivables', 'report-profit',]);
 
         //kasir
         $kasir->givePermissionTo('read-products');

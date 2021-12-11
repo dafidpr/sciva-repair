@@ -131,7 +131,7 @@ class SaleController extends Controller
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
                 'nominal' => $request->b_payment,
-                'description' => 'Penjualan',
+                'description' => 'Penjualan dengan kode ' . $sale->invoice,
                 'source' => 'income'
             ]);
 
@@ -209,7 +209,7 @@ class SaleController extends Controller
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
                 'nominal' => $request->b_payment,
-                'description' => 'Penjualan',
+                'description' => 'Penjualan dengan kode ' . $sale->invoice,
                 'source' => 'income'
             ]);
 

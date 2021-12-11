@@ -254,7 +254,6 @@ class ReportController extends Controller
             'sale' => $a,
             'total' => $b,
             // 'hpp' => $c,
-            'tipe' => $request->type,
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
             'company' => Company_profile::find(1),
@@ -262,5 +261,43 @@ class ReportController extends Controller
 
         $pdf = PDF::loadView('cetak.lap_labakotor', $data)->setPaper('a4', 'potrait');
         return $pdf->stream('PDF-Stock');
+    }
+    public function laba_bersih(Request $request)
+    {
+        $a = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->get();
+        $b = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->sum('sub_total');
+        // $c = collect(DB::select("SELECT * FROM sale_details a, sales b, products c WHERE b.id = c.sale_id AND c.id = a.product_id"));
+
+        // dd($a);
+        $data = [
+            'sale' => $a,
+            'total' => $b,
+            // 'hpp' => $c,
+            'lain' => $request->lain,
+            'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
+            'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
+            'company' => Company_profile::find(1),
+        ];
+
+        $pdf = PDF::loadView('cetak.lap_lababersih', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Stock');
+    }
+
+    public function jurnal_harian(Request $request)
+    {
+        $data = [
+            'cash' => Cash::whereBetween('date', [$request->from, $request->to])->get(),
+            'debit' => Cash::where('source', 'expenditure')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
+            'kredit' => Cash::where('source', 'income')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
+            // 'total' => $b,
+            // 'hpp' => $c,
+            // 'lain' => $request->lain,
+            'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
+            'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
+            'company' => Company_profile::find(1),
+        ];
+
+        $pdf = PDF::loadView('cetak.lap_jurnalharian', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Jurnal-Harian');
     }
 }

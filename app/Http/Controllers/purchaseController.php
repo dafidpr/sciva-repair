@@ -126,7 +126,7 @@ class purchaseController extends Controller
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
                 'nominal' => $request->payment,
-                'description' => 'Pembelian',
+                'description' => 'Pembelian dengan Kode ' . $purchase->invoice,
                 'source' => 'expenditure'
             ]);
 
@@ -183,7 +183,7 @@ class purchaseController extends Controller
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
                 'nominal' => $request->payment,
-                'description' => 'Pembelian',
+                'description' => 'Pembelian dengan Kode ' . $purchase->invoice,
                 'source' => 'expenditure'
             ]);
 

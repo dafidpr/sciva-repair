@@ -224,14 +224,30 @@
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                @can('report-daily-journal')
                                 <li><a href="/admin/lap_jurnalharian">Jurnal harian</a></li>
+                                @endcan
+                                @can('report-sales')
                                 <li><a href="/admin/lap_penjualan">Penjualan</a></li>
+                                @endcan
+                                @can('report-purchases')
                                 <li><a href="/admin/lap_pembelian">Pembelian</a></li>
+                                @endcan
+                                @can('report-opnames')
                                 <li><a href="/admin/lap_stokopname">Stok Opname</a></li>
+                                @endcan
+                                @can('report-stock-in-out')
                                 <li><a href="/admin/lap_stok_in_out">Stok In/Out</a></li>
+                                @endcan
+                                @can('report-chases')
                                 <li><a href="/admin/lap_kas">Kas</a></li>
+                                @endcan
+                                @can('report-debts-receivables')
                                 <li><a href="/admin/lap_hutangpiutang">Hutang Piutang</a></li>
+                                @endcan
+                                @can('report-profit')
                                 <li><a href="/admin/lap_labarugi">Laba Rugi</a></li>
+                                @endcan
                             </ul>
                         </li>
 

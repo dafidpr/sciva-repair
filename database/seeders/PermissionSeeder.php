@@ -84,6 +84,15 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-ppn', 'guard_name' => 'web'],
             // ['name' => 'detail-ppn', 'guard_name' => 'web'],
             ['name' => 'delete-ppn', 'guard_name' => 'web'],
+            //
+            ['name' => 'report-daily-journal', 'guard_name' => 'web'],
+            ['name' => 'report-sales', 'guard_name' => 'web'],
+            ['name' => 'report-purchases', 'guard_name' => 'web'],
+            ['name' => 'report-opnames', 'guard_name' => 'web'],
+            ['name' => 'report-stock-in-out', 'guard_name' => 'web'],
+            ['name' => 'report-chases', 'guard_name' => 'web'],
+            ['name' => 'report-debts-receivables', 'guard_name' => 'web'],
+            ['name' => 'report-profit', 'guard_name' => 'web'],
         ]);
     }
 }
