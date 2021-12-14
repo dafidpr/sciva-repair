@@ -5,6 +5,7 @@ use App\Http\Controllers\CashController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\GrafikController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\purchaseController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\TransactionServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VatController;
@@ -47,6 +49,11 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 
 Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
+
+
+    // Route::get('/ajax/purchase', function () {
+    //     return view('ajax.purchase');
+    // });
     //User Admin
     Route::get('/dashboard', function () {
         return view('dashboard.user');
@@ -171,8 +178,9 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/changepermission/{id}', [RoleController::class, 'changePermission']);
         Route::post('/{id}/input-change-permissions', [RoleController::class, 'inputPermission']);
     });
-    Route::get('/grafik', function () {
-        return view('content.grafik');
+
+    Route::prefix('grafik')->group(function () {
+        Route::get('', [GrafikController::class, 'index']);
     });
 
 
@@ -231,9 +239,10 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/backupdata', function () {
         return view('tools.backupdata');
     });
-    Route::get('/generatebarcode', function () {
-        return view('tools.generatebarcode');
-    });
+
+    Route::get('/generatebarcode', [ToolsController::class, 'index']);
+    Route::post('/generatebarcode/update', [ToolsController::class, 'updateBarcode']);
+
     Route::get('/del_dataservis', function () {
         return view('tools.del_dataservis');
     });

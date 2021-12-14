@@ -112,3 +112,47 @@ function paymentCheck(){
 
     }
 }
+
+    function checkOut(){
+        var tb = document.getElementById('dataProductCheckOut')
+        var customer = document.getElementById('id_customer').value
+
+        if(customer == ''){
+            alert('Customer tidak boleh kosong!!');
+
+        }else{
+            if(customer != ''){
+                tb.innerHTML = ''
+            }
+            if (localStorage.saleData && localStorage.idData) {
+                saleData = JSON.parse(localStorage.getItem('saleData'))
+
+
+                for (let index = 0; index < saleData.length; index++) {
+                    // const element = array[index];
+
+                    tb.innerHTML += `<tr>
+                            <td><input type="hidden" name="id_product[]" value="${saleData[index].id_product}" id="id_product"></td>
+                            <td><input type="hidden" name="price[]" value="${saleData[index].price}" id="price"></td>
+                            <td><input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
+                            <td><input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
+                            <td><input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
+                        </tr>`
+
+                }
+                // changetsubtotal()
+
+            } else {
+                console.log('Data Kosong/Errors')
+            }
+            $('#modalCheckOut').modal('show');
+        }
+
+
+
+    }
+
+    function modalCheckClose(){
+
+        $('#modalCheckOut').modal('hide');
+}

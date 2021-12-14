@@ -72,9 +72,9 @@
                 <h5>Data Barang</h5>
             </div>
             <div class="card-body">
-                <form action="/admin/entry_penjualan/inputSale" method="post">
+                <form action="" method="post">
                     @csrf
-                    <input type="hidden" class="form-control" name="id_customer" id="id_customer" placeholder="" value="" readonly>
+
                 <div class="table-responsive">
                     <table class="table table-striped" name="sale_add_item" id="stocklimit" style="font-size: 13px;">
                         <thead>
@@ -94,54 +94,11 @@
 
                 </div>
                 <hr>
-                <div>
-                    <h4>Check Out</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="">Subtotal</label>
-                            <input type="number" class="form-control" name="b_subtotal" id="b_subtotal" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">Grand Total</label>
-                            <input type="number" class="form-control" name="b_grandtotal" id="b_grandtotal" readonly>
-                        </div>
-                        <div>
-                            <label for="">Diskon</label>
-                            <input type="number" class="form-control" onkeyup="checkOutDis()" value="0" name="b_discount" id="b_discount" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">PPN</label>
-                            <input type="number" class="form-control" value="0"  name="b_vat_tax" id="b_vat_tax" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">PPN ( % )</label>
-                            <input type="number" class="form-control" onkeyup="ppn()" value="0" name="b_p_ppn" id="b_p_ppn">
-                        </div>
-                        <div>
-                            <label>Payment Method</label>
-                            <br>
-                            <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
-                            <input type="radio" name="method" class="meth" value="credit"> <label for="">Credit</label>
-                        </div>
-                        <div id="form_duedate">
-                            <label for="">Jatuh Tempo</label>
-                            <input type="date" class="form-control" name="due_date" id="due_date">
-                        </div>
-                        <div>
-                            <label for="">Bayar</label>
-                            <input type="number" class="form-control" onkeyup="paymentCheck()" required  name="b_payment" id="b_payment">
-                        </div>
-                        <div>
-                            <label for="">Kembalian</label>
-                            <input type="number" class="form-control" name="b_cashback" id="b_cashback" readonly>
-                        </div>
-                    </div>
-                </div>
-                <hr>
+
 
                 <div class="mt-3">
                     <a href="#" onclick="cancelledSale()" class="btn btn-danger"><i class="fa fa-recycle m-right-xs""></i> Cancel</a>
-                    <button type="submit" class="btn btn-primary" onclick="buyProduct()"><i class="fas fa-hand-holding-usd"></i> Payment</button>
+                    <button type="button" class="btn btn-primary" onclick="checkOut()"><i class="fas fa-hand-holding-usd"></i> Payment</button>
                 </div>
             </form>
             </div>
@@ -229,7 +186,7 @@
     </div><!-- /.modal-dialog -->
 </div>
 {{-- End Modal Product --}}
-{{-- Modal Product --}}
+{{-- Modal edit Product --}}
 <div class="modal fade editBarang" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -275,13 +232,96 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-{{-- End Modal Product --}}
+{{-- End Modal edit Product --}}
+
+
+{{-- Modal Check Out --}}
+<div class="modal fade" id="modalCheckOut" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Check Out</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/entry_penjualan/inputSale" method="post">
+                    @csrf
+                    <div>
+
+                        <div>
+                            <table>
+                                <tbody id="dataProductCheckOut"></tbody>
+                            </table>
+
+                        </div>
+                        {{-- <h4>Check Out</h4> --}}
+                        <input type="hidden" class="form-control" name="id_customer" id="id_customer" placeholder="" value="" readonly>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Subtotal</label>
+                            <input type="number" class="form-control" name="b_subtotal" id="b_subtotal" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Grand Total</label>
+                            <input type="number" class="form-control" name="b_grandtotal" id="b_grandtotal" readonly>
+                        </div>
+                        <div>
+                            <label for="">Diskon</label>
+                            <input type="number" class="form-control" onkeyup="checkOutDis()" value="0" name="b_discount" id="b_discount" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">PPN</label>
+                            <input type="number" class="form-control" value="0"  name="b_vat_tax" id="b_vat_tax" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">PPN ( % )</label>
+                            <input type="number" class="form-control" onkeyup="ppn()" value="0" name="b_p_ppn" id="b_p_ppn">
+                        </div>
+                        <div>
+                            <label>Payment Method</label>
+                            <br>
+                            <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
+                            <input type="radio" name="method" class="meth" value="credit"> <label for="">Credit</label>
+                        </div>
+                        <div id="form_duedate">
+                            <label for="">Jatuh Tempo</label>
+                            <input type="date" class="form-control" name="due_date" id="due_date">
+                        </div>
+                        <div>
+                            <label for="">Bayar</label>
+                            <input type="number" class="form-control" onkeyup="paymentCheck()" required  name="b_payment" id="b_payment">
+                        </div>
+                        <div>
+                            <label for="">Kembalian</label>
+                            <input type="number" class="form-control" name="b_cashback" id="b_cashback" readonly>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="Submit" onclick="cancelledSale()" class="btn btn-primary">Payment</button>
+            </div>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal Check Out --}}
+
+
+
+
+
 
 
 <script>
 
 const table = document.querySelector('table')
 var tbody = document.querySelector('tbody')
+var dataCheck = document.getElementById('dataProductCheckOut')
 
 
 if (localStorage.saleData && localStorage.idData) {
@@ -468,8 +508,22 @@ function onDelete(e){
             })
         localStorage.setItem('saleData', JSON.stringify(saleData))
 
-        location.reload()
+        // location.reload()
+        if(name_product != ''){
+            tbody.innerHTML = ''
+        }
+        closeModEdit()
+        re_load()
+
     }
+
+    // function updateInCol(){
+    //     tb.rows[rIndex].cells[0].innerHTML = document.getElementById('name').value;
+    //     tb.rows[rIndex].cells[1].innerHTML = document.getElementById('kelas').value;
+    //     tb.rows[rIndex].cells[1].innerHTML = document.getElementById('kelas').value;
+    //     tb.rows[rIndex].cells[2].innerHTML = document.getElementById('kelas').value;
+    //     tb.rows[rIndex].cells[3].innerHTML = document.getElementById('kelas').value;
+    // }
 
 
     function editQtyBarang(){
@@ -510,11 +564,13 @@ function onDelete(e){
                 <td>${saleData[index].discount}<input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
                 <td>${saleData[index].quantity} <input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
                 <td>${saleData[index].total}<input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
-                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i></a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2"><i class="fas fa-trash-alt"></i></button></td>
+                <td><a href="#" onclick="editSale(${saleData[index].id})" class="btn btn-sm btn-primary mb-2"><i class="fas fa-pencil-alt"></i> </a> <button type="button" onclick="removeSale(${saleData[index].id})" class="btn btn-sm btn-danger mb-2 del_sale_y"><i class="fas fa-trash-alt del_sale_y"></i></button></td>
             </tr>`
 
     }
     changetsubtotal()
+
+
 
 } else {
     console.log('Data Kosong/Errors')
