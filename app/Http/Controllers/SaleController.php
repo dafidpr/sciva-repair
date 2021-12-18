@@ -195,6 +195,7 @@ class SaleController extends Controller
 
             $piutang = [
                 'sale_id' => $sale->id,
+                'service_id' => null,
                 'receivable_date' => date('Y-m-d'),
                 'total' => abs($request->b_cashback),
                 'payment' => 0,

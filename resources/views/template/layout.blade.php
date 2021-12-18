@@ -81,13 +81,13 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">{{Auth::guard('web')->user()->name}}</span>
+                            <span class="d-none d-xl-inline-block ms-1" style="text-transform: capitalize;">{{Auth::guard('web')->user()->name}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             {{-- <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a> --}}
-                            <a class="dropdown-item d-block" href="/admin/admin/ubahpassword"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Ubah Password</a>
+                            <a class="dropdown-item d-block" href="/admin/ubahpassword"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Ubah Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="/logout"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
                         </div>
@@ -119,8 +119,8 @@
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">James Raphael</h5>
-                            <span class="font-size-13 text-white-50">Administrator</span>
+                            <h5 class="mt-3 font-size-16 text-white" style="text-transform: capitalize;">{{Auth::guard('web')->user()->name}}</h5>
+                            <span class="font-size-13 text-white-50" style="text-transform: capitalize;">{{Auth::guard('web')->user()->username}}</span>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                                 @can('report-stock-in-out')
                                 <li><a href="/admin/lap_stok_in_out">Stok In/Out</a></li>
                                 @endcan
-                                @can('report-chases')
+                                @can('report-cash')
                                 <li><a href="/admin/lap_kas">Kas</a></li>
                                 @endcan
                                 @can('report-debts-receivables')
@@ -252,10 +252,12 @@
                         </li>
 
                         <li>
+                            @can('read-grafik')
                             <a href="/admin/grafik" class=" waves-effect">
                                 <i class="far fa-chart-bar"></i>
                                 <span>Grafik</span>
                             </a>
+                            @endcan
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -263,17 +265,27 @@
                                 <span>Tools</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                @can('generate-barcode-tools')
                                 <li><a href="/admin/generatebarcode">Generate Barcode</a></li>
+                                @endcan
+                                @can('backup-tools')
                                 <li><a href="/admin/backupdata">Backup Data</a></li>
+                                @endcan
+                                @can('delete-servis-tools')
                                 <li><a href="/admin/del_dataservis">Hapus Servis</a></li>
+                                @endcan
+                                @can('delete-transaction-tools')
                                 <li><a href="/admin/del_transaksi">Hapus Transaksi</a></li>
+                                @endcan
                             </ul>
                         </li>
                         <li>
+                            @can('commission-users')
                             <a href="/admin/komisi" class=" waves-effect">
                                 <i class="dripicons-flag"></i>
                                 <span>Komisi Karyawan</span>
                             </a>
+                            @endcan
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">

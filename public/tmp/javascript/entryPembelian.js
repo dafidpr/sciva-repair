@@ -282,15 +282,14 @@ function checkOutPurchase(){
             // const element = array[index];
 
             tb.innerHTML += `<tr>
-                    <td>${data_purchase[index].barcode} <input type="hidden" name="i_id_product[]" value="${data_purchase[index].id_product}" class="form-control"></td>
-                    <td>${data_purchase[index].name_product} </td>
-                    <td>${data_purchase[index].purchase_price} <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
-                    <td>${data_purchase[index].sale_price} <input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
-                    <td>${data_purchase[index].quantity_product} <input type="hidden" name="i_quantity[]" value="${data_purchase[index].quantity_product}" class="form-control"></td>
-                    <td>${data_purchase[index].total}
+                    <td><input type="hidden" name="i_id_product[]" value="${data_purchase[index].id_product}" class="form-control"></td>
+                    <td></td>
+                    <td> <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
+                    <td><input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
+                    <td><input type="hidden" name="i_quantity[]" value="${data_purchase[index].quantity_product}" class="form-control"></td>
+                    <td>
                     <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
                     </td>
-                    <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt del_pur_y"></i></button></td>
                 </tr>`
 
         }

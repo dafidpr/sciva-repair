@@ -48,7 +48,7 @@ function restoreallid(e) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus!'
+        confirmButtonText: 'Ya, Restore!'
     }).then((result) => {
         if (result.isConfirmed) {
             window.location = "/admin/servis/restoreall/" + e,
@@ -69,7 +69,7 @@ function restoreall() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus!'
+        confirmButtonText: 'Ya, Restore!'
     }).then((result) => {
         if (result.isConfirmed) {
             window.location = "/admin/servis/restoreall/",
@@ -149,6 +149,7 @@ function takeUnit(a, b) {
         success: function (data) {
             var obj = JSON.parse(data);
             $('#t_transaction_code').val(obj.transaction_code);
+            $('#t_sv').val(obj.id);
             $('#t_customer').val(a);
             $('#t_unit').val(obj.unit);
             $('#t_serial_number').val(obj.serial_number);

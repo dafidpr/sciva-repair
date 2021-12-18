@@ -552,6 +552,7 @@
                     <div>
                         <label for="">No Nota</label>
                         <input type="text" class="form-control" name="transaction_code" id="t_transaction_code" readonly>
+                        <input type="text" class="form-control" name="id_sv" id="t_sv" readonly>
                     </div>
                     <div>
                         <label for="">Pelanggan</label>
@@ -570,8 +571,18 @@
                         <input type="number" class="form-control" name="total" id="t_total" readonly>
                     </div>
                     <div>
+                        <label>Payment Method</label>
+                        <br>
+                        <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
+                        <input type="radio" name="method" class="meth" value="credit"> <label for="">Credit</label>
+                    </div>
+                    <div id="form_duedate">
+                        <label for="">Jatuh Tempo</label>
+                        <input type="date" class="form-control" name="due_date" id="due_date">
+                    </div>
+                    <div>
                         <label for="">Bayar</label>
-                        <input type="number" onkeyup="es_cashback()" class="form-control" name="payment" id="t_payment">
+                        <input type="number" onkeyup="es_cashback()" class="form-control" name="payment" id="t_payment" required>
                     </div>
                     <div>
                         <label for="">Kembalian</label>

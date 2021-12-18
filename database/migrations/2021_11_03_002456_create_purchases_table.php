@@ -24,6 +24,7 @@ class CreatePurchasesTable extends Migration
             $table->decimal('payment', 10, 2);
             $table->decimal('cashback', 10, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

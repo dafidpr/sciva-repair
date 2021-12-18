@@ -26,6 +26,7 @@ class CreateSalesTable extends Migration
             $table->decimal('discount', 10, 2)->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

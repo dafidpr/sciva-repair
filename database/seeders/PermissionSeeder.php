@@ -90,9 +90,17 @@ class PermissionSeeder extends Seeder
             ['name' => 'report-purchases', 'guard_name' => 'web'],
             ['name' => 'report-opnames', 'guard_name' => 'web'],
             ['name' => 'report-stock-in-out', 'guard_name' => 'web'],
-            ['name' => 'report-chases', 'guard_name' => 'web'],
+            ['name' => 'report-cash', 'guard_name' => 'web'],
             ['name' => 'report-debts-receivables', 'guard_name' => 'web'],
             ['name' => 'report-profit', 'guard_name' => 'web'],
+            //
+            ['name' => 'read-grafik', 'guard_name' => 'web'],
+            ['name' => 'commission-users', 'guard_name' => 'web'],
+            //
+            ['name' => 'generate-barcode-tools', 'guard_name' => 'web'],
+            ['name' => 'backup-tools', 'guard_name' => 'web'],
+            ['name' => 'delete-servis-tools', 'guard_name' => 'web'],
+            ['name' => 'delete-transaction-tools', 'guard_name' => 'web'],
         ]);
     }
 }

@@ -1,9 +1,14 @@
 @extends('template.layout')
-@section('title', 'Piutang')
+@section('title', 'Restore Piutang')
 @section('content')
 
 <div class="card">
     <div class="card-body">
+        <div>
+            <a href="#" onclick="receivablerestoreall()" class="btn btn-sm btn-primary"><i class="fas fa-undo-alt"></i> Restore all</a>
+            <a href="#" onclick="receivabledeletepermanent()" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete permanent all</a>
+            <a href="/admin/del_transaksi" class="btn btn-sm btn-secondary"><i class="fas fa-undo-alt"></i> Back</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped" style="font-size: 13px;" id="stoklimit">
                 <thead>
@@ -44,15 +49,8 @@
                             @endif
                         </td>
                         <td>
-                            @if ($item->status == 'paid off')
-                            @can('payment-receivable')
-                            <a href="/admin/piutang/{{$item->id}}/detail_receivable" class="btn btn-sm btn-primary"><i class="dripicons-preview"></i></a>
-                            @endcan
-                            @else
-                            @can('detail-receivable')
-                            <a href="/admin/piutang/{{$item->id}}/pay_receivable" class="btn btn-sm btn-success"><i class="fas fa-money-bill-wave"></i></a>
-                            @endcan
-                            @endif
+                            <a href="#" onclick="receivableforceDelete({{$item->id}})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                            <a href="#" onclick="receivablerestoreallid({{$item->id}})" class="btn btn-sm btn-primary"><i class="fas fa-undo-alt"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -62,4 +60,8 @@
     </div>
 </div>
 
+
+{{-- Sweetalert --}}
+<script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{asset('tmp/javascript/restorepiutang.js')}}"></script>
 @endsection

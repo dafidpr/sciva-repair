@@ -2,36 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company_profile;
+use App\Models\Transaction_service;
 use App\Models\User;
-use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 
-class AuthController extends Controller
+class KomisiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-
-        if (Auth::guard('customer')->attempt(['telephone' => $request->username, 'password' => $request->password])) {
-
-            return redirect('/pelanggan/dashboardpelanggan')->with('berhasil', 'Anda telah berhasil Login!!');
-        } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
-
-            User::where('username', $request->username)->update([
-                'login_at' => date('Y-m-d H:i:s')
-            ]);
-
-            return redirect('/admin/dashboard')->with('berhasil', 'Anda telah berhasil Login!!');
-        } else {
-
-            return redirect('login')->with('gagal', 'Username/Telephone atau password yang anda masukan salah!!')->withInput($request->all());
-        }
+        $data = [
+            'user' => User::where('username', '!=', 'root')->get()
+        ];
+        return view('content.komisikaryawan', $data);
     }
 
     /**
@@ -39,20 +29,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function create()
     {
         //
-        if (Auth::guard('web')->check()) {
-
-            Auth::guard('web')->logout();
-
-            return redirect('/login')->with('berhasil', 'Anda telah Logout!!');
-        } elseif (Auth::guard('customer')->check()) {
-
-            Auth::guard('customer')->logout();
-
-            return redirect('/login')->with('berhasil', 'Anda telah Logout!!');
-        }
     }
 
     /**
@@ -64,6 +43,16 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         //
+        $data = [
+            'user' => Transaction_service::where('user_id', $request->user)->whereBetween('service_date', [$request->from, $request->to])->get(),
+            'total' => Transaction_service::where('user_id', $request->user)->whereBetween('service_date', [$request->from, $request->to])->sum('total'),
+            'company' => Company_profile::find(1),
+            'datefrom' => $request->from,
+            'dateto' => $request->to,
+        ];
+
+        $pdf = PDF::loadView('cetak.lap_komisi', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Stock');
     }
 
     /**

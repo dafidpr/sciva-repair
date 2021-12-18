@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Receivable;
 use App\Models\Repaire_service;
 use App\Models\Transaction_service;
 use App\Models\Transaction_service_detail;
@@ -69,6 +70,12 @@ class TransactionServiceController extends Controller
     {
         //
         $data = Transaction_service::find($id);
+        return json_encode($data);
+    }
+    public function json_service2($id)
+    {
+        //
+        $data = Transaction_service::where('transaction_code', $id)->first();
         return json_encode($data);
     }
 
@@ -193,6 +200,19 @@ class TransactionServiceController extends Controller
             'cashback' => $request->cashback,
             'status' => 'take'
         ]);
+
+        if ($request->method == 'credit') {
+            Receivable::create([
+                'sale_id' => null,
+                'service_id' => $request->id_sv,
+                'receivable_date' => date('Y-m-d'),
+                'total' => abs($request->cashback),
+                'payment' => 0,
+                'remainder' => abs($request->cashback),
+                'due_date' => $request->due_date,
+                'status' => 'not yet paid'
+            ]);
+        }
 
         return redirect('/admin/servis')->with('berhasil', 'Unit Telah berhasil diambil!!');
     }

@@ -31,7 +31,7 @@
                                 <i class="fas fa-hammer text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">58</h5>
+                    <h5 class="font-size-22">{{$servisMasuk->total()}}</h5>
 
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                 <i class="fas fa-check text-success font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">58</h5>
+                    <h5 class="font-size-22">{{$servisSelesai->total()}}</h5>
 
                 </div>
             </div>
@@ -65,7 +65,7 @@
                                 <i class="fas fa-users text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">58</h5>
+                    <h5 class="font-size-22">{{$waitingSparepart->total()}}</h5>
 
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                 <i class="far fa-times-circle text-danger font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">10</h5>
+                    <h5 class="font-size-22">{{$servisBatal->total()}}</h5>
 
                 </div>
             </div>
@@ -133,24 +133,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($product as $item)
+                                @if ($item->stock <= $item->limit)
                                 <tr>
-                                    <td>0001</td>
-                                    <td>Battery Smartphone</td>
-                                    <td><button class="btn btn-sm btn-danger">4</button></td>
-                                    <td><button class="btn btn-sm btn-danger">4</button></td>
+                                    <td>{{$item->barcode}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td><button class="btn btn-sm btn-danger">{{$item->limit}}</button></td>
+                                    <td>
+                                        @if ($item->stock <= $item->limit)
+                                        <button class="btn btn-sm btn-danger">{{$item->stock}}</button>
+                                        @else
+                                        <button class="btn btn-sm btn-success">{{$item->stock}}</button>
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>0002</td>
-                                    <td>Charger</td>
-                                    <td><button class="btn btn-sm btn-danger">5</button></td>
-                                    <td><button class="btn btn-sm btn-danger">5</button></td>
-                                </tr>
-                                <tr>
-                                    <td>0003</td>
-                                    <td>Headset</td>
-                                    <td><button class="btn btn-sm btn-danger">2</button></td>
-                                    <td><button class="btn btn-sm btn-danger">2</button></td>
-                                </tr>
+                                @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -185,12 +183,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($receivable as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Siti</td>
-                                    <td>Rp.10000</td>
-                                    <td><a href="" class="btn btn-sm btn-success"><i class="fas fa-hand-holding-usd"></i> Payment</a></td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$item->_sale->_customer->name}}</td>
+                                    <td>Rp. {{number_format($item->total)}}</td>
+                                    <td>
+                                        @can('detail-receivable')
+                                        <a href="/admin/piutang/{{$item->id}}/pay_receivable" class="btn btn-sm btn-success"><i class="fas fa-hand-holding-usd"></i> Payment</a>
+                                        @endcan
+                                    </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -222,11 +226,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($csbest as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Fikri Hasan</td>
-                                    <td>5</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->total}}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -257,47 +263,33 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <table class="table table-bordered" style="font-size: 13px;">
+                        @foreach ($historysale as $item)
+
                         <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                            <td><p class="mb-3"><b>{{$item->invoice}}</b> Oleh <b>{{$item->_user->name}}</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
                         </tr>
-                        <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
-                        </tr>
+                        @endforeach
                     </table>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <table class="table table-bordered" style="font-size: 13px;">
+                        @foreach ($historyservis as $item)
                         <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
+                            <td><p class="mb-3"> Servis Masuk dengan Kode <b>{{$item->transaction_code}}</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
                         </tr>
-                        <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="mb-3"><b>00001</b> Oleh <b>Admin</b> pada tanggal: <b>19-09-2020</b></p></td>
-                        </tr>
+                        @endforeach
+
                     </table>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <table class="table table-bordered" style="font-size: 13px;">
+                        @foreach ($historylogin as $item)
                         <tr>
                             <td>
-                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
+                                <p class="mb-3"><b>{{$item->username}}</b> telah Login pada tanggal: <b>{{$item->login_at}}</b></p>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="mb-3"><b>00001</b> telah Login pada tanggal: <b>19-09-2020</b></p>
-                            </td>
-                        </tr>
+                        @endforeach
                     </table>
                 </div>
               </div>
@@ -305,4 +297,19 @@
     </div>
 </div>
 
+
+
+<script>
+    const name = [
+                    @foreach ($terlaris as $item)
+                    <?= "'".$item->name."'"?>,
+                    @endforeach
+                    ];
+
+    var total = [
+                    @foreach ($terlaris as $item)
+                    <?= "'".$item->total."'"?>,
+                    @endforeach
+                    ];
+</script>
 @endsection
