@@ -5,10 +5,8 @@
 <div class="row">
     <div class="col-md-7">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Format SMS</h4>
-            </div>
             <div class="card-body">
+                <h4>Format SMS</h4>
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">

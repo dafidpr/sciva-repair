@@ -13,12 +13,15 @@
     <!-- plugin css -->
     <link href="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
 
-    <!-- Bootstrap Css -->
-    <link href="{{asset('tmp/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <div id="dark">
+        <!-- Bootstrap Css -->
+        <link href="{{asset('tmp/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css">
+        <!-- App Css-->
+        <link href="{{asset('tmp/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css">
+
+    </div>
     <!-- Icons Css -->
     <link href="{{asset('tmp/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="{{asset('tmp/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css">
 
             <!-- DataTables -->
             <link href="{{asset('tmp/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
@@ -73,7 +76,7 @@
 
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="Header Avatar">
+                            <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/img.jpg')}}" alt="Header Avatar">
                             <span class="d-none d-xl-inline-block ms-1">{{Auth::guard('customer')->user()->name}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
@@ -83,6 +86,13 @@
                             <a class="dropdown-item d-block" href="/pelanggan/ubahpassword"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Ubah Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="/logout"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                        </div>
+
+                        <div class="dropdown d-inline-block" id="btn-dark-mode">
+                            {{-- <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                                <i class="mdi mdi-cog-outline font-size-20"></i>
+                            </button> --}}
+                            <button class="btn btn-sm-success" onclick="dark_mode(true)"><i class="fas fa-moon"></i></button>
                         </div>
 
                     </div>
@@ -108,12 +118,12 @@
                 <div class="user-sidebar text-center">
                     <div class="dropdown">
                         <div class="user-img">
-                            <img src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="" class="rounded-circle">
+                            <img src="{{asset('tmp/assets/images/users/img.jpg')}}" alt="" class="rounded-circle">
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">James Raphael</h5>
-                            <span class="font-size-13 text-white-50">Administrator</span>
+                            <h5 class="mt-3 font-size-16 text-white">{{Auth::guard('customer')->user()->name}}</h5>
+                            <span class="font-size-13 text-white-50">Pelanggan</span>
                         </div>
                     </div>
                 </div>
@@ -239,6 +249,7 @@
     <script src="{{asset('tmp/assets/libs/chart.js/Chart.min.js')}}"></script>
 
     <script src="{{asset('tmp/chart/dashboard_admin.js')}}"></script>
+    <script src="{{asset('tmp/javascript/dark.js')}}"></script>
 
 
 

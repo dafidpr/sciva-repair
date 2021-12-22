@@ -22,10 +22,8 @@
 <div class="row">
     <div class="col-md-5">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Footer Nota Penjualan</h4>
-            </div>
             <div class="card-body">
+                <h4>Footer Nota Penjualan</h4>
                 <form action="/admin/footer_nota/updateNotaSale" method="post">
                     @csrf
                     <textarea name="value" class="form-control" id="" cols="20" rows="6" required>{{$footer_sale->value}}</textarea>
@@ -36,10 +34,8 @@
     </div>
     <div class="col-md-5">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Footer Nota Servis</h4>
-            </div>
             <div class="card-body">
+                <h4>Footer Nota Servis</h4>
                 <form action="/admin/footer_nota/updateNotaServis" method="post">
                     @csrf
                     <textarea name="value" class="form-control" id="" cols="20" rows="6">{{$footer_servis->value}}</textarea>
@@ -50,10 +46,8 @@
     </div>
     <div class="col-md-5">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Footer Nota Servis Diambil</h4>
-            </div>
             <div class="card-body">
+                <h4>Footer Nota Servis Diambil</h4>
                 <form action="/admin/footer_nota/updateNotaServisTake" method="post">
                     @csrf
                     <textarea name="value" class="form-control" id="" cols="20" rows="6">{{$footer_servis_take->value}}</textarea>

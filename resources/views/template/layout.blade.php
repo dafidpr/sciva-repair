@@ -15,12 +15,15 @@
     <!-- plugin css -->
     <link href="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
 
-    <!-- Bootstrap Css -->
-    <link href="{{asset('tmp/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <div id="dark">
+
+        <!-- Bootstrap Css -->
+        <link href="{{asset('tmp/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css">
+        <!-- App Css-->
+        <link href="{{asset('tmp/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css">
+    </div>
     <!-- Icons Css -->
     <link href="{{asset('tmp/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="{{asset('tmp/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css">
 
     {{-- sweet alert --}}
     <link href="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
@@ -52,19 +55,19 @@
                  <div class="navbar-brand-box">
                     <a href="" class="logo logo-dark mt-4">
                         <span class="logo-sm">
-                            <img src="{{asset('tmp/assets/images/logo-sm.png')}}" alt="" height="22">
+                            <h4>SCIVA</h4>
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset('tmp/assets/images/logo-dark.png')}}" alt="" height="20">
+                            <H4>SCIVA REPAIRE</H4>
                         </span>
                     </a>
 
-                    <a href="" class="logo logo-light">
+                    <a href="" class="logo logo-light mt-4">
                         <span class="logo-sm">
-                            <img src="{{asset('tmp/assets/images/logo-sm.png')}}" alt="" height="22">
+                            <h4>SCIVA</h4>
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset('tmp/assets/images/logo-light.png')}}" alt="" height="20">
+                            <h4>SCIVA REPAIRE</h4>
                         </span>
                     </a>
                 </div>
@@ -80,7 +83,7 @@
 
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="Header Avatar">
+                            <img class="rounded-circle header-profile-user" src="{{asset('tmp/assets/images/users/img.jpg')}}" alt="Header Avatar">
                             <span class="d-none d-xl-inline-block ms-1" style="text-transform: capitalize;">{{Auth::guard('web')->user()->name}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
@@ -92,10 +95,11 @@
                             <a class="dropdown-item text-danger" href="/logout"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                        <div class="dropdown d-inline-block" id="btn-dark-mode">
+                            {{-- <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                                 <i class="mdi mdi-cog-outline font-size-20"></i>
-                            </button>
+                            </button> --}}
+                            <button class="btn btn-sm-success" onclick="dark_mode(true)"><i class="fas fa-moon"></i></button>
                         </div>
 
                     </div>
@@ -121,7 +125,7 @@
                 <div class="user-sidebar text-center">
                     <div class="dropdown">
                         <div class="user-img">
-                            <img src="{{asset('tmp/assets/images/users/avatar-7.jpg')}}" alt="" class="rounded-circle">
+                            <img src="{{asset('tmp/assets/images/users/img.jpg')}}" alt="" class="rounded-circle">
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
@@ -435,6 +439,7 @@
 
     <script src="{{asset('tmp/javascript/service.js')}}"></script>
     <script src="{{asset('tmp/javascript/entryPenjualan.js')}}"></script>
+    <script src="{{asset('tmp/javascript/dark.js')}}"></script>
         <!-- init js -->
         {{-- <script src="{{asset('tmp/assets/js/pages/ecommerce-add-product.init.js')}}"></script> --}}
     {{-- //service --}}

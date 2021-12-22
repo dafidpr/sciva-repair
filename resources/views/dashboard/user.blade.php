@@ -95,14 +95,8 @@
 <div class="row">
     <div class="col-xl-7">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4 class="header-title mb-4 float-sm-start">Grafik Barang terlaris</h4>
-
-                <div class="float-sm-end">
-
-                </div>
-            </div>
             <div class="card-body">
+                <h4 class="header-title mb-4">Grafik Barang terlaris</h4>
 
                 <div class="clearfix" style="width: 100%;">
                     <div class="table-responsive mb-0 fixed-solution">
@@ -115,15 +109,13 @@
         </div>
 
         <div class="card">
-            <div class="card-header bg-white">
-                <h4 class="header-title mb-4 float-sm-start mb-4">Barang stock limit</h4>
-            </div>
             <div class="card-body">
+                <h4 class="header-title mb-4">Barang stock limit</h4>
 
 
                 <div class="clearfix">
                     <div class="table-responsive mb-0 fixed-solution">
-                        <table class="table table-striped" id='stoklimit' widht='60%' style="font-size: 14px;">
+                        <table class="table table-striped" id='stoklimit' width='100%' style="font-size: 14px;">
                             <thead>
                                 <tr>
                                     <th>Kode Barang</th>
@@ -160,20 +152,14 @@
     </div>
     <div class="col-xl-5">
         <div class="card">
-            <div class="card-header bg-white">
 
-                <h4 class="header-title mb-4 float-sm-start">Piutang Pelanggan</h4>
-
-                <div class="float-sm-end">
-
-                </div>
-            </div>
             <div class="card-body">
+                <h4 class="header-title mb-4 ">Piutang Pelanggan</h4>
 
 
                 <div class="clearfix">
                     <div class="table-responsive">
-                        <table class="table table-striped" id="piutang" style="font-size: 14px;">
+                        <table class="table table-striped" id="piutang" style="font-size: 14px; width: 100%;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -211,19 +197,11 @@
         </div>
         <div class="card">
 
-                <div class="card-header bg-white">
-
-                    <h4 class="header-title mb-4 float-sm-start mb-4">Pelanggan terbaik</h4>
-
-                    <div class="float-sm-end">
-
-                    </div>
-                </div>
-
 
                 <div class="card-body">
+                    <h4 class="header-title mb-4">Pelanggan terbaik</h4>
                     <div class="table-responsive">
-                        <table class="table table-striped" id="bestpelanggan" style="font-size: 14px;">
+                        <table class="table table-striped" id="bestpelanggan" width="100%" style="font-size: 14px;">
                             <thead>
                                 <tr>
                                     <th>No</th>

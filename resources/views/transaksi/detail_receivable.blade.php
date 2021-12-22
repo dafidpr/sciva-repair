@@ -2,12 +2,15 @@
 @section('title', 'Piutang')
 @section('content')
 <div class="card">
-    <div class="card-header bg-white">
-        <div class="float-sm-end">
-            <a href="/admin/piutang" class="btn btn-sm btn-secondary"><i class="fa fa-recycle m-right-xs"></i> Back</a>
-        </div>
-    </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="float-sm-end">
+                    <a href="/admin/piutang" class="btn btn-sm btn-secondary"><i class="fa fa-recycle m-right-xs"></i> Back</a>
+                </div>
+            </div>
+        </div><hr>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%">
                 <thead>

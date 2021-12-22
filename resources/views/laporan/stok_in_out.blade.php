@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Laporan Stok In/Out</h5></div>
             <div class="card-body">
+                <h5>Laporan Stok In/Out</h5>
                 <form action="/admin/lap_stok_in_out/print_report" method="post">
                     @csrf
                 <div class="row">

@@ -97,10 +97,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Data Servis</h4>
-            </div>
             <div class="card-body">
+                <h4>Data Servis</h4><hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="piutang" style="font-size: 13px;">
                         <thead>
@@ -150,10 +148,8 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Data Hutang</h4>
-            </div>
             <div class="card-body">
+                <h4>Data Hutang</h4><hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
                         <thead>

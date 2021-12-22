@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped" style="font-size: 13px;" id="stoklimit">
+            <table class="table table-striped" width="100%" style="font-size: 13px;" id="stoklimit">
                 <thead>
                     <tr>
                         <th>Kode Beli</th>

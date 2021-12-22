@@ -3,13 +3,9 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
-        <h3 class=" mb-4 float-sm-start">Servis</h3>
+    {{-- <div class="card-header bg-white"> --}}
 
-        <div class="float-sm-end">
-            <a href="/admin/servis/restore" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
-            {{-- modal --}}
+
 {{-- Create Modals --}}
 <td>
     <!-- Small modal -->
@@ -192,9 +188,20 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 {{-- end-modal --}}
-        </div>
-    </div>
+    {{-- </div> --}}
     <div class="card-body" style="font-size: 13px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class=" mb-4 float-sm-start">Servis</h3>
+            </div>
+            <div class="col-md-6">
+                <div class="float-sm-end">
+                    <a href="/admin/servis/restore" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
+                    {{-- modal --}}
+                </div>
+            </div>
+        </div>
 
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">

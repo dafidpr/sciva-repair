@@ -2,12 +2,9 @@
 @section('title', 'Pembelian')
 @section('content')
     <div class="card">
-        <div class="card-header bg-white">
-
-        </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" widht="80%" id="stoklimit" style="font-size: 13px;">
+                <table class="table table-striped" width="100%" id="stoklimit" style="font-size: 13px;">
                     <thead>
                         <tr>
                             <th>Kode</th>

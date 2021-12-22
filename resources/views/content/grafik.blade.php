@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-sm-9">
         <div class="card">
-            <div class="card-header bg-white">
-                <h6>Grafik 10 barang terlaris</h6>
-            </div>
+            {{-- <div class="card-header bg-white">
+            </div> --}}
             <div class="card-body">
+                <h6>Grafik 10 barang terlaris</h6>
                 <div width='300px'>
                     <canvas id="G_barang_laris"></canvas>
                 </div>
@@ -17,10 +17,10 @@
     </div>
     <div class="col-sm-9">
         <div class="card">
-            <div class="card-header bg-white">
-                <h6>Grafik Laba Rugi</h6>
-            </div>
+            {{-- <div class="card-header bg-white">
+            </div> --}}
             <div class="card-body">
+                <h6>Grafik Laba Rugi</h6>
                 <div width='300px'>
                     <canvas id="grafik_laba"></canvas>
                 </div>

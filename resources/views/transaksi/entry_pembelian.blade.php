@@ -3,12 +3,15 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
-        <div class="float-sm-end">
-            <h6>Invoice <b>{{$id}}</b></h6>
-        </div>
-    </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="float-sm-end">
+                    <h6>Invoice <b>{{$id}}</b></h6>
+                </div>
+            </div>
+        </div>
     <h1 class="float-sm-start" >Total (RP.)</h1>
 
     <div class="float-sm-end">
@@ -66,10 +69,9 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header bg-white">
-                        <h5>Data Barang</h5>
-                    </div>
                     <div class="card-body">
+                        <h5>Data Barang</h5>
+                        <hr>
                         @if (session('berhasil'))
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">

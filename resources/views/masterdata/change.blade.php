@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
+    {{-- <div class="card-header bg-white"> --}}
+        {{-- </div> --}}
+        <div class="card-body">
         <h4><li class="fas fa-align-left"></li> Role : {{$role->name}}</h4>
-    </div>
-    <div class="card-body">
         <div class="text-center">
             <input type="checkbox" onchange="checkAll(this)" name="permissionAll[]">
             <label for="">pilih semua</label>

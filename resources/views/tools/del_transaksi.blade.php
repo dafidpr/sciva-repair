@@ -23,13 +23,17 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h5 class="float-sm-start">Data Penjualan</h5>
-                <div class="float-sm-end">
-                    <a href="/admin/restore/getRestoreSale" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
-                </div>
-            </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="float-sm-start">Data Penjualan</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-sm-end">
+                            <a href="/admin/restore/getRestoreSale" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
+                        </div>
+                    </div>
+                </div>
                 <form action="/admin/del_transaksi/deleteSale" method="post">
                     @csrf
                     <div class="row">
@@ -55,13 +59,17 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h5 class="float-sm-start">Data Pembelian</h5>
-                <div class="float-sm-end">
-                    <a href="/admin/restore/getRestorePurchase" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
-                </div>
-            </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="float-sm-start">Data Pembelian</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-sm-end">
+                            <a href="/admin/restore/getRestorePurchase" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
+                        </div>
+                    </div>
+                </div>
                 <form action="/admin/del_transaksi/deletePurchase" method="post">
                     @csrf
                     <div class="row">
@@ -87,13 +95,16 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h5 class="float-sm-start">Data Hutang Lunas</h5>
-                <div class="float-sm-end">
-                    <a href="/admin/restore/getRestoreDebt" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
-                </div>
-            </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="float-sm-start">Data Hutang Lunas</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-sm-end">
+                        <a href="/admin/restore/getRestoreDebt" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a></div>
+                    </div>
+                </div>
                 <form action="/admin/del_transaksi/deleteDebt" method="post">
                     @csrf
                     <div class="row">
@@ -119,13 +130,17 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h5 class="float-sm-start">Data Piutang Lunas</h5>
-                <div class="float-sm-end">
-                    <a href="/admin/restore/getRestoreReceivable" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
-                </div>
-            </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="float-sm-start">Data Piutang Lunas</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-sm-end">
+                            <a href="/admin/restore/getRestoreReceivable" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
+                        </div>
+                    </div>
+                </div>
                 <form action="/admin/del_transaksi/deleteReceivable" method="post">
                     @csrf
                     <div class="row">
