@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cash;
 use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Receivable;
 use App\Models\Repaire_service;
+use App\Models\Setting;
 use App\Models\Transaction_service;
 use App\Models\Transaction_service_detail;
 use App\Models\User;
@@ -35,7 +37,16 @@ class TransactionServiceController extends Controller
             "user" => User::where('username', '!=', 'root')->get(),
             'nota' => $no_nota,
             'product' => Product::all(),
-            'repaire' => Repaire_service::all()
+            'repaire' => Repaire_service::all(),
+            'wa' => Setting::where('options', 'format_wa')->first(),
+            'sms' => Setting::where('options', 'format_sms')->first(),
+            'time' => 'all',
+            'all_status' => 'all_status',
+            'proses' => false,
+            'waiting_sparepart' => false,
+            'finished' => false,
+            'cancelled' => false,
+            'take' => false,
         ];
         return view('content.servis', $data);
     }
@@ -89,9 +100,9 @@ class TransactionServiceController extends Controller
     {
         //
 
-        Transaction_service::create([
+        $service = Transaction_service::create([
             'customer_id' => $request->id_customer,
-            'user_id' => null,
+            'user_id' => Auth::guard('web')->user()->id,
             'transaction_code' => $request->transaction_code,
             'unit' => $request->unit,
             'serial_number' => $request->serial_number,
@@ -108,8 +119,13 @@ class TransactionServiceController extends Controller
             'status' => $request->status,
             'technician' => null
         ]);
+        $company = Company_profile::find(1);
+        $footer = Setting::where('options', 'footer_nota_servis')->first();
 
-        return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
+        $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
+        return $pdf->stream('Struk_service');
+
+        // return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
     }
 
     public function create_customer(Request $request)
@@ -127,21 +143,53 @@ class TransactionServiceController extends Controller
 
     public function serviceSelesai(request $request)
     {
+        $rules = [
+            'sub_total' => 'required'
+        ];
+        $messages = [
+            'sub_total.required' => 'Data Kosong!!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('gagal', 'Proses Input yang anda lakukan gagal, mohon untuk cek data kembali!!');
+        }
 
         $data = $request->all();
 
-        if (count($data['sparepart']) > 0) {
-            foreach ($data['sparepart'] as $key => $i) {
-                $product = $data['sparepart'][$key];
+        //input sparepart
+        if (count($data['input_product_id']) > 0) {
+            foreach ($data['input_product_id'] as $key => $i) {
+                $product = $data['input_product_id'][$key];
 
                 // dd($product);
                 Transaction_service_detail::create([
                     'transaction_id' => $request->transaction_id,
-                    'repaire_id' => $request->jasa[$key],
-                    'sparepart_id' => $request->sparepart[$key],
-                    'total' => $request->total,
-                    'discount' => $request->discount,
-                    'sub_total' => $request->sub_total,
+                    'repaire_id' => null,
+                    'sparepart_id' => $request->input_product_id[$key],
+                    'total' => $request->input_product_total[$key],
+                    'qty' => $request->input_product_qty[$key],
+                    'discount' => $request->input_product_dis[$key],
+                    'sub_total' => $request->input_product_subtot[$key],
+                ]);
+            }
+        }
+
+        //input Jasa
+        if (count($data['input_product_id']) > 0) {
+            foreach ($data['input_product_id'] as $key => $i) {
+                $product = $data['input_product_id'][$key];
+
+                // dd($product);
+                Transaction_service_detail::create([
+                    'transaction_id' => $request->transaction_id,
+                    'repaire_id' => $request->input_jasa_id[$key],
+                    'sparepart_id' => null,
+                    'total' => $request->input_jasa_price[$key],
+                    'qty' => 1,
+                    'discount' => null,
+                    'sub_total' => $request->input_jasa_price[$key],
                 ]);
             }
         }
@@ -153,7 +201,8 @@ class TransactionServiceController extends Controller
 
         Transaction_service::where('id', $request->transaction_id)->update([
             'user_id' => Auth::guard('web')->user()->id,
-            'total' => $request->total,
+            'discount' => $request->total_discount,
+            'total' => $request->sub_total,
             'status' => 'finished',
             'technician' => $request->technician
         ]);
@@ -194,11 +243,21 @@ class TransactionServiceController extends Controller
 
     public function takeUnit(Request $request)
     {
-        Transaction_service::where('transaction_code', $request->transaction_code)->update([
+        $ser = Transaction_service::where('transaction_code', $request->transaction_code)->update([
             'pickup_date' => date('Y-m-d'),
+            'payment_method' => $request->method,
             'payment' => $request->payment,
-            'cashback' => $request->cashback,
+            'cashback' => abs($request->cashback),
             'status' => 'take'
+        ]);
+        $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
+        Cash::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'cash_code' => $cash_id,
+            'date' => date('Y-m-d'),
+            'nominal' => $request->payment,
+            'description' => 'Unit Servis ' . $request->transaction_code . " telah diambil!!",
+            'source' => 'income'
         ]);
 
         if ($request->method == 'credit') {
@@ -278,9 +337,20 @@ class TransactionServiceController extends Controller
 
     public function batalServis($id)
     {
+        $ser = Transaction_service::where('id', $id)->first();
+
         Transaction_service::where('id', $id)->update([
             'user_id' => Auth::guard('web')->user()->id,
             'status' => 'cancelled'
+        ]);
+        $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
+        Cash::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'cash_code' => $cash_id,
+            'date' => date('Y-m-d'),
+            'nominal' => 0,
+            'description' => 'Servis ' . $ser->transaction_code . " telah dibatalkan!!",
+            'source' => 'expenditure'
         ]);
 
         return redirect('/admin/servis')->with('error', 'Anda telah membatalkan Service!!');
@@ -300,9 +370,19 @@ class TransactionServiceController extends Controller
                 $data = [
                     'service' => Transaction_service::where('status', $request->proses)->orWhere('status', $request->waiting_sparepart)->orWhere('status', $request->finished)->orWhere('status', $request->cancelled)->orWhere('status', $request->take)->get(),
                     "customer" => Customer::all(),
+                    "user" => User::where('username', '!=', 'root')->get(),
                     'nota' => $no_nota,
                     'product' => Product::all(),
-                    'repaire' => Repaire_service::all()
+                    'repaire' => Repaire_service::all(),
+                    'wa' => Setting::where('options', 'format_wa')->first(),
+                    'sms' => Setting::where('options', 'format_sms')->first(),
+                    'time' => $request->time,
+                    'all_status' => 'kk',
+                    'proses' => $request->proses,
+                    'waiting_sparepart' => $request->waiting_sparepart,
+                    'finished' => $request->finished,
+                    'cancelled' => $request->cancelled,
+                    'take' => $request->take,
                 ];
                 return view('content.servis', $data);
             }
@@ -310,25 +390,87 @@ class TransactionServiceController extends Controller
             if ($request->all_status !== null) {
 
                 $data = [
-                    'service' => Transaction_service::where('service_date', date('Y-m-d'))->get(),
+                    'service' => Transaction_service::whereBetween('service_date', [date('Y-m-d'), date('Y-m-d')])->get(),
                     "customer" => Customer::all(),
+                    "user" => User::where('username', '!=', 'root')->get(),
                     'nota' => $no_nota,
                     'product' => Product::all(),
-                    'repaire' => Repaire_service::all()
+                    'repaire' => Repaire_service::all(),
+                    'wa' => Setting::where('options', 'format_wa')->first(),
+                    'sms' => Setting::where('options', 'format_sms')->first(),
+                    'time' => $request->time,
+                    'all_status' => 'all_status',
+                    'proses' => $request->proses,
+                    'waiting_sparepart' => $request->waiting_sparepart,
+                    'finished' => $request->finished,
+                    'cancelled' => $request->cancelled,
+                    'take' => $request->take,
                 ];
                 return view('content.servis', $data);
             } else {
 
                 $data = [
-                    'service' => Transaction_service::where('status', $request->proses)->orWhere('status', $request->waiting_sparepart)->orWhere('status', $request->finished)->orWhere('status', $request->cancelled)->orWhere('status', $request->take)->get(),
+                    'service' => Transaction_service::whereDate('service_date', date('Y-m-d'))->whereIn('status', [$request->proses, $request->waiting_sparepart, $request->finished, $request->cancelled, $request->take])->get(),
                     "customer" => Customer::all(),
+                    "user" => User::where('username', '!=', 'root')->get(),
                     'nota' => $no_nota,
                     'product' => Product::all(),
-                    'repaire' => Repaire_service::all()
+                    'repaire' => Repaire_service::all(),
+                    'wa' => Setting::where('options', 'format_wa')->first(),
+                    'sms' => Setting::where('options', 'format_sms')->first(),
+                    'time' => $request->time,
+                    'all_status' => 'kk',
+                    'proses' => $request->proses,
+                    'waiting_sparepart' => $request->waiting_sparepart,
+                    'finished' => $request->finished,
+                    'cancelled' => $request->cancelled,
+                    'take' => $request->take,
                 ];
                 return view('content.servis', $data);
             }
         } elseif ($request->time == 'range') {
+            if ($request->all_status !== null) {
+
+                $data = [
+                    'service' => Transaction_service::whereBetween('service_date', [$request->from, $request->to])->get(),
+                    "customer" => Customer::all(),
+                    "user" => User::where('username', '!=', 'root')->get(),
+                    'nota' => $no_nota,
+                    'product' => Product::all(),
+                    'repaire' => Repaire_service::all(),
+                    'wa' => Setting::where('options', 'format_wa')->first(),
+                    'sms' => Setting::where('options', 'format_sms')->first(),
+                    'time' => $request->time,
+                    'all_status' => 'all_status',
+                    'proses' => $request->proses,
+                    'waiting_sparepart' => $request->waiting_sparepart,
+                    'finished' => $request->finished,
+                    'cancelled' => $request->cancelled,
+                    'take' => $request->take,
+                ];
+
+                return view('content.servis', $data);
+            } else {
+
+                $data = [
+                    'service' => Transaction_service::whereBetween('service_date', [$request->from, $request->to])->whereIn('status', [$request->proses, $request->waiting_sparepart, $request->finished, $request->cancelled, $request->take])->get(),
+                    "customer" => Customer::all(),
+                    "user" => User::where('username', '!=', 'root')->get(),
+                    'nota' => $no_nota,
+                    'product' => Product::all(),
+                    'repaire' => Repaire_service::all(),
+                    'wa' => Setting::where('options', 'format_wa')->first(),
+                    'sms' => Setting::where('options', 'format_sms')->first(),
+                    'time' => $request->time,
+                    'all_status' => 'kk',
+                    'proses' => $request->proses,
+                    'waiting_sparepart' => $request->waiting_sparepart,
+                    'finished' => $request->finished,
+                    'cancelled' => $request->cancelled,
+                    'take' => $request->take,
+                ];
+                return view('content.servis', $data);
+            }
         }
     }
 

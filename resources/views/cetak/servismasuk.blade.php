@@ -76,40 +76,7 @@
     </tr>
 </table>
 
-<hr class='dotted' />
-@foreach ($service_detail as $item)
-@if ($item->repaire_id == null)
-<p style="font-size: 20px;">{{$item->qty}} X {{$item->_product->name}}</p>
-@endif
-@endforeach
-@foreach ($service_detail as $item)
-@if ($item->sparepart_id == null)
-<p style="font-size: 20px;">1 X {{$item->_repaire->name}}</p>
-@endif
-@endforeach
 
-    <table align="right" style="font-size: 20px;">
-        <tr>
-            <td>Diskon</td>
-            <td>:</td>
-            <td>Rp. {{number_format($service->discount)}}</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td>:</td>
-            <td>Rp. {{number_format($service->total)}}</td>
-        </tr>
-        <tr>
-            <td>Bayar</td>
-            <td>:</td>
-            <td>Rp. {{number_format($service->payment)}}</td>
-        </tr>
-        <tr>
-            <td>@if ($service->payment_method == 'cash') Kembali @else Hutang @endif</td>
-            <td>:</td>
-            <td>Rp. {{number_format($service->cashback)}}</td>
-        </tr>
-    </table>
 <hr class='dotted' />
 <table style="font-size: 20px;">
     <tr>
@@ -117,19 +84,9 @@
         <td>:</td>
         <td>{{$service->_user->name}}</td>
     </tr>
-    <tr>
-        <td>Teknisi</td>
-        <td>:</td>
-        <td>@if ($service->technician)
-            {{$service->_teknisi->name}}
-            @else
-            -
-            @endif
-        </td>
-    </tr>
 </table>
 
-<p style="text-align: center; font-size:20px;">Terima kasih</p>
+<p style="text-align: center; font-size:20px;">{{$footer->value}}</p>
 
 </body>
 </html>

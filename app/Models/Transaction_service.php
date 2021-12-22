@@ -11,7 +11,7 @@ class Transaction_service extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'transaction_services';
     protected $fillable = [
-        'customer_id', 'user_id', 'transaction_code', 'unit', 'serial_number', 'complient', 'completenes', 'passcode', 'notes', 'service_date', 'estimated_cost', 'pickup_date', 'payment_method', 'payment', 'cashback', 'total', 'status', 'technician'
+        'customer_id', 'user_id', 'transaction_code', 'unit', 'serial_number', 'complient', 'completenes', 'passcode', 'notes', 'service_date', 'estimated_cost', 'pickup_date', 'payment_method', 'payment', 'discount', 'cashback', 'total', 'status', 'technician'
     ];
 
     public function _customer()

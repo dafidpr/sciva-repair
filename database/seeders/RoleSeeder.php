@@ -53,6 +53,7 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['read-grafik']);
         $admin->givePermissionTo(['commission-users']);
         $admin->givePermissionTo(['generate-barcode-tools', 'backup-tools', 'delete-servis-tools', 'delete-transaction-tools']);
+        $admin->givePermissionTo(['footerNota-settings', 'formatWA-settings', 'formatSMS-settings', 'daylimit-settings', 'profile-settings']);
 
         //kasir
         $kasir->givePermissionTo('read-products');

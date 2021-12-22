@@ -89,7 +89,6 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size: 20px;">Terima kasih</p>
-<p style="text-align: center; font-size: 20px;">Barang Yang Sudah dibeli tidak dapat ditukar/dikembalikan</p>
+<p style="text-align: center; font-size: 20px;">{{$footer->value}}</p>
 </body>
 </html>

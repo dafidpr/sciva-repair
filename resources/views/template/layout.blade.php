@@ -92,6 +92,12 @@
                             <a class="dropdown-item text-danger" href="/logout"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
                         </div>
 
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                                <i class="mdi mdi-cog-outline font-size-20"></i>
+                            </button>
+                        </div>
+
                     </div>
 
                 </div>
@@ -293,11 +299,21 @@
                                 <span>Setting</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                @can('footerNota-settings')
                                 <li><a href="/admin/footer_nota">Footer Nota</a></li>
+                                @endcan
+                                @can('formatWA-settings')
                                 <li><a href="/admin/format_sms">Format SMS</a></li>
+                                @endcan
+                                @can('formatSMS-settings')
                                 <li><a href="/admin/format_WA">Format WA</a></li>
+                                @endcan
+                                @can('daylimit-settings')
                                 <li><a href="/admin/bataspengambilan">Batas Ambil Servis</a></li>
+                                @endcan
+                                @can('profile-settings')
                                 <li><a href="/admin/profil">Profil Toko</a></li>
+                                @endcan
                             </ul>
                         </li>
 
@@ -381,9 +397,14 @@
             <hr class="mt-0">
             <h6 class="text-center mb-0">Choose Layouts</h6>
 
+
+
         </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 850px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 395px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end slimscroll-menu-->
     </div>
     <!-- /Right-bar -->
+
+
+
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>

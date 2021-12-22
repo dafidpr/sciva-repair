@@ -186,7 +186,13 @@
                                 @foreach ($receivable as $item)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$item->_sale->_customer->name}}</td>
+                                    <td>
+                                        @if ($item->sale_id == null)
+                                        {{$item->_servis->_customer->name}}
+                                        @else
+                                        {{$item->_sale->_customer->name}}
+                                        @endif
+                                    </td>
                                     <td>Rp. {{number_format($item->total)}}</td>
                                     <td>
                                         @can('detail-receivable')

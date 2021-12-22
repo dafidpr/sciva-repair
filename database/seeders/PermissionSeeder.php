@@ -101,6 +101,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'backup-tools', 'guard_name' => 'web'],
             ['name' => 'delete-servis-tools', 'guard_name' => 'web'],
             ['name' => 'delete-transaction-tools', 'guard_name' => 'web'],
+            //
+            ['name' => 'footerNota-settings', 'guard_name' => 'web'],
+            ['name' => 'formatWA-settings', 'guard_name' => 'web'],
+            ['name' => 'formatSMS-settings', 'guard_name' => 'web'],
+            ['name' => 'daylimit-settings', 'guard_name' => 'web'],
+            ['name' => 'profile-settings', 'guard_name' => 'web'],
         ]);
     }
 }

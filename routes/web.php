@@ -17,6 +17,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RestoreController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ToolsController;
@@ -302,20 +303,30 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/cetak_komisi', [KomisiController::class, 'store']);
         Route::get('', [KomisiController::class, 'index'])->middleware('can:commission-users');
     });
-    Route::get('/profil', [CompanyController::class, 'index']);
+    Route::get('/profil', [CompanyController::class, 'index'])->middleware('can:profile-settings');
     Route::post('/profil/changeProfil', [CompanyController::class, 'store']);
 
-    Route::get('/footer_nota', function () {
-        return view('setting.footerNota');
+    Route::prefix('footer_nota')->group(function () {
+        Route::get('', [SettingController::class, 'indexfooter'])->middleware('can:footerNota-settings');
+        //Sale
+        Route::post('/updateNotaSale', [SettingController::class, 'updateNotaSale']);
+        //Servis Masuk
+        Route::post('/updateNotaServis', [SettingController::class, 'updateNotaServis']);
+        //servis diambil
+        Route::post('/updateNotaServisTake', [SettingController::class, 'updateNotaServisTake']);
     });
-    Route::get('/format_WA', function () {
-        return view('setting.formatWA');
+    Route::prefix('format_WA')->group(function () {
+        Route::get('', [SettingController::class, 'indexWA'])->middleware('can:formatWA-settings');
+        Route::get('/format_wa_get', [SettingController::class, 'format_wa']);
+        Route::post('/updateFormatWA', [SettingController::class, 'updateFormatWA']);
     });
-    Route::get('/format_sms', function () {
-        return view('setting.formatsms');
+    Route::prefix('format_sms')->group(function () {
+        Route::get('', [SettingController::class, 'indexSms'])->middleware('can:formatSMS-settings');
+        Route::post('/updateFormatSms', [SettingController::class, 'updateFormatSms']);
     });
-    Route::get('/bataspengambilan', function () {
-        return view('setting.bataspengambilan');
+    Route::prefix('bataspengambilan')->group(function () {
+        Route::get('', [SettingController::class, 'indexBatas'])->middleware('can:daylimit-settings');
+        Route::post('/updateBatas', [SettingController::class, 'updateBatas']);
     });
     Route::prefix('ubahpassword')->group(function () {
         Route::get('', function () {

@@ -8,7 +8,6 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Data Servis</h5></div>
             <div class="card-body">
 
                 @if (session('berhasil'))
@@ -27,6 +26,7 @@
                     <strong>Maaf</strong> {{session('gagal')}}.
                 </div>
                 @endif
+                <div class=""><h5>Data Servis</h5></div><br>
                 <form action="/admin/del_servis" method="post">
                     @csrf
                 <div class="row">
