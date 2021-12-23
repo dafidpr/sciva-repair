@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductImport;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -165,5 +168,43 @@ class ProductController extends Controller
         //
         Product::where('id', $id)->delete();
         return redirect('/admin/barang')->with('berhasil', 'Anda telah menghapus data!!');
+    }
+
+    public function import_excel(Request $request)
+    {
+        $rules = [
+            'file' => 'mimes:csv,xls,xlsx'
+        ];
+        $messages = [
+            'file.mimes' => 'Format tidak di dukung!!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all())->with('gagal', 'Anda gagal mengimport data!');
+        }
+
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        $nama_file = $file->hashName();
+
+        //temporary file
+        $path = $file->storeAs('public/tmp/exc/', $nama_file);
+
+        // import data
+        $import = Excel::import(new ProductImport(), storage_path('app/public/tmp/exc/' . $nama_file));
+
+        //remove from server
+        Storage::delete($path);
+
+        if ($import) {
+            //redirect
+            return redirect()->back()->with(['berhasil' => 'Data Berhasil Diimport!']);
+        } else {
+            //redirect
+            return redirect()->back()->with(['gagal' => 'Data Gagal Diimport!']);
+        }
     }
 }

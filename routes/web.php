@@ -125,6 +125,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/hapusdata/{id}', [ProductController::class, 'destroy'])->middleware('can:delete-products');
         Route::get('/detail/{id}', [ProductController::class, 'show']);
         Route::post('/editdata', [ProductController::class, 'update'])->middleware('can:update-products');
+        Route::post('/import_excel', [ProductController::class, 'import_excel'])->middleware('can:create-products');
     });
 
 
