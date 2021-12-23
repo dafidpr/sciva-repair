@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card">
+                <img class="card-img-top img-fluid" width="300px" src="{{asset('tmp/asset/images'). '/'. $company->logo}}" alt="">
                 <div class="card-body">
-                    <img width="200px" src="{{asset('tmp/asset/images'). '/'. $company->logo}}" alt="">
                     <h5 class="text-center">{{$company->name}}</h5>
                     <div class="text-right">
                         <p><i class="fas fa-map-marker-alt"></i> {{$company->address}}</p>

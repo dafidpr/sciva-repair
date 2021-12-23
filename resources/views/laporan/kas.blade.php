@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Laporan Kas</h5></div>
             <div class="card-body">
+                <h5>Laporan Kas</h5>
                 <form action="/admin/lap_kas/print_cash" method="post">
                     @csrf
                     <div class="row">

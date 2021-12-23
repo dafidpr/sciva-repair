@@ -3,14 +3,10 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
+    <div class="card-body">
         @can('create-repaire')
         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Jasa</a>
         @endcan
-        {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Jasa</a>
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Jasa</a> --}}
-    </div>
-    <div class="card-body">
 
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -28,6 +24,7 @@
             <strong>Maaf</strong> {{session('gagal')}}.
         </div>
         @endif
+        <hr>
 
         <div class="table-responsive">
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">

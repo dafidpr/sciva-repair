@@ -30,7 +30,7 @@
                                 <i class="fas fa-hammer text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">2</h5>
+                    <h5 class="font-size-22">{{$servisMasuk->total()}}</h5>
 
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                 <i class="fas fa-check text-success font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">1</h5>
+                    <h5 class="font-size-22">{{$servisSelesai}}</h5>
 
                 </div>
             </div>
@@ -64,7 +64,7 @@
                                 <i class="fas fa-users text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">0</h5>
+                    <h5 class="font-size-22">{{$waitingSparepart}}</h5>
 
                 </div>
             </div>
@@ -81,7 +81,7 @@
                                 <i class="far fa-times-circle text-danger font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">1</h5>
+                    <h5 class="font-size-22">{{$batal}}</h5>
 
                 </div>
             </div>
@@ -97,10 +97,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Data Servis</h4>
-            </div>
             <div class="card-body">
+                <h4>Data Servis</h4><hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="piutang" style="font-size: 13px;">
                         <thead>
@@ -113,13 +111,35 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($servis as $item)
+
                             <tr>
-                                <td>SR0000</td>
-                                <td>2020-08-10</td>
-                                <td>Samsung</td>
-                                <td>Selesai</td>
-                                <td>100000</td>
+                                <td>{{$item->transaction_code}}</td>
+                                <td>{{$item->created_at}}</td>
+                                <td>{{$item->unit}}</td>
+                                <td>
+                                    @if ($item->status == 'finished')
+                                    <span class="bg-success badge">Selesai</span>
+                                    @elseif ($item->status == 'proses')
+                                    <span class="bg-primary badge">Dalam Proses</span>
+                                    @elseif ($item->status == 'waiting sparepart')
+                                    <span class="bg-warning badge">Menunggu sparepart</span>
+                                    @elseif ($item->status == 'cancelled')
+                                    <span class="bg-danger badge">Batal</span>
+                                    @elseif ($item->status == 'take')
+                                    <span class="bg-secondary badge">Diambil</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->total == null)
+                                        -
+                                    @else
+
+                                    {{$item->total}}
+                                    @endif
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -128,27 +148,28 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white">
-                <h4>Data Hutang</h4>
-            </div>
             <div class="card-body">
+                <h4>Data Hutang</h4><hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
                         <thead>
                             <tr>
-                                <th>Kode</th>
+                                <th>NO</th>
                                 <th>Nama</th>
                                 <th>Total</th>
                                 <th>jatuh tempo</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($recei as $item)
+
                             <tr>
-                                <td>HT0000</td>
-                                <td>Saya</td>
-                                <td>100000</td>
-                                <td>2021-02-10</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->total}}</td>
+                                <td>{{$item->due_date}}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

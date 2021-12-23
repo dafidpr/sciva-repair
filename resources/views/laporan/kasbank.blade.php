@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Laporan Kas Bank</h5></div>
             <div class="card-body">
+                <h5>Laporan Kas Bank</h5>
                 <div class="row">
                     <div class="col-sm-6">
                         <div>

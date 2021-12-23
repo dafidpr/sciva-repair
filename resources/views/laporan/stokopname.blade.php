@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Laporan Stok Opname</h5></div>
             <div class="card-body">
+                <h5>Laporan Stok Opname</h5>
                 <form action="/admin/lap_stokopname/print_opname" method="post">
                     @csrf
                     <div class="row">

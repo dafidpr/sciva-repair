@@ -4,10 +4,10 @@
 
 <div class="">
     <div class="card">
-        <div class="card-header bg-white">
-            <h3 class=" mb-4 float-sm-start">Edit Servis</h3>
-        </div>
+        {{-- <div class="card-header bg-white">
+        </div> --}}
         <div class="card-body">
+            <h3 class=" mb-4">Edit Servis</h3>
             <form action="/admin/servis/{{$ts->id}}/update" method="post">
                 @csrf
                 <div>

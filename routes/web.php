@@ -4,17 +4,23 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\GrafikController;
+use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\purchaseController;
 use App\Http\Controllers\ReceivableController;
 use App\Http\Controllers\RepaireController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RestoreController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\TransactionServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VatController;
@@ -47,10 +53,13 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 
 Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
+
+
+    // Route::get('/ajax/purchase', function () {
+    //     return view('ajax.purchase');
+    // });
     //User Admin
-    Route::get('/dashboard', function () {
-        return view('dashboard.user');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::prefix('servis')->group(function () {
         Route::get('', [TransactionServiceController::class, 'index']);
@@ -61,6 +70,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/{id}/edit', [TransactionServiceController::class, 'edit']);
         Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
         Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
+        Route::get('/{id}/json_service2', [TransactionServiceController::class, 'json_service2']);
         Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
         Route::get('/deletepermanent/{id?}', [TransactionServiceController::class, 'deletePermanent']);
         Route::get('/restoreall/{id?}', [TransactionServiceController::class, 'restoreall']);
@@ -171,8 +181,9 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/changepermission/{id}', [RoleController::class, 'changePermission']);
         Route::post('/{id}/input-change-permissions', [RoleController::class, 'inputPermission']);
     });
-    Route::get('/grafik', function () {
-        return view('content.grafik');
+
+    Route::prefix('grafik')->group(function () {
+        Route::get('', [GrafikController::class, 'index'])->middleware('can:read-grafik');
     });
 
 
@@ -211,7 +222,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/print_cash', [ReportController::class, 'cash']);
         Route::get('', function () {
             return view('laporan.kas');
-        })->middleware('can:report-chases');
+        })->middleware('can:report-cash');
     });
     Route::get('/lap_kasbank', function () {
         return view('laporan.kasbank');
@@ -230,15 +241,47 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
 
     Route::get('/backupdata', function () {
         return view('tools.backupdata');
+    })->middleware('can:backup-tools');
+    Route::get('/backupdata/mydatabase', [ToolsController::class, 'backupDatabase']);
+
+    Route::prefix('restore')->group(function () {
+        //restore Penjualan
+        Route::get('/getRestoreSale', [RestoreController::class, 'indexSale']);
+        Route::get('/forceDeleteSale/{id?}', [RestoreController::class, 'forceDeleteSale']);
+        Route::get('/forceRestoreSale/{id?}', [RestoreController::class, 'forceRestoreSale']);
+        //restore Pembelian
+        Route::get('/getRestorePurchase', [RestoreController::class, 'indexPurchase']);
+        Route::get('/forceDeletePurchase/{id?}', [RestoreController::class, 'forceDeletePurchase']);
+        Route::get('/forceRestorePurchase/{id?}', [RestoreController::class, 'forceRestorePurchase']);
+        //restore Hutang
+        Route::get('/getRestoreDebt', [RestoreController::class, 'indexDebt']);
+        Route::get('/forceDeleteDebt/{id?}', [RestoreController::class, 'forceDeleteDebt']);
+        Route::get('/forceRestoreDebt/{id?}', [RestoreController::class, 'forceRestoreDebt']);
+        //piutang
+        Route::get('/getRestoreReceivable', [RestoreController::class, 'indexReceivable']);
+        Route::get('/forceDeleteReceivable/{id?}', [RestoreController::class, 'forceDeleteReceivable']);
+        Route::get('/forceRestoreReceivable/{id?}', [RestoreController::class, 'forceRestoreReceivable']);
     });
-    Route::get('/generatebarcode', function () {
-        return view('tools.generatebarcode');
-    });
+
+    Route::get('/generatebarcode', [ToolsController::class, 'index'])->middleware('can:generate-barcode-tools');
+    Route::post('/generatebarcode/update', [ToolsController::class, 'updateBarcode']);
+    Route::post('/generatebarcode/cetak', [ToolsController::class, 'cetak']);
+    Route::get('/generatebarcode/generate/{id}', [ToolsController::class, 'generate']);
+
     Route::get('/del_dataservis', function () {
         return view('tools.del_dataservis');
-    });
-    Route::get('/del_transaksi', function () {
-        return view('tools.del_transaksi');
+    })->middleware('can:delete-servis-tools');
+    Route::post('/del_servis', [ToolsController::class, 'deleteServisRange']);
+
+
+    Route::prefix('del_transaksi')->group(function () {
+        Route::get('', function () {
+            return view('tools.del_transaksi');
+        })->middleware('can:delete-transaction-tools');
+        Route::post('/deleteSale', [ToolsController::class, 'deleteSale']);
+        Route::post('/deletePurchase', [ToolsController::class, 'deletePurchase']);
+        Route::post('/deleteDebt', [ToolsController::class, 'deleteDebt']);
+        Route::post('/deleteReceivable', [ToolsController::class, 'deleteReceivable']);
     });
 
     Route::prefix('kas')->group(function () {
@@ -255,35 +298,49 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/bank', function () {
         return view('keuangan.bank');
     });
-    Route::get('/komisi', function () {
-        return view('content.komisikaryawan');
+
+    Route::prefix('komisi')->group(function () {
+        Route::post('/cetak_komisi', [KomisiController::class, 'store']);
+        Route::get('', [KomisiController::class, 'index'])->middleware('can:commission-users');
     });
-    Route::get('/profil', [CompanyController::class, 'index']);
+    Route::get('/profil', [CompanyController::class, 'index'])->middleware('can:profile-settings');
     Route::post('/profil/changeProfil', [CompanyController::class, 'store']);
 
-    Route::get('/footer_nota', function () {
-        return view('setting.footerNota');
+    Route::prefix('footer_nota')->group(function () {
+        Route::get('', [SettingController::class, 'indexfooter'])->middleware('can:footerNota-settings');
+        //Sale
+        Route::post('/updateNotaSale', [SettingController::class, 'updateNotaSale']);
+        //Servis Masuk
+        Route::post('/updateNotaServis', [SettingController::class, 'updateNotaServis']);
+        //servis diambil
+        Route::post('/updateNotaServisTake', [SettingController::class, 'updateNotaServisTake']);
     });
-    Route::get('/format_WA', function () {
-        return view('setting.formatWA');
+    Route::prefix('format_WA')->group(function () {
+        Route::get('', [SettingController::class, 'indexWA'])->middleware('can:formatWA-settings');
+        Route::get('/format_wa_get', [SettingController::class, 'format_wa']);
+        Route::post('/updateFormatWA', [SettingController::class, 'updateFormatWA']);
     });
-    Route::get('/format_sms', function () {
-        return view('setting.formatsms');
+    Route::prefix('format_sms')->group(function () {
+        Route::get('', [SettingController::class, 'indexSms'])->middleware('can:formatSMS-settings');
+        Route::post('/updateFormatSms', [SettingController::class, 'updateFormatSms']);
     });
-    Route::get('/bataspengambilan', function () {
-        return view('setting.bataspengambilan');
+    Route::prefix('bataspengambilan')->group(function () {
+        Route::get('', [SettingController::class, 'indexBatas'])->middleware('can:daylimit-settings');
+        Route::post('/updateBatas', [SettingController::class, 'updateBatas']);
     });
-    Route::get('/ubahpassword', function () {
-        return view('content.ubahpassword');
+    Route::prefix('ubahpassword')->group(function () {
+        Route::get('', function () {
+            return view('content.ubahpassword');
+        });
+        Route::post('/ubah', [GrafikController::class, 'update']);
     });
 });
 
 Route::prefix('pelanggan')->middleware(['authmiddle', 'customer'])->group(function () {
     //Pelanggan
-    Route::get('/dashboardpelanggan', function () {
-        return view('dashboard.pelanggan');
-    });
+    Route::get('/dashboardpelanggan', [DashboardController::class, 'indexCs']);
     Route::get('/ubahpassword', function () {
         return view('content.ubahpasswordpelanggan');
     });
+    Route::post('/ubahpassword/ubah', [DashboardController::class, 'updatePassCs']);
 });

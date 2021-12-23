@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,10 @@ class AuthController extends Controller
 
             return redirect('/pelanggan/dashboardpelanggan')->with('berhasil', 'Anda telah berhasil Login!!');
         } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
+
+            User::where('username', $request->username)->update([
+                'login_at' => date('Y-m-d H:i:s')
+            ]);
 
             return redirect('/admin/dashboard')->with('berhasil', 'Anda telah berhasil Login!!');
         } else {

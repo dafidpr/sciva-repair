@@ -78,32 +78,36 @@
 
 <hr class='dotted' />
 @foreach ($service_detail as $item)
-
-<p style="font-size: 20px;">1 X {{$item->_product->name}}</p>
+@if ($item->repaire_id == null)
+<p style="font-size: 20px;">{{$item->qty}} X {{$item->_product->name}}</p>
+@endif
+@endforeach
+@foreach ($service_detail as $item)
+@if ($item->sparepart_id == null)
 <p style="font-size: 20px;">1 X {{$item->_repaire->name}}</p>
-
+@endif
 @endforeach
 
     <table align="right" style="font-size: 20px;">
         <tr>
             <td>Diskon</td>
             <td>:</td>
-            <td>0</td>
+            <td>Rp. {{number_format($service->discount)}}</td>
         </tr>
         <tr>
             <td>Total</td>
             <td>:</td>
-            <td>{{number_format($service->total)}}</td>
+            <td>Rp. {{number_format($service->total)}}</td>
         </tr>
         <tr>
             <td>Bayar</td>
             <td>:</td>
-            <td>{{number_format($service->payment)}}</td>
+            <td>Rp. {{number_format($service->payment)}}</td>
         </tr>
         <tr>
-            <td>Kembali</td>
+            <td>@if ($service->payment_method == 'cash') Kembali @else Hutang @endif</td>
             <td>:</td>
-            <td>{{number_format($service->cashback)}}</td>
+            <td>Rp. {{number_format($service->cashback)}}</td>
         </tr>
     </table>
 <hr class='dotted' />

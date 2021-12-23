@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped" style="font-size: 13px;" id="stoklimit">
+            <table class="table table-striped" width="100%" style="font-size: 13px;" id="stoklimit">
                 <thead>
                     <tr>
                         <th>Kode Beli</th>
@@ -22,8 +22,13 @@
                 <tbody>
                     @foreach ($receivable as $item)
                     <tr>
+                        @if ($item->sale_id != null)
                         <td>{{$item->_sale->invoice}}</td>
                         <td>{{$item->_sale->_customer->name}}</td>
+                        @elseif ($item->service_id != null)
+                        <td>{{$item->_servis->transaction_code}}</td>
+                        <td>{{$item->_servis->_customer->name}}</td>
+                        @endif
                         <td>{{$item->receivable_date}}</td>
                         <td>{{$item->due_date}}</td>
                         <td>{{$item->total}}</td>

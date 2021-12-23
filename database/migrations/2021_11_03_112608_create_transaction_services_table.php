@@ -29,6 +29,7 @@ class CreateTransactionServicesTable extends Migration
             $table->date('pickup_date')->nullable();
             $table->enum('payment_method', ['cash', 'credit'])->nullable();
             $table->decimal('payment')->nullable();
+            $table->decimal('discount')->nullable();
             $table->decimal('cashback')->nullable();
             $table->decimal('total')->nullable();
             $table->enum('status', ['proses', 'waiting sparepart', 'finished', 'cancelled', 'take']);

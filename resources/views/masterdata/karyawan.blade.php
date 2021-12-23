@@ -3,14 +3,12 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
+
+    <div class="card-body">
         @can('create-users')
         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Karyawan</a>
         @endcan
-        {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Karyawan</a>
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Karyawan</a> --}}
-    </div>
-    <div class="card-body">
+        <hr>
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -66,10 +64,10 @@
 @can('read-roles')
 
 <div class="card">
-    <div class="card-header bg-white">
-        <h6>Level Karyawan</h6>
-    </div>
+    {{-- <div class="card-header bg-white">
+    </div> --}}
     <div class="card-body">
+        <h6>Level Karyawan</h6><hr>
         @can('create-roles')
         <a href="#" class="btn btn-primary btn-sm mb-3"  data-bs-toggle="modal" data-bs-target=".staticBackdrop"><i class="fas fa-plus"></i> Tambah Level</a>
         @endcan

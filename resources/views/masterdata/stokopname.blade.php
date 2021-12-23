@@ -2,30 +2,29 @@
 @section('title', 'Stok Opname')
 @section('content')
 
+@if (session('berhasil'))
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+    </button>
+    <strong>Selamat</strong> {{session('berhasil')}}.
+</div>
+@endif
+@if (session('gagal'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+    </button>
+    <strong>Maaf</strong> {{session('gagal')}}.
+</div>
+@endif
 <div class="card">
-    <div class="card-header bg-white">
+
+    <div class="card-body">
         @can('create-opnames')
         <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
         @endcan
-    </div>
-    <div class="card-body">
-
-        @if (session('berhasil'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-            </button>
-            <strong>Selamat</strong> {{session('berhasil')}}.
-        </div>
-        @endif
-        @if (session('gagal'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-            </button>
-            <strong>Maaf</strong> {{session('gagal')}}.
-        </div>
-        @endif
+            <hr>
 
         <div class="table-responsive">
             <table class="table table-striped" style="font-size: 13;" id="bestpelanggan">

@@ -59,20 +59,59 @@
             @endforeach
         </tbody>
     </table>
+    <br>
+    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
+        <thead>
+            <tr>
+                {{-- <th>No</th> --}}
+                <th>Tanggal</th>
+                <th>Kode Servis</th>
+                <th>Pelanggan</th>
+                <th>Tempo</th>
+                <th>Jumlah</th>
+                <th>Bayar</th>
+                <th>Sisa</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($receivable2 as $item)
+
+            <tr>
+                {{-- <td>{{$loop->iteration}}</td> --}}
+                <td>{{$item->receivable_date}}</td>
+                <td>{{$item->transaction_code}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->due_date}}</td>
+                <td>Rp. {{number_format($item->total)}}</td>
+                <td>Rp. {{number_format($item->payment)}}</td>
+                <td>Rp. {{number_format($item->remainder)}}</td>
+                <td>
+                    @if ($item->status == 'not yet paid')
+                        Belum Lunas
+                    @elseif ($item->status == 'paid off')
+                        Lunas
+                    @endif
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
 
 
     <table align="right" border="2" style="border-collapse: collapse; font-size:13px; margin-top:3px;">
         <tr>
             <td>  Total Piutang  </td>
-            <td id="totally" > Rp. {{number_format($total_piutang)}} </td>
+            <td id="totally" > Rp. {{number_format($total_piutang + $total_piutang2)}} </td>
         </tr>
         <tr>
             <td>  Total Bayar  </td>
-            <td id="totally"> Rp. {{number_format($total_bayar)}} </td>
+            <td id="totally"> Rp. {{number_format($total_bayar + $total_bayar2)}} </td>
         </tr>
         <tr>
             <td>  Sisa Piutang  </td>
-            <td id="totally"> Rp. {{number_format($sisa_piutang)}} </td>
+            <td id="totally"> Rp. {{number_format($sisa_piutang + $sisa_piutang2)}} </td>
         </tr>
     </table>
 </body>

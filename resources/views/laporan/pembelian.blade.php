@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-white"><h5>Laporan Pembelian</h5></div>
             <div class="card-body">
+                <h5>Laporan Pembelian</h5>
                 <form action="/admin/lap_pembelian/cetak_purchase" method="post">
                     @csrf
                     <div class="row">

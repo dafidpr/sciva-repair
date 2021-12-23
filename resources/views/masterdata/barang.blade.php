@@ -3,12 +3,15 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
+    {{-- <div class="card-header bg-white"> --}}
+        {{-- </div> --}}
+        <div class="card-body">
+        @can('create-product')
         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Barang</a>
+        @endcan
         {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a> --}}
-        <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a>
-    </div>
-    <div class="card-body">
+        {{-- <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a> --}}
+        <hr>
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">

@@ -10,7 +10,7 @@ class Transaction_service_detail extends Model
     use HasFactory;
     protected $table = 'transaction_service_details';
     protected $fillable = [
-        'transaction_id', 'repaire_id', 'sparepart_id', 'total', 'discount', 'sub_total'
+        'transaction_id', 'repaire_id', 'sparepart_id', 'total', 'qty', 'discount', 'sub_total'
     ];
 
     public function _transction_service()

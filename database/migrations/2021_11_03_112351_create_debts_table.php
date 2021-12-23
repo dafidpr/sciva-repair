@@ -23,6 +23,7 @@ class CreateDebtsTable extends Migration
             $table->date('due_date')->nullable();
             $table->enum('status', ['paid_off', 'not yet paid']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

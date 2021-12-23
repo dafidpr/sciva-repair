@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Receivable;
 use App\Models\Sale;
 use App\Models\Sale_detail;
+use App\Models\Setting;
 use App\Models\Vat_tax;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -195,6 +196,7 @@ class SaleController extends Controller
 
             $piutang = [
                 'sale_id' => $sale->id,
+                'service_id' => null,
                 'receivable_date' => date('Y-m-d'),
                 'total' => abs($request->b_cashback),
                 'payment' => 0,
@@ -259,6 +261,7 @@ class SaleController extends Controller
             'company' => Company_profile::find(1),
             'sale' => $sale,
             'sale_detail' => Sale_detail::where('sale_id', $sale->id)->get(),
+            'footer' => Setting::where('options', 'footer_nota_sale')->first()
         ];
 
         // return view('cetak.struk_penjualan', $data);

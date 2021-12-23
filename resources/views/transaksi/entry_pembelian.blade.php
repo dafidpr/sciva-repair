@@ -3,12 +3,15 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header bg-white">
-        <div class="float-sm-end">
-            <h6>Invoice <b>{{$id}}</b></h6>
-        </div>
-    </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="float-sm-end">
+                    <h6>Invoice <b>{{$id}}</b></h6>
+                </div>
+            </div>
+        </div>
     <h1 class="float-sm-start" >Total (RP.)</h1>
 
     <div class="float-sm-end">
@@ -66,10 +69,9 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header bg-white">
-                        <h5>Data Barang</h5>
-                    </div>
                     <div class="card-body">
+                        <h5>Data Barang</h5>
+                        <hr>
                         @if (session('berhasil'))
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -86,19 +88,19 @@
                             <strong>Maaf</strong> {{session('gagal')}}.
                         </div>
                         @endif
-                <form action="/admin/daftar_pembelian/inputPurchase" method="post" enctype="multipart/form-data">
+                <form action="#" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id_supplier" id="id_supplier">
+
                 <div class="table-responsive">
                     <table class="table table-striped" id="stocklimit" width="100%" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th>Barcode</th>
                                 <th>Nama</th>
-                                <th>Harga Beli</th>
-                                <th>Harga Jual</th>
+                                <th width="20%">Harga Beli</th>
+                                <th width="20%">Harga Jual</th>
                                 <th>Qty</th>
-                                <th>Total</th>
+                                <th width="18%">Total</th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
@@ -108,40 +110,11 @@
 
                 </div>
                 <hr>
-            <div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Diskon (Rp)</label>
-                        <input type="number" name="discount" value="0" class="form-control" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Grand total</label>
-                        <input type="text" name="grandtotal" id="i_grandtotal" class="form-control" readonly>
-                    </div>
-                    <div>
-                        <label>Payment Method</label>
-                        <br>
-                        <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
-                        <input type="radio" name="method" class="meth" value="credit"> <label for="">Credit</label>
-                    </div>
-                    <div id="form_duedate">
-                        <label for="">Jatuh Tempo</label>
-                        <input type="date" class="form-control" name="due_date" id="due_date">
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Bayar</label>
-                        <input type="number" onkeyup="purchase_cashback()" class="form-control" name="payment" id="i_payment">
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Kembalian</label>
-                        <input type="number" class="form-control" name="cashback" id="cashback" readonly>
-                    </div>
-                </div>
-            </div>
+
 
                 <div class="mt-3">
-                    <a href="#" class="btn btn-danger"><i class="fa fa-recycle m-right-xs""></i> Cancel</a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-hand-holding-usd"></i> Payment</button>
+                    <a href="#" onclick="cancelledPurchase()" class="btn btn-danger"><i class="fa fa-recycle m-right-xs""></i> Cancel</a>
+                    <button type="button" onclick="checkOutPurchase()" class="btn btn-primary"><i class="fas fa-hand-holding-usd"></i> Payment</button>
                 </div>
             </form>
 
@@ -250,13 +223,13 @@
                 <form action="">
                     <div>
                         <label for="">Barcode</label>
-                        <input type="text" id="e_barcode" class="form-control">
+                        <input type="text" id="e_barcode" class="form-control" readonly>
                         <input type="hidden" id="e_id_product" class="form-control">
                         <input type="hidden" id="e_id" class="form-control">
                     </div>
                     <div>
                         <label for="">Nama</label>
-                        <input type="text" id="e_name_product" class="form-control">
+                        <input type="text" id="e_name_product" class="form-control" readonly>
                     </div>
                     <div>
                         <label for="">Harga Beli</label>
@@ -271,8 +244,8 @@
                         <input type="number" id="e_quantity_product" class="form-control">
                     </div>
                     <div>
-                        <label for="">Total</label>
-                        <input type="text" id="e_total" class="form-control">
+                        {{-- <label for="">Total</label> --}}
+                        <input type="hidden" id="e_total" class="form-control" readonly>
                     </div>
                 </form>
             </div>
@@ -284,6 +257,68 @@
     </div><!-- /.modal-dialog -->
 </div>
 {{-- End Edit Modal --}}
+{{-- Modal Check Out --}}
+<div class="modal fade" id="modalCheckOutPurchase" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Check Out</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/daftar_pembelian/inputPurchase" method="post">
+                    @csrf
+                    <div>
+                        <table>
+                            <tbody id="dataPurchaseCheckOut">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <input type="hidden" name="id_supplier" id="id_supplier">
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="">Diskon (Rp)</label>
+                                <input type="number" name="discount" value="0" class="form-control" readonly>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Grand total</label>
+                                <input type="text" name="grandtotal" id="i_grandtotal" class="form-control" readonly>
+                            </div>
+                            <div>
+                                <label>Payment Method</label>
+                                <br>
+                                <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
+                                <input type="radio" name="method" class="meth" value="credit"> <label for="">Credit</label>
+                            </div>
+                            <div id="form_duedate">
+                                <label for="">Jatuh Tempo</label>
+                                <input type="date" class="form-control" name="due_date" id="due_date">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Bayar</label>
+                                <input type="number" onkeyup="purchase_cashback()" class="form-control" name="payment" id="i_payment">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Kembalian</label>
+                                <input type="number" class="form-control" name="cashback" id="cashback" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="cancelledPurchase()" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal Check Out --}}
 
 {{-- Javascript --}}
 <script src="{{asset('tmp/javascript/entryPembelian.js')}}"></script>

@@ -8,7 +8,7 @@
             <div class="card-body">
                 <span>Menu ini berguna untuk mem back-up data keseluruhan dari aplikasi Point Of Sales yang berformat <b>.sql</b></span>
                 <div class="d-grid gap-2 mt-3">
-                    <button class="btn btn-primary">Backup</button>
+                    <a href="/admin/backupdata/mydatabase" class="btn btn-primary">Backup</a>
                 </div>
             </div>
         </div>

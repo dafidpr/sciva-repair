@@ -48,9 +48,9 @@
     <label for="">{{$item->_product->name}}</label>
     <table style="100%">
         <tr>
-            <td>{{$item->quantity}}</td>
-            <td>{{$item->total}}</td>
-            <td>{{$item->sub_total}}</td>
+            <td>{{$item->quantity}} X </td>
+            <td> Rp. {{number_format($item->total)}}</td>
+            <td> Rp. {{number_format($item->sub_total)}}</td>
         </tr>
     </table>
 
@@ -62,22 +62,22 @@
         <tr>
             <td>Diskon</td>
             <td>:</td>
-            <td>{{$sale->discount}}</td>
+            <td>Rp. {{number_format($sale->discount)}}</td>
         </tr>
         <tr>
             <td>Total</td>
             <td>:</td>
-            <td>{{$sale->total}}</td>
+            <td>Rp. {{number_format($sale->total)}}</td>
         </tr>
         <tr>
             <td>Bayar</td>
             <td>:</td>
-            <td>{{$sale->payment}}</td>
+            <td>Rp. {{number_format($sale->payment)}}</td>
         </tr>
         <tr>
             <td>Kembali</td>
             <td>:</td>
-            <td>{{$sale->cashback}}</td>
+            <td>Rp. {{number_format($sale->cashback)}}</td>
         </tr>
     </table>
 <hr class='dotted' />
@@ -89,7 +89,6 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size: 20px;">Terima kasih</p>
-<p style="text-align: center; font-size: 20px;">Barang Yang Sudah dibeli tidak dapat ditukar/dikembalikan</p>
+<p style="text-align: center; font-size: 20px;">{{$footer->value}}</p>
 </body>
 </html>

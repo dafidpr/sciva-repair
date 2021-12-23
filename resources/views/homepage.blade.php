@@ -88,9 +88,10 @@
               </div>
 
               <div class="form-action">
-                <button type="submit" class="btn btn-form">Cek Status</button>
+                <button type="button" onclick="checkDataServis()" class="btn btn-form">Cek Status</button>
               </div>
             </form>
+            <div id="content_check"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -440,6 +441,7 @@
   <script src="{{asset('Homepage/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('Homepage/js/custom.js')}}"></script>
   <script src="{{asset('Homepage/contactform/contactform.js')}}"></script>
+  <script src="{{asset('tmp/javascript/check_servis.js')}}"></script>
 <script>
 $(document).on('click','.btn-form', function(){
 var input_blanter = document.getElementById('wa_name');

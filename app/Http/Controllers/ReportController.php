@@ -226,14 +226,40 @@ class ReportController extends Controller
             //sisa hutang gays
             $remainder = collect(DB::select("SELECT SUM(a.remainder) AS remainder FROM receivables a, sales b, customers c WHERE a.sale_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
             //total bayar
-            $bayar = collect(DB::select("SELECT SUM(a.payment) AS bayar FROM debts a, purchases b, suppliers c WHERE a.purchase_id = b.id AND c.id = b.supplier_id AND SUBSTRING(a.debt_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
+            $bayar = collect(DB::select("SELECT SUM(a.payment) AS bayar FROM receivables a, sales b, customers c WHERE a.sale_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
+        }
+
+
+        if ($request->customer != 'all') {
+            # code...
+            $debt2 = collect(DB::select("SELECT a.id, b.transaction_code, c.name, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to' AND c.id = '$request->customer' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
+
+            //total hutan
+            $total2 = collect(DB::select("SELECT SUM(a.total) AS total FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to' AND c.id = '$request->customer'"))->first();
+            //sisa hutang
+            $remainder2 = collect(DB::select("SELECT SUM(a.remainder) AS remainder FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to' AND c.id = '$request->customer'"))->first();
+            //total Bayar
+            $bayar2 = collect(DB::select("SELECT SUM(a.payment) AS bayar FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to' AND c.id = '$request->customer'"))->first();
+        } else {
+            $debt2 = collect(DB::select("SELECT a.id, b.transaction_code, c.name, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
+            # code...
+            //total hutang
+            $total2 = collect(DB::select("SELECT SUM(a.total) AS total FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
+            //sisa hutang gays
+            $remainder2 = collect(DB::select("SELECT SUM(a.remainder) AS remainder FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
+            //total bayar
+            $bayar2 = collect(DB::select("SELECT SUM(a.payment) AS bayar FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND SUBSTRING(a.receivable_date, 1, 10) BETWEEN '$request->from' AND '$request->to'"))->first();
         }
 
         $data = [
             'receivable' => $debt,
+            'receivable2' => $debt2,
             'total_piutang' => $total->total,
+            'total_piutang2' => $total2->total,
             'sisa_piutang' => $remainder->remainder,
+            'sisa_piutang2' => $remainder2->remainder,
             'total_bayar' => $bayar->bayar,
+            'total_bayar2' => $bayar2->bayar,
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
             'company' => Company_profile::find(1),
