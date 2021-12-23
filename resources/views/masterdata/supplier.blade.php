@@ -32,7 +32,9 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
+                        @canany(['update-suppliers', 'delete-suppliers'])
                         <th>Aksi</th>
+                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Telepone</th>
@@ -46,6 +48,7 @@
                 <tbody>
                     @foreach ($suppliers as $item)
                     <tr>
+                        @canany(['update-suppliers', 'delete-suppliers'])
                         <td>
                             @can('update-suppliers')
                             <a href="#" class="text-primary" onclick="editData({{$item->id}})"><i class="fas fa-edit"></i></a>
@@ -54,6 +57,7 @@
                             <a href="#" class="text-primary" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
                         </td>
+                        @endcanany
                         <td>{{$item->supplier_code}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->telephone}}</td>

@@ -35,23 +35,17 @@
         <tbody>
             <?php $ttl = 0; ?>
             @foreach ($user as $item)
-            @if ($item->status == 'take')
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$item->service_date}}</td>
-                <td>{{$item->transaction_code}}</td>
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->_servis->transaction_code}}</td>
                 <td>{{$item->_user->name}}</td>
-                <td>Rp. {{number_format($item->total / $item->_user->commission)}}</td>
+                <td>Rp. {{number_format($item->total)}}</td>
             </tr>
-            <?php
-                $a = $item->total / $item->_user->commission;
-                $ttl += $a;
-            ?>
-            @endif
             @endforeach
             <tr>
                 <td colspan="4" style="text-align: center;"><b>Total Komisi</b></td>
-                <td style="text-align: center;"><b>Rp. {{number_format($ttl)}}</b></td>
+                <td style="text-align: center;"><b>Rp. {{number_format($total)}}</b></td>
             </tr>
         </tbody>
     </table>

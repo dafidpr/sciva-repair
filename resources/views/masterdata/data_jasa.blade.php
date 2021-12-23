@@ -30,7 +30,9 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
+                        @canany(['update-repaire', 'delete-repaire'])
                         <th>Aksi</th>
+                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga</th>
@@ -39,6 +41,7 @@
                 <tbody>
                     @foreach ($repaire as $item)
                     <tr>
+                        @canany(['update-repaire', 'delete-repaire'])
                         <td>
                             @can('update-repaire')
                             <a href="#" onclick="editJasa({{$item->id}})" class="text-primary"><i class="fas fa-edit"></i></a>
@@ -47,6 +50,7 @@
                             <a href="#" onclick="hapusdatajasa({{$item->id}})" class="text-primary"><i class="fas fa-trash"></i></a>
                             @endcan
                         </td>
+                        @endcanany
                         <td>{{$item->repaire_code}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->price}}</td>

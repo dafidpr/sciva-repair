@@ -19,7 +19,7 @@ class GrafikController extends Controller
     public function index()
     {
         //
-        $laba = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(b.sub_total) AS total FROM sales a, sale_details b WHERE b.sale_id = a.id AND SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10)"));
+        $laba = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(b.sub_total) AS total FROM sales a, sale_details b WHERE b.sale_id = a.id AND SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10) LIMIT 20"));
 
         $sqllaris = collect(DB::select("SELECT a.name, COUNT(b.product_id) AS total FROM products a, sale_details b, sales c WHERE b.product_id = a.id AND b.sale_id = c.id GROUP BY b.product_id ORDER BY total DESC LIMIT 10"))->all();
 

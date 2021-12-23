@@ -19,7 +19,7 @@ class CreateStockOpnamesTable extends Migration
             $table->integer('stock');
             $table->integer('real_stock');
             $table->integer('difference_stock');
-            $table->decimal('value');
+            $table->decimal('value', 10, 2);
             $table->text('description');
             $table->timestamps();
         });

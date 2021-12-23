@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cash;
+use App\Models\Commision;
 use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Product;
@@ -198,6 +199,24 @@ class TransactionServiceController extends Controller
 
         // dd($request->all());
 
+        $persent = Auth::guard('web')->user()->commission / 100;
+        $t_com = $request->sub_total * $persent;
+
+        Commision::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'servis_id' => $request->transaction_id,
+            'total' => $t_com
+        ]);
+
+        $tech = User::find($request->technician);
+
+        $t_com_t = $request->sub_total * $tech->commission / 100;
+
+        Commision::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'servis_id' => $request->transaction_id,
+            'total' => $t_com_t
+        ]);
 
         Transaction_service::where('id', $request->transaction_id)->update([
             'user_id' => Auth::guard('web')->user()->id,
@@ -273,7 +292,7 @@ class TransactionServiceController extends Controller
             ]);
         }
 
-        return redirect('/admin/servis')->with('berhasil', 'Unit Telah berhasil diambil!!');
+        return redirect('/admin/servis/print_take/' . $request->id_sv);
     }
 
     /**
@@ -335,7 +354,7 @@ class TransactionServiceController extends Controller
         return redirect('/admin/servis/restore');
     }
 
-    public function batalServis($id)
+    public function batalServis($id, $st)
     {
         $ser = Transaction_service::where('id', $id)->first();
 
@@ -343,12 +362,22 @@ class TransactionServiceController extends Controller
             'user_id' => Auth::guard('web')->user()->id,
             'status' => 'cancelled'
         ]);
+
+        $persent = Auth::guard('web')->user()->commission / 100;
+        $t_com = $st * $persent;
+
+        Commision::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'servis_id' => $ser->id,
+            'total' => $t_com
+        ]);
+
         $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
         Cash::create([
             'user_id' => Auth::guard('web')->user()->id,
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
-            'nominal' => 0,
+            'nominal' => $st,
             'description' => 'Servis ' . $ser->transaction_code . " telah dibatalkan!!",
             'source' => 'expenditure'
         ]);
@@ -480,6 +509,7 @@ class TransactionServiceController extends Controller
             'company' => Company_profile::find(1),
             'service' => Transaction_service::find($id),
             'service_detail' => Transaction_service_detail::where('transaction_id', $id)->get(),
+            'footer' => Setting::where('options', 'footer_nota_servis')->first()
         ];
 
         // return view('cetak.servis_take', $data);

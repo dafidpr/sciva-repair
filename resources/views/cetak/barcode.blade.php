@@ -10,9 +10,9 @@
     @for ($i = 0; $i < $jumlah; $i++)
 
     <div style="text-align: center;">
-        <img style="width: 100%;" src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'EAN5')}}" alt="barcode" />
-        <span style="font-size: 20px;">{{$barcode}}</span>
-    </div><br><br>
+        <label style="font-size: 13px;">{{$barcode}}</label><br>
+        <img style="width: 25%;" src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'EAN13')}}" alt="barcode" />
+    </div><br>
     @endfor
 </body>
 </html>

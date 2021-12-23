@@ -16,6 +16,16 @@ class PermissionSeeder extends Seeder
     {
         //
         Permission::insert([
+            ['name' => 'read-services', 'guard_name' => 'web'],
+            ['name' => 'create-services', 'guard_name' => 'web'],
+            ['name' => 'update-services', 'guard_name' => 'web'],
+            ['name' => 'delete-services', 'guard_name' => 'web'],
+            ['name' => 'detail-services', 'guard_name' => 'web'],
+            ['name' => 'restore-services', 'guard_name' => 'web'],
+            ['name' => 'print-nota-services', 'guard_name' => 'web'],
+            ['name' => 'take-services', 'guard_name' => 'web'],
+            ['name' => 'call-services', 'guard_name' => 'web'],
+            //
             ['name' => 'read-products', 'guard_name' => 'web'],
             ['name' => 'create-products', 'guard_name' => 'web'],
             ['name' => 'update-products', 'guard_name' => 'web'],

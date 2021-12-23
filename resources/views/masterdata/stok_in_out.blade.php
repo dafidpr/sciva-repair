@@ -32,7 +32,9 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
+                        @can('delete-stocks')
                         <th>Aksi</th>
+                        @endcan
                         <th>Barcode</th>
                         <th>Nama</th>
                         <th>Jumlah</th>

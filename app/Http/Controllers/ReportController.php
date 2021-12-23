@@ -60,7 +60,7 @@ class ReportController extends Controller
         ];
 
         $pdf = PDF::loadView('cetak.lap_pembelian', $data)->setPaper('a4', 'potrait');
-        return $pdf->stream('PDF-Pembelian');
+        return $pdf->stream('PDF-Pembelian.pdf');
     }
 
     // dd(Carbon::parse($data->created_at)->format('Y-m-d'));
@@ -82,7 +82,7 @@ class ReportController extends Controller
         ];
 
         $pdf = PDF::loadView('cetak.lap_opname', $data)->setPaper('a4', 'potrait');
-        return $pdf->stream('PDF-Opname');
+        return $pdf->stream('PDF-Opname.pdf');
     }
 
     /**

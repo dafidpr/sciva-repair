@@ -11,11 +11,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="">Tanggal Awal</label>
-                            <input type="date" name="from" class="form-control">
+                            <input type="datetime-local" name="from" class="form-control">
                         </div>
                         <div class="col-sm-6">
                             <label for="">Tanggal Akhir</label>
-                            <input type="date" name="to" class="form-control">
+                            <input type="datetime-local" name="to" class="form-control">
                         </div>
                     </div>
                     <div>

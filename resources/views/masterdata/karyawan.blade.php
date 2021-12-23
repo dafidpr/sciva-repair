@@ -29,7 +29,9 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
+                        @canany(['update-users', 'delete-users'])
                         <th>Aksi</th>
+                        @endcanany
                         <th>Telephone</th>
                         <th>Nama</th>
                         <th>Username</th>
@@ -77,7 +79,9 @@
                     <tr>
                         {{-- <th width="10%">No</th> --}}
                         <th>Level</th>
+                        @canany(['update-roles', 'change-permissions', 'delete-roles'])
                         <th width="50%">aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 @foreach ($roles as $item)
