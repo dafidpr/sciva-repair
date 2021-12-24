@@ -35,25 +35,28 @@
                         <th>No HP</th>
                         <th>Alamat</th>
                         <th>Jenis</th>
-                        <th>Piutang</th>
+                        {{-- <th>Piutang</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pelanggan as $item)
                     <tr>
                         <td>
+                            @if ($item->umum != 'umum' and $item->address != 'umum')
+
                             @can('update-customers')
                             <a href="#" class="text-primary" onclick="editData({{$item->id}})"><i class="fas fa-edit"></i></a>
                             @endcan
                             @can('delete-customers')
                             <a href="#" class="text-primary" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
+                            @endif
                         </td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->telephone}}</td>
                         <td>{{$item->address}}</td>
                         <td>{{$item->type}}</td>
-                        <td>100000</td>
+                        {{-- <td>100000</td> --}}
                     </tr>
                     @endforeach
                 </tbody>

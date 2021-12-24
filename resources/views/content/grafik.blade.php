@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-sm-9">
+    <div class="">
         <div class="card">
             {{-- <div class="card-header bg-white">
             </div> --}}
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-9">
+    <div class="">
         <div class="card">
             {{-- <div class="card-header bg-white">
             </div> --}}

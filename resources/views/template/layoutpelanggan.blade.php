@@ -8,7 +8,7 @@
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesdesign" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('tmp/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('tmp/asset/images')}}/{{$company->logo}}">
 
     <!-- plugin css -->
     <link href="{{asset('tmp/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
@@ -191,7 +191,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Morvin.
+                            <script>document.write(new Date().getFullYear())</script> © Creadev.
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">

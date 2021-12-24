@@ -7,7 +7,10 @@
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesdesign" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <?php
+    $company = \App\Models\Company_profile::find(1);
+    ?>
+    <link rel="shortcut icon" href="{{asset('tmp/asset/images')}}/{{$company->logo}}">
 
     <!-- Bootstrap Css -->
     <link href="{{asset('tmp/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css">
@@ -37,8 +40,8 @@
 
 
                                     <div class="text-center">
-                                        <a href="index.html">
-                                            <img src="{{asset('tmp/assets/images/logo-dark.png')}}" height="22" alt="logo">
+                                        <a href="#" class="img-circle">
+                                            <img src="{{asset('tmp/asset/images')}}/{{$company->logo}}" style="border-radius: 20%;"  width="100px" alt="logo">
                                         </a>
 
                                         <h5 class="text-primary mb-2 mt-4">SCIVA REPAIR CENTER</h5>
@@ -94,7 +97,7 @@
 
                         <div class="mt-5 text-center text-white">
                             <p><a href="/" class="fw-bold text-white"> Kembali ke Homepage</a> </p>
-                            <p>© <script>document.write(new Date().getFullYear())</script>2021 Morvin. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                            <p>©2021-<script>document.write(new Date().getFullYear())</script> Creadev. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
                         </div>
                     </div>
                 </div>

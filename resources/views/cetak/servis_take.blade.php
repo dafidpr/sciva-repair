@@ -129,7 +129,7 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size:20px;">Terima kasih</p>
+<p style="text-align: center; font-size:20px;">{{$footer->value}}</p>
 
 </body>
 </html>

@@ -8,7 +8,11 @@
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesdesign" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('tmp/assets/images/favicon.ico')}}">
+    <?php
+    $company = \App\Models\Company_profile::where('id', 1)->first();
+    // dd($company->logo);
+    ?>
+    <link rel="shortcut icon" href="{{asset('tmp/asset/images')}}/{{$company->logo}}">
 
     <link href="{{asset('tmp/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('tmp/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet">
@@ -150,13 +154,16 @@
                             </a>
                         </li>
 
+                        @can('read-services')
                         <li>
                             <a href="/admin/servis" class=" waves-effect">
                                 <i class="fas fa-hammer"></i>
                                 <span>Servis</span>
                             </a>
                         </li>
+                        @endcan
 
+                        @canany(['create-sales', 'read-sales', 'create-purchases', 'read-purchases', 'read-debt', 'read-receivable'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-cart"></i>
@@ -183,7 +190,8 @@
                                 @endcan
                             </ul>
                         </li>
-
+                        @endcanany
+                        @canany(['read-products', 'read-repaire', 'read-suppliers', 'read-customers', 'read-users', 'read-opnames', 'read-stocks'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-desktop"></i>
@@ -213,14 +221,15 @@
                                 @endcan
                             </ul>
                         </li>
-    
+                        @endcanany
+                        @canany(['read-cash', 'read-ppn'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-money-bill-alt"></i>
                                 <span>Keuangan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                @can('read-cash', Model::class)
+                                @can('read-cash')
                                 <li><a href="/admin/kas">Kas</a></li>
                                 @endcan
                                 @can('read-ppn')
@@ -228,6 +237,8 @@
                                 @endcan
                             </ul>
                         </li>
+                        @endcanany
+                        @canany(['report-daily-journal', 'report-sales', 'report-purchases', 'report-opnames', 'report-stock-in-out', 'report-cash', 'report-debts-receivables', 'report-profit'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-file-alt"></i>
@@ -260,6 +271,7 @@
                                 @endcan
                             </ul>
                         </li>
+                        @endcanany
 
                         <li>
                             @can('read-grafik')
@@ -269,6 +281,7 @@
                             </a>
                             @endcan
                         </li>
+                        @canany(['generate-barcode-tools', 'backup-tools', 'delete-servis-tools', 'delete-transaction-tools'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-tools"></i>
@@ -289,6 +302,7 @@
                                 @endcan
                             </ul>
                         </li>
+                        @endcanany
                         <li>
                             @can('commission-users')
                             <a href="/admin/komisi" class=" waves-effect">
@@ -297,6 +311,7 @@
                             </a>
                             @endcan
                         </li>
+                        @canany(['footerNota-settings', 'formatWA-settings', 'formatSMS-settings', 'daylimit-settings', 'profile-settings'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-toggles"></i>
@@ -320,6 +335,7 @@
                                 @endcan
                             </ul>
                         </li>
+                        @endcanany
 
                     </ul>
                 </div>
@@ -369,7 +385,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Morvin.
+                            <script>document.write(new Date().getFullYear())</script> © Creadev.
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">

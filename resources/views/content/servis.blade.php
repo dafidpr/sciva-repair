@@ -196,8 +196,12 @@
             </div>
             <div class="col-md-6">
                 <div class="float-sm-end">
+                    @can('restore-services')
                     <a href="/admin/servis/restore" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
+                    @endcan
+                    @can('create-services')
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
+                    @endcan
                     {{-- modal --}}
                 </div>
             </div>
@@ -241,7 +245,7 @@
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="time" value="range" @if ($time == '') checked="" @endif>
+                    <input class="form-check-input" type="radio" name="time" value="range" @if ($time == 'range') checked="" @endif>
                     <label class="form-check-label">
                         <input type="date" class="form-control-sm" name="from"> s/d <input type="date" class="form-control-sm" name="to">
                     </label>
@@ -304,7 +308,9 @@
             <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
                 <thead>
                     <tr>
+                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
                         <th>aksi</th>
+                        @endcanany
                         <th>Tanggal</th>
                         <th>No Nota</th>
                         <th>Pelanggan</th>
@@ -319,21 +325,38 @@
                     $kode = $item->transaction_code;
                     ?>
                     <tr class="">
+                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
                         <td class="text-primary">
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
+                            @can('update-services')
                             <a href="/admin/servis/{{$item->id}}/edit"><i class="fas fa-edit"></i></a>
                             <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-money-bill"></i></a>
+                            @endcan
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
+
+                            @can('call-services')
                             <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')"><i class="fab fa-whatsapp"></i></a>
+                            @endcan
+
+                            @can('take-services')
                             <a href="#" onclick="takeUnit(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-shopping-cart"></i></a>
+                            @endcan
+
                             @elseif ($item->status == 'take')
+                            @can('print-nota-services')
                             <a href="/admin/servis/print_take/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
+                            @endcan
                             @endif
+                            @can('delete-services')
                             <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
+                            @endcan
+                            @can('detail-services')
                             <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}">
                                 <i class="fas fa-search"></i>
                             </a>
+                            @endcan
                         </td>
+                        @endcanany
                         <td>{{$item->service_date}}</td>
                         <td>{{$item->transaction_code}}</td>
                         <td>{{$item->_customer->name}}</td>

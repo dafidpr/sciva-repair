@@ -165,7 +165,9 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Hutang</th>
+                                    @can('detail-receivable')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>

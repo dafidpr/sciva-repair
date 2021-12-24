@@ -62,26 +62,26 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::prefix('servis')->group(function () {
-        Route::get('', [TransactionServiceController::class, 'index']);
-        Route::get('/restore', [TransactionServiceController::class, 'restore']);
+        Route::get('', [TransactionServiceController::class, 'index'])->middleware('can:read-services');
+        Route::get('/restore', [TransactionServiceController::class, 'restore'])->middleware('can:restore-services');
         Route::get('/{id}/select_customer', [TransactionServiceController::class, 'select_customer']);
         Route::get('/{id}/select_repaire', [TransactionServiceController::class, 'select_repaire']);
         Route::get('/{id}/detail_service', [TransactionServiceController::class, 'detail_service']);
-        Route::get('/{id}/edit', [TransactionServiceController::class, 'edit']);
+        Route::get('/{id}/edit', [TransactionServiceController::class, 'edit'])->middleware('can:update-services');
         Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
         Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
         Route::get('/{id}/json_service2', [TransactionServiceController::class, 'json_service2']);
         Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
         Route::get('/deletepermanent/{id?}', [TransactionServiceController::class, 'deletePermanent']);
         Route::get('/restoreall/{id?}', [TransactionServiceController::class, 'restoreall']);
-        Route::get('/batalServis/{id}', [TransactionServiceController::class, 'batalServis']);
-        Route::post('/create', [TransactionServiceController::class, 'store']);
-        Route::post('/takeUnit', [TransactionServiceController::class, 'takeUnit']);
+        Route::get('/batalServis/{id}/{st}', [TransactionServiceController::class, 'batalServis']);
+        Route::post('/create', [TransactionServiceController::class, 'store'])->middleware("can:create-services");
+        Route::post('/takeUnit', [TransactionServiceController::class, 'takeUnit'])->middleware('can:take-services');
         Route::post('/create_customer', [TransactionServiceController::class, 'create_customer']);
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
 
-        Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take']);
+        Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:print-nota-services');
     });
 
     Route::prefix('entry_penjualan')->group(function () {
@@ -125,6 +125,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/hapusdata/{id}', [ProductController::class, 'destroy'])->middleware('can:delete-products');
         Route::get('/detail/{id}', [ProductController::class, 'show']);
         Route::post('/editdata', [ProductController::class, 'update'])->middleware('can:update-products');
+        Route::post('/import_excel', [ProductController::class, 'import_excel'])->middleware('can:create-products');
     });
 
 

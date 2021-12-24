@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     {
         //
         $product = new Product();
-        $product->barcode = "00001";
+        $product->barcode = "0000123456";
         $product->name = "battery";
         $product->selling_price = 50000;
         $product->purchase_price = 45000;
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
         $product->save();
 
         $product = new Product();
-        $product->barcode = "00002";
+        $product->barcode = "000021234";
         $product->name = "case A";
         $product->selling_price = 50000;
         $product->purchase_price = 45000;
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
         $product->save();
 
         $product = new Product();
-        $product->barcode = "00003";
+        $product->barcode = "0000312345";
         $product->name = "case B";
         $product->selling_price = 50000;
         $product->purchase_price = 45000;
@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
         $product->save();
 
         $product = new Product();
-        $product->barcode = "00004";
+        $product->barcode = "0000412345";
         $product->name = "TouchScreen";
         $product->selling_price = 150000;
         $product->purchase_price = 100000;
@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
         $product->save();
 
         $product = new Product();
-        $product->barcode = "00005";
+        $product->barcode = "00005123456";
         $product->name = "earphone";
         $product->selling_price = 40000;
         $product->purchase_price = 30000;
@@ -71,7 +71,7 @@ class ProductSeeder extends Seeder
         $product->save();
 
         $product = new Product();
-        $product->barcode = "00006";
+        $product->barcode = "00006123456";
         $product->name = "Charger";
         $product->selling_price = 30000;
         $product->purchase_price = 25000;

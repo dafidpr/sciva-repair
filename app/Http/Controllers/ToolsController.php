@@ -74,7 +74,7 @@ class ToolsController extends Controller
     public function generate($id)
     {
         //
-        $aaa = \DNS1D::getBarcodeHTML($id, 'EAN5');;
+        $aaa = \DNS1D::getBarcodeHTML($id, 'EAN13');;
 
         return json_encode($aaa);
     }

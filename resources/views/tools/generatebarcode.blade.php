@@ -60,7 +60,7 @@
                 <form action="/admin/generatebarcode/update" method="post">
                     @csrf
                     <div>
-                        <label for="">BarcodeID (EAN5)</label>
+                        <label for="">BarcodeID (EAN13)</label>
                         <input type="text" name="barcode" id="barcode" class="form-control">
                     </div>
                     <div>
@@ -78,7 +78,7 @@
         </div>
         <div class="card mt-3">
             <div class="card-body">
-                <h6>View Barcode (EAN5)</h6>
+                <h6>View Barcode (EAN13)</h6>
                 <div id="viewBarcode">
                 </div>
             </div>

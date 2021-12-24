@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commision;
 use App\Models\Company_profile;
 use App\Models\Transaction_service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 
 class KomisiController extends Controller
 {
@@ -44,15 +46,15 @@ class KomisiController extends Controller
     {
         //
         $data = [
-            'user' => Transaction_service::where('user_id', $request->user)->whereBetween('service_date', [$request->from, $request->to])->get(),
-            'total' => Transaction_service::where('user_id', $request->user)->whereBetween('service_date', [$request->from, $request->to])->sum('total'),
+            'user' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$request->from, $request->to])->get(),
+            'total' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$request->from, $request->to])->sum('total'),
             'company' => Company_profile::find(1),
-            'datefrom' => $request->from,
-            'dateto' => $request->to,
+            'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
+            'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
         ];
 
         $pdf = PDF::loadView('cetak.lap_komisi', $data)->setPaper('a4', 'potrait');
-        return $pdf->stream('PDF-Stock');
+        return $pdf->stream('PDF-Stock.pdf');
     }
 
     /**

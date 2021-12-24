@@ -6,11 +6,11 @@
     {{-- <div class="card-header bg-white"> --}}
         {{-- </div> --}}
         <div class="card-body">
-        @can('create-product')
+        @can('create-products')
         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-plus"></i> Tambah Barang</a>
         @endcan
         {{-- <a href="" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> Export Barang</a> --}}
-        {{-- <a href="" class="btn btn-light btn-sm"><i class="fas fa-upload"></i> Import Barang</a> --}}
+        {{-- <a href="#" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#Import"><i class="fas fa-upload"></i> Import Barang</a> --}}
         <hr>
         @if (session('berhasil'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -32,7 +32,9 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
+                        @canany(['edit-products', 'delete-products'])
                         <th>Aksi</th>
+                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga beli</th>
@@ -45,10 +47,16 @@
                 <tbody>
                     @foreach ($barang as $item)
                     <tr>
+                        @canany(['update-products', 'delete-products'])
                         <td>
+                            @can('update-products')
                             <a href="#" class="text-primary" onclick="editProductA({{$item->id}})"><i class="fas fa-edit"></i></a>
+                            @endcan
+                            @can('delete-products')
                             <a href="#" class="text-primary" onclick="hapusdatabarang('{{$item->id}}')"><i class="fas fa-trash"></i></a>
+                            @endcan
                         </td>
+                        @endcanany
                         <td>{{$item->barcode}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->purchase_price}}</td>
@@ -222,6 +230,31 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 {{-- end-modals --}}
+
+{{-- Modal Import --}}
+<div id="Import" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Import Barang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/barang/import_excel" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <label for="">Pilih</label>
+                    <input type="file" class="form-control" name="file" required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    </div>
+                </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal Import --}}
 
 
 {{-- sweet alert --}}

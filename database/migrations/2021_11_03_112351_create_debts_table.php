@@ -16,9 +16,9 @@ class CreateDebtsTable extends Migration
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchase_id')->constrained('purchases')->onDelete('cascade')->onUpdate('cascade');
-            $table->decimal('total');
-            $table->decimal('payment');
-            $table->decimal('remainder');
+            $table->decimal('total', 10, 2);
+            $table->decimal('payment', 10, 2);
+            $table->decimal('remainder', 10, 2);
             $table->date('debt_date')->nullable();
             $table->date('due_date')->nullable();
             $table->enum('status', ['paid_off', 'not yet paid']);

@@ -198,7 +198,8 @@ function hargaService(b, a) {
 }
 function batalData() {
     var id = $('#transaction_id').val();
-    window.location = "/admin/servis/batalServis/" + id
+    var st = $('#subtot_jasa').val();
+    window.location = "/admin/servis/batalServis/" + id+"/"+st
 }
 
 function pilih_jasa_servis(e) {

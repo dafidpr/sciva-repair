@@ -62,7 +62,7 @@ class CompanyController extends Controller
                 'fax' => $request->fax,
                 'email' => $request->email,
                 'instagram' => $request->instagram,
-                'logo' => null,
+                // 'logo' => null,
             ]);
 
             return redirect()->back()->with('berhasil', 'Profile telah anda Ubah!!');

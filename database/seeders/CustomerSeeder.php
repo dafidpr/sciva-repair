@@ -26,21 +26,21 @@ class CustomerSeeder extends Seeder
         $cs->name = "pelanggan";
         $cs->telephone = "080123456789";
         $cs->address = "Jawa Timur";
-        $cs->password = bcrypt('pelanggan');
+        $cs->password = bcrypt('080123456789');
         $cs->type = "member";
         $cs->save();
         $cs = new Customer();
         $cs->name = "pelanggan2";
         $cs->telephone = "082123456789";
         $cs->address = "Jawa Barat";
-        $cs->password = bcrypt('pelanggan2');
+        $cs->password = bcrypt('082123456789');
         $cs->type = "umum";
         $cs->save();
         $cs = new Customer();
         $cs->name = "pelanggan";
         $cs->telephone = "083123456789";
         $cs->address = "Jawa Tengah";
-        $cs->password = bcrypt('pelanggan3');
+        $cs->password = bcrypt('083123456789');
         $cs->type = "umum";
         $cs->save();
     }
