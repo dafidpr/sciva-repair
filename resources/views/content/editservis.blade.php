@@ -59,6 +59,17 @@
                         <label for="">Estimasi Biaya</label>
                         <input type="number" name="estimated_cost" value="{{$ts->estimated_cost}}" class="form-control">
                     </div>
+                    <div class="col-md-6">
+                        <label for="">Status Perbaikan</label>
+                        <select class="form-select" name="status" aria-label="Default select example" required="">
+                            <option value="{{$ts->status}}">@if ($ts->status == 'proses') Proses @elseif($ts->status == 'waiting sparepart') Menunggu Sparepart @elseif($ts->status == 'finished') Selesai @elseif($ts->status == 'cancelled') Dibatalkan @elseif($ts->status == 'take') Diambil @endif</option>
+                            <option value="proses">Proses</option>
+                            <option value="waiting sparepart">Menunggu Sparepart</option>
+                            <option value="finished">Selesai</option>
+                            <option value="cancelled">Dibatalkan</option>
+                            <option value="take">Diambil</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mt-3">
                     <button class="btn btn-sm btn-primary">Simpan</button>

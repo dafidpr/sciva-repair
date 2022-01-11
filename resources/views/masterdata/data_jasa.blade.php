@@ -30,17 +30,20 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
-                        @canany(['update-repaire', 'delete-repaire'])
-                        <th>Aksi</th>
-                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga</th>
+                        @canany(['update-repaire', 'delete-repaire'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($repaire as $item)
                     <tr>
+                        <td>{{$item->repaire_code}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->price}}</td>
                         @canany(['update-repaire', 'delete-repaire'])
                         <td>
                             @can('update-repaire')
@@ -51,9 +54,6 @@
                             @endcan
                         </td>
                         @endcanany
-                        <td>{{$item->repaire_code}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->price}}</td>
                     </tr>
                     @endforeach
                 </tbody>

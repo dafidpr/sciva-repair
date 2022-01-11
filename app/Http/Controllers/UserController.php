@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         //
         $data = [
-            'user' => User::where('username', '!=', 'root')->get(),
+            'user' => User::with('roles')->where('username', '!=', 'root')->get(),
             'roles' => Role::where('name', '!=', 'developer')->get()
         ];
         return view('masterdata.karyawan', $data);
@@ -69,7 +69,7 @@ class UserController extends Controller
             'telephone' => $request->telephone,
             'address' => $request->address,
             'username' => $request->username,
-            'password' => bcrypt($request->name),
+            'password' => bcrypt($request->password),
             'commission' => $request->commission
         ]);
         $user->assignRole($request->role);

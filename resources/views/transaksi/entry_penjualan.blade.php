@@ -165,6 +165,8 @@
                                 <th>Barcode</th>
                                 <th>Name</th>
                                 <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Limit</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -175,7 +177,15 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->selling_price}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary" onclick="select_entry_product({{$item->id}})">Pilih</button>
+                                    @if ($item->stock == $item->limit || $item->stock < $item->limit)
+                                    <span class="btn btn-sm btn-danger">{{$item->stock}}</span>
+                                    @else
+                                    <span class="btn btn-sm btn-success">{{$item->stock}}</span>
+                                    @endif
+                                </td>
+                                <td><span class="btn btn-sm btn-danger">{{$item->limit}}</span></td>
+                                <td>
+                                    <button @if ($item->stock == 0) disabled='disabled' @endif class="btn btn-sm btn-primary" onclick="select_entry_product({{$item->id}})">Pilih</button>
                                 </td>
                             </tr>
                             @endforeach

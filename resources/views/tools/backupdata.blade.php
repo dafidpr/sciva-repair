@@ -13,6 +13,23 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <form action="/admin/backupdata/restore_db" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div>
+                        <label for="">Pilih File .sql</label>
+                        <input type="file" name="restore_db" class="form-control">
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">Restore</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

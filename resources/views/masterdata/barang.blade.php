@@ -29,24 +29,39 @@
         </div>
         @endif
         <div class="table-responsive">
-            <table class="table table-striped" style="font-size: 13;" id="stoklimit">
+            <table class="table table-striped" style="font-size: 13; width: 100%;" id="stoklimit">
                 <thead>
                     <tr>
-                        @canany(['edit-products', 'delete-products'])
-                        <th>Aksi</th>
-                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga beli</th>
                         <th>Harga jual</th>
                         <th>Harga member</th>
+                        <th>Supplier</th>
                         <th>Stok</th>
                         <th>Limit</th>
+                        @canany(['edit-products', 'delete-products'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($barang as $item)
                     <tr>
+                        <td>{{$item->barcode}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->purchase_price}}</td>
+                        <td>{{$item->selling_price}}</td>
+                        <td>{{$item->member_price}}</td>
+                        <td>{{$item->_supplier->name}}</td>
+                        <td>
+                            @if ($item->stock == $item->limit || $item->stock < $item->limit)
+                            <span class="btn btn-sm btn-danger">{{$item->stock}}</span>
+                            @else
+                            <span class="btn btn-sm btn-success">{{$item->stock}}</span>
+                            @endif
+                        </td>
+                        <td><span class="btn btn-sm btn-danger">{{$item->limit}}</span></td>
                         @canany(['update-products', 'delete-products'])
                         <td>
                             @can('update-products')
@@ -57,19 +72,6 @@
                             @endcan
                         </td>
                         @endcanany
-                        <td>{{$item->barcode}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->purchase_price}}</td>
-                        <td>{{$item->selling_price}}</td>
-                        <td>{{$item->member_price}}</td>
-                        <td>
-                            @if ($item->stock == $item->limit || $item->stock < $item->limit)
-                            <span class="btn btn-sm btn-danger">{{$item->stock}}</span>
-                            @else
-                            <span class="btn btn-sm btn-success">{{$item->stock}}</span>
-                            @endif
-                        </td>
-                        <td><span class="btn btn-sm btn-danger">{{$item->limit}}</span></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -106,17 +108,17 @@
                             @endif
                         </div>
                         <div>
-                            <label for="">Harga Jual</label>
-                            <input type="number" class="form-control" name="selling_price" placeholder="Harga Jual" required>
-                            @if ($errors->has('selling_price'))
-                            <span class="text-danger">{{ $errors->first('name_aspek') }}</span>
-                            @endif
-                        </div>
-                        <div>
                             <label for="">Harga Beli</label>
                             <input type="number" class="form-control" name="purchase_price" placeholder="Harga Beli" required>
                             @if ($errors->has('purchase_price'))
                             <span class="text-danger">{{ $errors->first('purchase_price') }}</span>
+                            @endif
+                        </div>
+                        <div>
+                            <label for="">Harga Jual</label>
+                            <input type="number" class="form-control" name="selling_price" placeholder="Harga Jual" required>
+                            @if ($errors->has('selling_price'))
+                            <span class="text-danger">{{ $errors->first('name_aspek') }}</span>
                             @endif
                         </div>
                         <div>
@@ -182,17 +184,17 @@
                             @endif
                         </div>
                         <div>
-                            <label for="">Harga Jual</label>
-                            <input type="number" class="form-control" name="selling_price" id="selling_price" placeholder="Harga Jual" required>
-                            @if ($errors->has('selling_price'))
-                            <span class="text-danger">{{ $errors->first('name_aspek') }}</span>
-                            @endif
-                        </div>
-                        <div>
                             <label for="">Harga Beli</label>
                             <input type="number" class="form-control" name="purchase_price" id="purchase_price" placeholder="Harga Beli" required>
                             @if ($errors->has('purchase_price'))
                             <span class="text-danger">{{ $errors->first('purchase_price') }}</span>
+                            @endif
+                        </div>
+                        <div>
+                            <label for="">Harga Jual</label>
+                            <input type="number" class="form-control" name="selling_price" id="selling_price" placeholder="Harga Jual" required>
+                            @if ($errors->has('selling_price'))
+                            <span class="text-danger">{{ $errors->first('name_aspek') }}</span>
                             @endif
                         </div>
                         <div>

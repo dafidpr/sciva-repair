@@ -11,11 +11,11 @@
     <!-- Small modal -->
     {{-- <button type="button" class="btn btn-primary btn-sm waves-effect waves-light">Modal demo</button> --}}
 
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal fade exampleModalScrollable" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Tambah Service</h5>
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                     </button>
@@ -86,20 +86,21 @@
                             <div class="col-sm-6">
                                 <div>
                                     <label for="">Pin/passcode</label>
-                                    <input type="text" name="passcode" class="form-control">
+                                    <input type="text" name="passcode" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div>
                                     <label for="">Catatan khusus</label>
-                                    <input type="text" name="notes" class="form-control">
+                                    <input type="text" name="notes" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div>
-                                <label for="">Estimasi Biaya</label>
-                                <input type="number" name="estimated_cost" value="{{old('estimated_cost')}}" class="form-control">
+                            <label for="">Estimasi Biaya</label>
+                            <div class="input-group mb-3">
+                                <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-estimasi-cost"><i class="fas fa-search"></i></button>
+                                <input type="number" name="estimated_cost" id="estimated_cost_total" value="{{old('estimated_cost')}}" class="form-control" required>
                             </div>
                         </div>
                         <div>
@@ -111,15 +112,18 @@
                             </select>
                         </div>
 
-                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>
+
+
 </td>
 {{-- End Create Modals --}}
 
@@ -136,23 +140,23 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <form action="/admin/servis/create_customer" method="post">
+                            <form action="" method="post">
                                 @csrf
                             <div class="row mt-2">
                                 <div class="col-sm-1">
                                     <label>Tambah Data</label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="telephone" placeholder="No Telephone">
+                                    <input type="text" class="form-control" name="telephone" id="custelephone" placeholder="No Telephone">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="name" placeholder="Nama">
+                                    <input type="text" class="form-control" name="name" id="cusname" placeholder="Nama">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="address" placeholder="Alamat">
+                                    <input type="text" class="form-control" name="address" id="cusaddress" placeholder="Alamat">
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</button>
+                                    <button type="button" onclick="create_cs_servis()" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</button>
                                 </div>
                             </div>
                             </form>
@@ -200,7 +204,7 @@
                     <a href="/admin/servis/restore" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Restore Data</a>
                     @endcan
                     @can('create-services')
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
                     @endcan
                     {{-- modal --}}
                 </div>
@@ -233,20 +237,20 @@
             <div class="col-md-5">
                 <h6>Waktu :</h6>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="time" value="all" @if ($time == 'all') checked="" @endif>
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="time" id="all-time" value="all" @if ($time == 'all') checked="" @endif>
+                    <label class="form-check-label" for="all-time">
                         Semua
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="time" value="now" @if ($time == 'now') checked="" @endif>
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="time" id="time-today" value="now" @if ($time == 'now') checked="" @endif>
+                    <label class="form-check-label" for="time-today">
                         Hari ini
                     </label>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="time" value="range" @if ($time == 'range') checked="" @endif>
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="time" id="time-range" value="range" @if ($time == 'range') checked="" @endif>
+                    <label class="form-check-label" for="time-range">
                         <input type="date" class="form-control-sm" name="from"> s/d <input type="date" class="form-control-sm" name="to">
                     </label>
                 </div>
@@ -257,41 +261,41 @@
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="proses" value="proses" @if ($proses == true) checked="" @endif>
-                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="proses" id="status-proses" value="proses" @if ($proses == true) checked="" @endif>
+                            <label class="form-check-label" for="status-proses">
                                 Dalam Proses
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="waiting_sparepart" value="waiting sparepart" @if ($waiting_sparepart == true) checked="" @endif>
-                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="status-ws" name="waiting_sparepart" value="waiting sparepart" @if ($waiting_sparepart == true) checked="" @endif>
+                            <label class="form-check-label" for="status-ws">
                                 Menunggu Sparepat
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="finished" value="finished" @if ($finished == true) checked="" @endif>
-                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="finished" id="finished" value="finished" @if ($finished == true) checked="" @endif>
+                            <label class="form-check-label" for="finished">
                                 Selesai
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-5">
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="cancelled" value="cancelled" @if ($cancelled
+                            <input class="form-check-input" type="checkbox" name="cancelled" id="status-batal" value="cancelled" @if ($cancelled
                             == true) checked="" @endif>
-                            <label class="form-check-label">
+                            <label class="form-check-label" for="status-batal">
                                 Dibatalkan
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="take" value="take" @if ($take == true) checked="" @endif>
-                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="take" id="status-take" value="take" @if ($take == true) checked="" @endif>
+                            <label class="form-check-label" for="status-take">
                                 Sudah Diambil
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="all_status" value="all_status" @if ($all_status == 'all_status') checked="" @endif>
-                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="semua-status" name="all_status" value="all_status" @if ($all_status == 'all_status') checked="" @endif>
+                            <label class="form-check-label" for="semua-status">
                                 Semua
                             </label>
                         </div>
@@ -308,15 +312,15 @@
             <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
                 <thead>
                     <tr>
-                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
-                        <th>aksi</th>
-                        @endcanany
                         <th>Tanggal</th>
                         <th>No Nota</th>
                         <th>Pelanggan</th>
                         <th>Unit</th>
                         <th>No seri</th>
                         <th>Status</th>
+                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
+                        <th>aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -325,6 +329,29 @@
                     $kode = $item->transaction_code;
                     ?>
                     <tr class="">
+                        <td>{{$item->service_date}}</td>
+                        <td>{{$item->transaction_code}}</td>
+                        <td>{{$item->_customer->name}}</td>
+                        <td>{{$item->unit}}</td>
+                        <td>{{$item->serial_number}}</td>
+                        <td>
+                            @if ($item->status == 'proses')
+
+                            <span class="bg-primary badge" style="font-size: 13px;">Dalam Proses</span>
+                            @elseif ($item->status == 'waiting sparepart')
+
+                            <span class="bg-warning badge" style="font-size: 13px;">Menunggu Sparepat</span>
+                            @elseif($item->status == 'finished')
+
+                            <span class="bg-success badge" style="font-size: 13px;">Selesai</span>
+                            @elseif($item->status == 'cancelled')
+
+                            <span class="bg-danger badge" style="font-size: 13px;">Dibatalkan</span>
+                            @elseif($item->status == 'take')
+
+                            <span class="bg-secondary badge" style="font-size: 13px;">Sudah diambil</span>
+                            @endif
+                        </td>
                         @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
                         <td class="text-primary">
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
@@ -332,10 +359,19 @@
                             <a href="/admin/servis/{{$item->id}}/edit"><i class="fas fa-edit"></i></a>
                             <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-money-bill"></i></a>
                             @endcan
+
+                            @can('print-nota-services')
+                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
+                            @endcan
+
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
 
                             @can('call-services')
                             <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')"><i class="fab fa-whatsapp"></i></a>
+                            @endcan
+
+                            @can('print-nota-services')
+                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
                             @endcan
 
                             @can('take-services')
@@ -351,35 +387,12 @@
                             <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
                             @endcan
                             @can('detail-services')
-                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}">
+                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}" data-alamat="{{$item->_customer->address}}">
                                 <i class="fas fa-search"></i>
                             </a>
                             @endcan
                         </td>
                         @endcanany
-                        <td>{{$item->service_date}}</td>
-                        <td>{{$item->transaction_code}}</td>
-                        <td>{{$item->_customer->name}}</td>
-                        <td>{{$item->unit}}</td>
-                        <td>{{$item->serial_number}}</td>
-                        <td>
-                            @if ($item->status == 'proses')
-
-                            <span class="bg-primary badge">Dalam Proses</span>
-                            @elseif ($item->status == 'waiting sparepart')
-
-                            <span class="bg-warning badge">Menunggu Sparepat</span>
-                            @elseif($item->status == 'finished')
-
-                            <span class="bg-success badge">Selesai</span>
-                            @elseif($item->status == 'cancelled')
-
-                            <span class="bg-danger badge">Batal</span>
-                            @elseif($item->status == 'take')
-
-                            <span class="bg-secondary badge">Sudah diambil</span>
-                            @endif
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -389,12 +402,13 @@
 </div>
 
 
+
 {{-- Modal Edit Status Service --}}
-<div class="modal fade" id="editStatusService" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+<div class="modal fade editStatusService" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Harga Service</h5>
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Harga Servis</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
@@ -442,7 +456,7 @@
                             <label class="control-label">Teknisi</label>
 
                             <select class="select2 form-control select2-multiple" name="technician"  id="technician" style="width: 100%;"
-                              data-placeholder="Pilih Teknisi">
+                              data-placeholder="Pilih Teknisi" required>
                               <option value=""  data-price="0">-pilih-</option>
                                 @foreach ($user as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -557,16 +571,19 @@
                         </div>
 
                     </div>
-                </div>
+
                 <div class="modal-footer">
                     <button type="button" onmousemove="sum()" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
                     <a href="#" onclick="batalData()" class="btn btn-danger" data-bs-dismiss="modal">Batalkan</a>
                     <button type="submit" onmousemove="sum()" class="btn btn-primary">Selesai</button>
                 </div>
             </form>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+
+
 {{-- End Modal Edit Status Service --}}
 {{-- Detail Modal --}}
 <div class="modal fade" id="DetailModals" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
@@ -582,54 +599,56 @@
                 <table class="table table-responsive">
                     <tbody>
                         <tr>
-                            <td><b>Nota</b></td>
-                            <td>:</td>
+                            <td><b>Tanggal Servis</b></td>
+                            <td><span id="dtgl_servis"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>No. Nota</b></td>
                             <td><span id="dnota"></span></td>
                         </tr>
                         <tr>
-                            <td><b>Telephone</b></td>
-                            <td>:</td>
-                            <td><span id="dtelephone"></span></td>
-                        </tr>
-                        <tr>
                             <td><b>Pelanggan</b></td>
-                            <td>:</td>
                             <td><span id="dcustomers"></span></td>
                         </tr>
                         <tr>
+                            <td><b>Alamat Pelanggan</b></td>
+                            <td><span id="dalamat"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>No Handphone</b></td>
+                            <td><span id="dtelephone"></span></td>
+                        </tr>
+                        <tr>
                             <td><b>Unit</b></td>
-                            <td>:</td>
                             <td><span id="dunit"></span></td>
                         </tr>
                         <tr>
-                            <td><b>Seri</b></td>
-                            <td>:</td>
+                            <td><b>No. Seri</b></td>
                             <td><span id="dseri"></span></td>
                         </tr>
                         <tr>
                             <td><b>Keluhan</b></td>
-                            <td>:</td>
                             <td><span id="dcomplient"></span></td>
                         </tr>
                         <tr>
                             <td><b>Kelengkapan</b></td>
-                            <td>:</td>
                             <td><span id="dcompletenes"></span></td>
                         </tr>
                         <tr>
-                            <td><b>Passcode</b></td>
-                            <td>:</td>
-                            <td><span id="dpasscode"></span></td>
-                        </tr>
-                        <tr>
                             <td><b>Catatan Khusus</b></td>
-                            <td>:</td>
                             <td><span id="dnotes"></span></td>
                         </tr>
                         <tr>
-                            <td><b>Estimasi Biaya</b></td>
-                            <td>:</td>
-                            <td><span id="destimated_cost"></span></td>
+                            <td><b>Biaya</b></td>
+                            <td><span id="dtotal"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Status Perbaikan</b></td>
+                            <td><span id="dstatus"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tanggal Pengambilan</b></td>
+                            <td><span id="dtake"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -643,11 +662,12 @@
 </div>
 {{-- End Detail Modal --}}
 {{-- Payment Servis --}}
-<div class="modal fade" id="takeUnit" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+
+<div class="modal fade takeUnit" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0" id="takeUnit">Pengambilan Unit</h5>
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Pengambilan Unit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
@@ -694,12 +714,13 @@
                         <label for="">Kembalian</label>
                         <input type="number" class="form-control" name="cashback" id="t_cashback" readonly>
                     </div>
-                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
@@ -730,6 +751,135 @@
   </div>
 {{-- End Modal Call Customer --}}
 
+{{-- Modal for choose estimated chost --}}
+<div class="modal fade bs-estimasi-cost" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Estimasi Biaya</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="">
+                    <div class="mb-3">
+                        <label class="control-label">Jasa</label>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-lg-js"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">Name Jasa</label>
+                        <input type="text" class="form-control" name="jasa_name" id="jasa_name" readonly>
+                        <input type="hidden" class="form-control" name="jasa_id" id="jasa_id" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="jasa_price" id="jasa_price" readonly>
+                    </div>
+                    <div class="mt-3">
+                        <button type="button" onclick="tambahJasaService()" class="btn btn-sm btn-success">Tambah</button>
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-bordered" width="100%" id="jasa_servis_op" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Harga</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_jasa_servis_op">
+
+                    </tbody>
+                </table>
+
+                <hr>
+                <div class="">
+                    <div class="mb-3">
+                        <label class="control-label">Sparepart</label>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-sparepart"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">item</label>
+                        <input type="text" class="form-control" name="item_product" id="item_product" readonly>
+                        <input type="hidden" class="form-control" name="item_product" id="id_product" readonly>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="">Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="item_price" id="item_price" readonly>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">qty</label>
+                        <input type="text" class="form-control" name="qty_prod" id="qty_prod">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Diskon (Rp.)</label>
+                        <input type="number" class="form-control" value="0" name="discount" id="discount_prod">
+                    </div>
+                    <div class="mt-3">
+                        <button type="button" onclick="tambahSparepartService()" class="btn btn-sm btn-success">Tambah</button>
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-bordered" width="100%" id="table_sparepart" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Diskon</th>
+                            <th>Subtotal</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_sparepart">
+
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">Total Sparepart</label>
+                        <input type="number" class="form-control" name="subtot_prod" value="0" id="subtot_prod" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Total jasa</label>
+                        <input type="text" class="form-control" name="subtot_jasa" value="0" id="subtot_jasa" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Diskon (Rp.)</label>
+                        <input type="text" class="form-control" name="total_discount" value="0" id="total_discount" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Total Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="sub_total" id="sub_total" readonly required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" onclick="estimate_cost_choose()" class="btn btn-primary">Save changes</button>
+                    </div>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal --}}
+
 {{-- Modal Jasa --}}
 <div class="modal fade bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -754,7 +904,7 @@
                             @foreach ($repaire as $item)
                             <tr>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->price}}</td>
+                                <td>{{number_format($item->price)}}</td>
                                 <td>
                                     <button onclick="pilih_jasa_servis({{$item->id}})" class="btn btn-sm btn-success">Pilih</button>
                                 </td>
@@ -787,6 +937,7 @@
                                 <th>Barcode</th>
                                 <th>Name</th>
                                 <th>Harga</th>
+                                <th>Stock</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -795,7 +946,8 @@
                             <tr>
                                 <td>{{$item->barcode}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->selling_price}}</td>
+                                <td>{{number_format($item->selling_price)}}</td>
+                                <td>{{$item->stock}}</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary" onclick="pilih_sparepart_servis({{$item->id}})">Pilih</button>
                                 </td>
@@ -809,6 +961,8 @@
     </div><!-- /.modal-dialog -->
 </div>
 {{-- End Modal Sparepart --}}
+
+
 
 
 <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>

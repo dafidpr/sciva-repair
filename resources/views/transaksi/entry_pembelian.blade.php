@@ -176,7 +176,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h4 class="text-center">Pilih Barang</h4>
+                {{-- <h4 class="text-center">Pilih Barang</h4><br> --}}
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#tambahBarang"><i class="fas fa-plus"></i> Tambah Barang</button>
+                <hr>
                 <div class="table-responsive">
                     <table class="table table-striped" style="width: 100%; font-size:13px;" id="piutang">
                         <thead>
@@ -319,6 +321,81 @@
     </div><!-- /.modal-dialog -->
 </div>
 {{-- End Modal Check Out --}}
+
+{{-- Modal Tambah Barang --}}
+<div id="tambahBarang" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Tambah Barang</h5>
+            </div>
+            <div class="modal-body">
+            <form action="" method="post">
+                    @csrf
+                    <div>
+                        <label for="">Barcode</label>
+                        <input type="text" class="form-control" id="tp_barcode" placeholder="Barcode" required>
+                        @if ($errors->has('barcode'))
+                        <span class="text-danger">{{ $errors->first('barcode') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">Nama</label>
+                        <input type="text" class="form-control" id="tp_name" placeholder="Nama Barang" required>
+                        @if ($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">Harga Beli</label>
+                        <input type="number" class="form-control" id="tp_purchase_price" placeholder="Harga Beli" required>
+                        @if ($errors->has('purchase_price'))
+                        <span class="text-danger">{{ $errors->first('purchase_price') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">Harga Jual</label>
+                        <input type="number" class="form-control" id="tp_selling_price" placeholder="Harga Jual" required>
+                        @if ($errors->has('selling_price'))
+                        <span class="text-danger">{{ $errors->first('name_aspek') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">Harga Member</label>
+                        <input type="number" class="form-control" id="tp_member_price" placeholder="Harga Member" required>
+                        @if ($errors->has('member_price'))
+                        <span class="text-danger">{{ $errors->first('member_price') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">limit</label>
+                        <input type="number" class="form-control" id="tp_limit" placeholder="limit" required>
+                        @if ($errors->has('limit'))
+                        <span class="text-danger">{{ $errors->first('limit') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="">Supplier</label>
+                        <select class="form-select" name="tp_supplier_id" id="tp_supplier_id" aria-label="Default select example" required>
+                            <option value="" selected>Pilih...</option>
+                            @foreach ($supplier as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('supplier_id'))
+                        <span class="text-danger">{{ $errors->first('supplier_id') }}</span>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="tambahProductEpur()" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal tambah barang --}}
 
 {{-- Javascript --}}
 <script src="{{asset('tmp/javascript/entryPembelian.js')}}"></script>

@@ -29,7 +29,7 @@ class TransactionServiceController extends Controller
     public function index()
     {
         //
-        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 15, 'prefix' => 'SRV' . date('dmY'), 'reset_on_prefix_change' => true]);
+        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 12, 'prefix' => 'SRV' . date('dmy'), 'reset_on_prefix_change' => true]);
         //output: INV-000001
 
         $data = [
@@ -90,6 +90,15 @@ class TransactionServiceController extends Controller
         $data = Transaction_service::where('transaction_code', $id)->first();
         return json_encode($data);
     }
+    public function json_service3($id)
+    {
+        //
+        $data = [
+            'transact' => Transaction_service::where('transaction_code', $id)->first(),
+            'bt' => Setting::where('options', 'batas_servis')->first()
+        ];
+        return json_encode($data);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -105,12 +114,12 @@ class TransactionServiceController extends Controller
             'customer_id' => $request->id_customer,
             'user_id' => Auth::guard('web')->user()->id,
             'transaction_code' => $request->transaction_code,
-            'unit' => $request->unit,
+            'unit' => ucwords($request->unit),
             'serial_number' => $request->serial_number,
-            'complient' => $request->complient,
-            'completenes' => $request->unit,
+            'complient' => ucwords($request->complient),
+            'completenes' => ucwords($request->completenes),
             'passcode' => $request->passcode,
-            'notes' => $request->notes,
+            'notes' => ucwords($request->notes),
             'service_date' => date("Y-m-d"),
             'estimated_cost' => $request->estimated_cost,
             'pickup_date' => null,
@@ -120,26 +129,39 @@ class TransactionServiceController extends Controller
             'status' => $request->status,
             'technician' => null
         ]);
+        // $company = Company_profile::find(1);
+        // $footer = Setting::where('options', 'footer_nota_servis')->first();
+
+        // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
+        // return $pdf->stream('Struk_service');
+
+        return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
+    }
+
+    public function service_masuk($id)
+    {
+        $service = Transaction_service::find($id);
         $company = Company_profile::find(1);
         $footer = Setting::where('options', 'footer_nota_servis')->first();
 
-        $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
-        return $pdf->stream('Struk_service');
-
-        // return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
+        return view('cetak.servismasuk', compact('service', 'company', 'footer'));
+        // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
+        // return $pdf->stream('Struk_service');
     }
 
-    public function create_customer(Request $request)
+    public function create_customer($telephone, $name, $address, Request $request)
     {
-        Customer::create([
-            'name' => $request->name,
-            'telephone' => $request->telephone,
-            'address' => $request->address,
-            'password' => $request->telephone,
+        $cus = Customer::create([
+            'name' => $name,
+            'telephone' => $telephone,
+            'address' => $address,
+            'password' => bcrypt($telephone),
             'type' => 'umum',
         ]);
 
-        return redirect('/admin/servis')->with('berhasil', 'Anda berhasil menambah Data Pelanggan!!');
+        return json_encode($cus);
+
+        // return redirect('/admin/servis')->with('berhasil', 'Anda berhasil menambah Data Pelanggan!!');
     }
 
     public function serviceSelesai(request $request)
@@ -159,39 +181,61 @@ class TransactionServiceController extends Controller
 
         $data = $request->all();
 
-        //input sparepart
-        if (count($data['input_product_id']) > 0) {
-            foreach ($data['input_product_id'] as $key => $i) {
-                $product = $data['input_product_id'][$key];
+        if ($request->input_product_id != null) {
 
-                // dd($product);
-                Transaction_service_detail::create([
-                    'transaction_id' => $request->transaction_id,
-                    'repaire_id' => null,
-                    'sparepart_id' => $request->input_product_id[$key],
-                    'total' => $request->input_product_total[$key],
-                    'qty' => $request->input_product_qty[$key],
-                    'discount' => $request->input_product_dis[$key],
-                    'sub_total' => $request->input_product_subtot[$key],
-                ]);
+            //input sparepart
+            if (count($data['input_product_id']) > 0) {
+                foreach ($data['input_product_id'] as $key => $i) {
+                    $product = $data['input_product_id'][$key];
+
+                    // dd($product);
+                    Transaction_service_detail::create([
+                        'transaction_id' => $request->transaction_id,
+                        'repaire_id' => null,
+                        'sparepart_id' => $request->input_product_id[$key],
+                        'total' => $request->input_product_total[$key],
+                        'qty' => $request->input_product_qty[$key],
+                        'discount' => $request->input_product_dis[$key],
+                        'sub_total' => $request->input_product_subtot[$key],
+                    ]);
+                }
+            }
+
+            if (count($data['input_product_qty']) > 0) {
+                foreach ($data['input_product_qty'] as $item => $v) {
+                    $p = Product::where('id', $data['input_product_id'][$item])->get();
+                    foreach ($p as $key) {
+                        # code...
+                        $updateqtyproduct = $key->stock - $data['input_product_qty'][$item];
+                    }
+                    $q = [
+                        'stock' => $updateqtyproduct
+                    ];
+
+                    Product::where('id', $data['input_product_id'][$item])->update($q);
+                    // dd($value);
+                }
             }
         }
 
-        //input Jasa
-        if (count($data['input_product_id']) > 0) {
-            foreach ($data['input_product_id'] as $key => $i) {
-                $product = $data['input_product_id'][$key];
+        if ($request->input_jasa_id != null) {
 
-                // dd($product);
-                Transaction_service_detail::create([
-                    'transaction_id' => $request->transaction_id,
-                    'repaire_id' => $request->input_jasa_id[$key],
-                    'sparepart_id' => null,
-                    'total' => $request->input_jasa_price[$key],
-                    'qty' => 1,
-                    'discount' => null,
-                    'sub_total' => $request->input_jasa_price[$key],
-                ]);
+            //input Jasa
+            if (count($data['input_jasa_id']) > 0) {
+                foreach ($data['input_jasa_id'] as $key => $i) {
+                    $product = $data['input_jasa_id'][$key];
+
+                    // dd($product);
+                    Transaction_service_detail::create([
+                        'transaction_id' => $request->transaction_id,
+                        'repaire_id' => $request->input_jasa_id[$key],
+                        'sparepart_id' => null,
+                        'total' => $request->input_jasa_price[$key],
+                        'qty' => 1,
+                        'discount' => null,
+                        'sub_total' => $request->input_jasa_price[$key],
+                    ]);
+                }
             }
         }
 
@@ -314,6 +358,7 @@ class TransactionServiceController extends Controller
             'passcode' => $request->passcode,
             'notes' => $request->notes,
             'estimated_cost' => $request->estimated_cost,
+            'status' => $request->status,
         ]);
         return redirect('/admin/servis')->with('berhasil', 'Anda telah mengubah data!!');
     }
@@ -387,7 +432,7 @@ class TransactionServiceController extends Controller
 
     public function filter(Request $request)
     {
-        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 15, 'prefix' => 'SRV' . date('dmY'), 'reset_on_prefix_change' => true]);
+        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 12, 'prefix' => 'SRV' . date('dmy'), 'reset_on_prefix_change' => true]);
         //output: INV-000001
         // dd($request->all());
         if ($request->time == 'all') {
@@ -509,11 +554,11 @@ class TransactionServiceController extends Controller
             'company' => Company_profile::find(1),
             'service' => Transaction_service::find($id),
             'service_detail' => Transaction_service_detail::where('transaction_id', $id)->get(),
-            'footer' => Setting::where('options', 'footer_nota_servis')->first()
+            'footer' => Setting::where('options', 'footer_nota_servis_take')->first()
         ];
 
-        // return view('cetak.servis_take', $data);
-        $pdf = PDF::loadView('cetak.servis_take', $data);
-        return $pdf->stream('Struk_service');
+        return view('cetak.servis_take', $data);
+        // $pdf = PDF::loadView('cetak.servis_take', $data);
+        // return $pdf->stream('Struk_service');
     }
 }

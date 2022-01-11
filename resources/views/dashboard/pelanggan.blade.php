@@ -100,7 +100,7 @@
             <div class="card-body">
                 <h4>Data Servis</h4><hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="piutang" style="font-size: 13px;">
+                    <table class="table table-bordered" id="piutang" width="100%" style="font-size: 13px;">
                         <thead>
                             <tr>
                                 <th>Kode</th>
@@ -151,7 +151,7 @@
             <div class="card-body">
                 <h4>Data Hutang</h4><hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
+                    <table class="table table-bordered" id="stoklimit" width="100%" style="font-size: 13px;">
                         <thead>
                             <tr>
                                 <th>NO</th>

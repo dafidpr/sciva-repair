@@ -26,9 +26,10 @@ class DashboardController extends Controller
     {
         //
         $sqllaris = collect(DB::select("SELECT a.name, COUNT(b.product_id) AS total FROM products a, sale_details b, sales c WHERE b.product_id = a.id AND b.sale_id = c.id GROUP BY b.product_id ORDER BY total DESC LIMIT 10"))->all();
-        $csbest = collect(DB::select("SELECT b.name, COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id GROUP BY a.customer_id ORDER BY total DESC"))->all();
+        $csbest = collect(DB::select("SELECT b.name, COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id GROUP BY a.customer_id ORDER BY total DESC LIMIT 10"))->all();
         $data = [
             'servisMasuk' => Transaction_service::paginate('10'),
+            'dalamProses' => Transaction_service::where('status', 'proses')->paginate('10'),
             'servisSelesai' => Transaction_service::where('status', 'finished')->paginate('10'),
             'waitingSparepart' => Transaction_service::where('status', 'waiting sparepart')->paginate('10'),
             'servisBatal' => Transaction_service::where('status', 'cancelled')->paginate('10'),
@@ -38,7 +39,8 @@ class DashboardController extends Controller
             'csbest' => $csbest,
             'historysale' => Sale::latest()->paginate('10'),
             'historyservis' => Transaction_service::latest()->paginate('10'),
-            'historylogin' => User::where('username', '!=', 'root')->latest()->paginate('10'),
+            'historyservisdiambil' => Transaction_service::where('status', 'take')->orderBy('updated_at', 'desc')->paginate('10'),
+            'historylogin' => User::where('username', '!=', 'root')->orderBy('login_at', 'desc')->paginate('10'),
         ];
         return view('dashboard.user', $data);
     }

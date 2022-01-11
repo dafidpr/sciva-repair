@@ -29,7 +29,7 @@ function supplierForPurchase(e) {
     $.ajax({
         url: "/admin/daftar_pembelian/" + e + "/select_supplier",
         type: "get",
-        success: function(data) {
+        success: function (data) {
             var obj = JSON.parse(data);
             $('#id_supplier').val(obj.id);
             $('#name_supplier').val(obj.name);
@@ -43,7 +43,7 @@ function productForPurchase(e) {
     $.ajax({
         url: "/admin/stockopname/" + e + "/select_product",
         type: "get",
-        success: function(data) {
+        success: function (data) {
             var obj = JSON.parse(data);
             $('#id_product').val(obj.id);
             $('#barcode').val(obj.barcode);
@@ -56,7 +56,7 @@ function productForPurchase(e) {
     })
 }
 
-function inputPurchase(){
+function inputPurchase() {
     var id_product = document.getElementById('id_product')
     var id_supplier = document.getElementById('id_supplier')
     var name_supplier = document.getElementById('name_supplier')
@@ -66,40 +66,40 @@ function inputPurchase(){
     var sale_price = document.getElementById('sale_price')
     var bonus = document.getElementById('bonus')
 
-    if(quantity_product.value == ""){
+    if (quantity_product.value == "") {
         alert('Quantity Tidak boleh kosong!!');
-    }else{
+    } else {
 
-    if(localStorage.data_purchase && localStorage.id_data){
-        data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
-        id_data = JSON.parse(localStorage.getItem('id_data'))
-    }else{
+        if (localStorage.data_purchase && localStorage.id_data) {
+            data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
+            id_data = JSON.parse(localStorage.getItem('id_data'))
+        } else {
 
-        var data_purchase = []
-        var id_data = 0
-    }
+            var data_purchase = []
+            var id_data = 0
+        }
 
-    var total = purchase_price.value * quantity_product.value
+        var total = purchase_price.value * quantity_product.value
 
-    //Menjadikan satu data
+        //Menjadikan satu data
 
-    id_data++
+        id_data++
 
-    data_purchase.push({
-        id: id_data,
-        id_product:id_product.value,
-        name_product:name_product.value,
-        barcode:barcode.value,
-        quantity_product:quantity_product.value,
-        purchase_price:purchase_price.value,
-        sale_price:sale_price.value,
-        total:total,
-    })
+        data_purchase.push({
+            id: id_data,
+            id_product: id_product.value,
+            name_product: name_product.value,
+            barcode: barcode.value,
+            quantity_product: quantity_product.value,
+            purchase_price: purchase_price.value,
+            sale_price: sale_price.value,
+            total: total,
+        })
 
-    localStorage.setItem('data_purchase', JSON.stringify(data_purchase))
-    localStorage.setItem('id_data', id_data)
+        localStorage.setItem('data_purchase', JSON.stringify(data_purchase))
+        localStorage.setItem('id_data', id_data)
 
-    tbody.innerHTML += `<tr>
+        tbody.innerHTML += `<tr>
                 <td>${barcode.value} <input type="hidden" name="i_id_product[]" value="${id_product.value}" class="form-control"></td>
                 <td>${name_product.value} </td>
                 <td>${purchase_price.value} <input type="hidden" name="i_purchase_price[]" value="${purchase_price.value}" class="form-control"></td>
@@ -110,14 +110,14 @@ function inputPurchase(){
                 </td>
                 <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${id_data})"><i class="fas fa-pencil-alt"></i> </button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${id_data})"><i class="fas fa-trash-alt del_pur_y"></i> </button></td>
             </tr>`
-    // location.reload()
-    changeTotal()
+        // location.reload()
+        changeTotal()
 
 
     }
 }
 
-function removePurchase(a){
+function removePurchase(a) {
     if (localStorage.data_purchase && localStorage.id_data) {
         data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
 
@@ -135,8 +135,8 @@ function removePurchase(a){
 }
 // var table = document.getElementById('stocklimit')
 const table = document.querySelector('table')
-function onDelete(e){
-    if(!e.target.classList.contains('del_pur_y')){
+function onDelete(e) {
+    if (!e.target.classList.contains('del_pur_y')) {
         return;
     }
     // alert('click the button');
@@ -147,14 +147,14 @@ function onDelete(e){
 }
 table.addEventListener('click', onDelete);
 
-function editPurchase(a){
+function editPurchase(a) {
     if (localStorage.data_purchase && localStorage.id_data) {
 
         data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
 
         idx_data = 0
-        for(i in data_purchase){
-            if(data_purchase[i].id == a){
+        for (i in data_purchase) {
+            if (data_purchase[i].id == a) {
                 document.getElementById('e_id_product').value = data_purchase[i].id_product
                 document.getElementById('e_id').value = data_purchase[i].id
                 document.getElementById('e_barcode').value = data_purchase[i].barcode
@@ -172,7 +172,7 @@ function editPurchase(a){
     }
 }
 
-function updatePurchase(){
+function updatePurchase() {
     var barcode = document.getElementById('e_barcode').value
     var id = document.getElementById('e_id').value
     var id_product = document.getElementById('e_id_product').value
@@ -187,12 +187,12 @@ function updatePurchase(){
     data_purchase.push({
         id: id,
         id_product: id_product,
-        name_product:name_product,
-        barcode:barcode,
-        quantity_product:quantity,
-        purchase_price:purchase_price,
-        sale_price:sale_price,
-        total:hasil,
+        name_product: name_product,
+        barcode: barcode,
+        quantity_product: quantity,
+        purchase_price: purchase_price,
+        sale_price: sale_price,
+        total: hasil,
     })
     localStorage.setItem('data_purchase', JSON.stringify(data_purchase))
 
@@ -203,25 +203,24 @@ function updatePurchase(){
 function changeTotal() {
     var table = document.querySelector("table"), sumHsl = 0;
     var i_total = document.getElementById("i_total");
-    for(var t = 1; t < table.rows.length; t++)
-    {
+    for (var t = 1; t < table.rows.length; t++) {
         sumHsl = sumHsl + parseInt(table.rows[t].cells[5].innerHTML);
     }
     // console.log(sumHsl);
-        document.getElementById("subtot").innerText = sumHsl;
-        document.getElementById("i_grandtotal").value = sumHsl;
+    document.getElementById("subtot").innerText = sumHsl;
+    document.getElementById("i_grandtotal").value = sumHsl;
 }
 
-function purchase_cashback(){
+function purchase_cashback() {
     var grandtotal = document.getElementById('i_grandtotal').value
     var payment = document.getElementById('i_payment').value
     var finallyTotal = payment - grandtotal
 
 
-    if(!isNaN(finallyTotal)){
+    if (!isNaN(finallyTotal)) {
 
         document.getElementById('cashback').value = finallyTotal
-    }else{
+    } else {
         document.getElementById('cashback').value = 0
         // changetsubtotal()
 
@@ -229,11 +228,11 @@ function purchase_cashback(){
 }
 
 
-function re_loadPurchase(){
+function re_loadPurchase() {
     var a = $('#i_grandtotal').val
-    if(a == ''){
+    if (a == '') {
         tbody.innerHTML = ''
-    }else{
+    } else {
         tbody.innerHTML = ''
     }
 
@@ -263,45 +262,80 @@ function re_loadPurchase(){
     }
 }
 
-function checkOutPurchase(){
+function checkOutPurchase() {
 
     var tb = document.getElementById('dataPurchaseCheckOut')
     var spl = document.getElementById('id_supplier').value
     // var tb = document.getElementById('dataPurchaseCheckOut')
-    if(spl == ''){
+    if (spl == '') {
         alert('Data Supplier tidak boleh kosong!!');
-    }
+    }else{
 
-    tb.innerHTML = ''
+        tb.innerHTML = ''
 
-    if (localStorage.data_purchase && localStorage.id_data) {
-        data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
+        if (localStorage.data_purchase && localStorage.id_data) {
+            data_purchase = JSON.parse(localStorage.getItem('data_purchase'))
 
 
-        for (let index = 0; index < data_purchase.length; index++) {
-            // const element = array[index];
+            for (let index = 0; index < data_purchase.length; index++) {
+                // const element = array[index];
 
-            tb.innerHTML += `<tr>
-                    <td><input type="hidden" name="i_id_product[]" value="${data_purchase[index].id_product}" class="form-control"></td>
-                    <td></td>
-                    <td> <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
-                    <td><input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
-                    <td><input type="hidden" name="i_quantity[]" value="${data_purchase[index].quantity_product}" class="form-control"></td>
-                    <td>
-                    <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
-                    </td>
-                </tr>`
+                tb.innerHTML += `<tr>
+                        <td><input type="hidden" name="i_id_product[]" value="${data_purchase[index].id_product}" class="form-control"></td>
+                        <td></td>
+                        <td> <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
+                        <td><input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
+                        <td><input type="hidden" name="i_quantity[]" value="${data_purchase[index].quantity_product}" class="form-control"></td>
+                        <td>
+                        <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
+                        </td>
+                    </tr>`
 
+            }
+            $('#modalCheckOutPurchase').modal('show')
+            changeTotal()
+        } else {
+            alert('Data Barang Kosong!!')
+            console.log('Data Kosong/Errors')
         }
-        $('#modalCheckOutPurchase').modal('show')
-        changeTotal()
-    } else {
-        alert('Data Barang Kosong!!')
-        console.log('Data Kosong/Errors')
     }
+
 }
 
-function cancelledPurchase(){
+function cancelledPurchase() {
     localStorage.clear()
     location.reload()
+}
+
+
+function tambahProductEpur() {
+    var barcode = document.getElementById('tp_barcode').value
+    var name = document.getElementById('tp_name').value
+    var purchase_price = document.getElementById('tp_purchase_price').value
+    var selling_price = document.getElementById('tp_selling_price').value
+    var member_price = document.getElementById('tp_member_price').value
+    var limit = document.getElementById('tp_limit').value
+    var supplier_id = document.getElementById('tp_supplier_id').value
+
+    if (barcode == '' || name == '' || purchase_price == '' || selling_price == '' || member_price == '' || limit == '' || supplier_id == '') {
+        alert('Data tidak boleh kosong!!');
+    } else {
+
+        $.ajax({
+            url: `/admin/daftar_pembelian/createProd/${barcode}/${name}/${purchase_price}/${selling_price}/${member_price}/${limit}/${supplier_id}`,
+            type: "get",
+            success: function (data) {
+                // console.log(barcode)
+                var obj = JSON.parse(data);
+                $('#id_product').val(obj.id);
+                $('#barcode').val(obj.barcode);
+                $('#name_product').val(obj.name);
+                $('#purchase_price').val(obj.purchase_price);
+                $('#sale_price').val(obj.selling_price);
+                $('#pilihbarang').modal('hide');
+                $('#tambahBarang').modal('hide');
+            }
+        })
+    }
+
 }

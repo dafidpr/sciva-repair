@@ -30,17 +30,25 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
-                        <th>Aksi</th>
                         <th>Nama</th>
                         <th>No HP</th>
                         <th>Alamat</th>
                         <th>Jenis</th>
                         {{-- <th>Piutang</th> --}}
+                        @canany(['update-customers', 'delete-customers'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pelanggan as $item)
                     <tr>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->telephone}}</td>
+                        <td>{{$item->address}}</td>
+                        <td>{{$item->type}}</td>
+                        {{-- <td>100000</td> --}}
+                        @canany(['update-customers', 'delete-customers'])
                         <td>
                             @if ($item->umum != 'umum' and $item->address != 'umum')
 
@@ -52,11 +60,7 @@
                             @endcan
                             @endif
                         </td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->telephone}}</td>
-                        <td>{{$item->address}}</td>
-                        <td>{{$item->type}}</td>
-                        {{-- <td>100000</td> --}}
+                        @endcanany
                     </tr>
                     @endforeach
                 </tbody>

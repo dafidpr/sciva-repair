@@ -25,13 +25,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                    <p class="font-size-16">Servis Masuk</p>
+                    <p class="font-size-16">Dalam Proses</p>
                     <div class="mini-stat-icon mx-auto mb-4 mt-3">
                         <span class="avatar-title rounded-circle bg-soft-primary">
                                 <i class="fas fa-hammer text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">{{$servisMasuk->total()}}</h5>
+                    <h5 class="font-size-22">{{$dalamProses->total()}}</h5>
 
                 </div>
             </div>
@@ -238,7 +238,10 @@
                   <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Penjualan</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Service</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Service Masuk</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#svdiambil" type="button" role="tab" aria-controls="profile" aria-selected="false">Service Diambil</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Login</button>
@@ -252,7 +255,7 @@
                         @foreach ($historysale as $item)
 
                         <tr>
-                            <td><p class="mb-3"><b>{{$item->invoice}}</b> Oleh <b>{{$item->_user->name}}</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
+                            <td><p class="mb-3"><b>{{$item->invoice}}</b> Oleh <b>@if ($item->_user->name == !null)  {{$item->_user->name}} @endif</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
                         </tr>
                         @endforeach
                     </table>
@@ -261,7 +264,17 @@
                     <table class="table table-bordered" style="font-size: 13px;">
                         @foreach ($historyservis as $item)
                         <tr>
-                            <td><p class="mb-3"> Servis Masuk dengan Kode <b>{{$item->transaction_code}}</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
+                            <td><p class="mb-3"> Servis Masuk dengan Kode <b>{{$item->transaction_code}}</b> oleh <b>{{$item->_user->name}}</b> pada tanggal: <b>{{$item->created_at}}</b></p></td>
+                        </tr>
+                        @endforeach
+
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="svdiambil" role="tabpanel" aria-labelledby="profile-tab">
+                    <table class="table table-bordered" style="font-size: 13px;">
+                        @foreach ($historyservisdiambil as $item)
+                        <tr>
+                            <td><p class="mb-3"> Servis Diambil dengan Kode <b>{{$item->transaction_code}}</b> oleh <b>{{$item->_user->name}}</b> pada tanggal: <b>{{$item->updated_at}}</b></p></td>
                         </tr>
                         @endforeach
 

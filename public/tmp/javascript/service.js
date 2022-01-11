@@ -126,21 +126,57 @@ function detail_service(e) {
         success: function (data) {
             var cust = $('#detail_btn_service').data('customer');
             var tlp = $('#detail_btn_service').data('telephone');
+            var address = $('#detail_btn_service').data('alamat');
             var obj = JSON.parse(data);
+            var sv_dt = new Date(`${obj.service_date}`);
+            if(obj.total == null){
+                var total = '-'
+            }else{
+                var total = "Rp." + new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 3 }).format(parseInt(obj.total))
+
+            }
+            if (obj.status == 'proses') {
+                var status_perbaikan = 'DALAM PROSES'
+            } else if (obj.status == 'waiting sparepart'){
+                var status_perbaikan = 'MENUNGGU SPAREPART'
+            } else if (obj.status == 'finished'){
+                var status_perbaikan = 'SELESAI'
+            }else if (obj.status == 'cancelled'){
+                var status_perbaikan = 'DIBATALKAN'
+            }else if (obj.status == 'take'){
+                var status_perbaikan = 'DIAMBIL'
+            }
+            if(obj.pickup_date == null){
+                var pickup = '-'
+            }else{
+                var pickup = new Date(`${obj.service_date}`)
+                pickup = pickup.getDate()+"-"+(pickup.getMonth()+1)+'-'+pickup.getFullYear()
+            }
+            if(obj.notes == null){
+                var notes = '-'
+            }else{
+                var notes = obj.notes
+            }
+
+            $('#dtgl_servis').html(sv_dt.getDate()+"-"+(sv_dt.getMonth()+1)+'-'+sv_dt.getFullYear());
             $('#dnota').html(obj.transaction_code);
             $('#dcustomers').html(cust);
             $('#dtelephone').html(tlp);
+            $('#dalamat').html(address);
             $('#dunit').html(obj.unit);
             $('#dcomplient').html(obj.complient);
             $('#dcompletenes').html(obj.completenes);
-            $('#dpasscode').html(obj.passcode);
-            $('#dnotes').html(obj.notes);
+            $('#dtotal').html(total);
+            $('#dstatus').html(status_perbaikan);
+            $('#dnotes').html(notes);
             $('#dseri').html(obj.serial_number);
-            $('#destimated_cost').html(obj.estimated_cost);
+            $('#dtake').html(pickup);
             $('#DetailModals').modal('show');
         }
     })
 }
+
+
 
 function takeUnit(a, b) {
     $.ajax({
@@ -154,7 +190,7 @@ function takeUnit(a, b) {
             $('#t_unit').val(obj.unit);
             $('#t_serial_number').val(obj.serial_number);
             $('#t_total').val(obj.total);
-            $('#takeUnit').modal('show');
+            $('.takeUnit').modal('show');
             // $('#myModal').modal('show');
         }
     })
@@ -191,7 +227,7 @@ function hargaService(b, a) {
             $('#complient').val(obj.complient);
             $('#estimated_cost').val(obj.estimated_cost);
             $('#estimated_cost').val(obj.estimated_cost);
-            $('#editStatusService').modal('show');
+            $('.editStatusService').modal('show');
             // $('#myModal').modal('show');
         }
     })
@@ -388,23 +424,40 @@ function callcs(a, c, d, e) {
             var b = obj.wa.value
             var sms = obj.sms.value
 
+            var h=(new Date()).getHours();
+            var m=(new Date()).getMinutes();
+            var s=(new Date()).getSeconds();
+            if (h >= 4 && h < 10) var waktu = "Selamat pagi";
+            if (h >= 10 && h < 15) waktu = "Siang";
+            if (h >= 15 && h < 18) waktu = "Sore";
+            if (h >= 18 || h < 4) waktu="Malam";
+
             if(d == 'finished'){
                 var st = 'selesai'
             }else if(d == 'cancelled'){
                 var st = 'batal'
             }
 
+            var tgl = new Date().getTime()+(obj.batas.value*24*60*60*1000)
+            var hariKedepan = new Date(tgl);
+            var ok = hariKedepan.getMonth()
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni","Juli", "Agustus", "September", "Oktober", "November", "December"];
+            // console.log(hariKedepan.getDate()+"-"+ok+"-"+hariKedepan.getFullYear())
+            let batas_tanggal = hariKedepan.getDate()+" "+monthNames[ok]+" "+hariKedepan.getFullYear()
+
 
             const text = b.replace('{code}', c)
-            const text2 = text.replace('{status}', st)
+            const text1 = text.replace('{waktu}', waktu)
+            const text2 = text1.replace('{status}', st)
             const text3 = text2.replace('{harga}', e)
-            const text4 = text3.replace('{batas}', obj.batas.value)
+            const text4 = text3.replace('{batas}', batas_tanggal)
             const text5 = text4.replace('{batas_type}', obj.batas_hari.value)
 
             const messages = sms.replace('{code}', c)
-            const messages2 = messages.replace('{status}', st)
+            const messages1 = messages.replace('{waktu}', waktu)
+            const messages2 = messages1.replace('{status}', st)
             const messages3 = messages2.replace('{harga}', e)
-            const messages4 = messages3.replace('{batas}', obj.batas.value)
+            const messages4 = messages3.replace('{batas}', batas_tanggal)
             const messages5 = messages4.replace('{batas_type}', obj.batas_hari.value)
 
             el.innerHTML = `<div class="row">
@@ -415,9 +468,36 @@ function callcs(a, c, d, e) {
                 <a href="sms:+62${a}?body=${messages5}"><i class="fas fa-envelope-square fa-10x"></i></a>
             </div>
             <div class="col-sm-4">
-                <a href="tel://${a}"><i class="fas fa-phone-square-alt fa-10x"></i></a>
+                <a href="tel://+62${a}"><i class="fas fa-phone-square-alt fa-10x"></i></a>
             </div></div>`
         }
     })
 
+}
+
+function estimate_cost_choose(){
+    let cost_estimated = document.getElementById('sub_total').value
+
+    document.getElementById('estimated_cost_total').value = cost_estimated
+
+    $('.bs-estimasi-cost').modal('hide')
+}
+
+function create_cs_servis(){
+    var telephone = document.getElementById('custelephone').value
+    var name = document.getElementById('cusname').value
+    var address = document.getElementById('cusaddress').value
+    $.ajax({
+        url: "/admin/servis/create_customer/"+telephone+'/'+name+'/'+address,
+        type: "get",
+        success: function (data) {
+            var obj = JSON.parse(data);
+            $('#id_customer').val(obj.id);
+            $('#name').val(obj.name);
+            $('#telephone').val(obj.telephone);
+            $('#address').val(obj.address);
+            $('.bs-example-modal-lg').modal('hide');
+            // $('#myModal').modal('show');
+        }
+    })
 }

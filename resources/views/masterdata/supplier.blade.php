@@ -32,9 +32,6 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
-                        @canany(['update-suppliers', 'delete-suppliers'])
-                        <th>Aksi</th>
-                        @endcanany
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Telepone</th>
@@ -43,11 +40,22 @@
                         <th>Rekening</th>
                         <th>Nama Rek</th>
                         <th>Alamat</th>
+                        @canany(['update-suppliers', 'delete-suppliers'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($suppliers as $item)
                     <tr>
+                        <td>{{$item->supplier_code}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->telephone}}</td>
+                        {{-- <td>l</td> --}}
+                        <td>{{$item->bank}}</td>
+                        <td>{{$item->account_number}}</td>
+                        <td>{{$item->bank_account_name}}</td>
+                        <td>{{$item->address}}</td>
                         @canany(['update-suppliers', 'delete-suppliers'])
                         <td>
                             @can('update-suppliers')
@@ -58,14 +66,6 @@
                             @endcan
                         </td>
                         @endcanany
-                        <td>{{$item->supplier_code}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->telephone}}</td>
-                        {{-- <td>l</td> --}}
-                        <td>{{$item->bank}}</td>
-                        <td>{{$item->account_number}}</td>
-                        <td>{{$item->bank_account_name}}</td>
-                        <td>{{$item->address}}</td>
                     </tr>
                     @endforeach
                 </tbody>

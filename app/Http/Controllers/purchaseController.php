@@ -38,7 +38,7 @@ class purchaseController extends Controller
     public function entry()
     {
         //
-        $id = IdGenerator::generate(['table' => 'purchases', 'length' => 14, 'prefix' => 'PB' . date('Ymd'), 'field' => 'invoice', 'reset_on_prefix_change' => true]);
+        $id = IdGenerator::generate(['table' => 'purchases', 'length' => 11, 'prefix' => 'PB' . date('dmy'), 'field' => 'invoice', 'reset_on_prefix_change' => true]);
         //output: INV-000001
 
         $data = [
@@ -59,7 +59,7 @@ class purchaseController extends Controller
     public function store(Request $request)
     {
         //
-        $id = IdGenerator::generate(['table' => 'purchases', 'length' => 14, 'prefix' => 'PB' . date('Ymd'), 'field' => 'invoice', 'reset_on_prefix_change' => true]);
+        $id = IdGenerator::generate(['table' => 'purchases', 'length' => 11, 'prefix' => 'PB' . date('dmy'), 'field' => 'invoice', 'reset_on_prefix_change' => true]);
         //output: INV-000001
         $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
         $rules = [
@@ -238,9 +238,23 @@ class purchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function createProd($barcode, $name, $purchase_price, $selling_price, $member_price, $limit, $supplier_id)
     {
         //
+        $prod = Product::create([
+            'barcode' => $barcode,
+            'name' => $name,
+            'selling_price' => $selling_price,
+            'purchase_price' => $purchase_price,
+            'member_price' => $member_price,
+            'stock' => 0,
+            'limit' => $limit,
+            'supplier_id' => $supplier_id,
+        ]);
+
+        $data = Product::find($prod->id);
+
+        return json_encode($data);
     }
 
     /**

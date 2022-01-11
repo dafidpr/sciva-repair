@@ -29,19 +29,28 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
-                        @canany(['update-users', 'delete-users'])
-                        <th>Aksi</th>
-                        @endcanany
                         <th>Telephone</th>
                         <th>Nama</th>
                         <th>Username</th>
                         <th>Alamat</th>
+                        <th>Role</th>
                         <th>Komisi</th>
+                        @canany(['update-users', 'delete-users'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($user as $item)
                     <tr>
+                        <td>{{$item->telephone}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->username}}</td>
+                        <td>{{$item->address}}</td>
+                        <td>@foreach ($item->getRoleNames() as $aa)
+                            {{$aa}}
+                        @endforeach</td>
+                        <td>{{$item->commission}}</td>
                         <td>
                             @can('update-users')
                             <a href="#" class="text-primary" onclick="editKaryawan({{$item->id}})"><i class="fas fa-edit"></i></a>
@@ -50,11 +59,6 @@
                             <a href="#" class="text-primary" onclick="hapusdatauser({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
                         </td>
-                        <td>{{$item->telephone}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->address}}</td>
-                        <td>{{$item->commission}}</td>
                     </tr>
                     @endforeach
                 </tbody>

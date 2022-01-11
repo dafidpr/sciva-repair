@@ -9,13 +9,13 @@
         }
     </style>
 </head>
-<body>
+<body style="width: 69mm;">
 <div id="wrapper">
-<p style="text-align: center; font-size: 25px;"><b>{{$company->name}}</b></p>
-<p style="text-align: center; font-size: 20px;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 20px;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 15px;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 13px;">{{$company->telephone}}</p>
+<p style="text-align: center; font-size: 10px;">{{$company->address}}</p>
 <br><br>
-<table style="font-size: 20px; width: 40%;">
+<table style="font-size: 10px; width: 40%;">
     <tr>
         <td>Tanggal</td>
         <td>:</td>
@@ -44,7 +44,7 @@
 </table>
 <hr class='dotted' />
 @foreach ($sale_detail as $item)
-<div style="font-size: 20px;">
+<div style="font-size: 10px;">
     <label for="">{{$item->_product->name}}</label>
     <table style="100%">
         <tr>
@@ -58,7 +58,7 @@
 
 @endforeach
 
-    <table align="right" style="font-size: 20px;">
+    <table align="right" style="font-size: 10px;">
         <tr>
             <td>Diskon</td>
             <td>:</td>
@@ -80,8 +80,9 @@
             <td>Rp. {{number_format($sale->cashback)}}</td>
         </tr>
     </table>
+    <br><br><br>
 <hr class='dotted' />
-<table style="font-size: 20px;">
+<table style="font-size: 10px;">
     <tr>
         <td>Operator</td>
         <td>:</td>
@@ -89,6 +90,10 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size: 20px;">{{$footer->value}}</p>
+<p style="text-align: center; font-size: 10px;">{{$footer->value}}</p>
+
+<script>
+window.print()
+</script>
 </body>
 </html>

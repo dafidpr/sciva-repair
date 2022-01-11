@@ -29,10 +29,10 @@
                     <div>
                         <span style="font-size: 13px;" class="text-danger">*catatan :</span><br>
                         <span style="font-size: 13px;" class="text-danger">*{code} untuk kode transaksi</span><br>
+                        <span style="font-size: 13px;" class="text-danger">*{waktu} untuk parameter waktu</span><br>
                         <span style="font-size: 13px;" class="text-danger">*{status} untuk status transaksi</span><br>
                         <span style="font-size: 13px;" class="text-danger">*{harga} untuk harga transaksi</span><br>
                         <span style="font-size: 13px;" class="text-danger">*{batas} untuk batas pengambilan unit</span><br>
-                        <span style="font-size: 13px;" class="text-danger">*{batas_type} untuk type batas pengambilan unit (hari/bulan)</span><br>
                         <span style="font-size: 13px;" class="text-danger">*%0A untuk memberikan baris baru</span><br>
                     </div>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>

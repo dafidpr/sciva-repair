@@ -33,7 +33,6 @@
             </tr>
         </thead>
         <tbody>
-            <?php $ttl = 0; ?>
             @foreach ($user as $item)
             <tr>
                 <td>{{$loop->iteration}}</td>

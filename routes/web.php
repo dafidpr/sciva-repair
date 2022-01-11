@@ -71,17 +71,19 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
         Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
         Route::get('/{id}/json_service2', [TransactionServiceController::class, 'json_service2']);
+        Route::get('/{id}/json_service3', [TransactionServiceController::class, 'json_service3']);
         Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
         Route::get('/deletepermanent/{id?}', [TransactionServiceController::class, 'deletePermanent']);
         Route::get('/restoreall/{id?}', [TransactionServiceController::class, 'restoreall']);
         Route::get('/batalServis/{id}/{st}', [TransactionServiceController::class, 'batalServis']);
         Route::post('/create', [TransactionServiceController::class, 'store'])->middleware("can:create-services");
         Route::post('/takeUnit', [TransactionServiceController::class, 'takeUnit'])->middleware('can:take-services');
-        Route::post('/create_customer', [TransactionServiceController::class, 'create_customer']);
+        Route::get('/create_customer/{telephone}/{name}/{address}', [TransactionServiceController::class, 'create_customer']);
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
 
         Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:print-nota-services');
+        Route::get('/service_masuk/{id}', [TransactionServiceController::class, 'service_masuk'])->middleware('can:print-nota-services');
     });
 
     Route::prefix('entry_penjualan')->group(function () {
@@ -99,6 +101,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('', [purchaseController::class, 'index'])->middleware('can:read-purchases');
         Route::get('/{id}/select_supplier', [purchaseController::class, 'select_supplier']);
         Route::post('/inputPurchase', [purchaseController::class, 'store']);
+        Route::get('/createProd/{a}/{b}/{c}/{d}/{e}/{f}/{g}', [purchaseController::class, 'createProd']);
         Route::get('/{id}/detail_pembelian', [purchaseController::class, 'show'])->middleware('can:detail-purchases');
     });
 
@@ -244,6 +247,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         return view('tools.backupdata');
     })->middleware('can:backup-tools');
     Route::get('/backupdata/mydatabase', [ToolsController::class, 'backupDatabase']);
+    Route::post('/backupdata/restore_db', [ToolsController::class, 'restore_db']);
 
     Route::prefix('restore')->group(function () {
         //restore Penjualan

@@ -202,4 +202,22 @@ class ToolsController extends Controller
         readfile($file_name);
         unlink($file_name);
     }
+
+
+    public function restore_db(Request $request)
+    {
+        // $request = $request->all();
+        // dd($request->all());
+
+        $db = $request->restore_db->getClientOriginalName() . '-' . time() . '.' . $request->restore_db->extension();
+        $request->restore_db->move(public_path('tmp/restore_db/'), $db);
+
+
+        // DB::statement('DROP DATABASE db_sciva');
+        $path = public_path('tmp/restore_db/' . $db);
+        // DB::statement('CREATE DATABASE db_sciva');
+        Backup::restore($path);
+
+        return redirect()->back();
+    }
 }

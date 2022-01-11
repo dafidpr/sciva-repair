@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Servis Diambil V.1</title>
+    <title>Servis Masuk V.1</title>
     <style>
 
         .dotted {
@@ -12,14 +12,14 @@
         }
     </style>
 </head>
-<body>
+<body style="width: 69mm;">
 
-<p style="text-align: center; font-size: 25px;"><b>{{$company->name}}</b></p>
-<p style="text-align: center; font-size: 20px;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 20px;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 15px;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 13px;">{{$company->telephone}}</p>
+<p style="text-align: center; font-size: 10px;">{{$company->address}}</p>
 
 <br><br>
-<table style="width: 100%; font-size: 20px;">
+<table style="width: 100%; font-size: 10px;">
     <tr>
         <td>Tanggal</td>
         <td>:</td>
@@ -53,7 +53,7 @@
 </table>
 <hr class='dotted' />
 
-<table style="width: 100%; font-size: 20px;">
+<table style="width: 100%; font-size: 10px;">
     <tr>
         <td>Unit</td>
         <td>:</td>
@@ -78,7 +78,7 @@
 
 
 <hr class='dotted' />
-<table style="font-size: 20px;">
+<table style="font-size: 10px;">
     <tr>
         <td>Operator</td>
         <td>:</td>
@@ -86,7 +86,11 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size:20px;">{{$footer->value}}</p>
+<p style="text-align: center; font-size:10px;">{{$footer->value}}</p>
 
+
+<script>
+window.print()
+</script>
 </body>
 </html>

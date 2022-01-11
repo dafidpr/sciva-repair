@@ -42,7 +42,7 @@ class SaleController extends Controller
     public function Entry()
     {
         //
-        $id = IdGenerator::generate(['table' => 'sales', 'field' => 'invoice', 'length' => 15, 'prefix' => 'POS' . date('Ymd'), 'reset_on_prefix_change' => true]);
+        $id = IdGenerator::generate(['table' => 'sales', 'field' => 'invoice', 'length' => 12, 'prefix' => 'POS' . date('dmy'), 'reset_on_prefix_change' => true]);
         //output: P00001
         $data = [
             'invoice' => $id,
@@ -75,7 +75,7 @@ class SaleController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-        $id = IdGenerator::generate(['table' => 'sales', 'field' => 'invoice', 'length' => 15, 'prefix' => 'POS' . date('Ymd'), 'reset_on_prefix_change' => true]);
+        $id = IdGenerator::generate(['table' => 'sales', 'field' => 'invoice', 'length' => 12, 'prefix' => 'POS' . date('dmy'), 'reset_on_prefix_change' => true]);
         $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
         $tax_code = IdGenerator::generate(['table' => 'vat_taxes', 'field' => 'tax_code', 'length' => 10, 'prefix' => 'PPN']);
         //output: P00001
@@ -264,10 +264,10 @@ class SaleController extends Controller
             'footer' => Setting::where('options', 'footer_nota_sale')->first()
         ];
 
-        // return view('cetak.struk_penjualan', $data);
+        return view('cetak.struk_penjualan', $data);
 
-        $pdf = PDF::loadView('cetak.struk_penjualan', $data)->setPaper('a4', 'potrait');
-        return $pdf->stream('Struk_sale');
+        // $pdf = PDF::loadView('cetak.struk_penjualan', $data)->setPaper('a4', 'potrait');
+        // return $pdf->stream('Struk_sale');
     }
 
     /**

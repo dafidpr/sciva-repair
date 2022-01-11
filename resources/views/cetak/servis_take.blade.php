@@ -12,14 +12,14 @@
         }
     </style>
 </head>
-<body>
+<body style="width: 69mm;">
 
-<p style="text-align: center; font-size: 25px;"><b>{{$company->name}}</b></p>
-<p style="text-align: center; font-size: 20px;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 20px;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 15px;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 13px;">{{$company->telephone}}</p>
+<p style="text-align: center; font-size: 10px;">{{$company->address}}</p>
 
 <br><br>
-<table style="width: 100%; font-size: 20px;">
+<table style="width: 100%; font-size: 10px;">
     <tr>
         <td>Tanggal</td>
         <td>:</td>
@@ -53,7 +53,7 @@
 </table>
 <hr class='dotted' />
 
-<table style="width: 100%; font-size: 20px;">
+<table style="width: 100%; font-size: 10px;">
     <tr>
         <td>Unit</td>
         <td>:</td>
@@ -79,16 +79,16 @@
 <hr class='dotted' />
 @foreach ($service_detail as $item)
 @if ($item->repaire_id == null)
-<p style="font-size: 20px;">{{$item->qty}} X {{$item->_product->name}}</p>
+<p style="font-size: 10px;">{{$item->qty}} X {{$item->_product->name}}</p>
 @endif
 @endforeach
 @foreach ($service_detail as $item)
 @if ($item->sparepart_id == null)
-<p style="font-size: 20px;">1 X {{$item->_repaire->name}}</p>
+<p style="font-size: 10px;">1 X {{$item->_repaire->name}}</p>
 @endif
 @endforeach
 
-    <table align="right" style="font-size: 20px;">
+    <table align="right" style="font-size: 10px;">
         <tr>
             <td>Diskon</td>
             <td>:</td>
@@ -110,8 +110,9 @@
             <td>Rp. {{number_format($service->cashback)}}</td>
         </tr>
     </table>
+    <br><br><br>
 <hr class='dotted' />
-<table style="font-size: 20px;">
+<table style="font-size: 10px;">
     <tr>
         <td>Operator</td>
         <td>:</td>
@@ -129,7 +130,12 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-size:20px;">{{$footer->value}}</p>
+<p style="text-align: center; font-size:10px;">{{$footer->value}}</p>
 
+
+
+<script>
+window.print();
+</script>
 </body>
 </html>

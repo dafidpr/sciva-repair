@@ -5,36 +5,117 @@ function checkDataServis() {
 
     chek.innerHTML = ''
     $.ajax({
-        url: `/admin/servis/${e}/json_service2`,
+        url: `/admin/servis/${e}/json_service3`,
         type: "get",
         success: function(data) {
             var obj = JSON.parse(data);
             console.log(obj)
-            if(obj.status == 'proses'){
-                var status = `Proses`
-            }else if (obj.status == 'finished'){
-                var status = `Selesai`
-            }else if (obj.status == 'cancelled'){
-                var status = `Batal`
-            }else if (obj.status == 'take'){
-                var status = `Diambil`
-            }else if (obj.status == 'waiting sparepart'){
-                var status = `Menunggu Sparepart`
+
+            //status
+            if(obj.transact.status == 'proses'){
+                var status = `<span class="bg-primary badge" style="background-color: blue;">Dalam Proses</span>`
+            }else if (obj.transact.status == 'finished'){
+                var status = `<span class="bg-success badge" style="background-color: green;">Selesai</span>`
+            }else if (obj.transact.status == 'cancelled'){
+                var status = `<span class="bg-danger badge" style="background-color: red;">Dibatalkan</span>`
+            }else if (obj.transact.status == 'take'){
+                var status = `<span class="bg-secondary badge" style="background-color: gray;">Diambil</span>`
+            }else if (obj.transact.status == 'waiting sparepart'){
+                var status = `<span class="bg-warning badge" style="background-color: #a69a17;">Menunggu Sparepart</span>`
             }
-            chek.innerHTML = `<hr><table class="table table-bordered" width="100%">
-            <tr>
-                <th>Kode</th>
-                <th>Unit</th>
-                <th>Keluhan</th>
-                <th>Status</th>
-            </tr>
-            <tr>
-                <td>${obj.transaction_code}</td>
-                <td>${obj.unit}</td>
-                <td>${obj.complient}</td>
-                <td>${status}</td>
-            </tr>
-        </table>`
+
+            //tanggal di ambil
+            if (obj.transact.pickup_date == null) {
+                var pick = '-'
+            } else {
+                var pick = new Date(obj.transact.pickup_date)
+                pick = pick.getDate()+"-"+(pick.getMonth()+1)+"-"+pick.getFullYear()
+            }
+            if (obj.transact.total == null) {
+                var harga = '-'
+            } else {
+                var harga = 'Rp. '+ formatNumber(Math.floor(obj.transact.total))
+            }
+
+            //batas tanggal
+            var batas = parseInt(obj.bt.value)
+            var tgl_sv = obj.transact.service_date
+            console.log(batas)
+            var inputHari = 15 //Contoh aja hehe
+            var hariKedepan = new Date(new Date(tgl_sv).getTime()+(batas*24*60*60*1000));
+            console.log(hariKedepan.getDate()+"-"+hariKedepan.getUTCMonth()+"-"+hariKedepan.getFullYear())
+
+            if(obj.transact.status == 'proses' || obj.transact.status == 'waiting sparepart'){
+
+            chek.innerHTML = `<hr><table class="table table-striped" width="100%">
+                <tr>
+                    <th width="45%">Status</th>
+                    <th width="10%">:</th>
+                    <th width="45%">${status}</th>
+                </tr>
+                <tr>
+                    <th width="45%">Unit</th>
+                    <th width="10%">:</th>
+                    <th width="45%">${obj.transact.unit}</th>
+                </tr>
+                <tr>
+                    <th width="45%">No.Seri</th>
+                    <th width="10%">:</th>
+                    <th width="45%">${obj.transact.serial_number}</th>
+                </tr>
+                <tr>
+                    <th width="45%">Keluhan</th>
+                    <th width="10%">:</th>
+                    <th width="45%">${obj.transact.complient}</th>
+                </tr>
+                </table>`
+            }else{
+
+                chek.innerHTML = `<hr><table class="table table-striped" width="100%">
+                    <tr>
+                        <th width="45%">Status</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${status}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">Unit</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${obj.transact.unit}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">No.Seri</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${obj.transact.serial_number}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">Keluhan</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${obj.transact.complient}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">Harga</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${harga}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">Batas Pengambilan Barang</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${hariKedepan.getDate()+"-"+(hariKedepan.getMonth()+1)+"-"+hariKedepan.getFullYear()}</th>
+                    </tr>
+                    <tr>
+                        <th width="45%">Tanggal Pengambilan</th>
+                        <th width="10%">:</th>
+                        <th width="45%">${pick}</th>
+                    </tr>
+                    </table>`
+
+
+            }
+
         }
     })
 }
+
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
