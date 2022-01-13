@@ -109,7 +109,7 @@ class PermissionSeeder extends Seeder
             //
             ['name' => 'generateBarcode-tools', 'label' => 'View Generate Barcode', 'guard_name' => 'web'],
             ['name' => 'backup-tools', 'label' => 'Backup Data', 'guard_name' => 'web'],
-            ['name' => 'deleteServis-tools', 'label' => 'Hapus Service Pertanggan', 'guard_name' => 'web'],
+            ['name' => 'deleteServis-tools', 'label' => 'Hapus Service Pertanggal', 'guard_name' => 'web'],
             ['name' => 'deleteTransaction-tools', 'label' => 'Hapus Transaksi Pertanggal', 'guard_name' => 'web'],
             //
             ['name' => 'footerNota-settings', 'label' => 'Footer Nota', 'guard_name' => 'web'],
