@@ -14,5 +14,9 @@
         <img style="width: 25%;" src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'EAN13')}}" alt="barcode" />
     </div><br>
     @endfor
+
+    <script>
+        window.print()
+        </script>
 </body>
 </html>

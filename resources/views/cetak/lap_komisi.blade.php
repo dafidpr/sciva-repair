@@ -9,7 +9,7 @@
 <body>
     <table style="width: 100%; font-size: 15px;">
         <tr>
-            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="90px" alt=""></td>
+            <td width="10%"><img src="{{asset('tmp/asset/images/'. $company->logo)}}" width="90px" alt=""></td>
             <td>
                 <p><b>{{$company->name}}</b></p>
                 <p>{{$company->address}}</p>
@@ -49,5 +49,9 @@
         </tbody>
     </table>
 
+
+    <script>
+        window.print()
+        </script>
 </body>
 </html>

@@ -76,5 +76,10 @@
             $hpp - $lain)}} </td>
         </tr>
     </table>
+
+
+    <script>
+        window.print()
+        </script>
 </body>
 </html>

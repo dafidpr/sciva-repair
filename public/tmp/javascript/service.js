@@ -253,6 +253,36 @@ function pilih_jasa_servis(e) {
         }
     })
 }
+function ec_pilih_jasa_servis(e) {
+    $.ajax({
+        url: "/admin/servis/" + e + "/select_repaire",
+        type: "get",
+        success: function(data) {
+            var obj = JSON.parse(data);
+            // alert()
+            $('#ec_jasa_id').val(obj.id);
+            $('#ec_jasa_name').val(obj.name);
+            $('#ec_jasa_price').val(obj.price);
+            $('.ec_bs-modal-lg-js').modal('hide');
+            // $('#myModal').modal('show');
+        }
+    })
+}
+function ec_pilih_sparepart_servis(e) {
+    // var d = document.getElementById('discount_prod').value
+    $.ajax({
+        url: "/admin/stockopname/" + e + "/select_product",
+        type: "get",
+        success: function(data) {
+            var obj = JSON.parse(data);
+            $('#ec_id_product').val(obj.id);
+            $('#ec_item_product').val(obj.name);
+            $('#ec_item_price').val(obj.selling_price);
+            $('.ec_bs-modal-sparepart').modal('hide');
+            // $('#myModal').modal('show');
+        }
+    })
+}
 function pilih_sparepart_servis(e) {
     // var d = document.getElementById('discount_prod').value
     $.ajax({
@@ -285,6 +315,56 @@ function tambahJasaService(){
     TotalHargaService()
 }
 
+function ec_tambahJasaService(){
+    var tbody_jasa = document.getElementById('ec_tbody_jasa_servis_op')
+    var jasa_name = document.getElementById('ec_jasa_name').value
+    var jasa_id = document.getElementById('ec_jasa_id').value
+    var jasa_price = document.getElementById('ec_jasa_price').value
+
+    tbody_jasa.innerHTML += `<tr>
+    <td>${jasa_name}<input type="hidden" class="form-control" name="input_jasa_id[]" id="" value="${jasa_id}" readonly> <input type="hidden" class="form-control" name="input_jasa_name[]" id="" value="${jasa_name}" readonly> <input type="hidden" class="form-control" name="input_jasa_price[]" id="" value="${jasa_price}" readonly></td>
+    <td>${jasa_price}</td>
+    <td><button class="btn btn-sm btn-danger del-js"><i class="fas fa-trash del-js"></i></button></td></tr>`
+
+    ec_changeTotalJasa()
+    ec_TotalHargaService()
+}
+
+function ec_tambahSparepartService(){
+    var tbody_sparepart = document.getElementById('ec_tbody_sparepart')
+    var item_product = document.getElementById('ec_item_product').value
+    var id_product = document.getElementById('ec_id_product').value
+    var item_price = document.getElementById('ec_item_price').value
+    var qty_prod = document.getElementById('ec_qty_prod').value
+    var discount_prod = document.getElementById('ec_discount_prod').value
+
+    var a = parseInt(item_price) * parseInt(qty_prod) - parseInt(discount_prod)
+
+    if(qty_prod == ''){
+        alert('Quantity harus diisi!!');
+    }else{
+
+            if(item_product == ''){
+                alert('data tidak boleh kosong!!')
+            }else{
+
+                tbody_sparepart.innerHTML += `<tr>
+                <td>${item_product}<input type="hidden" class="form-control" name="input_product_id[]" id="" value="${id_product}" readonly><input type="hidden" class="form-control" name="input_product_subtot[]" id="" value="${a}" readonly></td>
+                <td>${item_price}<input type="hidden" class="form-control" name="input_product_total[]" id="" value="${item_price}" readonly> <input type="hidden" class="form-control" name="input_product_qty[]" id="" value="${qty_prod}" readonly></td>
+                <td>${qty_prod} <input type="hidden" class="form-control" name="input_product_dis[]" id="" value="${discount_prod}" readonly></td>
+                <td>${discount_prod}</td>
+                <td>${a}</td>
+                <td><button class="btn btn-sm btn-danger del-spr"><i class="fas fa-trash del-spr"></i></button></td></tr>`
+
+                ec_changeTotalSparepart()
+                ec_TotalHargaService()
+                ec_changeTotalDiscountSparepart()
+            }
+
+    }
+
+
+}
 function tambahSparepartService(){
     var tbody_sparepart = document.getElementById('tbody_sparepart')
     var item_product = document.getElementById('item_product').value
@@ -476,7 +556,7 @@ function callcs(a, c, d, e) {
 }
 
 function estimate_cost_choose(){
-    let cost_estimated = document.getElementById('sub_total').value
+    let cost_estimated = document.getElementById('ec_sub_total').value
 
     document.getElementById('estimated_cost_total').value = cost_estimated
 
@@ -500,4 +580,80 @@ function create_cs_servis(){
             // $('#myModal').modal('show');
         }
     })
+}
+
+
+
+
+function ec_onDeleteJasaService(e) {
+    if (!e.target.classList.contains('del-js')) {
+        return;
+    }
+    // alert('click the button');
+    const btn = e.target;
+    btn.closest('tr').remove();
+
+    ec_changeTotalJasa()
+    ec_TotalHargaService()
+
+}
+function ec_onDeleteSparepart(e) {
+    if (!e.target.classList.contains('del-spr')) {
+        return;
+    }
+    // alert('click the button');
+    const btn = e.target;
+    btn.closest('tr').remove();
+
+    // changeTotalJasa()
+    ec_changeTotalSparepart()
+    ec_TotalHargaService()
+    ec_changeTotalDiscountSparepart()
+
+}
+var ec_table_sparepart = document.getElementById('ec_table_sparepart')
+var ec_tableJasaService = document.getElementById('ec_jasa_servis_op')
+ec_tableJasaService.addEventListener('click', ec_onDeleteJasaService);
+ec_table_sparepart.addEventListener('click', ec_onDeleteSparepart);
+
+function ec_changeTotalJasa() {
+    ec_tableJasaService = document.getElementById('ec_jasa_servis_op')
+    var sumHsl = 0;
+    var subtot_jasa = document.getElementById("ec_subtot_jasa").value;
+    for(var t = 1; t < ec_tableJasaService.rows.length; t++)
+    {
+        sumHsl = sumHsl + parseInt(ec_tableJasaService.rows[t].cells[1].innerHTML);
+    }
+    // console.log(sumHsl);
+    document.getElementById("ec_subtot_jasa").value = sumHsl;
+}
+function ec_changeTotalSparepart() {
+    table_sparepart = document.getElementById('ec_table_sparepart')
+    var sumHsl = 0;
+
+    for(var t = 1; t < table_sparepart.rows.length; t++)
+    {
+        sumHsl = sumHsl + parseInt(table_sparepart.rows[t].cells[4].innerHTML);
+    }
+    // console.log(sumHsl);
+    document.getElementById("ec_subtot_prod").value = sumHsl;
+}
+function ec_changeTotalDiscountSparepart() {
+    table_sparepart = document.getElementById('ec_table_sparepart')
+    var sumHsl = 0;
+
+    for(var t = 1; t < table_sparepart.rows.length; t++)
+    {
+        sumHsl = sumHsl + parseInt(table_sparepart.rows[t].cells[3].innerHTML);
+    }
+    // console.log(sumHsl);
+    document.getElementById("ec_total_discount").value = sumHsl;
+}
+
+function ec_TotalHargaService(){
+    var subtot_prod = document.getElementById('ec_subtot_prod').value
+    var subtot_jasa = document.getElementById('ec_subtot_jasa').value
+    var total = parseInt(subtot_prod) + parseInt(subtot_jasa)
+
+    document.getElementById('ec_sub_total').value = total
 }

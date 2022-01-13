@@ -751,134 +751,6 @@
   </div>
 {{-- End Modal Call Customer --}}
 
-{{-- Modal for choose estimated chost --}}
-<div class="modal fade bs-estimasi-cost" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title mt-0" id="myLargeModalLabel">Estimasi Biaya</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <div class="">
-                    <div class="mb-3">
-                        <label class="control-label">Jasa</label>
-                        <div class="input-group mb-3">
-                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-lg-js"><i class="fas fa-search"></i></button>
-                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Name Jasa</label>
-                        <input type="text" class="form-control" name="jasa_name" id="jasa_name" readonly>
-                        <input type="hidden" class="form-control" name="jasa_id" id="jasa_id" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Harga (Rp.)</label>
-                        <input type="number" class="form-control" name="jasa_price" id="jasa_price" readonly>
-                    </div>
-                    <div class="mt-3">
-                        <button type="button" onclick="tambahJasaService()" class="btn btn-sm btn-success">Tambah</button>
-                    </div>
-                </div>
-                <hr>
-                <table class="table table-bordered" width="100%" id="jasa_servis_op" style="font-size: 12px;">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Harga</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_jasa_servis_op">
-
-                    </tbody>
-                </table>
-
-                <hr>
-                <div class="">
-                    <div class="mb-3">
-                        <label class="control-label">Sparepart</label>
-                        <div class="input-group mb-3">
-                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-sparepart"><i class="fas fa-search"></i></button>
-                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">item</label>
-                        <input type="text" class="form-control" name="item_product" id="item_product" readonly>
-                        <input type="hidden" class="form-control" name="item_product" id="id_product" readonly>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="">Harga (Rp.)</label>
-                        <input type="number" class="form-control" name="item_price" id="item_price" readonly>
-
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">qty</label>
-                        <input type="text" class="form-control" name="qty_prod" id="qty_prod">
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Diskon (Rp.)</label>
-                        <input type="number" class="form-control" value="0" name="discount" id="discount_prod">
-                    </div>
-                    <div class="mt-3">
-                        <button type="button" onclick="tambahSparepartService()" class="btn btn-sm btn-success">Tambah</button>
-                    </div>
-                </div>
-                <hr>
-                <table class="table table-bordered" width="100%" id="table_sparepart" style="font-size: 12px;">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Harga</th>
-                            <th>Qty</th>
-                            <th>Diskon</th>
-                            <th>Subtotal</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_sparepart">
-
-                    </tbody>
-                </table>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Total Sparepart</label>
-                        <input type="number" class="form-control" name="subtot_prod" value="0" id="subtot_prod" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Total jasa</label>
-                        <input type="text" class="form-control" name="subtot_jasa" value="0" id="subtot_jasa" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Diskon (Rp.)</label>
-                        <input type="text" class="form-control" name="total_discount" value="0" id="total_discount" readonly>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Total Harga (Rp.)</label>
-                        <input type="number" class="form-control" name="sub_total" id="sub_total" readonly required>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onclick="estimate_cost_choose()" class="btn btn-primary">Save changes</button>
-                    </div>
-
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-{{-- End Modal --}}
 
 {{-- Modal Jasa --}}
 <div class="modal fade bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
@@ -962,6 +834,218 @@
 </div>
 {{-- End Modal Sparepart --}}
 
+
+{{-- Modal for choose estimated chost --}}
+<div class="modal fade bs-estimasi-cost" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Estimasi Biaya</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="">
+                    <div class="mb-3">
+                        <label class="control-label">Jasa</label>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".ec_bs-modal-lg-js"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">Name Jasa</label>
+                        <input type="text" class="form-control" name="jasa_name" id="ec_jasa_name" readonly>
+                        <input type="hidden" class="form-control" name="jasa_id" id="ec_jasa_id" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="jasa_price" id="ec_jasa_price" readonly>
+                    </div>
+                    <div class="mt-3">
+                        <button type="button" onclick="ec_tambahJasaService()" class="btn btn-sm btn-success">Tambah</button>
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-bordered" width="100%" id="ec_jasa_servis_op" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Harga</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ec_tbody_jasa_servis_op">
+
+                    </tbody>
+                </table>
+
+                <hr>
+                <div class="">
+                    <div class="mb-3">
+                        <label class="control-label">Sparepart</label>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".ec_bs-modal-sparepart"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">item</label>
+                        <input type="text" class="form-control" name="item_product" id="ec_item_product" readonly>
+                        <input type="hidden" class="form-control" name="item_product" id="ec_id_product" readonly>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="">Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="item_price" id="ec_item_price" readonly>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">qty</label>
+                        <input type="text" class="form-control" name="qty_prod" id="ec_qty_prod">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Diskon (Rp.)</label>
+                        <input type="number" class="form-control" value="0" name="discount" id="ec_discount_prod">
+                    </div>
+                    <div class="mt-3">
+                        <button type="button" onclick="ec_tambahSparepartService()" class="btn btn-sm btn-success">Tambah</button>
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-bordered" width="100%" id="ec_table_sparepart" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Diskon</th>
+                            <th>Subtotal</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ec_tbody_sparepart">
+
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="">Total Sparepart</label>
+                        <input type="number" class="form-control" name="subtot_prod" value="0" id="ec_subtot_prod" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Total jasa</label>
+                        <input type="text" class="form-control" name="subtot_jasa" value="0" id="ec_subtot_jasa" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Diskon (Rp.)</label>
+                        <input type="text" class="form-control" name="total_discount" value="0" id="ec_total_discount" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Total Harga (Rp.)</label>
+                        <input type="number" class="form-control" name="sub_total" id="ec_sub_total" readonly required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" onclick="estimate_cost_choose()" class="btn btn-primary">Save changes</button>
+                    </div>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal --}}
+
+
+{{-- Modal Jasa --}}
+<div class="modal fade ec_bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Jasa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" width="100%" style="font-size: 13px" id="pilihjasa">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th style="width: 10%;">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($repaire as $item)
+                            <tr>
+                                <td>{{$item->name}}</td>
+                                <td>{{number_format($item->price)}}</td>
+                                <td>
+                                    <button onclick="ec_pilih_jasa_servis({{$item->id}})" class="btn btn-sm btn-success">Pilih</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End modal Jasa --}}
+
+{{-- Modal Sparepart --}}
+<div class="modal fade ec_bs-modal-sparepart" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Sparepart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table responsive">
+                    <table class="table table-striped" id="pilihProduct" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Name</th>
+                                <th>Harga</th>
+                                <th>Stock</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($product as $item)
+                            <tr>
+                                <td>{{$item->barcode}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{number_format($item->selling_price)}}</td>
+                                <td>{{$item->stock}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="ec_pilih_sparepart_servis({{$item->id}})">Pilih</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{{-- End Modal Sparepart --}}
 
 
 

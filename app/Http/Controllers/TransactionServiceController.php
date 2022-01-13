@@ -405,6 +405,7 @@ class TransactionServiceController extends Controller
 
         Transaction_service::where('id', $id)->update([
             'user_id' => Auth::guard('web')->user()->id,
+            'total' => $st,
             'status' => 'cancelled'
         ]);
 

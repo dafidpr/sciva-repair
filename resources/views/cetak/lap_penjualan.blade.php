@@ -9,7 +9,7 @@
 <body>
     <table style="width: 100%;">
         <tr>
-            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="90px" alt=""></td>
+            <td width="10%"><img src="{{asset('tmp/asset/images/'. $company->logo)}}" width="100px" alt=""></td>
             <td>
                 <p><b>{{$company->name}}</b></p>
                 <p>{{$company->address}}</p>
@@ -90,5 +90,9 @@
     <br>
     @endforeach
     <div style="page-break-after:always;">
+
+        <script>
+            window.print()
+            </script>
 </body>
 </html>

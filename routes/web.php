@@ -83,7 +83,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
 
         Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:printNota-services');
-        Route::get('/service_masuk/{id}', [TransactionServiceController::class, 'service_masuk'])->middleware('can:print-nota-services');
+        Route::get('/service_masuk/{id}', [TransactionServiceController::class, 'service_masuk'])->middleware('can:printNota-services');
     });
 
     Route::prefix('entry_penjualan')->group(function () {
