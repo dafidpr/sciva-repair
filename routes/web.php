@@ -82,7 +82,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
 
-        Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:print-nota-services');
+        Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:printNota-services');
         Route::get('/service_masuk/{id}', [TransactionServiceController::class, 'service_masuk'])->middleware('can:print-nota-services');
     });
 
@@ -196,37 +196,37 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/cetak_lababersih', [ReportController::class, 'laba_bersih']);
         Route::get('', function () {
             return view('laporan.labarugi');
-        })->middleware('can:report-profit');
+        })->middleware('can:profit-report');
     });
     Route::prefix('lap_jurnalharian')->group(function () {
         Route::post('print', [ReportController::class, 'jurnal_harian']);
         Route::get('', function () {
             return view('laporan.jurnalharian');
-        })->middleware('can:report-daily-journal');
+        })->middleware('can:daily-report');
     });
     Route::prefix('lap_penjualan')->group(function () {
         Route::get('', function () {
             return view('laporan.penjualan');
-        })->middleware('can:report-sales');
+        })->middleware('can:sales-report');
         Route::post('cetak_sale', [ReportController::class, 'sale']);
     });
     Route::prefix('lap_stokopname')->group(function () {
         Route::post('/print_opname', [ReportController::class, 'opname']);
         Route::get('', function () {
             return view('laporan.stokopname');
-        })->middleware('can:report-opnames');
+        })->middleware('can:opnames-report');
     });
     Route::prefix('lap_stok_in_out')->group(function () {
         Route::post('/print_report', [ReportController::class, 'in_out']);
         Route::get('', function () {
             return view('laporan.stok_in_out');
-        })->middleware('can:report-stock-in-out');
+        })->middleware('can:stockInOut-report');
     });
     Route::prefix('lap_kas')->group(function () {
         Route::post('/print_cash', [ReportController::class, 'cash']);
         Route::get('', function () {
             return view('laporan.kas');
-        })->middleware('can:report-cash');
+        })->middleware('can:cash-report');
     });
     Route::get('/lap_kasbank', function () {
         return view('laporan.kasbank');
@@ -234,13 +234,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
     Route::prefix('lap_pembelian')->group(function () {
         Route::get('', function () {
             return view('laporan.pembelian');
-        })->middleware('can:report-purchases');
+        })->middleware('can:purchases-report');
         Route::post('/cetak_purchase', [ReportController::class, 'purchase']);
     });
     Route::prefix('lap_hutangpiutang')->group(function () {
         Route::post('/print_debt', [ReportController::class, 'debt']);
         Route::post('/print_receivable', [ReportController::class, 'receivable']);
-        Route::get('', [ReportController::class, 'hutang_piutang'])->middleware('can:report-debts-receivables');
+        Route::get('', [ReportController::class, 'hutang_piutang'])->middleware('can:debtsAndReceivables-report');
     });
 
     Route::get('/backupdata', function () {
@@ -268,21 +268,21 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/forceRestoreReceivable/{id?}', [RestoreController::class, 'forceRestoreReceivable']);
     });
 
-    Route::get('/generatebarcode', [ToolsController::class, 'index'])->middleware('can:generate-barcode-tools');
+    Route::get('/generatebarcode', [ToolsController::class, 'index'])->middleware('can:generateBarcode-tools');
     Route::post('/generatebarcode/update', [ToolsController::class, 'updateBarcode']);
     Route::post('/generatebarcode/cetak', [ToolsController::class, 'cetak']);
     Route::get('/generatebarcode/generate/{id}', [ToolsController::class, 'generate']);
 
     Route::get('/del_dataservis', function () {
         return view('tools.del_dataservis');
-    })->middleware('can:delete-servis-tools');
+    })->middleware('can:deleteServis-tools');
     Route::post('/del_servis', [ToolsController::class, 'deleteServisRange']);
 
 
     Route::prefix('del_transaksi')->group(function () {
         Route::get('', function () {
             return view('tools.del_transaksi');
-        })->middleware('can:delete-transaction-tools');
+        })->middleware('can:deleteTransaction-tools');
         Route::post('/deleteSale', [ToolsController::class, 'deleteSale']);
         Route::post('/deletePurchase', [ToolsController::class, 'deletePurchase']);
         Route::post('/deleteDebt', [ToolsController::class, 'deleteDebt']);

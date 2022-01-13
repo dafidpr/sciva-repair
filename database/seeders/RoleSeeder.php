@@ -35,10 +35,10 @@ class RoleSeeder extends Seeder
         $developer->givePermissionTo(Permission::all());
 
         //admin
-        $admin->givePermissionTo(['read-services', 'create-services', 'update-services', 'detail-services', 'delete-services', 'restore-services', 'print-nota-services', 'take-services', 'call-services']);
+        $admin->givePermissionTo(['read-services', 'create-services', 'update-services', 'detail-services', 'delete-services', 'restore-services', 'printNota-services', 'take-services', 'call-services']);
         $admin->givePermissionTo(['read-products', 'create-products', 'update-products', 'delete-products']);
         $admin->givePermissionTo(['read-users', 'create-users', 'update-users', 'delete-users']);
-        $admin->givePermissionTo(['read-roles', 'create-roles', 'update-roles', 'delete-roles', 'change-permissions']);
+        $admin->givePermissionTo(['read-roles', 'create-roles', 'update-roles', 'delete-roles', 'changePermissions-roles']);
         $admin->givePermissionTo(['read-repaire', 'create-repaire', 'update-repaire', 'delete-repaire']);
         $admin->givePermissionTo(['read-customers', 'create-customers', 'update-customers', 'delete-customers']);
         $admin->givePermissionTo(['read-suppliers', 'create-suppliers', 'update-suppliers', 'delete-suppliers']);
@@ -50,10 +50,10 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['read-receivable', 'payment-receivable', 'detail-receivable', 'delete-receivable']);
         $admin->givePermissionTo(['read-cash', 'create-cash', 'delete-cash']);
         $admin->givePermissionTo(['read-ppn', 'create-ppn', 'delete-ppn']);
-        $admin->givePermissionTo(['report-daily-journal', 'report-sales', 'report-purchases', 'report-opnames', 'report-stock-in-out', 'report-cash', 'report-debts-receivables', 'report-profit',]);
+        $admin->givePermissionTo(['daily-report', 'sales-report', 'purchases-report', 'opnames-report', 'stockInOut-report', 'cash-report', 'debtsAndReceivables-report', 'profit-report',]);
         $admin->givePermissionTo(['read-grafik']);
         $admin->givePermissionTo(['commission-users']);
-        $admin->givePermissionTo(['generate-barcode-tools', 'backup-tools', 'delete-servis-tools', 'delete-transaction-tools']);
+        $admin->givePermissionTo(['generateBarcode-tools', 'backup-tools', 'deleteServis-tools', 'deleteTransaction-tools']);
         $admin->givePermissionTo(['footerNota-settings', 'formatWA-settings', 'formatSMS-settings', 'daylimit-settings', 'profile-settings']);
 
         //kasir

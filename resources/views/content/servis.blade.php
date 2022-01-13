@@ -318,7 +318,7 @@
                         <th>Unit</th>
                         <th>No seri</th>
                         <th>Status</th>
-                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
+                        @canany(['update-services', 'call-services', 'take-services', 'printNota-services', 'delete-services', 'detail-services'])
                         <th>aksi</th>
                         @endcanany
                     </tr>
@@ -352,7 +352,7 @@
                             <span class="bg-secondary badge" style="font-size: 13px;">Sudah diambil</span>
                             @endif
                         </td>
-                        @canany(['update-services', 'call-services', 'take-services', 'print-nota-services', 'delete-services', 'detail-services'])
+                        @canany(['update-services', 'call-services', 'take-services', 'printNota-services', 'delete-services', 'detail-services'])
                         <td class="text-primary">
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
                             @can('update-services')
@@ -360,7 +360,7 @@
                             <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-money-bill"></i></a>
                             @endcan
 
-                            @can('print-nota-services')
+                            @can('printNota-services')
                             <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
                             @endcan
 
@@ -370,7 +370,7 @@
                             <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')"><i class="fab fa-whatsapp"></i></a>
                             @endcan
 
-                            @can('print-nota-services')
+                            @can('printNota-services')
                             <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
                             @endcan
 
@@ -379,7 +379,7 @@
                             @endcan
 
                             @elseif ($item->status == 'take')
-                            @can('print-nota-services')
+                            @can('printNota-services')
                             <a href="/admin/servis/print_take/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
                             @endcan
                             @endif

@@ -325,35 +325,35 @@
                             </ul>
                         </li>
                         @endcanany
-                        @canany(['report-daily-journal', 'report-sales', 'report-purchases', 'report-opnames', 'report-stock-in-out', 'report-cash', 'report-debts-receivables', 'report-profit'])
+                        @canany(['daily-journal-report', 'sales-report', 'purchases-report', 'opnames-report', 'stock-in-out-report', 'cash-report', 'debts-receivables-report', 'profit-report'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-file-alt"></i>
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                @can('report-daily-journal')
+                                @can('daily-report')
                                 <li><a href="/admin/lap_jurnalharian">Jurnal harian</a></li>
                                 @endcan
-                                @can('report-sales')
+                                @can('sales-report')
                                 <li><a href="/admin/lap_penjualan">Penjualan</a></li>
                                 @endcan
-                                @can('report-purchases')
+                                @can('purchases-report')
                                 <li><a href="/admin/lap_pembelian">Pembelian</a></li>
                                 @endcan
-                                @can('report-opnames')
+                                @can('opnames-report')
                                 <li><a href="/admin/lap_stokopname">Stok Opname</a></li>
                                 @endcan
-                                @can('report-stock-in-out')
+                                @can('stockInOut-report')
                                 <li><a href="/admin/lap_stok_in_out">Stok In/Out</a></li>
                                 @endcan
-                                @can('report-cash')
+                                @can('cash')
                                 <li><a href="/admin/lap_kas">Kas</a></li>
                                 @endcan
-                                @can('report-debts-receivables')
+                                @can('debtsAndReceivables-report')
                                 <li><a href="/admin/lap_hutangpiutang">Hutang Piutang</a></li>
                                 @endcan
-                                @can('report-profit')
+                                @can('profit-report')
                                 <li><a href="/admin/lap_labarugi">Laba Rugi</a></li>
                                 @endcan
                             </ul>
@@ -368,23 +368,23 @@
                             </a>
                             @endcan
                         </li>
-                        @canany(['generate-barcode-tools', 'backup-tools', 'delete-servis-tools', 'delete-transaction-tools'])
+                        @canany(['generateBarcode-tools', 'backup-tools', 'deleteServis-tools', 'deleteTransaction-tools'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fas fa-tools"></i>
                                 <span>Tools</span>
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
-                                @can('generate-barcode-tools')
+                                @can('generateBarcode-tools')
                                 <li><a href="/admin/generatebarcode">Generate Barcode</a></li>
                                 @endcan
                                 @can('backup-tools')
                                 <li><a href="/admin/backupdata">Backup Data</a></li>
                                 @endcan
-                                @can('delete-servis-tools')
+                                @can('deleteServis-tools')
                                 <li><a href="/admin/del_dataservis">Hapus Servis</a></li>
                                 @endcan
-                                @can('delete-transaction-tools')
+                                @can('deleteTransaction-tools')
                                 <li><a href="/admin/del_transaksi">Hapus Transaksi</a></li>
                                 @endcan
                             </ul>

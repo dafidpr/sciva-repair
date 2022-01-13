@@ -32,13 +32,13 @@ class RoleController extends Controller
     {
         //
         $remappedPermission = [];
-        $permissions = Permission::all()->pluck('name');
+        $permissions = Permission::all();
 
         foreach ($permissions as $permission) {
-            $explodePermissions = \explode('-', $permission);
+            $explodePermissions = \explode('-', $permission->name);
             $slicePermissions = array_slice($explodePermissions, 1);
             $implodePermissions = \implode('-', $slicePermissions);
-            $remappedPermission[$implodePermissions][] = $permission;
+            $remappedPermission[$implodePermissions][] = ['name' => $permission->name, 'label' => $permission->label];
         }
 
         $data = [

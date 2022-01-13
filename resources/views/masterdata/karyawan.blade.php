@@ -97,7 +97,7 @@
                             @can('update-roles')
                             <a href="#" class="text-primary" onclick="editRole({{$item->id}})"><i class="fas fa-edit"></i></a>
                             @endcan
-                            @can('change-permissions')
+                            @can('changePermissions-roles')
                             <a href="/admin/karyawan/changepermission/{{$item->id}}" class="text-primary"><i class="fas fa-key"></i></a>
                             @endcan
                             @can('delete-roles')
