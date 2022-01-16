@@ -517,6 +517,9 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script>
+        let app_url_ = {!! json_encode(url('')) !!}
+    </script>
     <script src="{{asset('tmp/assets/libs/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('tmp/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('tmp/assets/libs/metismenu/metisMenu.min.js')}}"></script>
