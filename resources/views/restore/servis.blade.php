@@ -15,22 +15,18 @@
         <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
             <thead>
                 <tr>
-                    <th>Aksi</th>
                     <th>Tanggal</th>
                     <th>No Nota</th>
                     <th>Pelanggan</th>
                     <th>Unit</th>
                     <th>No seri</th>
                     <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($service as $item)
                 <tr class="">
-                    <td class="text-primary">
-                        <a href="#" onclick="forceDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
-                        <a href="#" onclick="restoreallid({{$item->id}})"><i class="fas fa-undo-alt"></i></a>
-                    </td>
                     <td>{{$item->service_date}}</td>
                     <td>{{$item->transaction_code}}</td>
                     <td>{{$item->_customer->name}}</td>
@@ -53,6 +49,10 @@
 
                         <span class="bg-secondary badge">Sudah diambil</span>
                         @endif
+                    </td>
+                    <td class="text-primary">
+                        <a href="#" onclick="forceDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
+                        <a href="#" onclick="restoreallid({{$item->id}})"><i class="fas fa-undo-alt"></i></a>
                     </td>
                 </tr>
                 @endforeach
