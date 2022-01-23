@@ -50,8 +50,8 @@
                     <tr>
                         <td>{{$item->barcode}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->purchase_price}}</td>
-                        <td>{{$item->selling_price}}</td>
+                        <td>{{number_format($item->purchase_price)}}</td>
+                        <td>{{number_format($item->selling_price)}}</td>
                         <td>{{$item->member_price}}</td>
                         <td>{{$item->_supplier->name}}</td>
                         <td>

@@ -20,7 +20,17 @@ $(document).ready(function(){
     } );
 })
 $(document).ready(function(){
+    $('#pilihProduct2').DataTable( {
+        responsive: true
+    } );
+})
+$(document).ready(function(){
     $('#pilihjasa').DataTable( {
+        responsive: true
+    } );
+})
+$(document).ready(function(){
+    $('#pilihjasa2').DataTable( {
         responsive: true
     } );
 })

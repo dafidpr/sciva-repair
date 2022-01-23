@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{$item->_user->name}}</td>
                         <td>{{$item->created_at}}</td>
-                        <td>{{$item->nominal}}</td>
+                        <td>{{number_format($item->nominal)}}</td>
                     </tr>
                     @endforeach
                 </tbody>

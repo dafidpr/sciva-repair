@@ -8,12 +8,12 @@
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th>Supplaier</th>
+                            <th>Supplier</th>
                             <th>diskon</th>
                             <th>total</th>
-                            <th>payment</th>
-                            <th>method</th>
-                            <th>Opsi</th>
+                            <th>Pembayaran</th>
+                            <th>Jenis</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

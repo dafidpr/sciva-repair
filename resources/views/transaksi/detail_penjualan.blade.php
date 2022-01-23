@@ -28,10 +28,10 @@
                         <tr>
                             <td>{{$item->_product->barcode}}</td>
                             <td>{{$item->_product->name}}</td>
-                            <td>{{$item->discount}}</td>
-                            <td>{{$item->total}}</td>
+                            <td>{{number_format($item->discount)}}</td>
+                            <td>{{number_format($item->total)}}</td>
                             <td>{{$item->quantity}}</td>
-                            <td>{{$item->sub_total}}</td>
+                            <td>{{number_format($item->sub_total)}}</td>
                         </tr>
                         @endforeach
                     </tbody>

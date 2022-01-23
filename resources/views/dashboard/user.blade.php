@@ -249,7 +249,10 @@
               </ul>
 
 
-              <div class="tab-content" id="myTabContent">
+              <div class="tab-content" id="myTabContent" style="float:left;
+              width:100%;
+              overflow-y: auto;
+              height: 400px;">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <table class="table table-bordered" style="font-size: 13px;">
                         @foreach ($historysale as $item)

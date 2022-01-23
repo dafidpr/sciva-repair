@@ -30,9 +30,9 @@ function editProductA(e) {
                 $('#id').val(obj.id);
                 $('#barcode').val(obj.barcode);
                 $('#name').val(obj.name);
-                $('#selling_price').val(obj.selling_price);
-                $('#purchase_price').val(obj.purchase_price);
-                $('#member_price').val(obj.member_price);
+                $('#selling_price').val(parseInt(obj.selling_price));
+                $('#purchase_price').val(parseInt(obj.purchase_price));
+                $('#member_price').val(parseInt(obj.member_price));
                 $('#limit').val(obj.limit);
                 $('#supplier_id').val(obj.supplier_id);
                 $('#myEditModal').modal('show');

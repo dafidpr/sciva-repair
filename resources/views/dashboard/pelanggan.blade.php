@@ -24,13 +24,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                    <p class="font-size-16">Servis Masuk</p>
+                    <p class="font-size-16">Dalam Proses</p>
                     <div class="mini-stat-icon mx-auto mb-4 mt-3">
                         <span class="avatar-title rounded-circle bg-soft-primary">
                                 <i class="fas fa-hammer text-primary font-size-20"></i>
                             </span>
                     </div>
-                    <h5 class="font-size-22">{{$servisMasuk->total()}}</h5>
+                    <h5 class="font-size-22">{{$servisMasuk}}</h5>
 
                 </div>
             </div>
@@ -166,7 +166,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->total}}</td>
+                                <td>{{number_format($item->total)}}</td>
                                 <td>{{$item->due_date}}</td>
                             </tr>
                             @endforeach

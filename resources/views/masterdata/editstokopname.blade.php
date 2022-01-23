@@ -46,19 +46,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Harga Beli</label>
-                            <input type="text" class="form-control" name="purchase_price" id="purchase_price" value="{{$opname->_product->purchase_price}}" readonly>
+                            <input type="text" class="form-control" name="purchase_price" id="purchase_price" value="{{number_format($opname->_product->purchase_price)}}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="">Stock</label>
+                            <label for="">Stok</label>
                             <input type="number" class="form-control" name="stock" id="stock" value="{{$opname->_product->stock}}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="">Stock Nyata</label>
+                            <label for="">Stok Nyata</label>
                             <input type="number" class="form-control" name="real_stock" id="real_stock" value="{{$opname->real_stock}}" required>
                         </div>
                         <div class="mb-3">
                             <label for="">Keterangan</label>
-                            <input type="text" class="form-control" name="description" id="description" value="{{$opname->decription}}" required>
+                            <input type="text" class="form-control" name="description" id="description" value="{{$opname->description}}" required>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Save Change</button>
@@ -96,7 +96,7 @@
                                 <tr>
                                     <td>Barcode</td>
                                     <td>Nama</td>
-                                    <td>Stock</td>
+                                    <td>Stok</td>
                                     <td>Harga</td>
                                     <td>#</td>
                                 </tr>
@@ -107,7 +107,7 @@
                                     <td>{{$item->barcode}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->stock}}</td>
-                                    <td>{{$item->purchase_price}}</td>
+                                    <td>{{number_format($item->purchase_price)}}</td>
                                     <td>
                                         <button type="button" onclick="select_product({{$item->id}})" class="btn btn-sm btn-primary"><i class="far fa-check-square"></i> Pilih</button>
                                     </td>

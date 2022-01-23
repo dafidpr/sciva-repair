@@ -76,13 +76,13 @@
                         <div class="col-sm-6">
                             <div>
                                 <label for="">Tanggal Awal</label>
-                                <input type="datetime-local" name="from" class="form-control">
+                                <input type="date" name="from" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div>
                                 <label for="">Tanggal Akhir</label>
-                                <input type="datetime-local" name="to" class="form-control">
+                                <input type="date" name="to" class="form-control">
                             </div>
                         </div>
                         <div class="d-grid gap-2 mt-3">
@@ -147,13 +147,13 @@
                         <div class="col-sm-6">
                             <div>
                                 <label for="">Tanggal Awal</label>
-                                <input type="datetime-local" name="from" class="form-control">
+                                <input type="date" name="from" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div>
                                 <label for="">Tanggal Akhir</label>
-                                <input type="datetime-local" name="to" class="form-control">
+                                <input type="date" name="to" class="form-control">
                             </div>
                         </div>
                         <div class="d-grid gap-2 mt-3">

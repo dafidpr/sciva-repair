@@ -10,13 +10,13 @@
                     <tr>
                         <th>Kode Beli</th>
                         <th>Supplier</th>
-                        <th>tgl hutang</th>
+                        <th>Tgl hutang</th>
                         <th>Jatuh tempo</th>
                         <th>Total hutang</th>
                         <th>Total bayar</th>
                         <th>sisa</th>
                         <th>status</th>
-                        <th>Opsi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,9 +26,9 @@
                         <td>{{$item->_purchase->_supplier->name}}</td>
                         <td>{{$item->debt_date}}</td>
                         <td>{{$item->due_date}}</td>
-                        <td>{{$item->total}}</td>
-                        <td>{{$item->payment}}</td>
-                        <td>{{$item->remainder}}</td>
+                        <td>{{number_format($item->total)}}</td>
+                        <td>{{number_format($item->payment)}}</td>
+                        <td>{{number_format($item->remainder)}}</td>
                         <td>
                             @if ($item->status == 'paid_off')
                             <span class="badge bg-success">Lunas</span>

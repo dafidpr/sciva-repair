@@ -356,38 +356,38 @@
                         <td class="text-primary">
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
                             @can('update-services')
-                            <a href="/admin/servis/{{$item->id}}/edit"><i class="fas fa-edit"></i></a>
-                            <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-money-bill"></i></a>
+                            <a href="/admin/servis/{{$item->id}}/edit" class="ms-2"><i class="fas fa-edit"></i></a>
+                            <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})" class="ms-2"><i class="fas fa-money-bill"></i></a>
                             @endcan
 
                             @can('printNota-services')
-                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
+                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
 
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
 
                             @can('call-services')
-                            <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')" class="ms-2"><i class="fab fa-whatsapp"></i></a>
                             @endcan
 
                             @can('printNota-services')
-                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
+                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
 
                             @can('take-services')
-                            <a href="#" onclick="takeUnit(`{{$item->_customer->name}}`, {{$item->id}})"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" onclick="takeUnit(`{{$item->_customer->name}}`, {{$item->id}})" class="ms-2"><i class="fas fa-shopping-cart"></i></a>
                             @endcan
 
                             @elseif ($item->status == 'take')
                             @can('printNota-services')
-                            <a href="/admin/servis/print_take/{{$item->id}}" target="_blank"><i class="fas fa-print"></i></a>
+                            <a href="/admin/servis/print_take/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
                             @endif
                             @can('delete-services')
-                            <a href="#" onclick="softDelete({{$item->id}})"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#" onclick="softDelete({{$item->id}})" class="ms-2"><i class="fas fa-trash-alt"></i></a>
                             @endcan
                             @can('detail-services')
-                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}" data-alamat="{{$item->_customer->address}}">
+                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}" data-alamat="{{$item->_customer->address}}" class="ms-2">
                                 <i class="fas fa-search"></i>
                             </a>
                             @endcan
@@ -627,6 +627,10 @@
                             <td><span id="dseri"></span></td>
                         </tr>
                         <tr>
+                            <td><b>Passcode</b></td>
+                            <td><span id="dpasscode"></span></td>
+                        </tr>
+                        <tr>
                             <td><b>Keluhan</b></td>
                             <td><span id="dcomplient"></span></td>
                         </tr>
@@ -664,7 +668,7 @@
 {{-- Payment Servis --}}
 
 <div class="modal fade takeUnit" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myLargeModalLabel">Pengambilan Unit</h5>
@@ -754,7 +758,7 @@
 
 {{-- Modal Jasa --}}
 <div class="modal fade bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Jasa</h5>
@@ -793,7 +797,7 @@
 
 {{-- Modal Sparepart --}}
 <div class="modal fade bs-modal-sparepart" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Sparepart</h5>
@@ -967,7 +971,7 @@
 
 {{-- Modal Jasa --}}
 <div class="modal fade ec_bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Jasa</h5>
@@ -977,7 +981,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" width="100%" style="font-size: 13px" id="pilihjasa">
+                    <table class="table table-striped" width="100%" style="font-size: 13px" id="pilihjasa2">
                         <thead>
                             <tr>
                                 <th>Nama</th>
@@ -1006,7 +1010,7 @@
 
 {{-- Modal Sparepart --}}
 <div class="modal fade ec_bs-modal-sparepart" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myLargeModalLabel">Pilih Sparepart</h5>
@@ -1016,7 +1020,7 @@
             </div>
             <div class="modal-body">
                 <div class="table responsive">
-                    <table class="table table-striped" id="pilihProduct" style="width: 100%;">
+                    <table class="table table-striped" id="pilihProduct2" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Barcode</th>
@@ -1050,4 +1054,14 @@
 
 
 <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+@if (old('print_s_masuk'))
+<script>
+    window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
+</script>
+@endif
+@if (old('print_s_diambil'))
+<script>
+    window.open("/admin/servis/print_take/"+<?php echo old('print_s_diambil');?>, '_blank');
+</script>
+@endif
 @endsection

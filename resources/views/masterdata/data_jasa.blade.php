@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{$item->repaire_code}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->price}}</td>
+                        <td>{{number_format($item->price)}}</td>
                         @canany(['update-repaire', 'delete-repaire'])
                         <td>
                             @can('update-repaire')

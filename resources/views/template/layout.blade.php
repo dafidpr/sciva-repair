@@ -517,6 +517,12 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    @if (session('print_Nota'))
+    <script>
+        var url = '/admin/servis/service_masuk/' + session('print_Nota');
+        window.open(url , '_blank');
+    </script>
+    @endif
     <script>
         let app_url_ = {!! json_encode(url('')) !!}
     </script>

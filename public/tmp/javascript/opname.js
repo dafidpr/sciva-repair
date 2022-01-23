@@ -31,7 +31,7 @@ function select_product(e) {
             $('#barcode').val(obj.barcode);
             $('#name').val(obj.name);
             $('#stock').val(obj.stock);
-            $('#purchase_price').val(obj.purchase_price);
+            $('#purchase_price').val(parseInt(obj.purchase_price));
             $('.bs-example-modal-lg').modal('hide');
             // $('#myModal').modal('show');
         }

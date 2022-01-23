@@ -26,7 +26,7 @@
                 <h4>Footer Nota Penjualan</h4>
                 <form action="/admin/footer_nota/updateNotaSale" method="post">
                     @csrf
-                    <textarea name="value" class="form-control" id="" cols="20" rows="6" required>{{$footer_sale->value}}</textarea>
+                    <textarea name="value" class="form-control" id="editor" cols="70" rows="6" required>{{$footer_sale->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
             </div>
@@ -38,7 +38,7 @@
                 <h4>Footer Nota Servis</h4>
                 <form action="/admin/footer_nota/updateNotaServis" method="post">
                     @csrf
-                    <textarea name="value" class="form-control" id="" cols="20" rows="6">{{$footer_servis->value}}</textarea>
+                    <textarea name="value" class="form-control" id="editor2" cols="20" rows="6">{{$footer_servis->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
             </div>
@@ -50,7 +50,7 @@
                 <h4>Footer Nota Servis Diambil</h4>
                 <form action="/admin/footer_nota/updateNotaServisTake" method="post">
                     @csrf
-                    <textarea name="value" class="form-control" id="" cols="20" rows="6">{{$footer_servis_take->value}}</textarea>
+                    <textarea name="value" class="form-control" id="editor3" cols="20" rows="6">{{$footer_servis_take->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
             </div>
@@ -58,4 +58,27 @@
     </div>
 </div>
 
+
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor2' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor3' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

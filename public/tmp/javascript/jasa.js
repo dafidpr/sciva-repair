@@ -30,7 +30,7 @@ function editJasa(e) {
             $('#id').val(obj.id);
             $('#repaire_code').val(obj.repaire_code);
             $('#name').val(obj.name);
-            $('#price').val(obj.price);
+            $('#price').val(parseInt(obj.price));
             $('#myEditModal').modal('show');
         }
     })

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cash;
 use App\Models\Product;
 use App\Models\Stock_opname;
 use Illuminate\Http\Request;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
 
 class OpnameController extends Controller
 {
@@ -48,6 +51,17 @@ class OpnameController extends Controller
         // dd($request->all());
         $difference = $request->real_stock - $request->stock;
         $value = $difference * $request->purchase_price;
+
+        if ($difference < 0) {
+            Cash::create([
+                'user_id' => Auth::guard('web')->user()->id,
+                'cash_code' => IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']),
+                'date' => date('Y-m-d'),
+                'nominal' => abs($value),
+                'description' => 'Stok Keluar',
+                'source' => 'expenditure'
+            ]);
+        }
 
         Stock_opname::create(
             [

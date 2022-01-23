@@ -86,9 +86,16 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editPtoD($id)
     {
         //
+
+        $a = Customer::find($id);
+        Customer::where('id', $id)->update([
+            'password' => bcrypt($a->telephone)
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Password dari Pelanggan telah diUbah ke Default!!');
     }
 
     /**

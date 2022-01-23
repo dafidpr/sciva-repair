@@ -74,7 +74,7 @@ class ToolsController extends Controller
     public function generate($id)
     {
         //
-        $aaa = \DNS1D::getBarcodeHTML($id, 'EAN13');;
+        $aaa = \DNS1D::getBarcodeHTML($id, 'EAN13');
 
         return json_encode($aaa);
     }
@@ -112,7 +112,9 @@ class ToolsController extends Controller
     public function deletePurchase(Request $request)
     {
         //
-        Purchase::whereBetween('created_at', [$request->from, $request->to])->delete();
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+        Purchase::whereBetween('created_at', [$startDate, $endDate])->delete();
 
         return redirect()->back()->with('berhasil', 'Data penjualan telah dihapus sesuai range tanggal yang anda tentukan!!');
     }
@@ -127,7 +129,9 @@ class ToolsController extends Controller
     public function deleteReceivable(Request $request)
     {
         //
-        Receivable::where('status', 'paid off')->whereBetween('created_at', [$request->from, $request->to])->delete();
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+        Receivable::where('status', 'paid off')->whereBetween('created_at', [$startDate, $endDate])->delete();
 
         return redirect()->back()->with('berhasil', 'Data penjualan telah dihapus sesuai range tanggal yang anda tentukan!!');
     }
@@ -145,16 +149,48 @@ class ToolsController extends Controller
         $mysqlUserName      = env('DB_USERNAME');
         $mysqlPassword      = env('DB_PASSWORD');
         $DbName             = env('DB_DATABASE');
-        $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+        $file_name = 'database_sciva_backup_on_' . date('y-m-d') . '.sql';
 
 
-        $queryTables = DB::select(DB::raw('SHOW TABLES'));
-        foreach ($queryTables as $table) {
-            foreach ($table as $tName) {
-                $tables[] = $tName;
-            }
-        }
-        // $tables  = array("users","products","categories"); //here your tables...
+        // $queryTables = DB::select(DB::raw('SHOW TABLES'));
+        // foreach ($queryTables as $table) {
+        //     foreach ($table as $tName) {
+        //         $tables[] = $tName;
+        //     }
+        // }
+        $tables  = array(
+            'users',
+            'password_resets',
+            'failed_jobs',
+            'personal_access_tokens',
+            'customers',
+            'suppliers',
+            'products',
+            'purchases',
+            'repaire_services',
+            'stocks',
+            'sales',
+            'transaction_services',
+            'transaction_service_details',
+            'receivables',
+            'receivable_details',
+            'sale_details',
+            'purchase_details',
+            'debts',
+            'debt_details',
+            'stock_opnames',
+            'vat_taxes',
+            'company_profiles',
+            'settings',
+            'cashes',
+            'commisions',
+            'verifybackup',
+            'permissions',
+            'roles',
+            'model_has_permissions',
+            'model_has_roles',
+            'role_has_permissions'
+        ); //here your tables...
 
         $connect = new \PDO("mysql:host=$mysqlHostName;dbname=$DbName;charset=utf8", "$mysqlUserName", "$mysqlPassword", array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         $get_all_table_query = "SHOW TABLES";
@@ -180,8 +216,8 @@ class ToolsController extends Controller
                 $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
                 $table_column_array = array_keys($single_result);
                 $table_value_array = array_values($single_result);
-                $output .= "\nINSERT INTO $table (";
-                $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                $output .= "\nINSERT INTO $table";
+                $output .= " " . "VALUES (";
                 $output .= "'" . implode("','", $table_value_array) . "');\n";
             }
         }
@@ -201,6 +237,12 @@ class ToolsController extends Controller
         flush();
         readfile($file_name);
         unlink($file_name);
+
+        $headers = [
+            'Content-Disposition' => sprintf('attachment; filename="%s"', 'backup.sql'),
+        ];
+
+        return response()->make($output, 200, $headers);
     }
 
 

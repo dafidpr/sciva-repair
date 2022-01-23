@@ -15,7 +15,7 @@
         <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
             <thead>
                 <tr>
-                    <th>aksi</th>
+                    <th>Aksi</th>
                     <th>Tanggal</th>
                     <th>No Nota</th>
                     <th>Pelanggan</th>

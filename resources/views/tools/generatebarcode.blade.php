@@ -41,8 +41,8 @@
                                     {{$item->barcode}}
                                 </td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->purchase_price}}</td>
-                                <td>{{$item->selling_price}}</td>
+                                <td>{{number_format($item->purchase_price)}}</td>
+                                <td>{{number_format($item->selling_price)}}</td>
                                 <td>
                                     <a href="#" onclick="selectProductGenerete({{$item->id}})" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
                                 </td>

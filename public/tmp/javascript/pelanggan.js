@@ -19,6 +19,27 @@ function hapusdata(e) {
     })
 
 }
+function changePtoD(e) {
+    Swal.fire({
+    title: 'Apakah anda yakin?',
+    text: "Password akan kembali ke Default!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, Yakin!'
+    }).then((result) => {
+    if (result.isConfirmed) {
+        window.location = "/admin/pelanggan/editPtoD/"+e,
+        Swal.fire(
+        'Berhasil!',
+        'Password telah Di Reset ke Default.',
+        'success'
+        )
+    }
+    })
+
+}
 
 
 function editData(e) {

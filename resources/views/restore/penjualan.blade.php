@@ -17,10 +17,10 @@
                         <th>Kasir</th>
                         <th>Pelanggan</th>
                         <th>Total</th>
-                        <th>Type</th>
+                        <th>Tipe</th>
                         <th>Bayar</th>
                         <th>Waktu</th>
-                        <th>Opsi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

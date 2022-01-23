@@ -164,6 +164,7 @@ function detail_service(e) {
             $('#dtelephone').html(tlp);
             $('#dalamat').html(address);
             $('#dunit').html(obj.unit);
+            $('#dpasscode').html(obj.passcode);
             $('#dcomplient').html(obj.complient);
             $('#dcompletenes').html(obj.completenes);
             $('#dtotal').html(total);
@@ -189,7 +190,7 @@ function takeUnit(a, b) {
             $('#t_customer').val(a);
             $('#t_unit').val(obj.unit);
             $('#t_serial_number').val(obj.serial_number);
-            $('#t_total').val(obj.total);
+            $('#t_total').val(parseInt(obj.total));
             $('.takeUnit').modal('show');
             // $('#myModal').modal('show');
         }
@@ -225,8 +226,7 @@ function hargaService(b, a) {
             $('#name_customer').val(b);
             $('#unit').val(obj.unit);
             $('#complient').val(obj.complient);
-            $('#estimated_cost').val(obj.estimated_cost);
-            $('#estimated_cost').val(obj.estimated_cost);
+            $('#estimated_cost').val(parseInt(obj.estimated_cost));
             $('.editStatusService').modal('show');
             // $('#myModal').modal('show');
         }
@@ -247,7 +247,7 @@ function pilih_jasa_servis(e) {
             // alert()
             $('#jasa_id').val(obj.id);
             $('#jasa_name').val(obj.name);
-            $('#jasa_price').val(obj.price);
+            $('#jasa_price').val(parseInt(obj.price));
             $('.bs-modal-lg-js').modal('hide');
             // $('#myModal').modal('show');
         }
@@ -262,7 +262,7 @@ function ec_pilih_jasa_servis(e) {
             // alert()
             $('#ec_jasa_id').val(obj.id);
             $('#ec_jasa_name').val(obj.name);
-            $('#ec_jasa_price').val(obj.price);
+            $('#ec_jasa_price').val(parseInt(obj.price));
             $('.ec_bs-modal-lg-js').modal('hide');
             // $('#myModal').modal('show');
         }
@@ -277,7 +277,7 @@ function ec_pilih_sparepart_servis(e) {
             var obj = JSON.parse(data);
             $('#ec_id_product').val(obj.id);
             $('#ec_item_product').val(obj.name);
-            $('#ec_item_price').val(obj.selling_price);
+            $('#ec_item_price').val(parseInt(obj.selling_price));
             $('.ec_bs-modal-sparepart').modal('hide');
             // $('#myModal').modal('show');
         }
@@ -292,7 +292,7 @@ function pilih_sparepart_servis(e) {
             var obj = JSON.parse(data);
             $('#id_product').val(obj.id);
             $('#item_product').val(obj.name);
-            $('#item_price').val(obj.selling_price);
+            $('#item_price').val(parseInt(obj.selling_price));
             $('.bs-modal-sparepart').modal('hide');
             // $('#myModal').modal('show');
         }

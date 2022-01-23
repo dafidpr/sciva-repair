@@ -86,7 +86,7 @@
                                 <th>Diskon</th>
                                 <th>Qty</th>
                                 <th>total</th>
-                                <th>Opsi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="bodyTab">
@@ -175,7 +175,7 @@
                             <tr>
                                 <td>{{$item->barcode}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->selling_price}}</td>
+                                <td>{{number_format($item->selling_price)}}</td>
                                 <td>
                                     @if ($item->stock == $item->limit || $item->stock < $item->limit)
                                     <span class="btn btn-sm btn-danger">{{$item->stock}}</span>

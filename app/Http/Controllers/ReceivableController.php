@@ -48,7 +48,7 @@ class ReceivableController extends Controller
         $d = Receivable::find($request->receivable_id);
         $payment = $request->payment;
         $a = $d->payment + $payment;
-        $remainder = $request->total - $payment;
+        $remainder = $d->remainder - $payment;
 
         Receivable_detail::create([
             'receivable_id' => $request->receivable_id,

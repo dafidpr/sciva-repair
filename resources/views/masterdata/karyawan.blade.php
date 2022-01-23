@@ -35,7 +35,7 @@
                         <th>Alamat</th>
                         <th>Role</th>
                         <th>Komisi</th>
-                        @canany(['update-users', 'delete-users'])
+                        @canany(['update-users', 'delete-users', 'changePass-users'])
                         <th>Aksi</th>
                         @endcanany
                     </tr>
@@ -53,10 +53,13 @@
                         <td>{{$item->commission}}</td>
                         <td>
                             @can('update-users')
-                            <a href="#" class="text-primary" onclick="editKaryawan({{$item->id}})"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="editKaryawan({{$item->id}})"><i class="fas fa-edit"></i></a>
                             @endcan
                             @can('delete-users')
-                            <a href="#" class="text-primary" onclick="hapusdatauser({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="hapusdatauser({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            @endcan
+                            @can('changePass-users')
+                            <a href="/admin/karyawan/change_Passbyadmin/{{$item->id}}" class="text-primary ms-2"><i class="fas fa-lock"></i></a>
                             @endcan
                         </td>
                     </tr>
@@ -95,13 +98,13 @@
                         <th>{{$item->name}}</th>
                         <th>
                             @can('update-roles')
-                            <a href="#" class="text-primary" onclick="editRole({{$item->id}})"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="editRole({{$item->id}})"><i class="fas fa-edit"></i></a>
                             @endcan
                             @can('changePermissions-roles')
-                            <a href="/admin/karyawan/changepermission/{{$item->id}}" class="text-primary"><i class="fas fa-key"></i></a>
+                            <a href="/admin/karyawan/changepermission/{{$item->id}}" class="text-primary ms-2"><i class="fas fa-key"></i></a>
                             @endcan
                             @can('delete-roles')
-                            <a href="#" class="text-primary" onclick="hapusdatarole({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="hapusdatarole({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
                         </th>
                     </tr>

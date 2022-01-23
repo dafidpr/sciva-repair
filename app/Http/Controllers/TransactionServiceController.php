@@ -135,7 +135,7 @@ class TransactionServiceController extends Controller
         // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
         // return $pdf->stream('Struk_service');
 
-        return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!');
+        return redirect('/admin/servis')->with('berhasil', 'Anda telah berhasil menambah data service!!')->withInput(['print_s_masuk' => $service->id]);
     }
 
     public function service_masuk($id)
@@ -244,7 +244,7 @@ class TransactionServiceController extends Controller
         // dd($request->all());
 
         $persent = Auth::guard('web')->user()->commission / 100;
-        $t_com = $request->sub_total * $persent;
+        $t_com = $request->subtot_jasa * $persent;
 
         Commision::create([
             'user_id' => Auth::guard('web')->user()->id,
@@ -254,7 +254,7 @@ class TransactionServiceController extends Controller
 
         $tech = User::find($request->technician);
 
-        $t_com_t = $request->sub_total * $tech->commission / 100;
+        $t_com_t = $request->subtot_jasa * $tech->commission / 100;
 
         Commision::create([
             'user_id' => Auth::guard('web')->user()->id,
@@ -336,7 +336,7 @@ class TransactionServiceController extends Controller
             ]);
         }
 
-        return redirect('/admin/servis/print_take/' . $request->id_sv);
+        return redirect()->back()->with('berhasil', 'Unit Servis telah diambil!!')->withInput(['print_s_diambil' => $request->id_sv]);
     }
 
     /**

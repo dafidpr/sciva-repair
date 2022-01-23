@@ -45,9 +45,12 @@ class KomisiController extends Controller
     public function store(Request $request)
     {
         //
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+
         $data = [
-            'user' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$request->from, $request->to])->get(),
-            'total' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$request->from, $request->to])->sum('total'),
+            'user' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$startDate, $endDate])->get(),
+            'total' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$startDate, $endDate])->sum('total'),
             'company' => Company_profile::find(1),
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),

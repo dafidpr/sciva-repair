@@ -30,20 +30,31 @@
             <table class="table table-striped" style="font-size: 13;" id="bestpelanggan">
                 <thead>
                     <tr>
-                        <th>Aksi</th>
                         <th>Barcode</th>
                         <th>Nama</th>
-                        <th>stok gudang</th>
-                        <th>stok nyata</th>
-                        <th>selisih</th>
-                        <th>nilai</th>
-                        <th>keterangan</th>
-                        <th>tanggal</th>
+                        <th>Stok gudang</th>
+                        <th>Stok nyata</th>
+                        <th>Selisih</th>
+                        <th>Nilai</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        @canany(['update-opnames', 'delete-opnames'])
+                        <th>Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($opname as $item)
                     <tr>
+                        <td>{{$item->_product->barcode}}</td>
+                        <td>{{$item->_product->name}}</td>
+                        <td>{{$item->stock}}</td>
+                        <td>{{$item->real_stock}}</td>
+                        <td>{{$item->difference_stock}}</td>
+                        <td>{{number_format($item->value)}}</td>
+                        <td>{{$item->description}}</td>
+                        <td>{{$item->created_at}}</td>
+                        @canany(['update-opnames', 'delete-opnames'])
                         <td>
                             @can('update-opnames')
                             <a href="/admin/stockopname/{{$item->id}}/detail" class="text-primary"><i class="fas fa-edit"></i></a>
@@ -52,14 +63,7 @@
                             <a href="#" class="text-primary" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
                         </td>
-                        <td>{{$item->_product->barcode}}</td>
-                        <td>{{$item->_product->name}}</td>
-                        <td>{{$item->stock}}</td>
-                        <td>{{$item->real_stock}}</td>
-                        <td>{{$item->difference_stock}}</td>
-                        <td>{{$item->value}}</td>
-                        <td>{{$item->description}}</td>
-                        <td>{{$item->created_at}}</td>
+                        @endcanany
                     </tr>
                     @endforeach
                 </tbody>

@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'change-permission')
+@section('title', 'Change-permission')
 @section('content')
 
 <div class="card">

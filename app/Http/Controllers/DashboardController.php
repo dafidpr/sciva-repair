@@ -37,10 +37,10 @@ class DashboardController extends Controller
             'product' => Product::all(),
             'terlaris' => $sqllaris,
             'csbest' => $csbest,
-            'historysale' => Sale::latest()->paginate('10'),
-            'historyservis' => Transaction_service::latest()->paginate('10'),
-            'historyservisdiambil' => Transaction_service::where('status', 'take')->orderBy('updated_at', 'desc')->paginate('10'),
-            'historylogin' => User::where('username', '!=', 'root')->orderBy('login_at', 'desc')->paginate('10'),
+            'historysale' => Sale::latest()->paginate('100'),
+            'historyservis' => Transaction_service::latest()->paginate('100'),
+            'historyservisdiambil' => Transaction_service::where('status', 'take')->orderBy('updated_at', 'desc')->paginate('100'),
+            'historylogin' => User::where('username', '!=', 'root')->orderBy('login_at', 'desc')->paginate('100'),
         ];
         return view('dashboard.user', $data);
     }
@@ -56,11 +56,12 @@ class DashboardController extends Controller
         $id_i = Auth::guard('customer')->user()->id;
         $se = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'finished' ORDER BY total"))->first();
         $ws = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'waiting sparepart' ORDER BY total"))->first();
+        $dp = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'proses' ORDER BY total"))->first();
         $sb = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'cancelled' ORDER BY total"))->first();
-        $receivable = collect(DB::select("SELECT a.id, b.invoice, c.name, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, sales b, customers c WHERE a.sale_id = b.id AND c.id = b.customer_id AND c.id = '$id_i' AND a.status = 'not yet paid' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
+        $receivable = collect(DB::select("SELECT a.id, b.invoice, a.due_date, c.name, a.total, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, sales b, customers c WHERE a.sale_id = b.id AND c.id = b.customer_id AND c.id = '$id_i' AND a.status = 'not yet paid' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
 
         $data = [
-            'servisMasuk' => Transaction_service::where('customer_id', Auth::guard('customer')->user()->id)->paginate('1'),
+            'servisMasuk' => $dp->total,
             'servisSelesai' => $se->total,
             'waitingSparepart' => $ws->total,
             'batal' => $sb->total,

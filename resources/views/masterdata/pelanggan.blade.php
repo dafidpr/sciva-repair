@@ -35,7 +35,7 @@
                         <th>Alamat</th>
                         <th>Jenis</th>
                         {{-- <th>Piutang</th> --}}
-                        @canany(['update-customers', 'delete-customers'])
+                        @canany(['update-customers', 'delete-customers', 'changePassword-customers'])
                         <th>Aksi</th>
                         @endcanany
                     </tr>
@@ -48,15 +48,18 @@
                         <td>{{$item->address}}</td>
                         <td>{{$item->type}}</td>
                         {{-- <td>100000</td> --}}
-                        @canany(['update-customers', 'delete-customers'])
+                        @canany(['update-customers', 'delete-customers', 'changePassword-customers'])
                         <td>
                             @if ($item->umum != 'umum' and $item->address != 'umum')
 
                             @can('update-customers')
-                            <a href="#" class="text-primary" onclick="editData({{$item->id}})"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="editData({{$item->id}})"><i class="fas fa-edit"></i></a>
                             @endcan
                             @can('delete-customers')
-                            <a href="#" class="text-primary" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-primary ms-2" onclick="hapusdata({{$item->id}})"><i class="fas fa-trash"></i></a>
+                            @endcan
+                            @can('changePassword-customers')
+                            <a href="#" class="text-primary ms-2" onclick="changePtoD({{$item->id}})"><i class="fas fa-undo-alt"></i></a>
                             @endcan
                             @endif
                         </td>

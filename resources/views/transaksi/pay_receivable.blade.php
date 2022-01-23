@@ -12,12 +12,12 @@
                         @csrf
                         <div>
                             <label for="">Total Hutang</label>
-                            <input type="text" value="{{$receivable->remainder}}" name="total" class="form-control" readonly>
+                            <input type="text" value="{{number_format($receivable->remainder)}}" name="total" class="form-control" readonly>
                             <input type="hidden" value="{{$receivable->id}}" name="receivable_id" class="form-control" readonly>
                         </div>
                         <div>
                             <label for="">Pembayaran</label>
-                            <input type="text" name="payment" class="form-control">
+                            <input type="number" name="payment" class="form-control">
                         </div>
                         <div class="d-grid gap-2 mt-3">
                             <button type="submit" class="btn btn-sm btn-primary text-center"><i class="fas fa-hand-holding-usd"></i> Simpan</button>
@@ -52,7 +52,7 @@
                                     <th>Operator</th>
                                     <th>Tanggal</th>
                                     <th>Nominal</th>
-                                    <th>Opsi</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +60,7 @@
                                 <tr>
                                     <td>{{$item->_user->name}}</td>
                                     <td>{{$item->payment_date}}</td>
-                                    <td>{{$item->nominal}}</td>
+                                    <td>{{number_format($item->nominal)}}</td>
                                     <td>
                                         <a href="/admin/piutang/{{$item->id}}/delete_receivable" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>

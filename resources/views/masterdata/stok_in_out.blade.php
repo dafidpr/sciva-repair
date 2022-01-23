@@ -32,34 +32,34 @@
             <table class="table table-striped" style="font-size: 13;" id="stoklimit">
                 <thead>
                     <tr>
-                        @can('delete-stocks')
-                        <th>Aksi</th>
-                        @endcan
                         <th>Barcode</th>
                         <th>Nama</th>
                         <th>Jumlah</th>
                         <th>Nilai</th>
                         <th>Tipe</th>
-                        <th>keterangan</th>
-                        <th>tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        @can('delete-stocks')
+                        <th>Aksi</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($stock as $item)
                     <tr>
+                        <td>{{$item->_product->barcode}}</td>
+                        <td>{{$item->_product->name}}</td>
+                        <td>{{$item->total}}</td>
+                        <td>{{number_format($item->value)}}</td>
+                        <td>{{$item->type}}</td>
+                        <td>{{$item->description}}</td>
+                        <td>{{$item->created_at}}</td>
                         <td>
                             {{-- <a href="" class="text-primary"><i class="fas fa-edit"></i></a> --}}
                             @can('delete-stocks')
                             <a href="#" class="text-primary" onclick="hapusData({{$item->id}})"><i class="fas fa-trash"></i></a>
                             @endcan
                         </td>
-                        <td>{{$item->_product->barcode}}</td>
-                        <td>{{$item->_product->name}}</td>
-                        <td>{{$item->total}}</td>
-                        <td>{{$item->value}}</td>
-                        <td>{{$item->type}}</td>
-                        <td>{{$item->description}}</td>
-                        <td>{{$item->created_at}}</td>
                     </tr>
                     @endforeach
                 </tbody>

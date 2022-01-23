@@ -12,14 +12,14 @@
         }
     </style>
 </head>
-<body style="width: 69mm;">
+<body style="width: 76mm;">
 
-<p style="text-align: center; font-size: 15px;"><b>{{$company->name}}</b></p>
-<p style="text-align: center; font-size: 13px;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 10px;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 20px;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 18px;">{{$company->telephone}}</p>
+<p style="text-align: center; font-size: 15px;">{{$company->address}}</p>
 
-<br><br>
-<table style="width: 100%; font-size: 10px;">
+<br>
+<table style="width: 100%; font-size: 15px;">
     <tr>
         <td>Tanggal</td>
         <td>:</td>
@@ -38,12 +38,12 @@
     <tr>
         <td>Pelanggan</td>
         <td>:</td>
-        <td>{{$service->_customer->name}}</td>
+        <td>{{ucfirst($service->_customer->name)}}</td>
     </tr>
     <tr>
         <td>Alamat</td>
         <td>:</td>
-        <td>{{$service->_customer->address}}</td>
+        <td>{{ucfirst($service->_customer->address)}}</td>
     </tr>
     <tr>
         <td>Telephone</td>
@@ -53,7 +53,7 @@
 </table>
 <hr class='dotted' />
 
-<table style="width: 100%; font-size: 10px;">
+<table style="width: 100%; font-size: 15px;">
     <tr>
         <td>Unit</td>
         <td>:</td>
@@ -78,15 +78,15 @@
 
 
 <hr class='dotted' />
-<table style="font-size: 10px;">
+<table style="font-size: 15px;">
     <tr>
         <td>Operator</td>
         <td>:</td>
-        <td>{{$service->_user->name}}</td>
+        <td>{{ucfirst($service->_user->name)}}</td>
     </tr>
 </table>
 
-<p style="text-align: center; font-size:10px;">{{$footer->value}}</p>
+<center><p style="text-align: center; font-size:15px;">{!!$footer->value!!}</p></center>
 
 
 <script>

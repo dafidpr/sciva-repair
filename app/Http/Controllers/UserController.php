@@ -103,9 +103,35 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function change_Passbyadmin($id)
     {
         //
+        $user = User::find($id);
+
+        return view('content.ubah_password_User_admin', compact('user'));
+    }
+    public function ubahPassByadmin($id, Request $request)
+    {
+        $rules = [
+            'password1' => 'required',
+            'password2' => 'required|same:password1'
+        ];
+        $messages = [
+            'password1.required' => 'Data tidak boleh kosong!!',
+            'password2.required' => 'Data tidak boleh kosong!!',
+            'password2.same' => 'DiMohon untuk mengulangi password!!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all())->with('gagal', 'Anda gagal menambahkan data!!');
+        }
+
+        User::where('id', $id)->update([
+            'password' => bcrypt($request->password1)
+        ]);
+
+        return redirect('/admin/karyawan')->with('berhasil', 'Password Karyawan telah anda Ubah!!');
     }
 
     /**

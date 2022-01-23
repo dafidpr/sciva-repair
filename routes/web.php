@@ -49,6 +49,7 @@ Route::get('/login', function () {
 })->middleware('notauthmiddle');
 Route::post('/login/input', [AuthController::class, 'index']);
 Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/admin/servis/{id}/json_service3', [TransactionServiceController::class, 'json_service3']);
 
 
 
@@ -71,7 +72,6 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/{id}/update', [TransactionServiceController::class, 'update']);
         Route::get('/{id}/json_service', [TransactionServiceController::class, 'json_service']);
         Route::get('/{id}/json_service2', [TransactionServiceController::class, 'json_service2']);
-        Route::get('/{id}/json_service3', [TransactionServiceController::class, 'json_service3']);
         Route::get('/{id}/delete', [TransactionServiceController::class, 'destroy']);
         Route::get('/deletepermanent/{id?}', [TransactionServiceController::class, 'deletePermanent']);
         Route::get('/restoreall/{id?}', [TransactionServiceController::class, 'restoreall']);
@@ -168,6 +168,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/update', [CustomerController::class, 'update'])->middleware('can:update-customers');
         Route::get('/{id}/delete', [CustomerController::class, 'destroy'])->middleware('can:delete-customers');
         Route::get('/detail/{id}', [CustomerController::class, 'show']);
+        Route::get('/editPtoD/{id}', [CustomerController::class, 'editPtoD']);
     });
 
     //master karyawan/user
@@ -176,6 +177,8 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/tambah', [UserController::class, 'store'])->middleware('can:create-users');
         Route::get('/hapusdata/{id}', [UserController::class, 'destroy'])->middleware('can:delete-users');
         Route::get('/detail/{id}', [UserController::class, 'show']);
+        Route::get('/change_Passbyadmin/{id}', [UserController::class, 'change_Passbyadmin']);
+        Route::post('/ubahPassByadmin/{id}', [UserController::class, 'ubahPassByadmin']);
         Route::post('/update', [UserController::class, 'update'])->middleware('can:update-users');
         //roles
         Route::post('/createRole', [RoleController::class, 'store'])->middleware('can:create-roles');

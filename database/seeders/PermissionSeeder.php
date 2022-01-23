@@ -35,6 +35,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-users', 'label' => 'Tambah Karyawan', 'guard_name' => 'web'],
             ['name' => 'update-users', 'label' => 'Update Karyawan', 'guard_name' => 'web'],
             ['name' => 'delete-users', 'label' => 'Hapus Karyawan', 'guard_name' => 'web'],
+            ['name' => 'changePass-users', 'label' => 'Ubah Password Karyawan', 'guard_name' => 'web'],
             //
             ['name' => 'read-roles', 'label' => 'View Role', 'guard_name' => 'web'],
             ['name' => 'create-roles', 'label' => 'Tambah Role', 'guard_name' => 'web'],
@@ -51,6 +52,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'create-customers', 'label' => 'Tambah Pelanggan', 'guard_name' => 'web'],
             ['name' => 'update-customers', 'label' => 'Ubah Pelanggan', 'guard_name' => 'web'],
             ['name' => 'delete-customers', 'label' => 'Hapus Pelanggan', 'guard_name' => 'web'],
+            ['name' => 'changePassword-customers', 'label' => 'Reset Password Pelanggan', 'guard_name' => 'web'],
             //
             ['name' => 'read-suppliers', 'label' => 'View Supplier', 'guard_name' => 'web'],
             ['name' => 'create-suppliers', 'label' => 'Tambah Supplier', 'guard_name' => 'web'],

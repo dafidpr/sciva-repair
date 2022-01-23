@@ -52,8 +52,11 @@ class ReportController extends Controller
     public function purchase(Request $request)
     {
         //
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+
         $data = [
-            'purchase' => Purchase::whereBetween('created_at', [$request->from, $request->to])->get(),
+            'purchase' => Purchase::whereBetween('created_at', [$startDate, $endDate])->get(),
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
             'company' => Company_profile::find(1),
@@ -75,8 +78,10 @@ class ReportController extends Controller
     public function opname(Request $request)
     {
         //
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
         $data = [
-            'opname' => Stock_opname::whereBetween('created_at', [$request->from, $request->to])->get(),
+            'opname' => Stock_opname::whereBetween('created_at', [$startDate, $endDate])->get(),
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
             'company' => Company_profile::find(1),
@@ -97,13 +102,16 @@ class ReportController extends Controller
     {
         //
 
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+
         if ($request->type == 'all') {
-            $a = Stock::whereBetween('created_at', [$request->from, $request->to])->get();
-            $b = Stock::where('type', 'in')->whereBetween('created_at', [$request->from, $request->to])->sum('value');
-            $c = Stock::where('type', 'out')->whereBetween('created_at', [$request->from, $request->to])->sum('value');
+            $a = Stock::whereBetween('created_at', [$startDate, $endDate])->get();
+            $b = Stock::where('type', 'in')->whereBetween('created_at', [$startDate, $endDate])->sum('value');
+            $c = Stock::where('type', 'out')->whereBetween('created_at', [$startDate, $endDate])->sum('value');
         } else {
-            $a = Stock::where('type', $request->type)->whereBetween('created_at', [$request->from, $request->to])->get();
-            $b = Stock::where('type', $request->type)->whereBetween('created_at', [$request->from, $request->to])->sum('value');
+            $a = Stock::where('type', $request->type)->whereBetween('created_at', [$startDate, $endDate])->get();
+            $b = Stock::where('type', $request->type)->whereBetween('created_at', [$startDate, $endDate])->sum('value');
             $c = 0;
         }
         // dd($a);
@@ -281,8 +289,10 @@ class ReportController extends Controller
 
     public function laba_rugi(Request $request)
     {
-        $a = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->get();
-        $b = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->sum('sub_total');
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+        $a = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->get();
+        $b = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
         // $c = collect(DB::select("SELECT * FROM sale_details a, sales b, products c WHERE b.id = c.sale_id AND c.id = a.product_id"));
 
         // dd($a);
@@ -302,8 +312,11 @@ class ReportController extends Controller
     }
     public function laba_bersih(Request $request)
     {
-        $a = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->get();
-        $b = Sale_detail::whereBetween('created_at', [$request->from, $request->to])->sum('sub_total');
+        $startDate = date('Y-m-d', strtotime($request->from));
+        $endDate = date('Y-m-d', strtotime($request->to));
+
+        $a = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->get();
+        $b = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
         // $c = collect(DB::select("SELECT * FROM sale_details a, sales b, products c WHERE b.id = c.sale_id AND c.id = a.product_id"));
 
         // dd($a);

@@ -101,7 +101,7 @@
                                 <th width="20%">Harga Jual</th>
                                 <th>Qty</th>
                                 <th width="18%">Total</th>
-                                <th>Opsi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -196,7 +196,7 @@
                                 <td>{{$item->barcode}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->stock}}</td>
-                                <td>{{$item->purchase_price}}</td>
+                                <td>{{number_format($item->purchase_price)}}</td>
                                 <td>
                                     <button type="button" onclick="productForPurchase({{$item->id}})" class="btn btn-sm btn-primary"><i class="far fa-check-square"></i> Pilih</button>
                                 </td>

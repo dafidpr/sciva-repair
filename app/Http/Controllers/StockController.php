@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cash;
 use App\Models\Product;
 use App\Models\Stock;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -45,6 +48,18 @@ class StockController extends Controller
         // dd($request->all());
 
         $val = $request->total * $request->purchase_price;
+        if ($request->type == 'out') {
+
+            Cash::create([
+                'user_id' => Auth::guard('web')->user()->id,
+                'cash_code' => IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']),
+                'date' => date('Y-m-d'),
+                'nominal' => $val,
+                'description' => 'Stok Keluar',
+                'source' => 'expenditure'
+            ]);
+        }
+
         Stock::create([
             'product_id' => $request->id,
             'total' => $request->total,

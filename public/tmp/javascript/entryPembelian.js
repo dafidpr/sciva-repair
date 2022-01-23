@@ -10,10 +10,10 @@ if (localStorage.data_purchase && localStorage.id_data) {
         tbody.innerHTML += `<tr>
                 <td>${data_purchase[index].barcode} <input type="hidden" name="i_id_product[]" value="${data_purchase[index].id_product}" class="form-control"></td>
                 <td>${data_purchase[index].name_product} </td>
-                <td>${data_purchase[index].purchase_price} <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
-                <td>${data_purchase[index].sale_price} <input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
+                <td>${parseInt(data_purchase[index].purchase_price)} <input type="hidden" name="i_purchase_price[]" value="${data_purchase[index].purchase_price}" class="form-control"></td>
+                <td>${parseInt(data_purchase[index].sale_price)} <input type="hidden" name="i_sale_price[]" value="${data_purchase[index].sale_price}" class="form-control"></td>
                 <td>${data_purchase[index].quantity_product} <input type="hidden" name="i_quantity[]" value="${data_purchase[index].quantity_product}" class="form-control"></td>
-                <td>${data_purchase[index].total}
+                <td>${parseInt(data_purchase[index].total)}
                 <input type="hidden" name="i_total[]" id="i_total" value="${data_purchase[index].total}" class="form-control">
                 </td>
                 <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${data_purchase[index].id})"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${data_purchase[index].id})"><i class="fas fa-trash-alt del_pur_y"></i></button></td>
@@ -48,8 +48,8 @@ function productForPurchase(e) {
             $('#id_product').val(obj.id);
             $('#barcode').val(obj.barcode);
             $('#name_product').val(obj.name);
-            $('#purchase_price').val(obj.purchase_price);
-            $('#sale_price').val(obj.selling_price);
+            $('#purchase_price').val(parseInt(obj.purchase_price));
+            $('#sale_price').val(parseInt(obj.selling_price));
             $('.bs-modal-product').modal('hide');
             // $('#myModal').modal('show');
         }
@@ -102,10 +102,10 @@ function inputPurchase() {
         tbody.innerHTML += `<tr>
                 <td>${barcode.value} <input type="hidden" name="i_id_product[]" value="${id_product.value}" class="form-control"></td>
                 <td>${name_product.value} </td>
-                <td>${purchase_price.value} <input type="hidden" name="i_purchase_price[]" value="${purchase_price.value}" class="form-control"></td>
-                <td>${sale_price.value} <input type="hidden" name="i_sale_price[]" value="${sale_price.value}" class="form-control"></td>
+                <td>${parseInt(purchase_price.value)} <input type="hidden" name="i_purchase_price[]" value="${purchase_price.value}" class="form-control"></td>
+                <td>${parseInt(sale_price.value)} <input type="hidden" name="i_sale_price[]" value="${sale_price.value}" class="form-control"></td>
                 <td>${quantity_product.value} <input type="hidden" name="i_quantity[]" value="${quantity_product.value}" class="form-control"></td>
-                <td>${total}
+                <td>${parseInt(total)}
                 <input type="hidden" name="i_total[]" id="i_total" value="${total}" class="form-control">
                 </td>
                 <td><button class="btn btn-sm btn-primary" type='button' data-bs-toggle="modal" data-bs-target="#editProduct" onclick="editPurchase(${id_data})"><i class="fas fa-pencil-alt"></i> </button> <button class="btn btn-sm btn-danger del_pur_y" type='button' onclick="removePurchase(${id_data})"><i class="fas fa-trash-alt del_pur_y"></i> </button></td>

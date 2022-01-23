@@ -22,7 +22,7 @@ function select_entry_product(e){
                 $('#id_product').val(obj.id);
                 $('#name_product').val(obj.name);
                 $('#barcode').val(obj.barcode);
-                $('#price').val(obj.member_price);
+                $('#price').val(parseInt(obj.member_price));
                 $('.bs-example-product').modal('hide');
             }
         })
@@ -35,7 +35,7 @@ function select_entry_product(e){
                 $('#id_product').val(obj.id);
                 $('#name_product').val(obj.name);
                 $('#barcode').val(obj.barcode);
-                $('#price').val(obj.selling_price);
+                $('#price').val(parseInt(obj.selling_price));
                 $('.bs-example-product').modal('hide');
             }
         })
@@ -133,8 +133,8 @@ function paymentCheck(){
 
                     tb.innerHTML += `<tr>
                             <td><input type="hidden" name="id_product[]" value="${saleData[index].id_product}" id="id_product"></td>
-                            <td><input type="hidden" name="price[]" value="${saleData[index].price}" id="price"></td>
-                            <td><input type="hidden" name="discount[]" value="${saleData[index].discount}" id="discount"></td>
+                            <td><input type="hidden" name="price[]" value="${parseInt(saleData[index].price)}" id="price"></td>
+                            <td><input type="hidden" name="discount[]" value="${parseInt(saleData[index].discount)}" id="discount"></td>
                             <td><input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
                             <td><input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
                         </tr>`

@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="">Estimasi Biaya</label>
-                        <input type="number" name="estimated_cost" value="{{$ts->estimated_cost}}" class="form-control">
+                        <input type="number" name="estimated_cost" value="{{($ts->estimated_cost+0)}}" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label for="">Status Perbaikan</label>
