@@ -107,7 +107,7 @@
                                 <th>Tanggal</th>
                                 <th>Unit</th>
                                 <th>Status</th>
-                                <th>Harga</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,14 +130,7 @@
                                     <span class="bg-secondary badge">Diambil</span>
                                     @endif
                                 </td>
-                                <td>
-                                    @if ($item->total == null)
-                                        -
-                                    @else
-
-                                    {{$item->total}}
-                                    @endif
-                                </td>
+                                <td><button type="button" onclick="ps_servis({{$item->id}})" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></button></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -178,6 +171,69 @@
     </div>
 </div>
 
+{{-- MOdal Detail Servis --}}
+<div class="modal fade bs-modal-detail-pelanggan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Detail Servis</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td><b>Tanggal Servis</b></td>
+                            <td><span id="pstgl_servis"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>No. Nota</b></td>
+                            <td><span id="psnota"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Unit</b></td>
+                            <td><span id="psunit"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>No. Seri</b></td>
+                            <td><span id="psseri"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Passcode</b></td>
+                            <td><span id="pspasscode"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Keluhan</b></td>
+                            <td><span id="pscomplient"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Kelengkapan</b></td>
+                            <td><span id="pscompletenes"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Catatan Khusus</b></td>
+                            <td><span id="psnotes"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Biaya</b></td>
+                            <td><span id="pstotal"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Status Perbaikan</b></td>
+                            <td><span id="psstatus"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tanggal Pengambilan</b></td>
+                            <td><span id="pstake"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
 
 @endsection

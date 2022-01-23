@@ -324,6 +324,7 @@
     <script src="{{asset('tmp/assets/libs/simplebar/simplebar.min.js')}}"></script>
     <script src="{{asset('tmp/assets/libs/node-waves/waves.min.js')}}"></script>
 
+    <script src="{{asset('tmp/javascript/dashboard_pelanggan.js')}}"></script>
     {{-- <script src="{{asset('tmp/assets/js/pages/dashboard.init.js')}}"></script> --}}
 
     {{-- datatables --}}

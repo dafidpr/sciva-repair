@@ -93,7 +93,7 @@
 <center><p style="text-align: center; font-size: 15px;">{!!$footer->value!!}</p></center>
 
 <script>
-window.print()
-</script>
+    window.print()
+    </script>
 </body>
 </html>

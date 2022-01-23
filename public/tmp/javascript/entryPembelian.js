@@ -207,7 +207,7 @@ function changeTotal() {
         sumHsl = sumHsl + parseInt(table.rows[t].cells[5].innerHTML);
     }
     // console.log(sumHsl);
-    document.getElementById("subtot").innerText = sumHsl;
+    document.getElementById("subtot").innerText = new Intl.NumberFormat().format(sumHsl);
     document.getElementById("i_grandtotal").value = sumHsl;
 }
 

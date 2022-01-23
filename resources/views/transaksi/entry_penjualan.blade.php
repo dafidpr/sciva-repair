@@ -420,7 +420,7 @@ if (localStorage.saleData && localStorage.idData) {
 			sumHs2 = sumHs2 + parseInt(table.rows[t].cells[3].innerHTML);
 		}
         // console.log(sumHsl);
-            document.getElementById("subtot").innerText = sumHsl;
+            document.getElementById("subtot").innerText = new Intl.NumberFormat().format(sumHsl);
             document.getElementById("b_subtotal").value = sumHsl;
             document.getElementById("b_grandtotal").value = sumHsl;
             document.getElementById('b_cashback').value = sumHsl;

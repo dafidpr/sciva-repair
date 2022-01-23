@@ -351,4 +351,5 @@ Route::prefix('pelanggan')->middleware(['authmiddle', 'customer'])->group(functi
         return view('content.ubahpasswordpelanggan');
     });
     Route::post('/ubahpassword/ubah', [DashboardController::class, 'updatePassCs']);
+    Route::get('/{id}/detail_service', [TransactionServiceController::class, 'detail_service']);
 });
