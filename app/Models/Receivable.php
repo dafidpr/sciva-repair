@@ -16,10 +16,10 @@ class Receivable extends Model
 
     public function _sale()
     {
-        return $this->belongsTo(Sale::class, 'sale_id');
+        return $this->belongsTo(Sale::class, 'sale_id')->withTrashed();
     }
     public function _servis()
     {
-        return $this->belongsTo(Transaction_service::class, 'service_id');
+        return $this->belongsTo(Transaction_service::class, 'service_id')->withTrashed();
     }
 }

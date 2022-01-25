@@ -46,7 +46,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Harga Beli</label>
-                            <input type="text" class="form-control" name="purchase_price" id="purchase_price" value="{{number_format($opname->_product->purchase_price)}}" readonly>
+                            <input type="number" class="form-control" name="purchase_price" id="purchase_price" value="{{$opname->_product->purchase_price}}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="">Stok</label>

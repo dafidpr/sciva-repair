@@ -257,7 +257,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/admin/entry_penjualan/inputSale" method="post">
+                <form action="/admin/entry_penjualan/inputSale" method="post" enctype="multipart/form-data">
                     @csrf
                     <div>
 
@@ -314,7 +314,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="Submit" onclick="cancelledSale()" class="btn btn-primary">Payment</button>
+                <button type="submit" onclick="cancelledSale()" class="btn btn-primary">Payment</button>
             </div>
         </form>
         </div><!-- /.modal-content -->
@@ -356,7 +356,7 @@ if (localStorage.saleData && localStorage.idData) {
     changetsubtotal()
 
 } else {
-    console.log('Data Kosong/Errors')
+    console.log('.')
 }
 
 
@@ -556,7 +556,7 @@ function onDelete(e){
     }
 
     function cancelledSale(){
-        localStorage.clear()
+        localStorage.clear();
         location.reload()
     }
 

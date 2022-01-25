@@ -16,6 +16,6 @@ class Debt extends Model
 
     public function _purchase()
     {
-        return $this->belongsTo(Purchase::class, 'purchase_id');
+        return $this->belongsTo(Purchase::class, 'purchase_id')->withTrashed();
     }
 }

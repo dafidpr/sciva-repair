@@ -15,7 +15,7 @@ class AddServiceIdToReceivables extends Migration
     {
         Schema::table('receivables', function (Blueprint $table) {
             //
-            $table->foreignId('service_id')->nullable()->after('sale_id')->constrained('transaction_services')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('service_id')->nullable()->after('sale_id')->constrained('transaction_services')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
