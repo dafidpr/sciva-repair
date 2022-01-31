@@ -1054,14 +1054,34 @@
 
 
 <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('demo/js/qz-tray.js')}}"></script>
 @if (old('print_s_masuk'))
 <script>
-    window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
+    // window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
+
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: "/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
 </script>
 @endif
 @if (old('print_s_diambil'))
 <script>
-    window.open("/admin/servis/print_take/"+<?php echo old('print_s_diambil');?>, '_blank');
+
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: "/admin/servis/print_take/"+<?php echo old('print_s_diambil');?>
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
 </script>
 @endif
+<script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
+<script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection

@@ -226,7 +226,7 @@ class SaleController extends Controller
                 ]);
             }
 
-            return redirect('/admin/daftar_penjualan/cetak/' . $sale->id);
+            return redirect()->back()->withInput(['print_s_penjualan' => $sale->id]);
         }
     }
 

@@ -32,16 +32,17 @@ class ReportController extends Controller
         for ($i = 0; $i < 4; $i++) {
             $data = $i;
         }
+
         // dd($data);
         // return view('cetak.lap_penjualan', $data);
-        return view('cetak.lap_penjualan', [
+        $pdf = PDF::loadView('cetak.lap_penjualan', [
             'sale' => Sale::whereBetween('date', [$request->dateFrom, $request->dateTo])->get(),
             'tglawal' => $request->dateFrom,
             'tglakhir' => $request->dateTo,
             'company' => Company_profile::find(1),
             'i' => $data
         ]);
-        // return $pdf->stream('PDF-Penjualan');
+        return $pdf->stream('PDF-Penjualan');
     }
 
     /**
@@ -62,9 +63,9 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        return view('cetak.lap_pembelian', $data);
-        // $pdf = PDF::loadView('cetak.lap_pembelian', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Pembelian.pdf');
+        // return view('cetak.lap_pembelian', $data);
+        $pdf = PDF::loadView('cetak.lap_pembelian', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Pembelian.pdf');
     }
 
     // dd(Carbon::parse($data->created_at)->format('Y-m-d'));
@@ -87,9 +88,9 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        return view('cetak.lap_opname', $data);
-        // $pdf = PDF::loadView('cetak.lap_opname', $data)iew('cetak.lap_pembelian', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Opname.pdf');
+        // return view('cetak.lap_opname', $data);
+        $pdf = PDF::loadView('cetak.lap_opname', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Opname.pdf');
     }
 
     /**
@@ -125,10 +126,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_stock', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Stock');
+        $pdf = PDF::loadView('cetak.lap_stock', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Stock');
 
-        return view('cetak.lap_stock', $data);
+        // return view('cetak.lap_stock', $data);
     }
 
     /**
@@ -160,10 +161,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_kas', $data);
-        // return $pdf->stream('PDF-Kas');
+        $pdf = PDF::loadView('cetak.lap_kas', $data);
+        return $pdf->stream('PDF-Kas');
 
-        return view('cetak.lap_kas', $data);
+        // return view('cetak.lap_kas', $data);
     }
 
     /**
@@ -209,10 +210,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_hutang', $data);
-        // return $pdf->stream('PDF-Hutang');
+        $pdf = PDF::loadView('cetak.lap_hutang', $data);
+        return $pdf->stream('PDF-Hutang');
 
-        return view('cetak.lap_hutang', $data);
+        // return view('cetak.lap_hutang', $data);
     }
 
     /**
@@ -281,10 +282,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_piutang', $data);
-        // return $pdf->stream('PDF-Piutang');
+        $pdf = PDF::loadView('cetak.lap_piutang', $data);
+        return $pdf->stream('PDF-Piutang');
 
-        return view('cetak.lap_piutang', $data);
+        // return view('cetak.lap_piutang', $data);
     }
 
     public function laba_rugi(Request $request)
@@ -305,10 +306,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_labakotor', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Stock');
+        $pdf = PDF::loadView('cetak.lap_labakotor', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Stock');
 
-        return view('cetak.lap_labakotor', $data);
+        // return view('cetak.lap_labakotor', $data);
     }
     public function laba_bersih(Request $request)
     {
@@ -330,10 +331,10 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_lababersih', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Stock');
+        $pdf = PDF::loadView('cetak.lap_lababersih', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Stock');
 
-        return view('cetak.lap_lababersih', $data);
+        // return view('cetak.lap_lababersih', $data);
     }
 
     public function jurnal_harian(Request $request)
@@ -350,9 +351,9 @@ class ReportController extends Controller
             'company' => Company_profile::find(1),
         ];
 
-        // $pdf = PDF::loadView('cetak.lap_jurnalharian', $data)->setPaper('a4', 'potrait');
-        // return $pdf->stream('PDF-Jurnal-Harian');
+        $pdf = PDF::loadView('cetak.lap_jurnalharian', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-Jurnal-Harian');
 
-        return view('cetak.lap_jurnalharian', $data);
+        // return view('cetak.lap_jurnalharian', $data);
     }
 }

@@ -257,7 +257,7 @@ class TransactionServiceController extends Controller
         $t_com_t = $request->subtot_jasa * $tech->commission / 100;
 
         Commision::create([
-            'user_id' => Auth::guard('web')->user()->id,
+            'user_id' => $tech->id,
             'servis_id' => $request->transaction_id,
             'total' => $t_com_t
         ]);

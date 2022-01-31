@@ -328,6 +328,9 @@
 
 
 
+
+
+
 <script>
 
 const table = document.querySelector('table')
@@ -588,4 +591,28 @@ function onDelete(e){
 }
     }
 </script>
+
+
+
+
+
+
+
+<script type="text/javascript" src="{{asset('demo/js/qz-tray.js')}}"></script>
+@if (old('print_s_penjualan'))
+<script>
+    // window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
+
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: "/admin/daftar_penjualan/cetak/"+<?php echo old('print_s_penjualan');?>
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
+</script>
+@endif
+<script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
+<script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection

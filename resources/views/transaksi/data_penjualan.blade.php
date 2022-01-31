@@ -32,7 +32,7 @@
                                 <a href="/admin/daftar_penjualan/show/{{$item->id}}" class="btn btn-sm btn-primary mb-2"><i class="dripicons-preview"></i></a>
                                 @endcan
                                 @can('print-sales')
-                                <a href="/admin/daftar_penjualan/cetak/{{$item->id}}" target="_blank" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
+                                <a href="#" onclick="print_sale_a({{$item->id}})" class="btn btn-sm btn-success mb-2"><i class="dripicons-print"></i></a>
                                 @endcan
                             </td>
                         </tr>
@@ -42,4 +42,27 @@
             </div>
         </div>
     </div>
+
+
+
+
+<script type="text/javascript" src="{{asset('demo/js/qz-tray.js')}}"></script>
+<script>
+    // window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
+
+    function print_sale_a(id){
+
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: '/admin/daftar_penjualan/cetak/'+id
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
+    }
+
+</script>
+<script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
+<script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection
