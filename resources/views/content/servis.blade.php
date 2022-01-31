@@ -361,7 +361,7 @@
                             @endcan
 
                             @can('printNota-services')
-                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
+                            <a href="#" target="" onclick="ser_masuk({{$item->id}})" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
 
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
@@ -371,7 +371,7 @@
                             @endcan
 
                             @can('printNota-services')
-                            <a href="/admin/servis/service_masuk/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
+                            <a href="#" target="" onclick="ser_masuk({{$item->id}})" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
 
                             @can('take-services')
@@ -380,7 +380,7 @@
 
                             @elseif ($item->status == 'take')
                             @can('printNota-services')
-                            <a href="/admin/servis/print_take/{{$item->id}}" target="_blank" class="ms-2"><i class="fas fa-print"></i></a>
+                            <a href="#" onclick="ser_take({{$item->id}})" target="" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
                             @endif
                             @can('delete-services')
@@ -1082,6 +1082,28 @@
     qz.print(config, data).catch(function(e) { console.error(e); });
 </script>
 @endif
+<script>
+function ser_take(id){
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: "/admin/servis/print_take/"+id
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
+}
+function ser_masuk(id){
+    var config = qz.configs.create("Printer Name");
+    var data = [{
+    type: 'pixel',
+    format: 'html',
+    flavor: 'file', // or 'plain' if the data is raw HTML
+    data: "/admin/servis/service_masuk/"+id
+    }];
+    qz.print(config, data).catch(function(e) { console.error(e); });
+}
+</script>
 <script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
 <script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection
