@@ -135,19 +135,19 @@
                  <div class="navbar-brand-box">
                     <a href="" class="logo logo-dark mt-4">
                         <span class="logo-sm">
-                            <img src="{{asset('tmp/assets/images/logo-sm.png')}}" alt="" height="22">
+                            <h5>SCIVA</h5>
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset('tmp/assets/images/logo-dark.png')}}" alt="" height="20">
+                            <h5>SCIVA REPAIRE</h5>
                         </span>
                     </a>
 
                     <a href="" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{asset('tmp/assets/images/logo-sm.png')}}" alt="" height="22">
+                            <h5>SCIVA</h5>
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset('tmp/assets/images/logo-light.png')}}" alt="" height="20">
+                            <h5>SCIVA REPAIRE</h5>
                         </span>
                     </a>
                 </div>

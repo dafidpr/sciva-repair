@@ -76,7 +76,7 @@ class ReceivableController extends Controller
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
             'nominal' => $payment,
-            'description' => 'Pembayaran Hutang',
+            'description' => 'Penerimaan Piutang',
             'source' => 'income'
         ]);
         return redirect()->back()->with('berhasil', 'pembayaran piutang berhasil!!');
@@ -139,7 +139,7 @@ class ReceivableController extends Controller
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
             'nominal' => $a->nominal,
-            'description' => 'Pembayaran Hutang di Hapus',
+            'description' => 'Penerimaan Piutang di Hapus',
             'source' => 'expenditure'
         ]);
 

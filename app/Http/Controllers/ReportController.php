@@ -6,6 +6,7 @@ use App\Models\Cash;
 use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Debt;
+use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Sale_detail;
@@ -355,5 +356,16 @@ class ReportController extends Controller
         return $pdf->stream('PDF-Jurnal-Harian');
 
         // return view('cetak.lap_jurnalharian', $data);
+    }
+
+    public function print_data_product()
+    {
+        $data = [
+            'company' => Company_profile::find(1),
+            'product' => Product::all()
+        ];
+
+        $pdf = PDF::loadView('cetak.data_barang', $data)->setPaper('a4', 'potrait');
+        return $pdf->stream('PDF-databarang');
     }
 }

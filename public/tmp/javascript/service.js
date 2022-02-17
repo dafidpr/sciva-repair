@@ -119,14 +119,14 @@ function select_customer(e) {
         }
     })
 }
-function detail_service(e) {
+function detail_service(e, cust, tlp, address, teknisi, optr) {
     $.ajax({
         url: "/admin/servis/" + e + "/detail_service",
         type: "get",
         success: function (data) {
-            var cust = $('#detail_btn_service').data('customer');
-            var tlp = $('#detail_btn_service').data('telephone');
-            var address = $('#detail_btn_service').data('alamat');
+            // var cust = $('#detail_btn_service').data('customer');
+            // var tlp = $('#detail_btn_service').data('telephone');
+            // var address = $('#detail_btn_service').data('alamat');
             var obj = JSON.parse(data);
             var sv_dt = new Date(`${obj.service_date}`);
             if(obj.total == null){
@@ -149,13 +149,23 @@ function detail_service(e) {
             if(obj.pickup_date == null){
                 var pickup = '-'
             }else{
-                var pickup = new Date(`${obj.service_date}`)
+                var pickup = new Date(`${obj.pickup_date}`)
                 pickup = pickup.getDate()+"-"+(pickup.getMonth()+1)+'-'+pickup.getFullYear()
             }
             if(obj.notes == null){
                 var notes = '-'
             }else{
                 var notes = obj.notes
+            }
+            if(teknisi == null){
+                var tc = '-'
+            }else{
+                var tc = teknisi
+            }
+            if(optr == null){
+                var operator = '-'
+            }else{
+                var operator = optr
             }
 
             $('#dtgl_servis').html(sv_dt.getDate()+"-"+(sv_dt.getMonth()+1)+'-'+sv_dt.getFullYear());
@@ -172,6 +182,8 @@ function detail_service(e) {
             $('#dnotes').html(notes);
             $('#dseri').html(obj.serial_number);
             $('#dtake').html(pickup);
+            $('#dteknisi').html(tc);
+            $('#doperator').html(operator);
             $('#DetailModals').modal('show');
         }
     })
@@ -515,7 +527,7 @@ function callcs(a, c, d, e) {
             if(d == 'finished'){
                 var st = 'selesai'
             }else if(d == 'cancelled'){
-                var st = 'batal'
+                var st = 'di batalkan'
             }
 
             var tgl = new Date().getTime()+(obj.batas.value*24*60*60*1000)

@@ -309,7 +309,7 @@
     </form>
         <hr>
         <div class="table-responsive">
-            <table class="table table-bordered" id="stoklimit" style="font-size: 13px;">
+            <table class="table table-bordered" id="sortServis" style="font-size: 13px;">
                 <thead>
                     <tr>
                         <th>Tanggal</th>
@@ -386,8 +386,9 @@
                             @can('delete-services')
                             <a href="#" onclick="softDelete({{$item->id}})" class="ms-2"><i class="fas fa-trash-alt"></i></a>
                             @endcan
+                            <?php if($item->technician == null){ $techni = '-'; }else{$techni = $item->_teknisi->name;} ?>
                             @can('detail-services')
-                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}})" data-customer="{{$item->_customer->name}}" data-telephone="{{$item->_customer->telephone}}" data-alamat="{{$item->_customer->address}}" class="ms-2">
+                            <a href="#" id="detail_btn_service" onclick="detail_service({{$item->id}}, '{{$item->_customer->name}}', '{{$item->_customer->telephone}}', '{{$item->_customer->address}}', '{{$techni}}', '{{$item->_user->name}}')" class="ms-2">
                                 <i class="fas fa-search"></i>
                             </a>
                             @endcan
@@ -653,6 +654,14 @@
                         <tr>
                             <td><b>Tanggal Pengambilan</b></td>
                             <td><span id="dtake"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Operator</b></td>
+                            <td><span id="doperator"></span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Teknisi</b></td>
+                            <td><span id="dteknisi"></span></td>
                         </tr>
                     </tbody>
                 </table>

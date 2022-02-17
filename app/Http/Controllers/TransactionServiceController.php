@@ -319,7 +319,7 @@ class TransactionServiceController extends Controller
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
             'nominal' => $request->payment,
-            'description' => 'Unit Servis ' . $request->transaction_code . " telah diambil!!",
+            'description' => 'Unit Servis ' . $request->transaction_code . " telah diambil",
             'source' => 'income'
         ]);
 

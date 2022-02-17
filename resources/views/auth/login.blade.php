@@ -44,7 +44,7 @@
                                             <img src="{{asset('tmp/asset/images')}}/{{$company->logo}}" style="border-radius: 20%;"  width="100px" alt="logo">
                                         </a>
 
-                                        <h5 class="text-primary mb-2 mt-4">SCIVA REPAIR CENTER</h5>
+                                        <h5 class="text-primary mb-2 mt-4">{{$company->name}}</h5>
 
                                         @if (session('berhasil'))
                                         <div class="alert alert-info alert-dismissible fade show" role="alert">

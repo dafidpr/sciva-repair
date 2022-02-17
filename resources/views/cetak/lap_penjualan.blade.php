@@ -11,9 +11,9 @@
         <tr>
             <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="100px" alt=""></td>
             <td>
-                <p><b>{{$company->name}}</b></p>
-                <p>{{$company->address}}</p>
-                <p>Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
+                <p style="line-height: 0.5em;"><b>{{$company->name}}</b></p>
+                <p style="line-height: 0.5em;">{{$company->address}}</p>
+                <p style="line-height: 0.5em;">Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
             </td>
         </tr>
     </table><hr style="border: 0; border-top: 4px double #8c8c8c;">

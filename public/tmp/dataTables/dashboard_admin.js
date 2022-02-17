@@ -34,3 +34,8 @@ $(document).ready(function(){
         responsive: true
     } );
 })
+$(document).ready(function() {
+    $('#sortServis').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );

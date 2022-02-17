@@ -152,6 +152,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('', [OpnameController::class, 'index'])->middleware('can:read-opnames');
         Route::post('/create', [OpnameController::class, 'store'])->middleware('can:create-opnames');
         Route::post('/update/{id}', [OpnameController::class, 'update']);
+        Route::get('/print_data_product', [ReportController::class, 'print_data_product']);
         Route::get('/{id}/select_product', [OpnameController::class, 'selectProduct']);
         Route::get('/{id}/delete', [OpnameController::class, 'destroy'])->middleware('can:delete-opnames');
         Route::get('/{id}/detail', [OpnameController::class, 'show'])->middleware('can:update-opnames');

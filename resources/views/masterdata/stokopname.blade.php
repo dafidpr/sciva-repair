@@ -24,6 +24,7 @@
         @can('create-opnames')
         <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
         @endcan
+        <a href="/admin/stockopname/print_data_product" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-print"></i> Print Barang</a>
             <hr>
 
         <div class="table-responsive">

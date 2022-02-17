@@ -52,7 +52,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{number_format($item->purchase_price)}}</td>
                         <td>{{number_format($item->selling_price)}}</td>
-                        <td>{{$item->member_price}}</td>
+                        <td>{{number_format($item->member_price)}}</td>
                         <td>{{$item->_supplier->name}}</td>
                         <td>
                             @if ($item->stock == $item->limit || $item->stock < $item->limit)
