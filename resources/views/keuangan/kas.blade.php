@@ -62,6 +62,10 @@
                                 <p>pemasukan</p>
                             @elseif ($item->source == 'expenditure')
                                 <p>pengeluaran</p>
+                            @elseif ($item->source == 'other_income')
+                                <p>pemasukan</p>
+                            @elseif ($item->source == 'other_expenditure')
+                                <p>pengeluaran</p>
                             @endif
                         </td>
                         <td>{{number_format($item->nominal)}}</td>
@@ -101,8 +105,8 @@
                         <label for="">Jenis</label>
                         <select class="form-select" name="source" aria-label="Default select example">
                             <option selected="">--Pilih--</option>
-                            <option value="income">Pemasukan</option>
-                            <option value="expenditure">Pengeluaran</option>
+                            <option value="other_income">Pemasukan</option>
+                            <option value="other_expenditure">Pengeluaran</option>
                         </select>
                     </div>
                     <div>

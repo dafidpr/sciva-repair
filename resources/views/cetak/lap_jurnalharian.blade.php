@@ -9,11 +9,11 @@
 <body>
     <table style="width: 100%; font-size: 15px;">
         <tr>
-            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="90px" alt=""></td>
+            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="60px" alt=""></td>
             <td>
-                <p style="line-height: 0.5em;"><b>{{$company->name}}</b></p>
-                <p style="line-height: 0.5em;">{{$company->address}}</p>
-                <p style="line-height: 0.5em;">Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
+                <p style="line-height: 0.3em;"><b>{{$company->name}}</b></p>
+                <p style="line-height: 0.3em;">{{$company->address}}</p>
+                <p style="line-height: 0.3em;">Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
             </td>
         </tr>
     </table><hr style="border: 0; border-top: 4px double #8c8c8c;">
@@ -41,12 +41,16 @@
                 <td>
                     @if ($item->source == 'expenditure')
                         Rp. {{number_format($item->nominal)}}
+                    @elseif ($item->source == 'other_expenditure')
+                        Rp. {{number_format($item->nominal)}}
                     @else
                         -
                     @endif
                 </td>
                 <td>
                     @if ($item->source == 'income')
+                        Rp. {{number_format($item->nominal)}}
+                    @elseif ($item->source == 'other_income')
                         Rp. {{number_format($item->nominal)}}
                     @else
                         -
@@ -56,8 +60,8 @@
             @endforeach
             <tr>
                 <td colspan="3" style="text-align: center;"><b>Total</b></td>
-                <td><b>Rp. {{number_format($debit)}}</b></td>
-                <td><b>Rp. {{number_format($kredit)}}</b></td>
+                <td><b>Rp. {{number_format(($debit + $debit2))}}</b></td>
+                <td><b>Rp. {{number_format(($kredit + $kredit2))}}</b></td>
             </tr>
         </tbody>
     </table>

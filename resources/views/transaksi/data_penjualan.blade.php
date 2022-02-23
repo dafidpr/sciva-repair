@@ -43,26 +43,44 @@
         </div>
     </div>
 
+    {{-- Modal Check Out --}}
+<div id="modal_print_check" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Cetak Print</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="font-size-16 text-center">Pilih Untuk Cetak Print!!</h5>
+                <div class="row" id="choose_print">
+                    <div class="col-md-6">
+                        <a href="/admin/daftar_penjualan/cetak/{{old('print_s_penjualan')}}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/admin/daftar_penjualan/cetak_epson/{{old('print_s_penjualan')}}" target="_blank" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+            </div> --}}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 
 
 
-<script type="text/javascript" src="{{asset('demo/js/qz-tray.js')}}"></script>
 <script>
-    // window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
 
     function print_sale_a(id){
+        // window.open("/admin/daftar_penjualan/cetak/"+id, '_blank');
 
-    var config = qz.configs.create("Printer Name");
-    var data = [{
-    type: 'pixel',
-    format: 'html',
-    flavor: 'file', // or 'plain' if the data is raw HTML
-    data: '/admin/daftar_penjualan/cetak/'+id
-    }];
-    qz.print(config, data).catch(function(e) { console.error(e); });
+        print_penjualan_choose(id)
     }
 
 </script>
-<script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
-<script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection

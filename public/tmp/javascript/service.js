@@ -669,3 +669,15 @@ function ec_TotalHargaService(){
 
     document.getElementById('ec_sub_total').value = total
 }
+
+function ct_print_sm(){
+    $(window).on('load',function(){
+        $('#modal_print_sm_check').modal('show');
+    });
+}
+function ct_print_st(a){
+    document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${a}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/print_take_epson/${a}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+    $(window).on('load',function(){
+        $('#modal_print_sm_check').modal('show');
+    });
+}

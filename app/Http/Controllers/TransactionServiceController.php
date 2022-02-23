@@ -148,6 +148,16 @@ class TransactionServiceController extends Controller
         // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
         // return $pdf->stream('Struk_service');
     }
+    public function service_masuk_epson($id)
+    {
+        $service = Transaction_service::find($id);
+        $company = Company_profile::find(1);
+        $footer = Setting::where('options', 'footer_nota_servis')->first();
+
+        return view('cetak.print_servis_masuk', compact('service', 'company', 'footer'));
+        // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
+        // return $pdf->stream('Struk_service');
+    }
 
     public function create_customer($telephone, $name, $address, Request $request)
     {
@@ -314,11 +324,20 @@ class TransactionServiceController extends Controller
             'status' => 'take'
         ]);
         $cash_id = IdGenerator::generate(['table' => 'cashes', 'field' => 'cash_code', 'length' => 10, 'prefix' => 'CASH']);
+
+        $ser2 = Transaction_service::where('transaction_code', $request->transaction_code)->first();
+        if ($request->payment >= $ser2->total) {
+
+            $nom = $ser2->total;
+        } elseif ($request->payment < $ser2->total) {
+
+            $nom = $request->payment;
+        }
         Cash::create([
             'user_id' => Auth::guard('web')->user()->id,
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
-            'nominal' => $request->payment,
+            'nominal' => $nom,
             'description' => 'Unit Servis ' . $request->transaction_code . " telah diambil",
             'source' => 'income'
         ]);
@@ -423,8 +442,8 @@ class TransactionServiceController extends Controller
             'user_id' => Auth::guard('web')->user()->id,
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
-            'nominal' => $st,
-            'description' => 'Servis ' . $ser->transaction_code . " telah dibatalkan!!",
+            'nominal' => 0,
+            'description' => 'Servis ' . $ser->transaction_code . " telah dibatalkan",
             'source' => 'expenditure'
         ]);
 
@@ -559,6 +578,19 @@ class TransactionServiceController extends Controller
         ];
 
         return view('cetak.servis_take', $data);
+        // $pdf = PDF::loadView('cetak.servis_take', $data);
+        // return $pdf->stream('Struk_service');
+    }
+    public function print_take_epson($id)
+    {
+        $data = [
+            'company' => Company_profile::find(1),
+            'service' => Transaction_service::find($id),
+            'service_detail' => Transaction_service_detail::where('transaction_id', $id)->get(),
+            'footer' => Setting::where('options', 'footer_nota_servis_take')->first()
+        ];
+
+        return view('cetak.print_servis_diambil', $data);
         // $pdf = PDF::loadView('cetak.servis_take', $data);
         // return $pdf->stream('Struk_service');
     }

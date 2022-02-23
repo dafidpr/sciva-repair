@@ -460,10 +460,11 @@
 
                 <div class="container-fluid">
 
-                    <div class="page-content-wrapper">
+                    <section class="page-content-wrapper">
                         @yield('content')
                     </section>
 
+                    @yield('modal_section')
 
                 </div> <!-- container-fluid -->
             </div>
@@ -552,6 +553,7 @@
 
     <script src="{{asset('tmp/javascript/service.js')}}"></script>
     <script src="{{asset('tmp/javascript/entryPenjualan.js')}}"></script>
+    @yield('c_print')
     <script src="{{asset('tmp/javascript/dark.js')}}"></script>
     <script src="{{asset('tmp/javascript/pre-load.js')}}"></script>
         <!-- init js -->

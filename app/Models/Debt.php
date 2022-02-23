@@ -10,7 +10,7 @@ class Debt extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'purchase_id', 'total', 'payment', 'remainder',    'debt_date', 'due_date', 'status'
+        'purchase_id', 'total', 'payment', 'remainder', 'debt_date', 'due_date', 'status'
     ];
 
 

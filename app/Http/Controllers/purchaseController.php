@@ -125,7 +125,7 @@ class purchaseController extends Controller
                 'user_id' => Auth::guard('web')->user()->id,
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
-                'nominal' => $request->payment,
+                'nominal' => $request->grandtotal,
                 'description' => 'Pembelian dengan Kode ' . $purchase->invoice,
                 'source' => 'expenditure'
             ]);

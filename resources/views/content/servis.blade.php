@@ -206,6 +206,7 @@
                     @can('create-services')
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".exampleModalScrollable"><i class="fas fa-plus"></i> Tambah Data</a>
                     @endcan
+                    {{-- <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_print_sm_check"><i class="fas fa-plus"></i> Tambah Data</a> --}}
                     {{-- modal --}}
                 </div>
             </div>
@@ -380,7 +381,7 @@
 
                             @elseif ($item->status == 'take')
                             @can('printNota-services')
-                            <a href="#" onclick="ser_take({{$item->id}})" target="" class="ms-2"><i class="fas fa-print"></i></a>
+                            <a href="#" onclick="ser_take({{$item->id}})" class="ms-2"><i class="fas fa-print"></i></a>
                             @endcan
                             @endif
                             @can('delete-services')
@@ -1061,58 +1062,62 @@
 {{-- End Modal Sparepart --}}
 
 
-
 <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('demo/js/qz-tray.js')}}"></script>
+<script>
+    function ser_take(id){
+        // window.open("/admin/servis/print_take/"+id, '_blank');
+        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/print_take_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+            $('#modal_print_sm_check').modal('show');
+    }
+    function ser_masuk(id){
+        // window.open("/admin/servis/service_masuk/"+id, '_blank');
+        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/service_masuk/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/service_masuk_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+            $('#modal_print_sm_check').modal('show');
+    }
+</script>
+@endsection
+@section('modal_section')
+{{-- Modal print sm --}}
+<td>
+    <div id="modal_print_sm_check" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myModalLabel">Cetak Print</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="font-size-16 text-center">Pilih Untuk Cetak Print!!</h5>
+                    <div id="buttonToPrint">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/admin/servis/service_masuk/{{old('print_s_masuk')}}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/admin/servis/service_masuk_epson/{{old('print_s_masuk')}}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</td>
+@endsection
+@section('c_print')
 @if (old('print_s_masuk'))
 <script>
-    // window.open("/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>, '_blank');
-
-    var config = qz.configs.create("Printer Name");
-    var data = [{
-    type: 'pixel',
-    format: 'html',
-    flavor: 'file', // or 'plain' if the data is raw HTML
-    data: "/admin/servis/service_masuk/"+<?php echo old('print_s_masuk');?>
-    }];
-    qz.print(config, data).catch(function(e) { console.error(e); });
+    $(window).on('load',function(){
+        $('#modal_print_sm_check').modal('show');
+    });
 </script>
 @endif
 @if (old('print_s_diambil'))
 <script>
-
-    var config = qz.configs.create("Printer Name");
-    var data = [{
-    type: 'pixel',
-    format: 'html',
-    flavor: 'file', // or 'plain' if the data is raw HTML
-    data: "/admin/servis/print_take/"+<?php echo old('print_s_diambil');?>
-    }];
-    qz.print(config, data).catch(function(e) { console.error(e); });
+    ct_print_st(<?php echo old('print_s_diambil');?>)
 </script>
 @endif
-<script>
-function ser_take(id){
-    var config = qz.configs.create("Printer Name");
-    var data = [{
-    type: 'pixel',
-    format: 'html',
-    flavor: 'file', // or 'plain' if the data is raw HTML
-    data: "/admin/servis/print_take/"+id
-    }];
-    qz.print(config, data).catch(function(e) { console.error(e); });
-}
-function ser_masuk(id){
-    var config = qz.configs.create("Printer Name");
-    var data = [{
-    type: 'pixel',
-    format: 'html',
-    flavor: 'file', // or 'plain' if the data is raw HTML
-    data: "/admin/servis/service_masuk/"+id
-    }];
-    qz.print(config, data).catch(function(e) { console.error(e); });
-}
-</script>
-<script src="https://cdn.rawgit.com/kjur/jsrsasign/c057d3447b194fa0a3fdcea110579454898e093d/jsrsasign-all-min.js"></script>
-<script src="{{asset('demo/assets/signing/sign-message.js')}}"></script>
 @endsection

@@ -6,13 +6,18 @@ use App\Models\Cash;
 use App\Models\Company_profile;
 use App\Models\Customer;
 use App\Models\Debt;
+use App\Models\Debt_detail;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Purchase_detail;
+use App\Models\Receivable;
+use App\Models\Receivable_detail;
 use App\Models\Sale;
 use App\Models\Sale_detail;
 use App\Models\Stock;
 use App\Models\Stock_opname;
 use App\Models\Supplier;
+use App\Models\Transaction_service;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -319,13 +324,35 @@ class ReportController extends Controller
 
         $a = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->get();
         $b = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
-        // $c = collect(DB::select("SELECT * FROM sale_details a, sales b, products c WHERE b.id = c.sale_id AND c.id = a.product_id"));
+        $c = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->sum('total');
+        $c2 = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->get();
+        $d = Debt_detail::whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
+        $d2 = Debt_detail::whereBetween('created_at', [$startDate, $endDate])->get();
+        $e = Receivable_detail::whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
+        $e2 = Receivable_detail::whereBetween('created_at', [$startDate, $endDate])->get();
+        $f = Cash::where('source', 'other_income')->whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
+        $f2 = Cash::where('source', 'other_income')->whereBetween('created_at', [$startDate, $endDate])->get();
+        $g = Cash::where('source', 'other_expenditure')->whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
+        $g2 = Cash::where('source', 'other_expenditure')->whereBetween('created_at', [$startDate, $endDate])->get();
+        $h = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->get();
+        $h2 = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
 
         // dd($a);
         $data = [
             'sale' => $a,
             'total' => $b,
-            // 'hpp' => $c,
+            'service' => $c,
+            'service_detail' => $c2,
+            'debt' => $d,
+            'debt_detail' => $d2,
+            'receivable' => $e,
+            'receivable_detail' => $e2,
+            'other_in' => $f,
+            'other_in_d' => $f2,
+            'other_ex' => $g,
+            'other_ex_d' => $g2,
+            'purchase' => $h2,
+            'purchase_d' => $h,
             'lain' => $request->lain,
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
@@ -344,6 +371,8 @@ class ReportController extends Controller
             'cash' => Cash::whereBetween('date', [$request->from, $request->to])->get(),
             'debit' => Cash::where('source', 'expenditure')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
             'kredit' => Cash::where('source', 'income')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
+            'debit2' => Cash::where('source', 'other_expenditure')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
+            'kredit2' => Cash::where('source', 'other_income')->whereBetween('date', [$request->from, $request->to])->sum('nominal'),
             // 'total' => $b,
             // 'hpp' => $c,
             // 'lain' => $request->lain,

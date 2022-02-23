@@ -83,7 +83,9 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
 
         Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:printNota-services');
+        Route::get('/print_take_epson/{id}', [TransactionServiceController::class, 'print_take_epson'])->middleware('can:printNota-services');
         Route::get('/service_masuk/{id}', [TransactionServiceController::class, 'service_masuk'])->middleware('can:printNota-services');
+        Route::get('/service_masuk_epson/{id}', [TransactionServiceController::class, 'service_masuk_epson'])->middleware('can:printNota-services');
     });
 
     Route::prefix('entry_penjualan')->group(function () {
@@ -94,6 +96,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('', [SaleController::class, 'index'])->middleware('can:read-sales');
         Route::get('/show/{id}', [SaleController::class, 'show'])->middleware('can:detail-sales');
         Route::get('/cetak/{id}', [SaleController::class, 'cetak'])->middleware('can:print-sales');
+        Route::get('/cetak_epson/{id}', [SaleController::class, 'cetak_epson'])->middleware('can:print-sales');
     });
 
     Route::get('/entry_pembelian', [purchaseController::class, 'entry'])->middleware('can:create-purchases');

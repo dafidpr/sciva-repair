@@ -20,7 +20,7 @@ class CreateCashesTable extends Migration
             $table->date('date')->nullable();
             $table->decimal('nominal', 10, 2);
             $table->text('description');
-            $table->enum('source', ['income', 'expenditure']);
+            $table->enum('source', ['income', 'expenditure', 'other_income', 'other_expenditure']);
             $table->timestamps();
         });
     }

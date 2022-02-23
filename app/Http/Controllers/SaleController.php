@@ -102,6 +102,7 @@ class SaleController extends Controller
                         'sale_id' => $sale->id,
                         'product_id' => $data['id_product'][$item],
                         'discount' => $data['discount'][$item],
+                        'hpp' => $data['hpp'][$item],
                         'total' => $data['price'][$item],
                         'quantity' => $data['quantity'][$item],
                         'sub_total' => $data['total'][$item]
@@ -131,7 +132,7 @@ class SaleController extends Controller
                 'user_id' => Auth::guard('web')->user()->id,
                 'cash_code' => $cash_id,
                 'date' => date('Y-m-d'),
-                'nominal' => $request->b_payment,
+                'nominal' => $request->b_grandtotal,
                 'description' => 'Penjualan dengan kode ' . $sale->invoice,
                 'source' => 'income'
             ]);
@@ -147,7 +148,7 @@ class SaleController extends Controller
                 ]);
             }
 
-            return redirect('/admin/daftar_penjualan/cetak/' . $sale->id);
+            return redirect()->back()->withInput(['print_s_penjualan' => $sale->id]);
         } elseif ($request->method == 'credit') {
             $data = [
                 'user_id' => Auth::guard('web')->user()->id,
@@ -170,6 +171,7 @@ class SaleController extends Controller
                         'sale_id' => $sale->id,
                         'product_id' => $data['id_product'][$item],
                         'discount' => $data['discount'][$item],
+                        'hpp' => $data['hpp'][$item],
                         'total' => $data['price'][$item],
                         'quantity' => $data['quantity'][$item],
                         'sub_total' => $data['total'][$item]
@@ -265,6 +267,22 @@ class SaleController extends Controller
         ];
 
         return view('cetak.struk_penjualan', $data);
+
+        // $pdf = PDF::loadView('cetak.struk_penjualan', $data)->setPaper('a4', 'potrait');
+        // return $pdf->stream('Struk_sale');
+    }
+    public function cetak_epson($id)
+    {
+        //
+        $sale = Sale::find($id);
+        $data = [
+            'company' => Company_profile::find(1),
+            'sale' => $sale,
+            'sale_detail' => Sale_detail::where('sale_id', $sale->id)->get(),
+            'footer' => Setting::where('options', 'footer_nota_sale')->first()
+        ];
+
+        return view('cetak.print_penjualan', $data);
 
         // $pdf = PDF::loadView('cetak.struk_penjualan', $data)->setPaper('a4', 'potrait');
         // return $pdf->stream('Struk_sale');

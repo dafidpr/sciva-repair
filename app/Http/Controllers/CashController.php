@@ -19,8 +19,10 @@ class CashController extends Controller
     {
         //
         $pemasukan = collect(DB::select("SELECT SUM(nominal) AS nominal FROM cashes WHERE source = 'income'"))->first();
+        $pemasukan2 = collect(DB::select("SELECT SUM(nominal) AS nominal FROM cashes WHERE source = 'other_income'"))->first();
         $pengeluaran = collect(DB::select("SELECT SUM(nominal) AS nominal FROM cashes WHERE source = 'expenditure'"))->first();
-        $total = $pemasukan->nominal - $pengeluaran->nominal;
+        $pengeluaran2 = collect(DB::select("SELECT SUM(nominal) AS nominal FROM cashes WHERE source = 'other_expenditure'"))->first();
+        $total = ($pemasukan->nominal + $pemasukan2->nominal) - ($pengeluaran->nominal + $pengeluaran2->nominal);
         // dd($total);
         $data = [
             'cash' => Cash::all(),

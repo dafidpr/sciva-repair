@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cash;
+use App\Models\Debt_detail;
+use App\Models\Purchase_detail;
+use App\Models\Receivable_detail;
+use App\Models\Sale_detail;
+use App\Models\Transaction_service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +25,40 @@ class GrafikController extends Controller
     public function index()
     {
         //
-        $laba = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(b.sub_total) AS total FROM sales a, sale_details b WHERE b.sale_id = a.id AND SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10) LIMIT 20"));
+
+        $label         = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+
+        for ($bulan = 1; $bulan < 13; $bulan++) {
+            $b = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('sub_total');
+            $b2 = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
+            $c = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->sum('total');
+            $d = Debt_detail::whereMonth('created_at', '=', $bulan)->sum('nominal');
+            $e = Receivable_detail::whereMonth('created_at', '=', $bulan)->sum('nominal');
+            $f = Cash::where('source', 'other_income')->whereMonth('created_at', '=', $bulan)->sum('nominal');
+            $g = Cash::where('source', 'other_expenditure')->whereMonth('created_at', '=', $bulan)->sum('nominal');
+            $h = Purchase_detail::whereMonth('created_at', '=', $bulan)->sum('sub_total');
+
+            $ex_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_expenditure', 'expenditure') AND month(created_at)='$bulan'"))->first();
+
+            $in_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_income', 'income') AND month(created_at)='$bulan'"))->first();
+
+            $kas_ex[] = ($b + $c + $e + $f) - ($g + $h + $d + $b2);
+        }
+
+
+        // $kas_in = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(a.nominal) AS total FROM cashes a WHERE a.source = 'other_income' OR a.source = 'income' AND SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10) LIMIT 20"));
+
+        // $kas_ex = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(a.nominal) AS total FROM cashes a WHERE a.source = 'other_expenditure' OR a.source = 'expenditure' AND SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10) LIMIT 20"));
+        // $kas = collect(DB::select("SELECT SUBSTRING(a.created_at, 1, 10) AS tgl, SUM(a.nominal) AS total FROM cashes a WHERE SUBSTRING(a.created_at, 6, 2) = DATE_FORMAT(CURDATE(), '%m') GROUP BY SUBSTRING(a.created_at, 1, 10) LIMIT 20"));
 
         $sqllaris = collect(DB::select("SELECT a.name, COUNT(b.product_id) AS total FROM products a, sale_details b, sales c WHERE b.product_id = a.id AND b.sale_id = c.id GROUP BY b.product_id ORDER BY total DESC LIMIT 10"))->all();
 
         $data = [
             'terlaris' => $sqllaris,
-            'laba' => $laba
+            'kas_ex' => $kas_ex,
+            'hpp' => $b2,
+            'label' => $label
         ];
 
         return view('content.grafik', $data);

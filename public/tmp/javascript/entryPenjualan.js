@@ -22,6 +22,7 @@ function select_entry_product(e){
                 $('#id_product').val(obj.id);
                 $('#name_product').val(obj.name);
                 $('#barcode').val(obj.barcode);
+                $('#hpp').val(obj.purchase_price);
                 $('#price').val(parseInt(obj.member_price));
                 $('.bs-example-product').modal('hide');
             }
@@ -35,6 +36,7 @@ function select_entry_product(e){
                 $('#id_product').val(obj.id);
                 $('#name_product').val(obj.name);
                 $('#barcode').val(obj.barcode);
+                $('#hpp').val(obj.purchase_price);
                 $('#price').val(parseInt(obj.selling_price));
                 $('.bs-example-product').modal('hide');
             }
@@ -135,7 +137,7 @@ function paymentCheck(){
                             <td><input type="hidden" name="id_product[]" value="${saleData[index].id_product}" id="id_product"></td>
                             <td><input type="hidden" name="price[]" value="${parseInt(saleData[index].price)}" id="price"></td>
                             <td><input type="hidden" name="discount[]" value="${parseInt(saleData[index].discount)}" id="discount"></td>
-                            <td><input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"></td>
+                            <td><input type="hidden" name="quantity[]" value="${saleData[index].quantity}" id="quantity"><input type="hidden" name="hpp[]" value="${saleData[index].hpp}" id="hpp"></td>
                             <td><input type="hidden" name="total[]" value="${saleData[index].total}" id="total"></td>
                         </tr>`
 
@@ -155,4 +157,21 @@ function paymentCheck(){
     function modalCheckClose(){
 
         $('#modalCheckOut').modal('hide');
-}
+    }
+
+    function check_print(){
+        // $('#modal_print_check').modal('show');
+        $(window).on('load',function(){
+            $('#modal_print_check').modal('show');
+        });
+    }
+
+    function print_penjualan_choose(id){
+        document.getElementById('choose_print').innerHTML = `<div class="col-md-6">
+        <a href="/admin/daftar_penjualan/cetak/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Thermal</a>
+    </div>
+    <div class="col-md-6">
+        <a href="/admin/daftar_penjualan/cetak_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+    </div>`
+        $('#modal_print_check').modal('show');
+    }

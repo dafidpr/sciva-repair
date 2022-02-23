@@ -9,11 +9,11 @@
 <body>
     <table style="width: 100%; font-size: 15px;">
         <tr>
-            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="90px" alt=""></td>
+            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="60px" alt=""></td>
             <td>
-                <p style="line-height: 0.5em;"><b>{{$company->name}}</b></p>
-                <p style="line-height: 0.5em;">{{$company->address}}</p>
-                <p style="line-height: 0.5em;">Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
+                <p style="line-height: 0.3em;"><b>{{$company->name}}</b></p>
+                <p style="line-height: 0.3em;">{{$company->address}}</p>
+                <p style="line-height: 0.3em;">Phone : {{$company->telephone}} | Email : {{$company->email}}</p>
             </td>
         </tr>
     </table><hr style="border: 0; border-top: 4px double #8c8c8c;">
@@ -29,6 +29,7 @@
                 <th>Barcode</th>
                 <th width="20%">Item</th>
                 <th>Stok gudang</th>
+                <th>Stok Nyata</th>
                 <th width="40%">Keterangan</th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$item->barcode}}</td>
                 <td>{{$item->name}}</td>
+                <td>{{$item->stock}}</td>
                 <td></td>
                 <td></td>
             </tr>
