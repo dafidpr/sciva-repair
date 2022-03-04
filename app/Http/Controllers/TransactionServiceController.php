@@ -33,7 +33,7 @@ class TransactionServiceController extends Controller
         //output: INV-000001
 
         $data = [
-            'service' => Transaction_service::all(),
+            'service' => Transaction_service::orderBy('service_date', 'desc')->get(),
             "customer" => Customer::all(),
             "user" => User::where('username', '!=', 'root')->get(),
             'nota' => $no_nota,
