@@ -14,9 +14,9 @@
 </head>
 <body style="width: 76mm;">
 
-<p style="text-align: center; font-size: 20px;"><b>{{$company->name}}</b></p>
-<p style="text-align: center; font-size: 18px;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 15px;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 20px; line-height: 0.3em;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 18px; line-height: 0.3em;">{{$company->telephone}}</p>
+<p style="text-align: center; font-size: 15px; line-height: 0.3em;">{{$company->address}}</p>
 
 <br>
 <table style="width: 100%; font-size: 15px;">

@@ -147,10 +147,10 @@
                  <div class="navbar-brand-box">
                     <a href="" class="logo logo-dark mt-4">
                         <span class="logo-sm">
-                            <h4>SCIVA</h4>
+                            <h5>{{$company->name}}</h5>
                         </span>
                         <span class="logo-lg">
-                            <H4>SCIVA REPAIRE</H4>
+                            <H5>{{$company->name}}</H5>
                         </span>
                     </a>
 

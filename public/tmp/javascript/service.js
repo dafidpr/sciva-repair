@@ -203,6 +203,7 @@ function takeUnit(a, b) {
             $('#t_unit').val(obj.unit);
             $('#t_serial_number').val(obj.serial_number);
             $('#t_total').val(parseInt(obj.total));
+            $('#t_total_hidden').val(parseInt(obj.total));
             $('.takeUnit').modal('show');
             // $('#myModal').modal('show');
         }
@@ -527,7 +528,7 @@ function callcs(a, c, d, e) {
             if(d == 'finished'){
                 var st = 'selesai'
             }else if(d == 'cancelled'){
-                var st = 'di batalkan'
+                var st = 'dibatalkan'
             }
 
             var tgl = new Date().getTime()+(obj.batas.value*24*60*60*1000)
@@ -680,4 +681,13 @@ function ct_print_st(a){
     $(window).on('load',function(){
         $('#modal_print_sm_check').modal('show');
     });
+}
+function cekdiscounttakeunit(){
+    var total = document.getElementById('t_total_hidden').value
+    var discount = document.getElementById('t_discount').value
+    var total_e = parseInt(total) - parseInt(discount)
+
+    console.log(total_e)
+
+    document.getElementById('t_total').value = total_e
 }

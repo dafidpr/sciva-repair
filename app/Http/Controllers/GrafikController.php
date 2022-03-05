@@ -33,17 +33,14 @@ class GrafikController extends Controller
             $b = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('sub_total');
             $b2 = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
             $c = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->sum('total');
-            $d = Debt_detail::whereMonth('created_at', '=', $bulan)->sum('nominal');
-            $e = Receivable_detail::whereMonth('created_at', '=', $bulan)->sum('nominal');
             $f = Cash::where('source', 'other_income')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $g = Cash::where('source', 'other_expenditure')->whereMonth('created_at', '=', $bulan)->sum('nominal');
-            $h = Purchase_detail::whereMonth('created_at', '=', $bulan)->sum('sub_total');
 
             $ex_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_expenditure', 'expenditure') AND month(created_at)='$bulan'"))->first();
 
             $in_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_income', 'income') AND month(created_at)='$bulan'"))->first();
 
-            $kas_ex[] = ($b + $c + $e + $f) - ($g + $h + $d + $b2);
+            $kas_ex[] = ($b + $c + $f) - ($g + $b2);
         }
 
 

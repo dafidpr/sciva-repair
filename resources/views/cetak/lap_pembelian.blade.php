@@ -9,7 +9,7 @@
 <body>
     <table style="width: 100%;">
         <tr>
-            <td width="10%"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" width="60px" alt=""></td>
+            <td width="60px"><img src="{{public_path('tmp/asset/images/'. $company->logo)}}" style="width: 60px;" alt=""></td>
             <td>
                 <p style="line-height: 0.3em;"><b>{{$company->name}}</b></p>
                 <p style="line-height: 0.3em;">{{$company->address}}</p>

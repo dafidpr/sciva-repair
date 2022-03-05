@@ -709,6 +709,7 @@
                     <div>
                         <label for="">Total Biaya</label>
                         <input type="number" class="form-control" name="total" id="t_total" readonly>
+                        <input type="hidden" class="form-control" name="total_hidden" id="t_total_hidden" readonly>
                     </div>
                     <div>
                         <label>Payment Method</label>
@@ -723,6 +724,10 @@
                     <div>
                         <label for="">Bayar</label>
                         <input type="number" onkeyup="es_cashback()" class="form-control" name="payment" id="t_payment" required>
+                    </div>
+                    <div>
+                        <label for="">Diskon</label>
+                        <input type="number" onkeyup="cekdiscounttakeunit()" value="0" class="form-control" name="payment" id="t_discount" required>
                     </div>
                     <div>
                         <label for="">Kembalian</label>

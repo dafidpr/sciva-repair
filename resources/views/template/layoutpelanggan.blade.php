@@ -144,10 +144,10 @@
 
                     <a href="" class="logo logo-light">
                         <span class="logo-sm">
-                            <h5>SCIVA</h5>
+                            <h5>{{$company->name}}</h5>
                         </span>
                         <span class="logo-lg">
-                            <h5>SCIVA REPAIRE</h5>
+                            <h5>{{$company->name}}</h5>
                         </span>
                     </a>
                 </div>
