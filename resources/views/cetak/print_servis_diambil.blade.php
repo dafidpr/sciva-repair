@@ -8,7 +8,7 @@
     console.log(company)
     console.log(footer)
     console.log(service)
-function print() {
+function print_take_sr() {
     qz.websocket.connect().then(() => {
         return qz.printers.find("EPSON TM-U220");
     }).then((found) => {
@@ -92,6 +92,6 @@ function print() {
         return qz.websocket.disconnect();
     });
 }
+console.log(print_take_sr())
 </script>
-<button onclick="print();">Print</button>
 </html>

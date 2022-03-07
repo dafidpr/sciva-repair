@@ -306,6 +306,7 @@ function pilih_sparepart_servis(e) {
             $('#id_product').val(obj.id);
             $('#item_product').val(obj.name);
             $('#item_price').val(parseInt(obj.selling_price));
+            $('#item_hpp').val(parseInt(obj.purchase_price));
             $('.bs-modal-sparepart').modal('hide');
             // $('#myModal').modal('show');
         }
@@ -384,6 +385,8 @@ function tambahSparepartService(){
     var id_product = document.getElementById('id_product').value
     var item_price = document.getElementById('item_price').value
     var qty_prod = document.getElementById('qty_prod').value
+    var item_hpp = document.getElementById('item_hpp').value
+    var tot_hpp = parseInt(item_hpp)*parseInt(qty_prod)
     var discount_prod = document.getElementById('discount_prod').value
 
     var a = parseInt(item_price) * parseInt(qty_prod) - parseInt(discount_prod)
@@ -398,7 +401,7 @@ function tambahSparepartService(){
 
                 tbody_sparepart.innerHTML += `<tr>
                 <td>${item_product}<input type="hidden" class="form-control" name="input_product_id[]" id="" value="${id_product}" readonly><input type="hidden" class="form-control" name="input_product_subtot[]" id="" value="${a}" readonly></td>
-                <td>${item_price}<input type="hidden" class="form-control" name="input_product_total[]" id="" value="${item_price}" readonly> <input type="hidden" class="form-control" name="input_product_qty[]" id="" value="${qty_prod}" readonly></td>
+                <td>${item_price}<input type="hidden" class="form-control" name="input_product_total[]" id="" value="${item_price}" readonly> <input type="hidden" class="form-control" name="input_product_qty[]" id="" value="${qty_prod}" readonly><input type="hidden" class="form-control" name="input_product_hpp[]" id="" value="${tot_hpp}" readonly></td>
                 <td>${qty_prod} <input type="hidden" class="form-control" name="input_product_dis[]" id="" value="${discount_prod}" readonly></td>
                 <td>${discount_prod}</td>
                 <td>${a}</td>
@@ -677,10 +680,16 @@ function ct_print_sm(){
     });
 }
 function ct_print_st(a){
-    document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${a}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/print_take_epson/${a}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+    document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${a}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="#" onclick="print_frame(${a})" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
     $(window).on('load',function(){
         $('#modal_print_sm_check').modal('show');
     });
+}
+function print_frame(id){
+    document.getElementById('print_frame').innerHTML = `<iframe style="visibility:hidden;" onload="this.style.visibility = 'visible';" src="/admin/servis/print_take_epson/${id}" > </iframe>`
+}
+function print2_frame(id){
+    document.getElementById('print_frame').innerHTML = `<iframe style="visibility:hidden;" onload="this.style.visibility = 'visible';" src="/admin/servis/service_masuk_epson/${id}" > </iframe>`
 }
 function cekdiscounttakeunit(){
     var total = document.getElementById('t_total_hidden').value

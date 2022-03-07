@@ -17,12 +17,12 @@ function print() {
             data:
             '\x1B' + '\x61' + '\x31'+                            // center align
             '\x1B' + '\x45' + '\x0D'+                            // bold on
-            data.name.toLowerCase() +
+            <?php echo "'".ucfirst($company->name)."'"; ?> +
             '\x1B' + '\x45' + '\x0A'+                            // bold off
             '\x0A'+                                              // line break
-            data.telephone +
+            <?php echo "'".$company->telephone."'"; ?> +
             '\x0A'+                                              // line break
-            data.address.toLowerCase() +
+            <?php echo "'".ucfirst($company->address)."'"; ?> +
             '\x0A'+                                              // line break
             '\x0A'+                                              // line break
             '\x1B' + '\x61' + '\x30'+                            // left align
@@ -56,11 +56,11 @@ function print() {
             '\x0A'+                                              // line break
             '--------------------------------------'+
             '\x0A'+                                              // line break
-            'OPERATOR : '+<?php echo strtoupper($sale->_user->name); ?> +
+            'OPERATOR : '+<?php echo "'".strtoupper($sale->_user->name)."'"; ?> +
             '\x0A'+                                              // line break
             '\x0A'+                                              // line break
             '\x1B' + '\x61' + '\x31'+                            // center align
-            footer+
+            <?php echo "'".$footer->value."'"; ?>+
             '\x0A'+                                              // line break
             '\x0A'+                                              // line break
             '\n\n\n\n\n\n'+
@@ -76,5 +76,4 @@ function print() {
 }
 console.log(print())
 </script>
-<button onclick="print();">Print</button>
 </html>

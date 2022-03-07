@@ -152,7 +152,7 @@ class TransactionServiceController extends Controller
     {
         $service = Transaction_service::find($id);
         $company = Company_profile::find(1);
-        $footer = Setting::where('options', 'footer_nota_servis')->first();
+        $footer = Setting::where('options', 'footer_nota_servis_ep')->first();
 
         return view('cetak.print_servis_masuk', compact('service', 'company', 'footer'));
         // $pdf = PDF::loadView('cetak.servismasuk', compact('service', 'company', 'footer'));
@@ -203,6 +203,7 @@ class TransactionServiceController extends Controller
                         'transaction_id' => $request->transaction_id,
                         'repaire_id' => null,
                         'sparepart_id' => $request->input_product_id[$key],
+                        'hpp' => $request->input_product_hpp[$key],
                         'total' => $request->input_product_total[$key],
                         'qty' => $request->input_product_qty[$key],
                         'discount' => $request->input_product_dis[$key],
@@ -320,6 +321,7 @@ class TransactionServiceController extends Controller
             'pickup_date' => date('Y-m-d'),
             'payment_method' => $request->method,
             'payment' => $request->payment,
+            'discount' => $request->discount,
             'cashback' => abs($request->cashback),
             'status' => 'take'
         ]);
@@ -587,7 +589,7 @@ class TransactionServiceController extends Controller
             'company' => Company_profile::find(1),
             'service' => Transaction_service::find($id),
             'service_detail' => Transaction_service_detail::where('transaction_id', $id)->get(),
-            'footer' => Setting::where('options', 'footer_nota_servis_take')->first()
+            'footer' => Setting::where('options', 'footer_nota_servis_take_ep')->first()
         ];
 
         return view('cetak.print_servis_diambil', $data);

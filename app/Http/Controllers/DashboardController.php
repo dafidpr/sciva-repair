@@ -59,6 +59,7 @@ class DashboardController extends Controller
         $dp = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'proses' ORDER BY total"))->first();
         $sb = collect(DB::select("SELECT COUNT(a.customer_id) AS total FROM transaction_services a, customers b WHERE a.customer_id = b.id AND b.id = '$id_i' AND a.status = 'cancelled' ORDER BY total"))->first();
         $receivable = collect(DB::select("SELECT a.id, b.invoice, a.due_date, c.name, a.total, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, sales b, customers c WHERE a.sale_id = b.id AND c.id = b.customer_id AND c.id = '$id_i' AND a.status = 'not yet paid' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
+        $receivable2 = collect(DB::select("SELECT a.id, b.transaction_code, a.due_date, c.name, a.total, SUBSTRING(a.receivable_date, 1, 10) AS receivable_date, a.total, a.payment, a.remainder, a.status, a.due_date FROM receivables a, transaction_services b, customers c WHERE a.service_id = b.id AND c.id = b.customer_id AND c.id = '$id_i' AND a.status = 'not yet paid' ORDER BY SUBSTRING(a.receivable_date, 1, 10) ASC"))->all();
 
         $data = [
             'servisMasuk' => $dp->total,
@@ -67,6 +68,7 @@ class DashboardController extends Controller
             'batal' => $sb->total,
             'servis' => Transaction_service::where('customer_id', Auth::guard('customer')->user()->id)->get(),
             'recei' => $receivable,
+            'recei2' => $receivable2,
         ];
         return view('dashboard.pelanggan', $data);
     }

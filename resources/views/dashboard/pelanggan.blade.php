@@ -163,6 +163,15 @@
                                 <td>{{$item->due_date}}</td>
                             </tr>
                             @endforeach
+                            @foreach ($recei2 as $item)
+
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{number_format($item->total)}}</td>
+                                <td>{{$item->due_date}}</td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

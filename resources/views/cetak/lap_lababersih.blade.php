@@ -70,6 +70,11 @@
                 <td width="30%" style="text-align: right;">Rp. {{number_format($hpp2)}} </td>
             </tr>
             <tr>
+                <td>HARGA POKOK PENJUALAN SERVIS</td>
+                <td></td>
+                <td width="30%" style="text-align: right;">Rp. {{number_format($hpp_servis)}} </td>
+            </tr>
+            <tr>
                 <td>PENGELUARAN LAIN-LAIN</td>
                 <td></td>
                 <td width="30%" style="text-align: right;">Rp. {{number_format($other_ex)}} </td>
@@ -77,14 +82,14 @@
             <tr>
                 <td><b>TOTAL PENGELUARAN</b></td>
                 <td></td>
-                <td style="text-align: right;"><b> Rp. {{number_format($hpp2+$other_ex)}}  </b></td>
+                <td style="text-align: right;"><b> Rp. {{number_format($hpp2+$other_ex+$hpp_servis)}}  </b></td>
             </tr>
             <tr>
                 <td colspan="3"><br></td>
             </tr>
             <tr>
                 <td colspan="2"><b>LABA RUGI</b></td>
-                <td style="text-align: right;"><b>Rp. {{number_format(($service+$total+$other_in)-($hpp2+$other_ex))}}</b></td>
+                <td style="text-align: right;"><b>Rp. {{number_format(($service+$total+$other_in)-($hpp2+$other_ex+$hpp_servis))}}</b></td>
             </tr>
     </table>
 
@@ -142,23 +147,34 @@
                 <th>No</th>
                 <th>Tanggal Servis</th>
                 <th>No Nota</th>
+                <th>HPP</th>
                 <th>Diskon</th>
                 <th>Total</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($service_detail as $item)
+            <?php $no_hpp = 0;?>
+            <?php $details_hpp = \App\Models\Transaction_service_detail::where('transaction_id', $item->id)->get();?>
+            @foreach ($details_hpp as $val)
+                <?php $no_hpp += $val->hpp; ?>
+            @endforeach
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->transaction_code}}</td>
+                <td>Rp. {{number_format($no_hpp)}}</td>
                 <td>Rp. {{number_format($item->discount)}}</td>
                 <td>Rp. {{number_format($item->total)}}</td>
             </tr>
             @endforeach
             <tr>
-                <th colspan="4">Total</th>
+                <th colspan="5">Total</th>
                 <th>Rp. {{number_format($service)}}</th>
+            </tr>
+            <tr>
+                <th colspan="5">HPP</th>
+                <th>Rp. {{number_format($hpp_servis)}}</th>
             </tr>
         </tbody>
     </table>

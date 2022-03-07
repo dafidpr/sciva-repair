@@ -98,11 +98,12 @@ class SaleController extends Controller
 
             if (count($data['id_product']) > 0) {
                 foreach ($data['id_product'] as $item => $v) {
+                    $hpp = $data['hpp'][$item] * $data['quantity'][$item];
                     $detail = [
                         'sale_id' => $sale->id,
                         'product_id' => $data['id_product'][$item],
                         'discount' => $data['discount'][$item],
-                        'hpp' => $data['hpp'][$item],
+                        'hpp' => $hpp,
                         'total' => $data['price'][$item],
                         'quantity' => $data['quantity'][$item],
                         'sub_total' => $data['total'][$item]

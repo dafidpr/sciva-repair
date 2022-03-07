@@ -60,7 +60,7 @@
                         <a href="/admin/daftar_penjualan/cetak/{{old('print_s_penjualan')}}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a>
                     </div>
                     <div class="col-md-6">
-                        <a href="/admin/daftar_penjualan/cetak_epson/{{old('print_s_penjualan')}}" target="_blank" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+                        <a href="#" onclick="printSaleWithEpson()" target="_blank" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
                     </div>
                 </div>
                 </div>
@@ -72,8 +72,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 
-
-
 <script>
 
     function print_sale_a(id){
@@ -83,4 +81,8 @@
     }
 
 </script>
+@endsection
+@section('c_print')
+<div id="toPrint"></div>
+
 @endsection

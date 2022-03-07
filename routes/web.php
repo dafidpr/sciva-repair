@@ -322,10 +322,13 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('', [SettingController::class, 'indexfooter'])->middleware('can:footerNota-settings');
         //Sale
         Route::post('/updateNotaSale', [SettingController::class, 'updateNotaSale']);
+        Route::post('/updateNotaSaleEp', [SettingController::class, 'updateNotaSaleEp']);
         //Servis Masuk
         Route::post('/updateNotaServis', [SettingController::class, 'updateNotaServis']);
+        Route::post('/updateNotaServisEp', [SettingController::class, 'updateNotaServisEp']);
         //servis diambil
         Route::post('/updateNotaServisTake', [SettingController::class, 'updateNotaServisTake']);
+        Route::post('/updateNotaServisTakeEp', [SettingController::class, 'updateNotaServisTakeEp']);
     });
     Route::prefix('format_WA')->group(function () {
         Route::get('', [SettingController::class, 'indexWA'])->middleware('can:formatWA-settings');

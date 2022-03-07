@@ -34,6 +34,24 @@ class SettingSeeder extends Seeder
             'value' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         ]);
         Setting::create([
+            'groups' => 'footer',
+            'options' => 'footer_nota_sale_ep',
+            'label' => 'footer_nota',
+            'value' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        ]);
+        Setting::create([
+            'groups' => 'footer',
+            'options' => 'footer_nota_servis_ep',
+            'label' => 'footer_nota',
+            'value' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        ]);
+        Setting::create([
+            'groups' => 'footer',
+            'options' => 'footer_nota_servis_take_ep',
+            'label' => 'footer_nota',
+            'value' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        ]);
+        Setting::create([
             'groups' => 'format',
             'options' => 'format_sms',
             'label' => 'format_text',

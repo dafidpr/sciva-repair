@@ -18,6 +18,7 @@ use App\Models\Stock;
 use App\Models\Stock_opname;
 use App\Models\Supplier;
 use App\Models\Transaction_service;
+use App\Models\Transaction_service_detail;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -324,6 +325,7 @@ class ReportController extends Controller
 
         $a = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->get();
         $b = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
+        $b2 = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('hpp');
         $c = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->sum('total');
         $c2 = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->get();
         $d = Debt_detail::whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
@@ -336,11 +338,13 @@ class ReportController extends Controller
         $g2 = Cash::where('source', 'other_expenditure')->whereBetween('created_at', [$startDate, $endDate])->get();
         $h = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->get();
         $h2 = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
+        $i = Transaction_service_detail::whereBetween('created_at', [$startDate, $endDate])->sum('hpp');
 
         // dd($a);
         $data = [
             'sale' => $a,
             'total' => $b,
+            'hpp_sell' => $b2,
             'service' => $c,
             'service_detail' => $c2,
             'debt' => $d,
@@ -353,6 +357,7 @@ class ReportController extends Controller
             'other_ex_d' => $g2,
             'purchase' => $h2,
             'purchase_d' => $h,
+            'hpp_servis' => $i,
             'lain' => $request->lain,
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),

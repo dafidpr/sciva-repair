@@ -18,6 +18,7 @@ class CreateTransactionServiceDetailsTable extends Migration
             $table->foreignId('transaction_id')->constrained('transaction_services')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('repaire_id')->nullable()->constrained('repaire_services')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('sparepart_id')->nullable()->constrained('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->decimal('hpp', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->integer('qty')->nullable();
             $table->decimal('discount', 10, 2)->nullable();

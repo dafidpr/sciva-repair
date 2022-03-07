@@ -167,11 +167,18 @@ function paymentCheck(){
     }
 
     function print_penjualan_choose(id){
+        var idi = id;
+
         document.getElementById('choose_print').innerHTML = `<div class="col-md-6">
         <a href="/admin/daftar_penjualan/cetak/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Thermal</a>
     </div>
+
     <div class="col-md-6">
-        <a href="/admin/daftar_penjualan/cetak_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+        <a href="#" onclick="print_frime(${id})" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
     </div>`
         $('#modal_print_check').modal('show');
+    }
+
+    function print_frime(id){
+        document.getElementById('toPrint').innerHTML = `<iframe style="visibility:hidden;" onload="this.style.visibility = 'visible';" src="/admin/daftar_penjualan/cetak_epson/${id}" name="my_frame"> </iframe>`
     }

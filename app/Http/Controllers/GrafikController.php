@@ -8,6 +8,7 @@ use App\Models\Purchase_detail;
 use App\Models\Receivable_detail;
 use App\Models\Sale_detail;
 use App\Models\Transaction_service;
+use App\Models\Transaction_service_detail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,12 +36,13 @@ class GrafikController extends Controller
             $c = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->sum('total');
             $f = Cash::where('source', 'other_income')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $g = Cash::where('source', 'other_expenditure')->whereMonth('created_at', '=', $bulan)->sum('nominal');
+            $i = Transaction_service_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
 
             $ex_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_expenditure', 'expenditure') AND month(created_at)='$bulan'"))->first();
 
             $in_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_income', 'income') AND month(created_at)='$bulan'"))->first();
 
-            $kas_ex[] = ($b + $c + $f) - ($g + $b2);
+            $kas_ex[] = ($b + $c + $f) - ($g + $b2 + $i);
         }
 
 

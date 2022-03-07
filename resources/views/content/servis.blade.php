@@ -523,6 +523,7 @@
                         <div class="col-sm-6">
                             <label for="">Harga (Rp.)</label>
                             <input type="number" class="form-control" name="item_price" id="item_price" readonly>
+                            <input type="hidden" class="form-control" name="item_hpp" id="item_hpp" readonly>
 
                         </div>
                         <div class="col-sm-6">
@@ -727,7 +728,7 @@
                     </div>
                     <div>
                         <label for="">Diskon</label>
-                        <input type="number" onkeyup="cekdiscounttakeunit()" value="0" class="form-control" name="payment" id="t_discount" required>
+                        <input type="number" onkeyup="cekdiscounttakeunit()" value="0" class="form-control" name="discount" id="t_discount" required>
                     </div>
                     <div>
                         <label for="">Kembalian</label>
@@ -1071,18 +1072,19 @@
 <script>
     function ser_take(id){
         // window.open("/admin/servis/print_take/"+id, '_blank');
-        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/print_take_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/print_take/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="#" onclick="print_frame(${id})" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
             $('#modal_print_sm_check').modal('show');
     }
     function ser_masuk(id){
         // window.open("/admin/servis/service_masuk/"+id, '_blank');
-        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/service_masuk/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="/admin/servis/service_masuk_epson/${id}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
+        document.getElementById('buttonToPrint').innerHTML = `<div class="row"><div class="col-md-6"><a href="/admin/servis/service_masuk/${id}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a></div><div class="col-md-6"><a href="#" onclick="print2_frame(${id})" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a></div></div>`
             $('#modal_print_sm_check').modal('show');
     }
 </script>
 @endsection
 @section('modal_section')
 {{-- Modal print sm --}}
+<div id="print_frame"></div>
 <td>
     <div id="modal_print_sm_check" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
@@ -1101,7 +1103,7 @@
                                 <a href="/admin/servis/service_masuk/{{old('print_s_masuk')}}" style="width: 100%;" target="_blank" class="btn btn-primary btn-block">Termal</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="/admin/servis/service_masuk_epson/{{old('print_s_masuk')}}" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
+                                <a href="#" onclick="print2_frame({{old('print_s_masuk')}})" style="width: 100%;"class="btn btn-secondary btn-block">Epson</a>
                             </div>
                         </div>
                     </div>

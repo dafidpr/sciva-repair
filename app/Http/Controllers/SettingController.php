@@ -19,6 +19,9 @@ class SettingController extends Controller
             'footer_sale' => Setting::where('options', 'footer_nota_sale')->first(),
             'footer_servis' => Setting::where('options', 'footer_nota_servis')->first(),
             'footer_servis_take' => Setting::where('options', 'footer_nota_servis_take')->first(),
+            'footer_sale_ep' => Setting::where('options', 'footer_nota_sale_ep')->first(),
+            'footer_servis_ep' => Setting::where('options', 'footer_nota_servis_ep')->first(),
+            'footer_servis_take_ep' => Setting::where('options', 'footer_nota_servis_take_ep')->first(),
         ];
 
         return view('setting.footerNota', $data);
@@ -80,6 +83,34 @@ class SettingController extends Controller
     {
         //
         Setting::where('options', 'footer_nota_servis_take')->update([
+            'value' => $request->value
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+    }
+    public function updateNotaSaleEp(Request $request)
+    {
+        //
+        Setting::where('options', 'footer_nota_sale_ep')->update([
+            'value' => $request->value
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+    }
+    public function updateNotaServisEp(Request $request)
+    {
+        //
+        Setting::where('options', 'footer_nota_servis_ep')->update([
+            'value' => $request->value
+        ]);
+
+        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+    }
+
+    public function updateNotaServisTakeEp(Request $request)
+    {
+        //
+        Setting::where('options', 'footer_nota_servis_take_ep')->update([
             'value' => $request->value
         ]);
 
