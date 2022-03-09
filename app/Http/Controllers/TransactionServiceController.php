@@ -197,6 +197,7 @@ class TransactionServiceController extends Controller
             if (count($data['input_product_id']) > 0) {
                 foreach ($data['input_product_id'] as $key => $i) {
                     $product = $data['input_product_id'][$key];
+                    $hpp_tot = $request->input_product_hpp[$key]*$request->input_product_qty[$key];
 
                     // dd($product);
                     Transaction_service_detail::create([

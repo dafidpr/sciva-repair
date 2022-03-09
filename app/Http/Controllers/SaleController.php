@@ -280,7 +280,7 @@ class SaleController extends Controller
             'company' => Company_profile::find(1),
             'sale' => $sale,
             'sale_detail' => Sale_detail::where('sale_id', $sale->id)->get(),
-            'footer' => Setting::where('options', 'footer_nota_sale')->first()
+            'footer' => Setting::where('options', 'footer_nota_sale_ep')->first()
         ];
 
         return view('cetak.print_penjualan', $data);
