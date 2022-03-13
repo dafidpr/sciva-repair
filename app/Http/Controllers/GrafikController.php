@@ -7,6 +7,8 @@ use App\Models\Debt_detail;
 use App\Models\Purchase_detail;
 use App\Models\Receivable_detail;
 use App\Models\Sale_detail;
+use App\Models\Stock;
+use App\Models\Stock_opname;
 use App\Models\Transaction_service;
 use App\Models\Transaction_service_detail;
 use App\Models\User;
@@ -34,15 +36,31 @@ class GrafikController extends Controller
             $b = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('sub_total');
             $b2 = Sale_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
             $c = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->sum('total');
+            $c2 = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->sum('discount');
+            $c3 = Transaction_service::where('status', 'take')->whereMonth('created_at', '=', $bulan)->get();
             $f = Cash::where('source', 'other_income')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $g = Cash::where('source', 'other_expenditure')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $i = Transaction_service_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
+            $k = Stock_opname::where('value', '>', 0)->whereMonth('created_at', '=', $bulan)->sum('value');
+            $k2 = Stock_opname::where('value', '<', 0)->whereMonth('created_at', '=', $bulan)->sum('value');
+            $j = Stock::whereMonth('created_at', '=', $bulan)->where('type', 'in')->sum('value');
+            $j2 = Stock::whereMonth('created_at', '=', $bulan)->where('type', 'out')->sum('value');
+
+            $no_hpp2 = 0;
+            foreach ($c3 as $item) {
+                $details_hpp = Transaction_service_detail::where('transaction_id', $item->id)->get();
+                foreach ($details_hpp as $val) {
+                    $no_hpp2 += $val->hpp;
+                }
+            }
+            // dd($no_hpp2);
 
             $ex_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_expenditure', 'expenditure') AND month(created_at)='$bulan'"))->first();
 
             $in_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_income', 'income') AND month(created_at)='$bulan'"))->first();
 
-            $kas_ex[] = ($b + $c + $f) - ($g + $b2 + $i);
+
+            $kas_ex[] = ($b + ($c - $c2) + $f + abs($k) + $j) - ($g + $b2 + abs($k2) + $j2 + $no_hpp2);
         }
 
 

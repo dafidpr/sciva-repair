@@ -216,10 +216,11 @@ function modCall(a, c, d, e){
 }
 
 function es_cashback() {
-    var a = document.getElementById('t_total').value
+    var a = document.getElementById('t_total_hidden').value
     var b = document.getElementById('t_payment').value
+    var c = document.getElementById('t_discount').value
 
-    var h = parseInt(b) - parseInt(a)
+    var h = parseInt(b) - (parseInt(a) - parseInt(c))
 
     if (!isNaN(h)) {
         document.getElementById('t_cashback').value = h
@@ -694,9 +695,12 @@ function print2_frame(id){
 function cekdiscounttakeunit(){
     var total = document.getElementById('t_total_hidden').value
     var discount = document.getElementById('t_discount').value
+    var payment = document.getElementById('t_payment').value
     var total_e = parseInt(total) - parseInt(discount)
+    var pay_e = parseInt(payment) - (parseInt(total) - parseInt(discount))
 
     console.log(total_e)
 
     document.getElementById('t_total').value = total_e
+    document.getElementById('t_cashback').value = pay_e
 }

@@ -23,9 +23,10 @@
         </tr>
     </table><hr style="border: 0; border-top: 4px double #8c8c8c;">
     <br>
-    <h3 style="text-align: center;">LAPORAN LABA KOTOR</h3>
+    <h3 style="text-align: center;">LAPORAN LABA RUGI</h3>
     <h4 style="text-align: center;">PERIODE {{$datefrom}} s/d {{$dateto}}</h4>
     <br>
+
 
     <?php $hpp2= 0; ?>
     @foreach ($sale as $item)
@@ -33,6 +34,13 @@
         $a = $item->_product->purchase_price * $item->quantity;
         $hpp2 += $a;
         ?>
+    @endforeach
+    <?php $no_hpp2 = 0;?>
+    @foreach ($service_detail as $item)
+            <?php $details_hpp = \App\Models\Transaction_service_detail::where('transaction_id', $item->id)->get();?>
+            @foreach ($details_hpp as $val)
+                <?php $no_hpp2 += $val->hpp; ?>
+            @endforeach
     @endforeach
     <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
             <tr>
@@ -45,17 +53,17 @@
             </tr>
             <tr>
                 <td>SERVIS</td>
-                <td style="text-align: right;">Rp. {{number_format($service)}} </td>
+                <td style="text-align: right;">Rp. {{number_format($service-$service_disc)}} </td>
                 <td width="30%"></td>
             </tr>
             <tr>
                 <td>PENDAPATAN LAIN-LAIN</td>
-                <td width="30%" style="text-align: right;">Rp. {{number_format($other_in)}}</td>
+                <td width="30%" style="text-align: right;">Rp. {{number_format($other_in+$stok_in+abs($opname_in))}}</td>
                 <td></td>
             </tr>
             <tr>
                 <td><b>TOTAL PENDAPATAN</b></td>
-                <td style="text-align: right;"><b> Rp. {{number_format($service+$total+$other_in)}} </b></td>
+                <td style="text-align: right;"><b> Rp. {{number_format(($service-$service_disc)+$total+$other_in+$stok_in+abs($opname_in))}} </b></td>
                 <td></td>
             </tr>
             <tr>
@@ -72,24 +80,24 @@
             <tr>
                 <td>HARGA POKOK PENJUALAN SERVIS</td>
                 <td></td>
-                <td width="30%" style="text-align: right;">Rp. {{number_format($hpp_servis)}} </td>
+                <td width="30%" style="text-align: right;">Rp. {{number_format($no_hpp2)}} </td>
             </tr>
             <tr>
                 <td>PENGELUARAN LAIN-LAIN</td>
                 <td></td>
-                <td width="30%" style="text-align: right;">Rp. {{number_format($other_ex)}} </td>
+                <td width="30%" style="text-align: right;">Rp. {{number_format($other_ex+$stok_out+abs($opname_out))}} </td>
             </tr>
             <tr>
                 <td><b>TOTAL PENGELUARAN</b></td>
                 <td></td>
-                <td style="text-align: right;"><b> Rp. {{number_format($hpp2+$other_ex+$hpp_servis)}}  </b></td>
+                <td style="text-align: right;"><b> Rp. {{number_format($hpp2+$other_ex+$no_hpp2+$stok_out+abs($opname_out))}}  </b></td>
             </tr>
             <tr>
                 <td colspan="3"><br></td>
             </tr>
             <tr>
                 <td colspan="2"><b>LABA RUGI</b></td>
-                <td style="text-align: right;"><b>Rp. {{number_format(($service+$total+$other_in)-($hpp2+$other_ex+$hpp_servis))}}</b></td>
+                <td style="text-align: right;"><b>Rp. {{number_format((($service-$service_disc)+$total+$other_in+$stok_in+abs($opname_in))-($hpp2+$other_ex+$no_hpp2+$stok_out+abs($opname_out)))}}</b></td>
             </tr>
     </table>
 
@@ -150,6 +158,7 @@
                 <th>HPP</th>
                 <th>Diskon</th>
                 <th>Total</th>
+                <th>Sub Total</th>
             </tr>
         </thead>
         <tbody>
@@ -166,15 +175,16 @@
                 <td>Rp. {{number_format($no_hpp)}}</td>
                 <td>Rp. {{number_format($item->discount)}}</td>
                 <td>Rp. {{number_format($item->total)}}</td>
+                <td>Rp. {{number_format($item->total-$item->discount)}}</td>
             </tr>
             @endforeach
             <tr>
-                <th colspan="5">Total</th>
-                <th>Rp. {{number_format($service)}}</th>
+                <th colspan="6">Total</th>
+                <th>Rp. {{number_format($service-$service_disc)}}</th>
             </tr>
             <tr>
-                <th colspan="5">HPP</th>
-                <th>Rp. {{number_format($hpp_servis)}}</th>
+                <th colspan="6">HPP</th>
+                <th>Rp. {{number_format($no_hpp2)}}</th>
             </tr>
         </tbody>
     </table>
@@ -183,6 +193,75 @@
 
     <h3 style="text-align: center;">PENDAPATAN LAIN-LAIN</h3>
 
+    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
+        <thead>
+            <tr>
+                <th colspan="8">Opname Lebih</th>
+            </tr>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Barcode</th>
+                <th>Nama</th>
+                <th>Stok Gudang</th>
+                <th>Stok Nyata</th>
+                <th>Total</th>
+                <th width="20%">Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($opname_in_get as $item)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->_product->barcode}}</td>
+                <td>{{$item->_product->name}}</td>
+                <td>{{$item->stock}}</td>
+                <td>{{$item->real_stock}}</td>
+                <td>Rp. {{number_format($item->value)}}</td>
+                <td>{{$item->description}}</td>
+            </tr>
+            @endforeach
+            <tr>
+                <th colspan="7">Total</th>
+                <th>Rp. {{number_format($opname_in)}}</th>
+            </tr>
+        </tbody>
+    </table><br>
+
+    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
+        <thead>
+            <tr>
+                <th colspan="7">Stok In</th>
+            </tr>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Barcode</th>
+                <th>Nama</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+                <th width="30%">Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($stok_in_get as $item)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->_product->barcode}}</td>
+                <td>{{$item->_product->name}}</td>
+                <td>{{$item->total}}</td>
+                <td>Rp. {{number_format($item->value)}}</td>
+                <td>{{$item->description}}</td>
+            </tr>
+            @endforeach
+            <tr>
+                <th colspan="6">Total</th>
+                <th>Rp. {{number_format($stok_in)}}</th>
+            </tr>
+        </tbody>
+    </table><br>
     <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
         <thead>
             <tr>
@@ -217,6 +296,74 @@
 
     <h3 style="text-align: center;">PENGELUARAN LAIN-LAIN</h3>
 
+    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
+        <thead>
+            <tr>
+                <th colspan="8">Opname Kurang</th>
+            </tr>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Barcode</th>
+                <th>Nama</th>
+                <th>Stok Gudang</th>
+                <th>Stok Nyata</th>
+                <th>Total</th>
+                <th width="20%">Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($opname_out_get as $item)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->_product->barcode}}</td>
+                <td>{{$item->_product->name}}</td>
+                <td>{{$item->stock}}</td>
+                <td>{{$item->real_stock}}</td>
+                <td>Rp. {{number_format(abs($item->value))}}</td>
+                <td>{{$item->description}}</td>
+            </tr>
+            @endforeach
+            <tr>
+                <th colspan="7">Total</th>
+                <th>Rp. {{number_format(abs($opname_out))}}</th>
+            </tr>
+        </tbody>
+    </table><br>
+    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
+        <thead>
+            <tr>
+                <th colspan="7">Stok Out</th>
+            </tr>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Barcode</th>
+                <th>Nama</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+                <th width="30%">Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($stok_out_get as $item)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->_product->barcode}}</td>
+                <td>{{$item->_product->name}}</td>
+                <td>{{$item->total}}</td>
+                <td>Rp. {{number_format($item->value)}}</td>
+                <td>{{$item->description}}</td>
+            </tr>
+            @endforeach
+            <tr>
+                <th colspan="6">Total</th>
+                <th>Rp. {{number_format($stok_out)}}</th>
+            </tr>
+        </tbody>
+    </table><br>
     <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
         <thead>
             <tr>

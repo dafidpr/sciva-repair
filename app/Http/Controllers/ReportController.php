@@ -327,6 +327,7 @@ class ReportController extends Controller
         $b = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
         $b2 = Sale_detail::whereBetween('created_at', [$startDate, $endDate])->sum('hpp');
         $c = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->sum('total');
+        $c3 = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->sum('discount');
         $c2 = Transaction_service::where('status', 'take')->whereBetween('created_at', [$startDate, $endDate])->get();
         $d = Debt_detail::whereBetween('created_at', [$startDate, $endDate])->sum('nominal');
         $d2 = Debt_detail::whereBetween('created_at', [$startDate, $endDate])->get();
@@ -339,14 +340,23 @@ class ReportController extends Controller
         $h = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->get();
         $h2 = Purchase_detail::whereBetween('created_at', [$startDate, $endDate])->sum('sub_total');
         $i = Transaction_service_detail::whereBetween('created_at', [$startDate, $endDate])->sum('hpp');
+        $j = Stock::whereBetween('created_at', [$startDate, $endDate])->where('type', 'in')->sum('value');
+        $j2 = Stock::whereBetween('created_at', [$startDate, $endDate])->where('type', 'out')->sum('value');
+        $j3 = Stock::whereBetween('created_at', [$startDate, $endDate])->where('type', 'in')->get();
+        $j4 = Stock::whereBetween('created_at', [$startDate, $endDate])->where('type', 'out')->get();
+        $k = Stock_opname::whereBetween('created_at', [$startDate, $endDate])->where('value', '>', 0)->sum('value');
+        $k2 = Stock_opname::whereBetween('created_at', [$startDate, $endDate])->where('value', '<', 0)->sum('value');
+        $k3 = Stock_opname::whereBetween('created_at', [$startDate, $endDate])->where('value', '>', 0)->get();
+        $k4 = Stock_opname::whereBetween('created_at', [$startDate, $endDate])->where('value', '<', 0)->get();
 
         // dd($a);
         $data = [
             'sale' => $a,
             'total' => $b,
             'hpp_sell' => $b2,
-            'service' => $c,
             'service_detail' => $c2,
+            'service' => $c,
+            'service_disc' => $c3,
             'debt' => $d,
             'debt_detail' => $d2,
             'receivable' => $e,
@@ -358,6 +368,14 @@ class ReportController extends Controller
             'purchase' => $h2,
             'purchase_d' => $h,
             'hpp_servis' => $i,
+            'stok_in' => $j,
+            'stok_out' => $j2,
+            'stok_in_get' => $j3,
+            'stok_out_get' => $j4,
+            'opname_in' => $k,
+            'opname_out' => $k2,
+            'opname_in_get' => $k3,
+            'opname_out_get' => $k4,
             'lain' => $request->lain,
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),
