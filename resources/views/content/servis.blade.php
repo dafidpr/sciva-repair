@@ -713,6 +713,10 @@
                         <input type="hidden" class="form-control" name="total_hidden" id="t_total_hidden" readonly>
                     </div>
                     <div>
+                        <label for="">Diskon</label>
+                        <input type="number" onkeyup="cekdiscounttakeunit()" value="0" class="form-control" name="discount" id="t_discount" required>
+                    </div>
+                    <div>
                         <label>Payment Method</label>
                         <br>
                         <input type="radio" name="method" class="meth" value="cash" checked> <label for="">Cash</label>
@@ -721,10 +725,6 @@
                     <div id="form_duedate">
                         <label for="">Jatuh Tempo</label>
                         <input type="date" class="form-control" name="due_date" id="due_date">
-                    </div>
-                    <div>
-                        <label for="">Diskon</label>
-                        <input type="number" onkeyup="cekdiscounttakeunit()" value="0" class="form-control" name="discount" id="t_discount" required>
                     </div>
                     <div>
                         <label for="">Bayar</label>
