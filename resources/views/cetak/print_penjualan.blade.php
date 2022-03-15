@@ -5,7 +5,7 @@
     var footer = <?php echo "'".$footer->value."'"; ?>;
     var sale_detail = <?php echo $sale_detail; ?>;
     console.log(sale_detail)
-function print() {
+function printSale() {
     qz.websocket.connect().then(() => {
         return qz.printers.find("EPSON TM-U220");
     }).then((found) => {
@@ -74,6 +74,6 @@ function print() {
         return qz.websocket.disconnect();
     });
 }
-console.log(print())
+console.log(printSale())
 </script>
 </html>
