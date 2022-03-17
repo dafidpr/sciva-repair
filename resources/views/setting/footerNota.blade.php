@@ -41,9 +41,11 @@
                     <textarea name="value" class="form-control"  cols="70" rows="4" required>{{$footer_sale_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <p>
-                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
-                </p>
+                <div>
+                    <span class="text-danger">Note :</span><br>
+                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">Tidak boleh Enter Didalam form</span>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +70,11 @@
                     <textarea name="value" class="form-control"  cols="20" rows="4">{{$footer_servis_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
+                <div>
+                    <span class="text-danger">Note :</span><br>
+                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">Tidak boleh Enter Didalam form</span>
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +99,11 @@
                     <textarea name="value" class="form-control"  cols="20" rows="4">{{$footer_servis_take_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
+                <div>
+                    <span class="text-danger">Note :</span><br>
+                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">Tidak boleh Enter Didalam form</span>
+                </div>
             </div>
         </div>
     </div>
