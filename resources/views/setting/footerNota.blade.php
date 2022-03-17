@@ -41,7 +41,9 @@
                     <textarea name="value" class="form-control"  cols="70" rows="4" required>{{$footer_sale_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <span class="text-danger">\x0A untuk baris baru</span>
+                <p>
+                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
+                </p>
             </div>
         </div>
     </div>
@@ -66,7 +68,7 @@
                     <textarea name="value" class="form-control"  cols="20" rows="4">{{$footer_servis_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <span class="text-danger">\x0A untuk baris baru</span>
+                <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
             </div>
         </div>
     </div>
@@ -91,7 +93,7 @@
                     <textarea name="value" class="form-control"  cols="20" rows="4">{{$footer_servis_take_ep->value}}</textarea>
                     <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-                <span class="text-danger">\x0A untuk baris baru</span>
+                <span class="text-danger">'+'/x0A'+' untuk baris baru</span>
             </div>
         </div>
     </div>

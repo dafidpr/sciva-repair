@@ -259,7 +259,7 @@
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 @can('create-sales')
-                                <li><a href="/admin/entry_penjualan">Enty Penjualan</a></li>
+                                <li><a href="/admin/entry_penjualan">Entry Penjualan</a></li>
                                 @endcan
                                 @can('read-sales')
                                 <li><a href="/admin/daftar_penjualan">Daftar Penjualan</a></li>

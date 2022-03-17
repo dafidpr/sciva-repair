@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laporan Laba Kotor PDF</title>
+    <title>Laporan Laba Rugi PDF</title>
     <style>
         .page-break {
             page-break-after: always;
@@ -58,12 +58,12 @@
             </tr>
             <tr>
                 <td>PENDAPATAN LAIN-LAIN</td>
-                <td width="30%" style="text-align: right;">Rp. {{number_format($other_in+$stok_in+abs($opname_in))}}</td>
+                <td width="30%" style="text-align: right;">Rp. {{number_format($other_in)}}</td>
                 <td></td>
             </tr>
             <tr>
                 <td><b>TOTAL PENDAPATAN</b></td>
-                <td style="text-align: right;"><b> Rp. {{number_format(($service-$service_disc)+$total+$other_in+$stok_in+abs($opname_in))}} </b></td>
+                <td style="text-align: right;"><b> Rp. {{number_format(($service-$service_disc)+$total+$other_in)}} </b></td>
                 <td></td>
             </tr>
             <tr>
@@ -97,7 +97,7 @@
             </tr>
             <tr>
                 <td colspan="2"><b>LABA RUGI</b></td>
-                <td style="text-align: right;"><b>Rp. {{number_format((($service-$service_disc)+$total+$other_in+$stok_in+abs($opname_in))-($hpp2+$other_ex+$no_hpp2+$stok_out+abs($opname_out)))}}</b></td>
+                <td style="text-align: right;"><b>Rp. {{number_format((($service-$service_disc)+$total+$other_in)-($hpp2+$other_ex+$no_hpp2+$stok_out+abs($opname_out)))}}</b></td>
             </tr>
     </table>
 
@@ -193,75 +193,6 @@
 
     <h3 style="text-align: center;">PENDAPATAN LAIN-LAIN</h3>
 
-    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
-        <thead>
-            <tr>
-                <th colspan="8">Opname Lebih</th>
-            </tr>
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Barcode</th>
-                <th>Nama</th>
-                <th>Stok Gudang</th>
-                <th>Stok Nyata</th>
-                <th>Total</th>
-                <th width="20%">Deskripsi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($opname_in_get as $item)
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$item->created_at}}</td>
-                <td>{{$item->_product->barcode}}</td>
-                <td>{{$item->_product->name}}</td>
-                <td>{{$item->stock}}</td>
-                <td>{{$item->real_stock}}</td>
-                <td>Rp. {{number_format($item->value)}}</td>
-                <td>{{$item->description}}</td>
-            </tr>
-            @endforeach
-            <tr>
-                <th colspan="7">Total</th>
-                <th>Rp. {{number_format($opname_in)}}</th>
-            </tr>
-        </tbody>
-    </table><br>
-
-    <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
-        <thead>
-            <tr>
-                <th colspan="7">Stok In</th>
-            </tr>
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Barcode</th>
-                <th>Nama</th>
-                <th>Jumlah</th>
-                <th>Total</th>
-                <th width="30%">Deskripsi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($stok_in_get as $item)
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$item->created_at}}</td>
-                <td>{{$item->_product->barcode}}</td>
-                <td>{{$item->_product->name}}</td>
-                <td>{{$item->total}}</td>
-                <td>Rp. {{number_format($item->value)}}</td>
-                <td>{{$item->description}}</td>
-            </tr>
-            @endforeach
-            <tr>
-                <th colspan="6">Total</th>
-                <th>Rp. {{number_format($stok_in)}}</th>
-            </tr>
-        </tbody>
-    </table><br>
     <table width="100%" id="stock" border="2" style="border-collapse: collapse; font-size: 13px;">
         <thead>
             <tr>

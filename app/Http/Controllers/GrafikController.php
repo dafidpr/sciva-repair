@@ -41,9 +41,7 @@ class GrafikController extends Controller
             $f = Cash::where('source', 'other_income')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $g = Cash::where('source', 'other_expenditure')->whereMonth('created_at', '=', $bulan)->sum('nominal');
             $i = Transaction_service_detail::whereMonth('created_at', '=', $bulan)->sum('hpp');
-            $k = Stock_opname::where('value', '>', 0)->whereMonth('created_at', '=', $bulan)->sum('value');
             $k2 = Stock_opname::where('value', '<', 0)->whereMonth('created_at', '=', $bulan)->sum('value');
-            $j = Stock::whereMonth('created_at', '=', $bulan)->where('type', 'in')->sum('value');
             $j2 = Stock::whereMonth('created_at', '=', $bulan)->where('type', 'out')->sum('value');
 
             $no_hpp2 = 0;
@@ -60,7 +58,7 @@ class GrafikController extends Controller
             $in_kas     = collect(DB::SELECT("SELECT sum(nominal) AS total from cashes where source IN ('other_income', 'income') AND month(created_at)='$bulan'"))->first();
 
 
-            $kas_ex[] = ($b + ($c - $c2) + $f + abs($k) + $j) - ($g + $b2 + abs($k2) + $j2 + $no_hpp2);
+            $kas_ex[] = ($b + ($c - $c2) + $f) - ($g + $b2 + abs($k2) + $j2 + $no_hpp2);
         }
 
 
