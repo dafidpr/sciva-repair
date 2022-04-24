@@ -158,7 +158,7 @@
                                     <td>Barcode</td>
                                     <td>Nama</td>
                                     <td>Stock</td>
-                                    <td>Harga</td>
+                                    {{-- <td>Harga</td> --}}
                                     <td>#</td>
                                 </tr>
                             </thead>
@@ -168,7 +168,7 @@
                                     <td>{{$item->barcode}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->stock}}</td>
-                                    <td>{{$item->purchase_price}}</td>
+                                    {{-- <td>{{$item->purchase_price}}</td> --}}
                                     <td>
                                         <button type="button" onclick="select_product({{$item->id}})" class="btn btn-sm btn-primary"><i class="far fa-check-square"></i> Pilih</button>
                                     </td>

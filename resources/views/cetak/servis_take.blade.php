@@ -10,13 +10,17 @@
         .dotted {
             border: 1px dotted #292828; border-style: none none dotted; color: #fff; background-color: #fff;
         }
+
+        .foot_div p{
+            line-height: 10px;
+        }
     </style>
 </head>
 <body style="width: 76mm;">
 
-<p style="text-align: center; font-size: 20px; line-height: 0.3em;"><b>{{$company->name}}</b></p>
+<p style="text-align: center; font-size: 20px; line-height: 0.3em;"><b>{{strtoupper($company->name)}}</b></p>
 <p style="text-align: center; font-size: 18px; line-height: 0.3em;">{{$company->telephone}}</p>
-<p style="text-align: center; font-size: 15px; line-height: 0.3em;">{{$company->address}}</p>
+<p style="text-align: center; font-size: 15px; line-height: 0.3em;">{{strtoupper($company->address)}}</p>
 
 <br>
 <table style="width: 100%; font-size: 15px;">
@@ -30,11 +34,11 @@
         <td>:</td>
         <td>{{$service->transaction_code}}</td>
     </tr>
-    <tr>
+    {{-- <tr>
         <td>Tgl. Servis</td>
         <td>:</td>
         <td>{{$service->created_at}}</td>
-    </tr>
+    </tr> --}}
     <tr>
         <td>Pelanggan</td>
         <td>:</td>
@@ -130,7 +134,7 @@
     </tr>
 </table>
 
-<center><p style="text-align: center; font-size:15px;">{!!$footer->value!!}</p></center>
+<center><div class="foot_div" style="text-align: center; font-size:15px;">{!!$footer->value!!}</div></center>
 
 
 

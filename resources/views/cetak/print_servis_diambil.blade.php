@@ -4,6 +4,12 @@
     var company = <?= $company;?>;
     var footer = <?= $footer;?>;
     var service = <?= $service;?>;
+    var method_pay = <?= "'".$service->payment_method."'";?>;
+    if(method_pay == 'cash'){
+        var meth = 'KEMBALI  :'
+    }else{
+        var meth = 'HUTANG   :'
+    }
 
     console.log(company)
     console.log(footer)
@@ -33,11 +39,11 @@ function print_take_sr() {
             '\x0A'+                                              // line break
             'No. NOTA  : '+<?= "'".$service->transaction_code."'"?> +
             '\x0A'+
-            'PELANGGAN : '+<?php echo "'".strtoupper($service->_customer->name)."'"; ?> +
+            'PELANGGAN : '+<?php echo "'".ucfirst($service->_customer->name)."'"; ?> +
             '\x0A'+                                              // line break
-            'ALAMAT    : '+<?php echo "'".strtoupper($service->_customer->address)."'"; ?> +
+            'ALAMAT    : '+<?php echo "'".ucfirst($service->_customer->address)."'"; ?> +
             '\x0A'+                                              // line break
-            'No. HP    : '+<?php echo "'".strtoupper($service->_customer->telephone)."'"; ?> +
+            'No. HP    : '+<?php echo "'".ucfirst($service->_customer->telephone)."'"; ?> +
             '\x0A'+                                              // line break
             '--------------------------------------'+
             '\x0A'+                                              // line break
@@ -62,13 +68,13 @@ function print_take_sr() {
             <?php foreach($service_detail as $item) :?><?php if($item->sparepart_id == null): ?>"1x "+<?= "'".$item->_repaire->name."'";?>+
             <?php endif;?><?php endforeach;?>'\x0A'+                                              // line break
             '\x0A'+                                              // line break
-            'Discount : '+<?= "'".number_format($service->discount)."'";?> +
+            'Discount : '+<?= "'Rp. ".number_format($service->discount)."'";?> +
             '\x0A'+                                              // line break
-            'TOTAL    : '+<?= "'".number_format($service->total)."'";?> +
+            'TOTAL    : '+<?= "'Rp. ".number_format($service->total)."'";?> +
             '\x0A'+                                              // line break
-            'BAYAR    : '+<?= "'".number_format($service->payment)."'";?> +
+            'BAYAR    : '+<?= "'Rp. ".number_format($service->payment)."'";?> +
             '\x0A'+                                              // line break
-            'KEMBALI  : '+<?= "'".number_format($service->cashback)."'";?> +
+            meth+<?= "'Rp. ".number_format($service->cashback)."'";?> +
             '\x0A'+                                              // line break
             '--------------------------------------'+
             '\x0A'+                                              // line break

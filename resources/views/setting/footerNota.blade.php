@@ -43,7 +43,7 @@
                 </form>
                 <div>
                     <span class="text-danger">Note :</span><br>
-                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">'+'\x0A'+' untuk baris baru</span><br>
                     <span class="text-danger">Tidak boleh Enter Didalam form</span>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 </form>
                 <div>
                     <span class="text-danger">Note :</span><br>
-                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">'+'\x0A'+' untuk baris baru</span><br>
                     <span class="text-danger">Tidak boleh Enter Didalam form</span>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 </form>
                 <div>
                     <span class="text-danger">Note :</span><br>
-                    <span class="text-danger">'+'/x0A'+' untuk baris baru</span><br>
+                    <span class="text-danger">'+'\x0A'+' untuk baris baru</span><br>
                     <span class="text-danger">Tidak boleh Enter Didalam form</span>
                 </div>
             </div>
