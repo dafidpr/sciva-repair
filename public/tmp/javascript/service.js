@@ -524,7 +524,7 @@ function callcs(a, c, d, e) {
             var h=(new Date()).getHours();
             var m=(new Date()).getMinutes();
             var s=(new Date()).getSeconds();
-            if (h >= 4 && h < 10) var waktu = "Selamat pagi";
+            if (h >= 4 && h < 10) var waktu = "Pagi";
             if (h >= 10 && h < 15) waktu = "Siang";
             if (h >= 15 && h < 18) waktu = "Sore";
             if (h >= 18 || h < 4) waktu="Malam";

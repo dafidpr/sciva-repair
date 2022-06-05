@@ -316,6 +316,7 @@
                         <th>Tanggal</th>
                         <th>No Nota</th>
                         <th>Pelanggan</th>
+                        <th>No Telp</th>
                         <th>Unit</th>
                         <th>No seri</th>
                         <th>Status</th>
@@ -333,6 +334,7 @@
                         <td>{{$item->service_date}}</td>
                         <td>{{$item->transaction_code}}</td>
                         <td>{{$item->_customer->name}}</td>
+                        <td>{{$item->_customer->telephone}}</td>
                         <td>{{$item->unit}}</td>
                         <td>{{$item->serial_number}}</td>
                         <td>
@@ -366,6 +368,9 @@
                             @endcan
 
                             @elseif ($item->status == 'cancelled' or $item->status == 'finished')
+                            @can('update-services')
+                            <a href="/admin/servis/{{$item->id}}/edit" class="ms-2"><i class="fas fa-edit"></i></a>
+                            @endcan
 
                             @can('call-services')
                             <a href="#" onclick="modCall({{$item->_customer->telephone}}, '{{$item->transaction_code}}', '{{$item->status}}', '{{number_format($item->total)}}')" class="ms-2"><i class="fab fa-whatsapp"></i></a>
@@ -841,7 +846,12 @@
                                 <td>{{number_format($item->selling_price)}}</td>
                                 <td>{{$item->stock}}</td>
                                 <td>
+                                    @if ($item->stock == 0)
+                                    <button class="btn btn-sm btn-primary" disabled="disabled" onclick="">Pilih</button>
+
+                                    @else
                                     <button class="btn btn-sm btn-primary" onclick="pilih_sparepart_servis({{$item->id}})">Pilih</button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

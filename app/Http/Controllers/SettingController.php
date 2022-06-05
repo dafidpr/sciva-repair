@@ -63,30 +63,47 @@ class SettingController extends Controller
     public function updateNotaSale(Request $request)
     {
         //
-        Setting::where('options', 'footer_nota_sale')->update([
-            'value' => $request->value
-        ]);
+        if($request->value == null){
 
-        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+            return redirect()->back()->with('gagal', 'Data Yang Di Update Tidak boleh Kosong!!');
+        }else{
+            Setting::where('options', 'footer_nota_sale')->update([
+                'value' => $request->value
+            ]);
+    
+            return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+        }
     }
     public function updateNotaServis(Request $request)
     {
         //
-        Setting::where('options', 'footer_nota_servis')->update([
-            'value' => $request->value
-        ]);
+        if($request->value == null){
 
-        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+            return redirect()->back()->with('gagal', 'Data Yang Di Update Tidak boleh Kosong!!');
+        }else{
+
+            Setting::where('options', 'footer_nota_servis')->update([
+                'value' => $request->value
+            ]);
+    
+            return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+        }
     }
 
     public function updateNotaServisTake(Request $request)
     {
         //
-        Setting::where('options', 'footer_nota_servis_take')->update([
-            'value' => $request->value
-        ]);
+        if($request->value == null){
 
-        return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+            return redirect()->back()->with('gagal', 'Data Yang Di Update Tidak boleh Kosong!!');
+        }else{
+
+            Setting::where('options', 'footer_nota_servis_take')->update([
+                'value' => $request->value
+            ]);
+    
+            return redirect()->back()->with('berhasil', 'Data talah anda ubah!!');
+        }
     }
     public function updateNotaSaleEp(Request $request)
     {

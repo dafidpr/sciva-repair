@@ -310,7 +310,11 @@ class TransactionServiceController extends Controller
         //
         $data = [
             'customer' => Customer::all(),
-            'ts' => Transaction_service::find($id)
+            'ts' => Transaction_service::find($id),
+            'repaire' => Repaire_service::all(),
+            'product' => Product::all(),
+            'repaire_id' => Transaction_service_detail::where('transaction_id', $id)->get(),
+            'sparepart_id' => Transaction_service_detail::where('transaction_id', $id)->get(),
         ];
 
         return view('content.editservis', $data);
