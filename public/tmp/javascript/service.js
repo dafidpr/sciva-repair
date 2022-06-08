@@ -103,6 +103,67 @@ function softDelete(e) {
     })
 
 }
+function del_jasa_edit(e) {
+    Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "Data yang telah dihapus, tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Hapus!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = "/admin/servis/" + e + "/del_data_jasa_edit",
+                Swal.fire(
+                    'Terhapus!',
+                    'Anda telah menghapus data.',
+                    'success'
+                )
+        }
+    })
+
+}
+function del_sparepart_edit(e) {
+    Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "Data yang telah dihapus, tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Hapus!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = "/admin/servis/" + e + "/del_data_sparepart_edit",
+                Swal.fire(
+                    'Terhapus!',
+                    'Anda telah menghapus data.',
+                    'success'
+                )
+        }
+    })
+
+}
+
+function editSpare(a, b){
+    $.ajax({
+    url: "/admin/servis/" + a + "/edit_detail_spare",
+    type: "get",
+    success: function (data) {
+        var obj = JSON.parse(data);
+        $('#a_name').val(obj.name);
+        $('#a_id').val(obj.id);
+        $('#a_hpp').val(obj.hpp);
+        $('#a_price').val(parseInt(obj.total));
+        $('#a_discount').val(parseInt(obj.discount));
+        $('#a_qty').val(obj.qty);
+        $('#a_total').val(parseInt(obj.sub_total));
+        console.log(obj);
+        $('.editSpare').modal('show');
+    }
+    })
+}
 
 function select_customer(e) {
     $.ajax({

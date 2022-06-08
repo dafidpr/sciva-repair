@@ -18,6 +18,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class TransactionServiceController extends Controller
 {
@@ -71,6 +72,12 @@ class TransactionServiceController extends Controller
         $data = Customer::find($id);
         return json_encode($data);
     }
+    public function edit_detail_spare($id)
+    {
+        //
+        $data = collect(DB::select("select a.*, b.name from transaction_service_details a, products b where a.id = '$id' and b.id = a.sparepart_id"))->first();
+        return json_encode($data);
+    }
     public function select_repaire($id)
     {
         //
@@ -100,12 +107,6 @@ class TransactionServiceController extends Controller
         return json_encode($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
@@ -318,6 +319,166 @@ class TransactionServiceController extends Controller
         ];
 
         return view('content.editservis', $data);
+    }
+
+    public function editSparepartserv(Request $request)
+    {
+        $a = Transaction_service_detail::find($request->id);
+
+        $c = Transaction_service::find($a['transaction_id']);
+        $newSubtot = $c['total'] - $a['sub_total'];
+        $newSubtot2 = $newSubtot + $request->total;
+        Transaction_service::where('id', $a['transaction_id'])->update([
+            'total' => $newSubtot2,
+        ]);
+
+        $b = Product::find($a['sparepart_id']);
+        $updStock = $b['stock'] + $a['qty'];
+        $updStock2 = $updStock - $request->qty;
+        Product::where('id', $b['id'])->update([
+            'stock' => $updStock2,
+        ]);
+        Transaction_service_detail::where('id', $request->id)->update([
+            'discount'  => $request->discount,
+            'qty'       => $request->qty,
+            'sub_total' => $request->total
+        ]);
+
+        return redirect('/admin/servis/' . $a['transaction_id'] . '/edit')->with('berhasil', 'Data Sparepart berhasil diupdate!!');
+        // dd($updStock . " bbb " . $updStock2);
+    }
+
+    public function tambah_data_sparepart_edit(Request $request, $id)
+    {
+        $rules = [
+            'id_product' => 'required',
+            'qty_prod' => 'required'
+        ];
+        $messages = [
+            'id_product.required' => 'Data Kosong!!',
+            'qty_prod.required' => 'Data Kosong!!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('gagal', 'Proses Input yang anda lakukan gagal, mohon untuk cek data kembali!!');
+        }
+
+        $prod = Product::find($request->id_product);
+        $newqty = $prod['stock'] - $request->qty_prod;
+
+        Product::where('id', $request->id_product)->update([
+            'stock' => $newqty,
+        ]);
+
+        // dd($prod);
+
+        $subtot = $request->item_price * $request->qty_prod - $request->discount;
+        // dd($subtot);
+
+        Transaction_service_detail::create([
+            'transaction_id' => $id,
+            'repaire_id' => null,
+            'sparepart_id' => $request->id_product,
+            'hpp' => $request->item_hpp,
+            'total' => $request->item_price,
+            'qty' => $request->qty_prod,
+            'discount' => $request->discount,
+            'sub_total' => $subtot,
+        ]);
+
+        $a = transaction_service::find($id);
+
+        $tot = $a['total'] + $subtot;
+
+        Transaction_service::where('id', $id)->update([
+            'total' => $tot,
+        ]);
+
+        return redirect('/admin/servis/' . $id . '/edit')->with('berhasil', 'Data sparepart telah ditambahkan!!');
+    }
+
+    public function del_data_sparepart_edit($id)
+    {
+        $data = Transaction_service_detail::find($id);
+
+        $data_serv = Transaction_service::find($data['transaction_id']);
+
+        $prod = Product::find($data['sparepart_id']);
+        $newqty = $prod['stock'] + $data['qty'];
+
+        Product::where('id', $data['sparepart_id'])->update([
+            'stock' => $newqty,
+        ]);
+
+        $new_tot = floatval($data_serv['total']) - floatval($data['sub_total']);
+
+        Transaction_service::where('id', $data['transaction_id'])->update([
+            'total' => $new_tot,
+        ]);
+
+        Transaction_service_detail::where('id', $id)->delete();
+
+        return redirect('/admin/servis/' . $data['transaction_id'] . "/edit")->with('berhasil', 'Data Sparepart Telah dihapus!!');
+    }
+
+    public function tambah_data_jasa_edit(Request $request, $id)
+    {
+        $rules = [
+            'jasa_id' => 'required'
+        ];
+        $messages = [
+            'jasa_id.required' => 'Data Kosong!!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('gagal', 'Proses Input yang anda lakukan gagal, mohon untuk cek data kembali!!');
+        }
+
+        Transaction_service_detail::create([
+            'transaction_id' => $id,
+            'repaire_id' => $request->jasa_id,
+            'sparepart_id' => null,
+            'total' => $request->jasa_price,
+            'qty' => 1,
+            'discount' => null,
+            'sub_total' => $request->jasa_price,
+        ]);
+
+        $det_serv = Transaction_service::where('id', $id)->get();
+
+        $total = $det_serv[0]['total'] + floatval($request->jasa_price);
+
+        // dd($det_serv);
+        // dd("total " . $total . " jasa" . $request->jasa_price);
+
+        Transaction_service::where('id', $id)->update([
+            'total' => $total,
+        ]);
+
+        return redirect('/admin/servis/' . $id . "/edit")->with('berhasil', 'Data Jasa Telah ditambahkan!!');
+    }
+
+    public function del_data_jasa_edit($id)
+    {
+        $data = Transaction_service_detail::find($id);
+
+        $data_serv = Transaction_service::find($data['transaction_id']);
+
+        $new_tot = floatval($data_serv['total']) - floatval($data['sub_total']);
+
+        Transaction_service::where('id', $data['transaction_id'])->update([
+            'total' => $new_tot,
+        ]);
+
+        Transaction_service_detail::where('id', $id)->delete();
+
+        return redirect('/admin/servis/' . $data['transaction_id'] . "/edit")->with('berhasil', 'Data Jasa Telah dihapus!!');
+
+        // dd($new_tot);
     }
 
     public function takeUnit(Request $request)

@@ -8,6 +8,24 @@
         </div> --}}
         <div class="card-body">
             <h3 class=" mb-4">Edit Servis</h3>
+            @if (session('berhasil'))
+            <br>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                </button>
+                <strong>Selamat</strong> {{session('berhasil')}}.
+            </div>
+            @endif
+            @if (session('gagal'))
+            <br>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                </button>
+                <strong>Maaf</strong> {{session('gagal')}}.
+            </div>
+            @endif
             <form action="/admin/servis/{{$ts->id}}/update" method="post">
                 @csrf
                 <div>
@@ -78,53 +96,57 @@
                 </div>
             </form>
             <hr>
+            @if ($ts->status == 'finished')
             <div>
-                <div class="">
-                    <div class="mb-3">
-                        <label class="control-label">Jasa</label>
-                        <div class="input-group mb-3">
-                            <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-lg-js"><i class="fas fa-search"></i></button>
-                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <form action="/admin/servis/{{$ts->id}}/tambah_data_jasa_edit" method="post">
+                    @csrf
+                    <div class="">
+                        <div class="mb-3">
+                            <label class="control-label">Jasa</label>
+                            <div class="input-group mb-3">
+                                <button class="btn btn-primary" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target=".bs-modal-lg-js"><i class="fas fa-search"></i></button>
+                                <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="">Name Jasa</label>
-                        <input type="text" class="form-control" name="jasa_name" id="jasa_name" readonly>
-                        <input type="hidden" class="form-control" name="jasa_id" id="jasa_id" readonly>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="">Name Jasa</label>
+                            <input type="text" class="form-control" name="jasa_name" id="jasa_name" readonly>
+                            <input type="hidden" class="form-control" name="jasa_id" id="jasa_id" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Harga (Rp.)</label>
+                            <input type="number" class="form-control" name="jasa_price" id="jasa_price" readonly>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit"  class="btn btn-sm btn-success">Tambah</button>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="">Harga (Rp.)</label>
-                        <input type="number" class="form-control" name="jasa_price" id="jasa_price" readonly>
-                    </div>
-                    <div class="mt-3">
-                        <button type="button"  class="btn btn-sm btn-success">Tambah</button>
-                    </div>
-                </div>
-                <hr>
-                <table class="table table-bordered" width="100%" id="jasa_servis_op" style="font-size: 12px;">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Harga</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_jasa_servis_op">
-                        @foreach ($repaire_id as $l)
-                        @if ($l->sparepart_id == null)
-                        <tr>
-                            <td>{{$l->_repaire->name}}</td>
-                            <td>Rp. {{number_format($l->_repaire->price)}}</td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
+                </form>
+                    <hr>
+                    <table class="table table-bordered" width="100%" id="jasa_servis_op" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_jasa_servis_op">
+                            @foreach ($repaire_id as $l)
+                            @if ($l->sparepart_id == null)
+                            <tr>
+                                <td>{{$l->_repaire->name}}</td>
+                                <td>Rp. {{number_format($l->_repaire->price)}}</td>
+                                <td>
+                                    <button onclick="del_jasa_edit({{$l->id}})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            @endif
+                            @endforeach
+                        </tbody>
+                    </table>
             </div>
             <div>
                 <hr>
@@ -137,11 +159,13 @@
                         </div>
                     </div>
                 </div>
+                <form action="/admin/servis/{{$ts->id}}/tambah_data_sparepart_edit" method="post">
+                    @csrf
                 <div class="row">
                     <div class="col-sm-6">
                         <label for="">item</label>
                         <input type="text" class="form-control" name="item_product" id="item_product" readonly>
-                        <input type="hidden" class="form-control" name="item_product" id="id_product" readonly>
+                        <input type="hidden" class="form-control" name="id_product" id="id_product" readonly>
                     </div>
 
                     <div class="col-sm-6">
@@ -159,9 +183,10 @@
                         <input type="number" class="form-control" value="0" name="discount" id="discount_prod">
                     </div>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-sm btn-success">Tambah</button>
+                        <button type="submit" class="btn btn-sm btn-success">Tambah</button>
                     </div>
                 </div>
+            </form>
                 <hr>
                 <table class="table table-bordered" width="100%" id="table_sparepart" style="font-size: 12px;">
                     <thead>
@@ -184,7 +209,8 @@
                             <td>Rp. {{number_format($item->discount)}}</td>
                             <td>Rp. {{number_format($item->sub_total)}}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <button type="button" onclick="editSpare({{$item->id}}, {{$ts->id}})" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                <a href="#" onclick="del_sparepart_edit({{$item->id}})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endif
@@ -193,9 +219,86 @@
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
     </div>
 </div>
+
+
+    {{-- Modal edit Product --}}
+    <div class="modal fade editSpare" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">ُEdit Barang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <form action="/admin/servis/editSparepartserv" method="post">
+                            @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">Name</label>
+                                <input type="text" name="name" id="a_name" class="form-control" readonly>
+                                <input type="hidden" name="id" id="a_id" class="form-control" readonly>
+                                <input type="hidden" name="hpp" id="a_hpp" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Harga</label>
+                                <input type="text" name="price" id="a_price" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Diskon</label>
+                                <input type="text" name="discount" id="a_discount" onkeyup="editDscSp()" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Qty</label>
+                                <input type="number" name="qty" id="a_qty" onkeyup="editQtySp()" class="form-control" required>
+                            </div>
+                            <div>
+                                <label for="">Total</label>
+                                <input type="text" name="total" id="a_total" class="form-control" readonly>
+                            </div>
+                        </div><br>
+                        <script>
+                            function editQtySp(){
+                                var a = document.getElementById('a_price').value
+                                var b = document.getElementById('a_discount').value
+                                var c = document.getElementById('a_qty').value
+                                if(c == '0' || c == ''){
+                                    var tot = parseInt(a) * parseInt(c)
+                                }else{
+                                    var tot = parseInt(a) * parseInt(c) - parseInt(b)
+                                }
+                                document.getElementById('a_total').value = tot
+                            }
+                            function editDscSp(){
+                                var a = document.getElementById('a_price').value
+                                var b = document.getElementById('a_discount').value
+                                var c = document.getElementById('a_qty').value
+                                if(b == '0' || b == ''){
+                                    var tot = parseInt(a) * parseInt(c)
+                                }else{
+                                    var tot = parseInt(a) * parseInt(c) - parseInt(b)
+                                }
+                                document.getElementById('a_total').value = tot
+                            }
+                        </script>
+                        <div>
+                            <button type="submit" onclick="" class="btn btn-sm btn-primary">Simpan</button>
+                            <button type="button" onclick="" class="btn btn-sm btn-secondary">Kembali</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    {{-- End Modal edit Product --}}
 
 {{-- Modal Jasa --}}
 <div class="modal fade bs-modal-lg-js" tabindex="-1" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
@@ -351,4 +454,5 @@
     </div>
 
 
+    <script src="{{asset('tmp/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 @endsection

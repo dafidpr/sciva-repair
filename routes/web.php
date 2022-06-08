@@ -66,6 +66,7 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('', [TransactionServiceController::class, 'index'])->middleware('can:read-services');
         Route::get('/restore', [TransactionServiceController::class, 'restore'])->middleware('can:restore-services');
         Route::get('/{id}/select_customer', [TransactionServiceController::class, 'select_customer']);
+        Route::get('/{id}/edit_detail_spare', [TransactionServiceController::class, 'edit_detail_spare']);
         Route::get('/{id}/select_repaire', [TransactionServiceController::class, 'select_repaire']);
         Route::get('/{id}/detail_service', [TransactionServiceController::class, 'detail_service']);
         Route::get('/{id}/edit', [TransactionServiceController::class, 'edit'])->middleware('can:update-services');
@@ -81,6 +82,11 @@ Route::prefix('admin')->middleware(['authmiddle', 'user'])->group(function () {
         Route::get('/create_customer/{telephone}/{name}/{address}', [TransactionServiceController::class, 'create_customer']);
         Route::post('/serviceSelesai', [TransactionServiceController::class, 'serviceSelesai']);
         Route::post('/filter', [TransactionServiceController::class, 'filter']);
+        Route::post('/{id}/tambah_data_sparepart_edit', [TransactionServiceController::class, 'tambah_data_sparepart_edit']);
+        Route::post('/{id}/tambah_data_jasa_edit', [TransactionServiceController::class, 'tambah_data_jasa_edit']);
+        Route::get('/{id}/del_data_jasa_edit', [TransactionServiceController::class, 'del_data_jasa_edit']);
+        Route::get('/{id}/del_data_sparepart_edit', [TransactionServiceController::class, 'del_data_sparepart_edit']);
+        Route::post('editSparepartserv', [TransactionServiceController::class, 'editSparepartserv']);
 
         Route::get('/print_take/{id}', [TransactionServiceController::class, 'print_take'])->middleware('can:printNota-services');
         Route::get('/print_take_epson/{id}', [TransactionServiceController::class, 'print_take_epson'])->middleware('can:printNota-services');
