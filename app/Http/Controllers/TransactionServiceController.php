@@ -523,7 +523,7 @@ class TransactionServiceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('berhasil', 'Unit Servis telah diambil!!')->withInput(['print_s_diambil' => $request->id_sv]);
+        return redirect('/admin/servis')->with('berhasil', 'Unit Servis telah diambil!!')->withInput(['print_s_diambil' => $request->id_sv]);
     }
 
     /**

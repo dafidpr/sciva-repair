@@ -360,7 +360,7 @@
                             @if ($item->status == 'proses' or $item->status == 'waiting sparepart')
                             @can('update-services')
                             <a href="/admin/servis/{{$item->id}}/edit" class="ms-2"><i class="fas fa-edit"></i></a>
-                            <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}})" class="ms-2"><i class="fas fa-money-bill"></i></a>
+                            <a href="#" onclick="hargaService(`{{$item->_customer->name}}`, {{$item->id}}, `{{$item->_customer->type}}`)" class="ms-2"><i class="fas fa-money-bill"></i></a>
                             @endcan
 
                             @can('printNota-services')
@@ -433,6 +433,7 @@
                             <div>
                                 <label for="">Pelanggan</label>
                                 <input type="text" class="form-control" name="name" id="name_customer" readonly>
+                                <input type="hidden" class="form-control" name="id" id="id_customer_l" readonly>
                             </div>
                         </div>
                     </div>

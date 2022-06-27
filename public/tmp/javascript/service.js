@@ -290,7 +290,7 @@ function es_cashback() {
 
     }
 }
-function hargaService(b, a) {
+function hargaService(b, a, c) {
     $.ajax({
         url: "/admin/servis/" + a + "/json_service",
         type: "get",
@@ -298,6 +298,7 @@ function hargaService(b, a) {
             var obj = JSON.parse(data);
             $('#transaction_code').val(obj.transaction_code);
             $('#transaction_id').val(obj.id);
+            $('#id_customer_l').val(c);
             $('#name_customer').val(b);
             $('#unit').val(obj.unit);
             $('#complient').val(obj.complient);
@@ -360,6 +361,7 @@ function ec_pilih_sparepart_servis(e) {
 }
 function pilih_sparepart_servis(e) {
     // var d = document.getElementById('discount_prod').value
+    var l = $('#id_customer_l').val()
     $.ajax({
         url: "/admin/stockopname/" + e + "/select_product",
         type: "get",
@@ -367,7 +369,12 @@ function pilih_sparepart_servis(e) {
             var obj = JSON.parse(data);
             $('#id_product').val(obj.id);
             $('#item_product').val(obj.name);
-            $('#item_price').val(parseInt(obj.selling_price));
+            if(l == 'member'){
+                var hm = parseInt(obj.member_price);
+            }else{
+                var hm = parseInt(obj.selling_price);
+            }
+            $('#item_price').val(parseInt(hm));
             $('#item_hpp').val(parseInt(obj.purchase_price));
             $('.bs-modal-sparepart').modal('hide');
             // $('#myModal').modal('show');
