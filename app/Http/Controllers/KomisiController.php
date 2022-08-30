@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class KomisiController extends Controller
 {
@@ -49,8 +50,8 @@ class KomisiController extends Controller
         $endDate = date('Y-m-d', strtotime($request->to));
 
         $data = [
-            'user' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$startDate, $endDate])->get(),
-            'total' => Commision::where('user_id', $request->user)->whereBetween('created_at', [$startDate, $endDate])->sum('total'),
+            'user' => collect(DB::select("SELECT a.total, c.transaction_code, a.created_at, b.name FROM commisions a, users b, transaction_services c WHERE a.user_id='" . $request->user . "' AND b.id=a.user_id AND substring(a.created_at, 1, 10) BETWEEN '" . $startDate . "' AND '" . $endDate . "' AND c.id=a.servis_id"))->all(),
+            'total' => collect(DB::select("SELECT SUM(a.total) as total FROM commisions a, users b, transaction_services c WHERE a.user_id='" . $request->user . "' AND b.id=a.user_id AND substring(a.created_at, 1, 10) BETWEEN '" . $startDate . "' AND '" . $endDate . "' AND c.id=a.servis_id"))->first(),
             'company' => Company_profile::find(1),
             'datefrom' => Carbon::parse($request->from)->format('Y-m-d'),
             'dateto' => Carbon::parse($request->to)->format('Y-m-d'),

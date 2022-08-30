@@ -30,7 +30,7 @@ class TransactionServiceController extends Controller
     public function index()
     {
         //
-        $no_nota = $id = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 12, 'prefix' => 'SRV' . date('dmy'), 'reset_on_prefix_change' => true]);
+        $no_nota = IdGenerator::generate(['table' => 'transaction_services', 'field' => 'transaction_code', 'length' => 12, 'prefix' => 'SRV' . date('dmy'), 'reset_on_prefix_change' => true]);
         //output: INV-000001
 
         $data = [
@@ -506,7 +506,7 @@ class TransactionServiceController extends Controller
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
             'nominal' => $nom,
-            'description' => 'Unit Servis ' . $request->transaction_code . " telah diambil",
+            'description' => 'Servis diambil dengan kode ' . $request->transaction_code,
             'source' => 'income'
         ]);
 
@@ -541,7 +541,7 @@ class TransactionServiceController extends Controller
             'unit' => $request->unit,
             'serial_number' => $request->serial_number,
             'complient' => $request->complient,
-            'completenes' => $request->unit,
+            'completenes' => $request->completenes,
             'passcode' => $request->passcode,
             'notes' => $request->notes,
             'estimated_cost' => $request->estimated_cost,
@@ -611,7 +611,7 @@ class TransactionServiceController extends Controller
             'cash_code' => $cash_id,
             'date' => date('Y-m-d'),
             'nominal' => 0,
-            'description' => 'Servis ' . $ser->transaction_code . " telah dibatalkan",
+            'description' => 'Servis dibatalkan dengan kode ' . $ser->transaction_code,
             'source' => 'expenditure'
         ]);
 
