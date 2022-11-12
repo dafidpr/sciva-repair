@@ -308,7 +308,7 @@ function cancelledPurchase() {
 }
 
 
-function tambahProductEpur() {
+function TambahProductEpurchase() {
     var barcode = document.getElementById('tp_barcode').value
     var name = document.getElementById('tp_name').value
     var purchase_price = document.getElementById('tp_purchase_price').value
@@ -323,7 +323,7 @@ function tambahProductEpur() {
 
         $.ajax({
             url: `/admin/daftar_pembelian/createProd/${barcode}/${name}/${purchase_price}/${selling_price}/${member_price}/${limit}/${supplier_id}`,
-            type: "get",
+            type: "GET",
             success: function (data) {
                 // console.log(barcode)
                 var obj = JSON.parse(data);

@@ -11,6 +11,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class purchaseController extends Controller
@@ -252,7 +253,9 @@ class purchaseController extends Controller
             'supplier_id' => $supplier_id,
         ]);
 
-        $data = Product::find($prod->id);
+        $id_prod     = collect(DB::SELECT("SELECT max(id) as id FROM products"))->first();
+
+        $data = Product::find($id_prod->id);
 
         return json_encode($data);
     }

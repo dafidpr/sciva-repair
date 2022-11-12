@@ -389,7 +389,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="button" onclick="tambahProductEpur()" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    <button type="button" onclick="TambahProductEpurchase()" class="btn btn-primary waves-effect waves-light">Save changes</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
