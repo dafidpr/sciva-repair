@@ -334,7 +334,7 @@
                             </a>
                             <ul class="sub-menu mm-collapse" aria-expanded="false">
                                 @can('daily-report')
-                                <li><a href="/admin/lap_jurnalharian">Jurnal harian</a></li>
+                                <li><a href="/admin/lap_jurnalharian">Jurnal Harian</a></li>
                                 @endcan
                                 @can('sales-report')
                                 <li><a href="/admin/lap_penjualan">Penjualan</a></li>

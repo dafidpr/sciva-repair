@@ -33,8 +33,8 @@
                     <tr>
                         <th>Barcode</th>
                         <th>Nama</th>
-                        <th>Stok gudang</th>
-                        <th>Stok nyata</th>
+                        <th>Stok Gudang</th>
+                        <th>Stok Nyata</th>
                         <th>Selisih</th>
                         <th>Nilai</th>
                         <th>Keterangan</th>
@@ -111,11 +111,11 @@
                             <input type="text" class="form-control" name="purchase_price" id="purchase_price" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="">Stock</label>
+                            <label for="">Stok</label>
                             <input type="number" class="form-control" name="stock" id="stock" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="">Stock Nyata</label>
+                            <label for="">Stok Nyata</label>
                             <input type="number" class="form-control" name="real_stock" id="real_stock" required>
                         </div>
                         <div class="mb-3">
@@ -157,7 +157,7 @@
                                 <tr>
                                     <td>Barcode</td>
                                     <td>Nama</td>
-                                    <td>Stock</td>
+                                    <td>Stok</td>
                                     {{-- <td>Harga</td> --}}
                                     <td>#</td>
                                 </tr>

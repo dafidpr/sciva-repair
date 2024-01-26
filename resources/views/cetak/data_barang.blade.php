@@ -28,7 +28,7 @@
                 <th>No</th>
                 <th>Barcode</th>
                 <th width="20%">Item</th>
-                <th>Stok gudang</th>
+                <th>Stok Gudang</th>
                 <th>Stok Nyata</th>
                 <th width="40%">Keterangan</th>
             </tr>

@@ -78,7 +78,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Tambah Stock In/Out</h5>
+                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Tambah Stok In/Out</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                     </button>
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td>Barcode</td>
                                     <td>Nama</td>
-                                    <td>Stock</td>
+                                    <td>Stok</td>
                                     {{-- <td>Harga</td> --}}
                                     <td>#</td>
                                 </tr>

@@ -144,7 +144,7 @@
                                 @csrf
                             <div class="row mt-2">
                                 <div class="col-sm-1">
-                                    <label>Tambah Data</label>
+                                    <label>Add Data</label>
                                 </div>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" name="telephone" id="custelephone" placeholder="No Telephone">
@@ -483,7 +483,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="">Name Jasa</label>
+                            <label for="">Nama Jasa</label>
                             <input type="text" class="form-control" name="jasa_name" id="jasa_name" readonly>
                             <input type="hidden" class="form-control" name="jasa_id" id="jasa_id" readonly>
                         </div>
@@ -521,7 +521,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="">item</label>
+                            <label for="">Item</label>
                             <input type="text" class="form-control" name="item_product" id="item_product" readonly>
                             <input type="hidden" class="form-control" name="item_product" id="id_product" readonly>
                         </div>
@@ -533,7 +533,7 @@
 
                         </div>
                         <div class="col-sm-6">
-                            <label for="">qty</label>
+                            <label for="">Qty</label>
                             <input type="text" class="form-control" name="qty_prod" id="qty_prod">
                         </div>
                         <div class="col-sm-6">
@@ -567,7 +567,7 @@
                             <input type="number" class="form-control" name="subtot_prod" value="0" id="subtot_prod" readonly>
                         </div>
                         <div class="col-sm-6">
-                            <label for="">Total jasa</label>
+                            <label for="">Total Jasa</label>
                             <input type="text" class="form-control" name="subtot_jasa" value="0" id="subtot_jasa" readonly>
                         </div>
                         <div class="col-sm-6">

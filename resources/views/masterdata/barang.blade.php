@@ -34,9 +34,9 @@
                     <tr>
                         <th>Kode</th>
                         <th>Nama</th>
-                        <th>Harga beli</th>
-                        <th>Harga jual</th>
-                        <th>Harga member</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Harga Member</th>
                         <th>Supplier</th>
                         <th>Stok</th>
                         <th>Limit</th>
@@ -129,7 +129,7 @@
                             @endif
                         </div>
                         <div>
-                            <label for="">limit</label>
+                            <label for="">Limit</label>
                             <input type="number" class="form-control" name="limit" placeholder="limit" required>
                             @if ($errors->has('limit'))
                             <span class="text-danger">{{ $errors->first('limit') }}</span>
@@ -205,7 +205,7 @@
                             @endif
                         </div>
                         <div>
-                            <label for="">limit</label>
+                            <label for="">Limit</label>
                             <input type="number" class="form-control" id="limit" name="limit" placeholder="limit" required>
                             @if ($errors->has('limit'))
                             <span class="text-danger">{{ $errors->first('limit') }}</span>

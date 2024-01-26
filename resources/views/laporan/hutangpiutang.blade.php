@@ -25,7 +25,7 @@
                         </div>
                         <div>
                             <div>
-                                <label for="">Berdasarkan Supplaier</label>
+                                <label for="">Berdasarkan Supplier</label>
                                 <select class="select2 form-control" name="supplier" id="technician" aria-label="Default select example">
                                     <option selected value="all">Semua Supllier</option>
                                     @foreach ($supplier as $item)
